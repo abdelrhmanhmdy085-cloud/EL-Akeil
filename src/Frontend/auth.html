@@ -98,8 +98,8 @@
             <div style="text-align:left; margin-bottom:0.5rem" data-i18n="pass_label">Password</div>
             <input type="password" id="password" class="form-input" required>
 
-            <div style="text-align:left; margin-bottom:0.5rem" data-i18n="valid_pass_confirm">Confirm Password</div>
-            <input type="password" id="confirm_password" class="form-input" required>
+            <div style="text-align:left; margin-bottom:0.5rem; display:none" data-i18n="valid_pass_confirm">Confirm Password</div>
+            <input type="password" id="confirm_password" class="form-input" style="display:none">
 
             <!-- Registration Fields -->
             <div id="regFields" class="hidden">
@@ -161,12 +161,10 @@
         function toggleMode() {
             isLogin = !isLogin;
             document.getElementById('regFields').classList.toggle('hidden', isLogin);
-            document.getElementById('confirm_password').parentElement.style.display = isLogin ? 'none' : 'block'; // Toggle confirm pass
-            // Hide label too if feasible, but structure is flat. Let's fix structure or toggle inputs.
-            // Actually, simply toggling the input and its label (previous sibling) is cleaner if wrapped.
-            // For now, let's just assume we toggle the specific elements.
+
             const confirmInput = document.getElementById('confirm_password');
             confirmInput.style.display = isLogin ? 'none' : 'block';
+            confirmInput.required = !isLogin;
             confirmInput.previousElementSibling.style.display = isLogin ? 'none' : 'block';
 
             // Update Text
@@ -213,11 +211,19 @@
         // Submit Logic (Same as before)
         document.getElementById('authForm').onsubmit = async (e) => {
             e.preventDefault();
-            const username = document.getElementById('username').value;
-            const password = document.getElementById('password').value;
+            const submitBtn = document.getElementById('submitBtn');
+            const originalText = submitBtn.innerText;
 
-            if (isLogin) {
-                const res = await apiFetch('/login', 'POST', { username, password });
+            // Loading State
+            submitBtn.disabled = true;
+            submitBtn.innerText = "Loading...";
+
+            try {
+                const username = document.getElementById('username').value;
+                const password = document.getElementById('password').value;
+
+                if (isLogin) {
+                    const res = await apiFetch('/login', 'POST', { username, password });
                 if (res.ok) {
                     localStorage.setItem('token', res.data.token);
                     localStorage.setItem('user', JSON.stringify(res.data.user));
@@ -247,15 +253,19 @@
                     body.face_id_data = faceBase64;
                 }
 
-                const res = await apiFetch(`/register/${role}`, 'POST', body);
-                if (res.ok) {
-                    alert('Registration successful!');
-                    localStorage.setItem('token', res.data.token);
-                    localStorage.setItem('user', JSON.stringify(res.data.user));
-                    window.location.href = `${role}.html`;
-                } else {
-                    alert(res.data.error || 'Registration failed');
+                    const res = await apiFetch(`/register/${role}`, 'POST', body);
+                    if (res.ok) {
+                        alert('Registration successful!');
+                        localStorage.setItem('token', res.data.token);
+                        localStorage.setItem('user', JSON.stringify(res.data.user));
+                        window.location.href = `${role}.html`;
+                    } else {
+                        alert(res.data.error || 'Registration failed');
+                    }
                 }
+            } finally {
+                submitBtn.disabled = false;
+                submitBtn.innerText = originalText;
             }
         };
     </script>
