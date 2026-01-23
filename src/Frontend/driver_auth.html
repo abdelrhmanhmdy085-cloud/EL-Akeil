@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <title>انضم كطيار - الأكيل</title>
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
+    <script src="assets/js/common.js"></script>
+    <style>
+        body {
+            background-color: #FFF5F5;
+            color: #5E2129;
+            font-family: 'Cairo', sans-serif;
+        }
+
+        .auth-container {
+            max-width: 500px;
+            margin: 50px auto;
+            padding: 2rem;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(94, 33, 41, 0.1);
+            border: 1px solid #E8D0D0;
+            text-align: center;
+        }
+
+        .auth-logo {
+            width: 100px;
+            margin-bottom: 20px;
+        }
+
+        .form-title {
+            font-size: 2rem;
+            margin-bottom: 30px;
+            font-weight: 700;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+            text-align: right;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #E8D0D0;
+            border-radius: 8px;
+            font-family: inherit;
+        }
+
+        .btn-submit {
+            width: 100%;
+            padding: 12px;
+            background: #5E2129;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .btn-submit:hover {
+            background: #4a1a20;
+        }
+
+        .toggle-link {
+            display: block;
+            margin-top: 15px;
+            color: #5E2129;
+            cursor: pointer;
+            text-decoration: underline;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="auth-container">
+        <img src="assets/images/logo.png" class="auth-logo" alt="El Akil">
+        <h2 class="form-title" id="formTitle">تسجيل دخول طيار</h2>
+
+        <form id="driverAuthForm" onsubmit="_handleDriverSubmit(event)">
+            <div class="form-group" id="nameGroup" style="display:none;">
+                <input type="text" class="form-input" id="name" placeholder="الاسم بالكامل">
+            </div>
+            <div class="form-group">
+                <input type="text" class="form-input" id="username" placeholder="اسم المستخدم" required>
+            </div>
+            <div class="form-group">
+                <input type="password" class="form-input" id="password" placeholder="كلمة المرور" required>
+            </div>
+            <!-- Driver Specifics -->
+            <div class="form-group" id="driverSpecifics" style="display:none;">
+                <input type="text" class="form-input" id="nationalId" placeholder="الرقم القومي (14 رقم)">
+                <label style="font-size:0.9rem; color:#888;">* يتطلب تفعيل الحساب الحضور للمقر للفحص</label>
+            </div>
+
+            <button type="submit" class="btn-submit" id="submitBtn">دخول</button>
+        </form>
+        <a class="toggle-link" onclick="toggleDriverMode()" id="toggleText">ليس لديك حساب؟ انضم كأسطول توصيل</a>
+    </div>
+
+    <script>
+        let isRegister = false;
+        function toggleDriverMode() {
+            isRegister = !isRegister;
+            document.getElementById('formTitle').innerText = isRegister ? 'تسجيل طيار جديد' : 'تسجيل دخول طيار';
+            document.getElementById('submitBtn').innerText = isRegister ? 'إنشاء حساب' : 'دخول';
+            document.getElementById('toggleText').innerText = isRegister ? 'لديك حساب بالفعل؟ تسجيل الدخول' : 'ليس لديك حساب؟ انضم كأسطول توصيل';
+            document.getElementById('nameGroup').style.display = isRegister ? 'block' : 'none';
+            document.getElementById('driverSpecifics').style.display = isRegister ? 'block' : 'none';
+        }
+
+        async function _handleDriverSubmit(e) {
+            e.preventDefault();
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            const role = 'driver';
+
+            const url = isRegister ? '/api/auth/register' : '/api/auth/login';
+            const body = { username, password, role };
+
+            if (isRegister) {
+                body.name = document.getElementById('name').value;
+                body.national_id = document.getElementById('nationalId').value;
+            }
+
+            try {
+                const res = await apiFetch(url, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(body)
+                });
+
+                if (res.token) {
+                    localStorage.setItem('token', res.token);
+                    localStorage.setItem('user', JSON.stringify({ username, role }));
+                    window.location.href = 'driver.html';
+                } else if (res.message === 'User created successfully') {
+                    alert('تم تسجيل طلبك بنجاح! سيتم مراجعة بياناتك.');
+                    toggleDriverMode();
+                }
+            } catch (err) {
+                alert(err.message || 'حدث خطأ ما');
+            }
+        }
+    </script>
+</body>
+
+</html>

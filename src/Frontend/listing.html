@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dishes - El Akeil</title>
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&family=Inter:wght@400;600&display=swap"
+        rel="stylesheet">
+    <script src="assets/js/common.js"></script>
+    <script src="assets/js/i18n.js"></script>
+</head>
+
+<body>
+    <nav class="navbar">
+        <a href="index.html" class="nav-brand logo-area">
+            <span>El Akeil</span>
+        </a>
+        <div class="nav-controls actions">
+            <a href="index.html" class="btn btn-secondary" style="margin-right: 1rem;">العودة للرئيسية</a>
+            <a href="categories.html" class="btn btn-outline">الفئات</a>
+            <a href="levels.html" class="btn btn-outline">المستويات</a>
+        </div>
+    </nav>
+
+    <div class="container" style="margin-top: 4rem;">
+        <h1 id="pageTitle" class="section-title">...</h1>
+
+        <!-- Filter Info -->
+        <p id="filterInfo" style="text-align: right; color: var(--text-secondary); margin-bottom: 2rem;"></p>
+
+        <div id="dishesGrid" class="dish-grid">
+            <div class="loading-spinner">Loading...</div>
+        </div>
+    </div>
+
+    <script>
+        async function loadListing() {
+            const params = new URLSearchParams(window.location.search);
+            const categoryId = params.get('category');
+            const levelId = params.get('level');
+            
+            const grid = document.getElementById('dishesGrid');
+            const titleEl = document.getElementById('pageTitle');
+            const filterInfo = document.getElementById('filterInfo');
+            const lang = localStorage.getItem('elakeil_lang') || 'ar';
+
+            try {
+                let endpoint = '';
+                let filterType = '';
+                let filterId = '';
+
+                if (categoryId) {
+                    endpoint = `/api/browse/category/${categoryId}/dishes?lang=${lang}`;
+                    filterType = 'category';
+                    filterId = categoryId;
+                } else if (levelId) {
+                    endpoint = `/api/browse/level/${levelId}/dishes?lang=${lang}`;
+                    filterType = 'level';
+                    filterId = levelId;
+                } else {
+                    // All dishes
+                    endpoint = `/api/browse/dishes?lang=${lang}`;
+                    titleEl.innerText = lang === 'ar' ? 'جميع الأطباق' : 'All Dishes';
+                    filterInfo.innerText = lang === 'ar' ? 'يتم عرض جميع الأطباق المتاحة' : 'Showing all available dishes';
+                }
+
+                const response = await fetch(endpoint);
+                
+                if (!response.ok) {
+                    throw new Error(`API returned ${response.status}`);
+                }
+
+                const data = await response.json();
+                const dishes = Array.isArray(data) ? data : (data.dishes || []);
+
+                // Set Title if needed
+                if (filterType === 'category' && data.category_name) {
+                    titleEl.innerText = data.category_name;
+                    document.title = `${data.category_name} - El Akeil`;
+                    filterInfo.innerText = lang === 'ar' ? `${dishes.length} أطباق في هذه الفئة` : `${dishes.length} dishes in this category`;
+                } else if (filterType === 'level' && data.level_name) {
+                    titleEl.innerText = data.level_name;
+                    document.title = `${data.level_name} - El Akeil`;
+                    filterInfo.innerText = lang === 'ar' ? `${dishes.length} أطباق في هذا المستوى` : `${dishes.length} dishes in this level`;
+                }
+
+                if (dishes.length === 0) {
+                    grid.innerHTML = `<p style="grid-column: 1/-1; text-align: center; padding: 2rem; color: var(--text-secondary);">${lang === 'ar' ? 'لا توجد أطباق متاحة' : 'No dishes found'}</p>`;
+                    return;
+                }
+
+                grid.innerHTML = '';
+                dishes.forEach(dish => {
+                    const card = document.createElement('div');
+                    card.className = 'dish-card';
+                    
+                    // Get chef name
+                    const chefName = dish.chef_name || dish.chef_profile?.name || 'شيف';
+                    
+                    // Get image or icon
+                    let imageHtml = dish.image_url 
+                        ? `<img src="${dish.image_url}" alt="${dish.name}" style="width:100%; height:100%; object-fit:cover;">`
+                        : `<div style="display: flex; align-items: center; justify-content: center; height: 100%; font-size: 2rem; background: #f0f0f0;">🍲</div>`;
+
+                    // Rating or status
+                    const ratingText = dish.rating ? `★ ${dish.rating}` : (lang === 'ar' ? 'جديد' : 'New');
+
+                    card.innerHTML = `
+                        <div class="dish-image">
+                            ${imageHtml}
+                        </div>
+                        <div class="dish-info">
+                            <div style="display:flex; justify-content:space-between; align-items:flex-start; gap: 0.5rem;">
+                                <h3 class="dish-name">${dish.name}</h3>
+                            </div>
+                            <p class="dish-chef" style="font-size: 0.9rem; color: var(--text-secondary);">${chefName}</p>
+                            
+                            <div class="dish-meta" style="display: flex; justify-content: space-between; align-items: center; margin: 0.5rem 0;">
+                                <span class="dish-price" style="font-weight: 700; color: var(--primary);">${dish.price} جنيه</span>
+                                <span class="dish-rating" style="font-size: 0.9rem;">${ratingText}</span>
+                            </div>
+
+                            <p class="dish-description" style="font-size: 0.85rem; color: var(--text-secondary); margin: 0.5rem 0; line-height: 1.4; max-height: 60px; overflow: hidden;">${dish.description || ''}</p>
+                            
+                            <button class="btn btn-order" style="width:100%; margin-top:1rem; padding:0.7rem;" onclick="viewDish(${dish.id})">عرض التفاصيل</button>
+                            <button class="btn" style="width:100%; margin-top:0.5rem; padding:0.7rem; background: #FF5A00; color: white; border: none;" onclick="addToCart(${dish.id})">أضف للطلب</button>
+                        </div>
+                    `;
+                    grid.appendChild(card);
+                });
+
+            } catch (error) {
+                console.error('Error loading dishes:', error);
+                grid.innerHTML = `<p style="grid-column: 1/-1; text-align: center; color: var(--danger);">${lang === 'ar' ? 'خطأ في تحميل الأطباق' : 'Error loading dishes'}</p>`;
+            }
+        }
+
+        function viewDish(id) {
+            window.location.href = `dish.html?id=${id}`;
+        }
+
+        function addToCart(id) {
+            const lang = localStorage.getItem('elakeil_lang') || 'ar';
+            alert(lang === 'ar' ? '✓ تم إضافة الطبق للطلب' : '✓ Dish added to order');
+            
+            // يمكن إضافة منطق حقيقي هنا لحفظ الطلب
+            let cart = JSON.parse(localStorage.getItem('cart') || '[]');
+            cart.push({ dish_id: id, quantity: 1, added_at: new Date() });
+            localStorage.setItem('cart', JSON.stringify(cart));
+        }
+
+        window.addEventListener('load', () => {
+            loadListing();
+            
+            // تحديث العنوان مع اللغة
+            const lang = localStorage.getItem('elakeil_lang') || 'ar';
+            if (typeof loadLanguage === 'function') loadLanguage(lang);
+        });
+    </script>
+</body>
+
+</html>

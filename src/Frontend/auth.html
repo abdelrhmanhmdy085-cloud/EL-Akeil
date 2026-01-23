@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title data-i18n="portal_title">El Akeil</title>
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&family=Inter:wght@400;600&display=swap"
+        rel="stylesheet">
+    <style>
+        body {
+            /* Image Theme Colors */
+            background-color: #FFF5F5 !important;
+            /* Light Pink Background */
+            color: #5E2129 !important;
+            /* Maroon Text */
+        }
+
+        /* Override Navbar for this page */
+        .navbar {
+            background-color: #FFF5F5 !important;
+            border-bottom: 1px solid #E8D0D0 !important;
+        }
+
+        .auth-card {
+            background: rgba(255, 255, 255, 0.8) !important;
+            /* Transparent white */
+            padding: 3rem;
+            border-radius: 1rem;
+            box-shadow: 0 4px 15px rgba(94, 33, 41, 0.1) !important;
+            /* Maroon shadow */
+            width: 100%;
+            max-width: 500px;
+            margin: 5rem auto;
+            text-align: center;
+            border: 1px solid #E8D0D0;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 1rem;
+            border: 1px solid #E8D0D0 !important;
+            border-radius: 8px;
+            background: white !important;
+            color: #5E2129 !important;
+            font-family: inherit;
+        }
+
+        .form-input::placeholder {
+            color: #AA8888;
+        }
+
+        /* Update titles */
+        h2,
+        div[data-i18n] {
+            color: #5E2129 !important;
+            font-weight: bold;
+        }
+
+        /* Helper Links */
+        .auth-switch a {
+            color: #5E2129;
+            text-decoration: underline;
+        }
+
+        /* Buttons matching the maroon text */
+        button[type="submit"] {
+            background-color: #5E2129 !important;
+            color: #FFF5F5 !important;
+            border-radius: 8px;
+            border: none;
+        }
+
+        button[type="submit"]:hover {
+            background-color: #4a1a20 !important;
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="navbar">
+        <a href="index.html" class="logo-container nav-brand" style="color:#5E2129 !important;">
+            <img src="assets/images/logo.png" alt="El Akil" class="nav-logo-img" onerror="this.style.display='none'">
+            <span>El Akil</span>
+        </a>
+        <div class="lang-selector" id="langControls"></div>
+    </nav>
+
+    <div class="auth-card">
+        <h2 data-i18n="login_title" style="margin-bottom: 2rem; color: var(--primary);">تسجيل الدخول - الأكيل</h2>
+
+        <form id="authForm">
+            <!-- Universal Fields -->
+            <div style="text-align:left; margin-bottom:0.5rem" data-i18n="username">Username</div>
+            <input type="text" id="username" class="form-input" required>
+
+            <div style="text-align:left; margin-bottom:0.5rem" data-i18n="pass_label">Password</div>
+            <input type="password" id="password" class="form-input" required>
+
+            <div style="text-align:left; margin-bottom:0.5rem" data-i18n="valid_pass_confirm">Confirm Password</div>
+            <input type="password" id="confirm_password" class="form-input" required>
+
+            <!-- Registration Fields -->
+            <div id="regFields" class="hidden">
+                <div style="text-align:left; margin-bottom:0.5rem" data-i18n="full_name">Full Name</div>
+                <input type="text" id="fullname" class="form-input">
+
+                <!-- Role Specific -->
+                <div id="chefFields" class="hidden">
+                    <input type="text" id="address" data-i18n-placeholder="kitchen_addr" placeholder="Kitchen Address"
+                        class="form-input">
+                    <input type="text" id="chef_national_id" data-i18n-placeholder="national_id"
+                        placeholder="National ID" class="form-input">
+                </div>
+
+                <div id="customerFields" class="hidden">
+                    <input type="tel" id="phone" placeholder="Phone Number" class="form-input">
+                    <div style="display:grid; grid-template-columns: 1fr 1fr; gap:10px">
+                        <input type="number" id="lat" placeholder="Lat" class="form-input">
+                        <input type="number" id="long" placeholder="Long" class="form-input">
+                    </div>
+                </div>
+
+                <div id="driverFields" class="hidden">
+                    <div style="text-align:left; margin-bottom:0.5rem">National ID</div>
+                    <input type="text" id="national_id" class="form-input">
+                    <div style="margin-bottom: 1rem;">
+                        <label class="input-label" data-i18n="face_id_msg">Please enable camera</label>
+                        <video id="webcam" autoplay playsinline
+                            style="width:100%; border-radius:0.5rem; background:black; margin-bottom:10px;"></video>
+                        <button type="button" id="snapBtn" class="btn" style="width:100%;">📸 Verify Face</button>
+                        <canvas id="canvas" width="320" height="240" style="display:none"></canvas>
+                        <div id="faceStatus" class="text-center" style="color:var(--success); margin-top:5px"></div>
+                    </div>
+                </div>
+            </div>
+
+            <button type="submit" class="btn-order" style="width:100%; margin-top:1rem;" data-i18n="btn_login"
+                id="submitBtn">دخول</button>
+            <p style="margin-top:1rem; cursor:pointer; color:var(--primary)" onclick="toggleMode()" id="switchMsg"
+                data-i18n="no_account">ليس لديك حساب؟ سجل الآن</p>
+        </form>
+    </div>
+
+    <script src="assets/js/main.js"></script>
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+        const roleParam = urlParams.get('role');
+        let role = roleParam || 'customer';
+        let isLogin = !roleParam; // If role is specified in URL, default to Register mode
+
+        // If specific role requested, switch to register view immediately
+        if (roleParam) {
+            document.addEventListener('DOMContentLoaded', () => {
+                if (isLogin) toggleMode(); // Ensure we are in register mode if role is param
+                // Actually logic below handles state, we just need to set isLogin false initially
+            });
+        }
+
+        function toggleMode() {
+            isLogin = !isLogin;
+            document.getElementById('regFields').classList.toggle('hidden', isLogin);
+            document.getElementById('confirm_password').parentElement.style.display = isLogin ? 'none' : 'block'; // Toggle confirm pass
+            // Hide label too if feasible, but structure is flat. Let's fix structure or toggle inputs.
+            // Actually, simply toggling the input and its label (previous sibling) is cleaner if wrapped.
+            // For now, let's just assume we toggle the specific elements.
+            const confirmInput = document.getElementById('confirm_password');
+            confirmInput.style.display = isLogin ? 'none' : 'block';
+            confirmInput.previousElementSibling.style.display = isLogin ? 'none' : 'block';
+
+            // Update Text
+            const submitBtn = document.getElementById('submitBtn');
+            const switchMsg = document.getElementById('switchMsg');
+            const title = document.querySelector('h2[data-i18n="login_title"]');
+
+            if (isLogin) {
+                // Reset to login text (handled by i18n somewhat, but simpler strictly here)
+                // Re-run applyTranslations to reset if needed or manual
+                location.reload(); // Simplest to reset state
+            } else {
+                submitBtn.innerText = "Register"; // Needs i18n key really
+                title.innerText = "Register - " + role.toUpperCase();
+
+                // Show fields based on role
+                if (role === 'chef') document.getElementById('chefFields').classList.remove('hidden');
+                if (role === 'customer') document.getElementById('customerFields').classList.remove('hidden');
+                if (role === 'driver') {
+                    document.getElementById('driverFields').classList.remove('hidden');
+                    startWebcam();
+                }
+            }
+        }
+
+        // Webcam
+        async function startWebcam() {
+            try {
+                const stream = await navigator.mediaDevices.getUserMedia({ video: true });
+                document.getElementById('webcam').srcObject = stream;
+            } catch (e) {
+                console.warn('Camera access denied');
+            }
+        }
+
+        document.getElementById('snapBtn').onclick = () => {
+            const video = document.getElementById('webcam');
+            const canvas = document.getElementById('canvas');
+            canvas.getContext('2d').drawImage(video, 0, 0, 320, 240);
+            faceBase64 = canvas.toDataURL('image/jpeg');
+            document.getElementById('faceStatus').innerText = "Face Captured ✅";
+        };
+
+        // Submit Logic (Same as before)
+        document.getElementById('authForm').onsubmit = async (e) => {
+            e.preventDefault();
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+
+            if (isLogin) {
+                const res = await apiFetch('/login', 'POST', { username, password });
+                if (res.ok) {
+                    localStorage.setItem('token', res.data.token);
+                    localStorage.setItem('user', JSON.stringify(res.data.user));
+                    window.location.href = `${res.data.user.role}.html`;
+                } else {
+                    alert(res.data.error || 'Login failed');
+                }
+            } else {
+                const name = document.getElementById('fullname').value;
+                const body = { username, password, name, role };
+
+                // Validation
+                if (password !== document.getElementById('confirm_password').value) {
+                    alert(translations[localStorage.getItem('elakeil_lang') || 'ar']?.pass_mismatch || "Passwords do not match");
+                    return;
+                }
+
+                if (role === 'chef') {
+                    body.address = document.getElementById('address').value;
+                    body.national_id = document.getElementById('chef_national_id').value;
+                } else if (role === 'customer') {
+                    body.phone = document.getElementById('phone').value;
+                    body.lat = parseFloat(document.getElementById('lat').value) || 0;
+                    body.long = parseFloat(document.getElementById('long').value) || 0;
+                } else if (role === 'driver') {
+                    body.national_id = document.getElementById('national_id').value;
+                    body.face_id_data = faceBase64;
+                }
+
+                const res = await apiFetch(`/register/${role}`, 'POST', body);
+                if (res.ok) {
+                    alert('Registration successful!');
+                    localStorage.setItem('token', res.data.token);
+                    localStorage.setItem('user', JSON.stringify(res.data.user));
+                    window.location.href = `${role}.html`;
+                } else {
+                    alert(res.data.error || 'Registration failed');
+                }
+            }
+        };
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-i18n="chef_register_title">تسجيل الشيف - الأكيل</title>
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&family=Inter:wght@400;600&display=swap"
+        rel="stylesheet">
+    <style>
+        .auth-container {
+            min-height: 100vh;
+            background: linear-gradient(135deg, var(--bg-dark) 0%, #FFEAEA 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+
+        .auth-card {
+            background: white;
+            border-radius: 20px;
+            padding: 3rem 2rem;
+            box-shadow: 0 10px 40px rgba(94, 33, 41, 0.15);
+            max-width: 700px;
+            width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        .auth-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .auth-header h1 {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .auth-header p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-label {
+            display: block;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+            font-size: 0.95rem;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 0.9rem;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            font-size: 1rem;
+            color: var(--text-primary);
+            background: var(--bg-hover);
+            transition: border-color 0.2s;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: var(--primary);
+            background: white;
+        }
+
+        .form-input::placeholder {
+            color: var(--text-secondary);
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .form-row .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .btn-submit {
+            width: 100%;
+            padding: 1rem;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-top: 1rem;
+        }
+
+        .btn-submit:hover {
+            background: var(--primary-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(94, 33, 41, 0.2);
+        }
+
+        .btn-submit:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .auth-footer {
+            text-align: center;
+            margin-top: 1.5rem;
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+
+        .auth-footer a {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.2s;
+        }
+
+        .auth-footer a:hover {
+            color: var(--primary-hover);
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-bottom: 1rem;
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.2s;
+        }
+
+        .back-link:hover {
+            color: var(--primary);
+        }
+
+        .error-message {
+            color: var(--danger);
+            font-size: 0.85rem;
+            margin-top: 0.3rem;
+            display: none;
+        }
+
+        .form-input.error {
+            border-color: var(--danger);
+        }
+
+        .kitchen-icon {
+            font-size: 3rem;
+            text-align: center;
+            margin-bottom: 1rem;
+        }
+
+        /* Dishes Section */
+        .section-title {
+            font-size: 1.3rem;
+            color: var(--primary);
+            margin: 2rem 0 1rem 0;
+            font-weight: 700;
+            border-bottom: 2px solid #FF5A00;
+            padding-bottom: 0.5rem;
+        }
+
+        .dish-item {
+            background: #f9f9f9;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-bottom: 1.5rem;
+            border-left: 4px solid var(--primary);
+        }
+
+        .dish-item-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .dish-item h4 {
+            margin: 0;
+            color: var(--text-primary);
+        }
+
+        .remove-dish-btn {
+            background: #ff6b6b;
+            color: white;
+            border: none;
+            padding: 0.4rem 0.8rem;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.9rem;
+        }
+
+        .remove-dish-btn:hover {
+            background: #ff5252;
+        }
+
+        .add-dish-btn {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 600;
+            margin: 1rem 0;
+            transition: background 0.3s;
+        }
+
+        .add-dish-btn:hover {
+            background: var(--primary-hover);
+        }
+
+        .file-preview {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+            gap: 0.8rem;
+            margin-top: 0.8rem;
+        }
+
+        .file-preview-item {
+            position: relative;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .file-preview-item img {
+            width: 100%;
+            height: 80px;
+            object-fit: cover;
+        }
+
+        .file-preview-item .remove-btn {
+            position: absolute;
+            top: 2px;
+            right: 2px;
+            background: red;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+            font-size: 0.8rem;
+            padding: 0;
+        }
+
+        @media (max-width: 480px) {
+            .auth-card {
+                padding: 2rem 1.5rem;
+            }
+
+            .auth-header h1 {
+                font-size: 1.5rem;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="auth-container">
+        <div class="auth-card">
+            <a href="index.html" class="back-link">← العودة للرئيسية</a>
+
+            <div class="auth-header">
+                <div class="kitchen-icon">👨‍🍳</div>
+                <h1 data-i18n="chef_register_title">تسجيل الشيف</h1>
+                <p data-i18n="join_chef_desc">بيع أكلك البيتي بسهولة</p>
+            </div>
+
+            <form id="chefRegisterForm">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label" data-i18n="full_name">الاسم الكامل</label>
+                        <input type="text" name="fullName" class="form-input" required>
+                        <span class="error-message" data-i18n="error_required">هذا الحقل مطلوب</span>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" data-i18n="email_label">البريد الإلكتروني</label>
+                        <input type="email" name="email" class="form-input" required>
+                        <span class="error-message" data-i18n="error_email">بريد إلكتروني غير صحيح</span>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label" data-i18n="pass_label">كلمة المرور</label>
+                        <input type="password" name="password" class="form-input" required>
+                        <span class="error-message" data-i18n="error_password">كلمة المرور قصيرة جداً (8 أحرف على الأقل)</span>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" data-i18n="valid_pass_confirm">تأكيد كلمة المرور</label>
+                        <input type="password" name="confirmPassword" class="form-input" required>
+                        <span class="error-message" data-i18n="pass_mismatch">كلمة المرور غير متطابقة!</span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" data-i18n="kitchen_name">اسم المطبخ</label>
+                    <input type="text" name="kitchenName" class="form-input" required>
+                    <span class="error-message" data-i18n="error_required">هذا الحقل مطلوب</span>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" data-i18n="kitchen_address">عنوان المطبخ</label>
+                    <input type="text" name="kitchenAddress" class="form-input" placeholder="الحي، الشارع، المدينة" required>
+                    <span class="error-message" data-i18n="error_required">هذا الحقل مطلوب</span>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" data-i18n="national_id">الرقم القومي</label>
+                    <input type="text" name="nationalId" class="form-input" pattern="[0-9]{14}" placeholder="14 رقم" required>
+                    <span class="error-message" data-i18n="error_national_id">الرقم القومي يجب أن يكون 14 رقم</span>
+                </div>
+
+                <!-- Dishes Section -->
+                <div class="section-title">🍽️ أطباقك</div>
+                <div id="dishesContainer"></div>
+                <button type="button" class="add-dish-btn" onclick="addDishForm()">+ إضافة طبق جديد</button>
+
+                <button type="submit" class="btn-submit" data-i18n="btn_register">تسجيل</button>
+            </form>
+
+            <div class="auth-footer">
+                <span data-i18n="already_have_account">هل لديك حساب؟</span>
+                <a href="chef_login.html" data-i18n="btn_login">دخول</a>
+            </div>
+        </div>
+    </div>
+
+    <script src="assets/js/common.js"></script>
+    <script src="assets/js/i18n.js"></script>
+    <script src="assets/js/main.js"></script>
+    <script>
+        let dishCount = 0;
+
+        // Add dish form
+        function addDishForm() {
+            dishCount++;
+            const container = document.getElementById('dishesContainer');
+            const dishId = `dish_${dishCount}`;
+            
+            const dishForm = document.createElement('div');
+            dishForm.className = 'dish-item';
+            dishForm.id = dishId;
+            dishForm.innerHTML = `
+                <div class="dish-item-header">
+                    <h4>الطبق #${dishCount}</h4>
+                    <button type="button" class="remove-dish-btn" onclick="removeDish('${dishId}')">حذف</button>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">اسم الطبق</label>
+                    <input type="text" class="form-input dish-name" placeholder="مثلاً: معكرونة بشرقة" required>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label">السعر (جنيه)</label>
+                        <input type="number" class="form-input dish-price" placeholder="50" min="1" step="0.5" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">حجم الحصة</label>
+                        <input type="text" class="form-input dish-serving" placeholder="مثلاً: 250g" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">الوصف</label>
+                    <textarea class="form-input dish-description" placeholder="وصف الطبق والمكونات..." style="min-height: 70px;" required></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">صور الطبق (اختياري)</label>
+                    <input type="file" class="dish-images" accept="image/*" multiple onchange="previewDishImages(this, '${dishId}')">
+                    <div style="font-size: 0.85rem; color: #666; margin-top: 0.5rem;">يمكنك اختيار عدة صور</div>
+                    <div class="file-preview" id="preview_${dishId}"></div>
+                </div>
+            `;
+            
+            container.appendChild(dishForm);
+        }
+
+        function removeDish(dishId) {
+            document.getElementById(dishId).remove();
+        }
+
+        function previewDishImages(input, dishId) {
+            const preview = document.getElementById(`preview_${dishId}`);
+            preview.innerHTML = '';
+            
+            Array.from(input.files).forEach((file, index) => {
+                const reader = new FileReader();
+                reader.onload = (e) => {
+                    const item = document.createElement('div');
+                    item.className = 'file-preview-item';
+                    item.innerHTML = `
+                        <img src="${e.target.result}">
+                        <button type="button" class="remove-btn" onclick="this.parentElement.remove()">×</button>
+                    `;
+                    preview.appendChild(item);
+                };
+                reader.readAsDataURL(file);
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            // Add first dish form on load
+            addDishForm();
+
+            const form = document.getElementById('chefRegisterForm');
+
+            form.addEventListener('submit', async (e) => {
+                e.preventDefault();
+
+                const fullName = form.fullName.value;
+                const email = form.email.value;
+                const password = form.password.value;
+                const confirmPassword = form.confirmPassword.value;
+                const kitchenName = form.kitchenName.value;
+                const kitchenAddress = form.kitchenAddress.value;
+                const nationalId = form.nationalId.value;
+
+                // Validation
+                if (password !== confirmPassword) {
+                    alert('كلمات المرور غير متطابقة!');
+                    return;
+                }
+
+                if (password.length < 8) {
+                    alert('كلمة المرور يجب أن تكون 8 أحرف على الأقل');
+                    return;
+                }
+
+                if (nationalId.length !== 14) {
+                    alert('الرقم القومي يجب أن يكون 14 رقم');
+                    return;
+                }
+
+                // Collect dishes data
+                const dishes = [];
+                document.querySelectorAll('.dish-item').forEach((dishEl) => {
+                    const dishData = {
+                        name: dishEl.querySelector('.dish-name').value,
+                        price: parseFloat(dishEl.querySelector('.dish-price').value),
+                        serving: dishEl.querySelector('.dish-serving').value,
+                        description: dishEl.querySelector('.dish-description').value,
+                        images: dishEl.querySelector('.dish-images').files
+                    };
+                    dishes.push(dishData);
+                });
+
+                if (dishes.length === 0) {
+                    alert('يجب أن تضيف طبق واحد على الأقل');
+                    return;
+                }
+
+                // Prepare FormData for multipart upload
+                const formData = new FormData();
+                formData.append('fullName', fullName);
+                formData.append('email', email);
+                formData.append('password', password);
+                formData.append('kitchenName', kitchenName);
+                formData.append('kitchenAddress', kitchenAddress);
+                formData.append('nationalId', nationalId);
+                formData.append('role', 'chef');
+
+                // Add dishes with their images
+                dishes.forEach((dish, index) => {
+                    formData.append(`dishes[${index}][name]`, dish.name);
+                    formData.append(`dishes[${index}][price]`, dish.price);
+                    formData.append(`dishes[${index}][serving]`, dish.serving);
+                    formData.append(`dishes[${index}][description]`, dish.description);
+                    
+                    Array.from(dish.images).forEach((file) => {
+                        formData.append(`dishes[${index}][images]`, file);
+                    });
+                });
+
+                // API Call
+                try {
+                    const submitBtn = form.querySelector('.btn-submit');
+                    submitBtn.disabled = true;
+                    submitBtn.textContent = 'جاري التسجيل...';
+
+                    const response = await fetch('/api/auth/chef-register', {
+                        method: 'POST',
+                        body: formData
+                    });
+
+                    const result = await response.json();
+
+                    if (response.ok) {
+                        localStorage.setItem('token', result.token);
+                        localStorage.setItem('user', JSON.stringify(result.user));
+                        localStorage.setItem('user_role', 'chef');
+                        alert('تم التسجيل بنجاح! جاري نقلك إلى لوحتك...');
+                        window.location.href = 'chef.html';
+                    } else {
+                        alert('خطأ في التسجيل: ' + (result.message || 'حاول مرة أخرى'));
+                    }
+                } catch (error) {
+                    console.error('Registration error:', error);
+                    alert('حدث خطأ في التسجيل');
+                } finally {
+                    const submitBtn = form.querySelector('.btn-submit');
+                    submitBtn.disabled = false;
+                    submitBtn.textContent = 'تسجيل';
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>

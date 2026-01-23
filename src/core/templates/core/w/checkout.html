@@ -1,0 +1,27 @@
+{% extends "core/base.html" %}
+{% block content %}
+<h4>إتمام الطلب</h4>
+<form method="post" action="{% url 'core:checkout' %}">
+  {% csrf_token %}
+  <div class="mb-3">
+    <label class="form-label">عنوان التوصيل</label>
+    <textarea name="address" class="form-control" required></textarea>
+  </div>
+  <div class="mb-3">
+    <h6>ملخص الطلب</h6>
+    <ul class="list-group mb-3">
+      {% for item in items %}
+        <li class="list-group-item d-flex justify-content-between align-items-center">
+          {{ item.product.name }} × {{ item.quantity }}
+          <span>{{ item.line_total }}</span>
+        </li>
+      {% endfor %}
+      <li class="list-group-item d-flex justify-content-between">
+        <strong>المجموع</strong>
+        <strong>{{ total }}</strong>
+      </li>
+    </ul>
+  </div>
+  <button class="btn btn-success">تأكيد وطلب</button>
+</form>
+{% endblock %}

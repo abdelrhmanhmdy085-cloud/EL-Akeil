@@ -1,0 +1,54 @@
+{% extends "core/base.html" %}
+{% block content %}
+<h4>سلتك</h4>
+{% if items %}
+  <table class="table table-sm">
+    <thead>
+      <tr>
+        <th>المنتج</th>
+        <th>الكمية</th>
+        <th>السعر</th>
+        <th>الإجمالي</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for item in items %}
+        <tr>
+          <td>{{ item.product.name }} <div class="text-muted small">{{ item.product.cook_name }}</div></td>
+          <td>
+            <form method="post" action="{% url 'core:update_cart' %}" class="d-flex">
+              {% csrf_token %}
+              <input type="hidden" name="item_id" value="{{ item.id }}">
+              <input type="number" name="quantity" value="{{ item.quantity }}" min="1" class="form-control form-control-sm me-2" style="width:80px;">
+              <button class="btn btn-sm btn-outline-primary">تحديث</button>
+            </form>
+          </td>
+          <td>{{ item.product.price }}</td>
+          <td>{{ item.line_total }}</td>
+          <td>
+            <form method="post" action="{% url 'core:update_cart' %}">
+              {% csrf_token %}
+              <input type="hidden" name="item_id" value="{{ item.id }}">
+              <input type="hidden" name="action" value="remove">
+              <button class="btn btn-sm btn-outline-danger">حذف</button>
+            </form>
+          </td>
+        </tr>
+      {% endfor %}
+      <tr>
+        <td colspan="3" class="text-end"><strong>المجموع:</strong></td>
+        <td><strong>{{ total }}</strong></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="d-flex gap-2">
+    <a href="{% url 'core:checkout' %}" class="btn btn-success">إتمام الطلب</a>
+  </div>
+{% else %}
+  <p class="text-muted">سلتك فارغة.</p>
+  <a href="{% url 'core:home' %}" class="btn btn-outline-primary">تسوق الآن</a>
+{% endif %}
+{% endblock %}

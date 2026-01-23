@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-i18n="checkout_title">الدفع - الأكيل</title>
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <script src="assets/js/common.js"></script>
+    <script src="assets/js/i18n.js"></script>
+    <style>
+        .checkout-container {
+            max-width: 900px;
+            margin: 3rem auto;
+            padding: 2rem;
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 2rem;
+        }
+
+        .checkout-form {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        }
+
+        .checkout-summary {
+            background: linear-gradient(135deg, #FF5A00 0%, #ff7a2a 100%);
+            color: white;
+            padding: 2rem;
+            border-radius: 12px;
+            height: fit-content;
+            position: sticky;
+            top: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-family: 'Cairo', sans-serif;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: #FF5A00;
+            box-shadow: 0 0 0 3px rgba(255, 90, 0, 0.1);
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .section-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            color: #333;
+            border-bottom: 2px solid #FF5A00;
+            padding-bottom: 0.5rem;
+        }
+
+        .checkout-summary h3 {
+            font-size: 1.3rem;
+            margin-bottom: 1.5rem;
+            border-bottom: 2px solid rgba(255, 255, 255, 0.3);
+            padding-bottom: 0.5rem;
+        }
+
+        .plan-details {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-bottom: 1.5rem;
+        }
+
+        .plan-details-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.8rem;
+            font-size: 1rem;
+        }
+
+        .plan-details-row.total {
+            font-size: 1.3rem;
+            font-weight: 700;
+            border-top: 1px solid rgba(255, 255, 255, 0.3);
+            padding-top: 0.8rem;
+            margin-top: 0.8rem;
+        }
+
+        .payment-methods {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .payment-method {
+            display: flex;
+            align-items: center;
+            padding: 1rem;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .payment-method:hover {
+            border-color: #FF5A00;
+            background: rgba(255, 90, 0, 0.05);
+        }
+
+        .payment-method input[type="radio"] {
+            width: 20px;
+            height: 20px;
+            margin-right: 1rem;
+            cursor: pointer;
+        }
+
+        .payment-method.selected {
+            border-color: #FF5A00;
+            background: rgba(255, 90, 0, 0.05);
+        }
+
+        .payment-method-icon {
+            font-size: 1.5rem;
+            margin-right: 1rem;
+        }
+
+        .payment-method-text {
+            flex-grow: 1;
+        }
+
+        .payment-method-text h4 {
+            margin: 0;
+            font-size: 1rem;
+            color: #333;
+        }
+
+        .payment-method-text p {
+            margin: 0.3rem 0 0 0;
+            font-size: 0.85rem;
+            color: #999;
+        }
+
+        .terms-checkbox {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.8rem;
+            margin-bottom: 2rem;
+        }
+
+        .terms-checkbox input {
+            width: 20px;
+            height: 20px;
+            margin-top: 0.3rem;
+            cursor: pointer;
+        }
+
+        .terms-checkbox label {
+            margin: 0;
+            color: #666;
+            font-size: 0.95rem;
+            cursor: pointer;
+        }
+
+        .checkout-btn {
+            width: 100%;
+            padding: 1.2rem;
+            background: #FF5A00;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .checkout-btn:hover {
+            background: #ff7a2a;
+        }
+
+        .checkout-btn:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-bottom: 2rem;
+            color: #FF5A00;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .back-link:hover {
+            text-decoration: underline;
+        }
+
+        .security-badge {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.9);
+            margin-top: 2rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .security-badge::before {
+            content: "🔒";
+            font-size: 1.2rem;
+        }
+
+        @media (max-width: 768px) {
+            .checkout-container {
+                grid-template-columns: 1fr;
+            }
+
+            .checkout-summary {
+                position: static;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <a href="index.html" class="nav-brand logo-area">
+            <span>El Akeil</span>
+        </a>
+        <div class="nav-controls actions">
+            <a href="subscriptions.html" class="btn btn-secondary">العودة للخطط</a>
+        </div>
+    </nav>
+
+    <div style="max-width: 1200px; margin: 0 auto; padding: 2rem;">
+        <a href="subscriptions.html" class="back-link">← العودة لاختيار الخطة</a>
+
+        <div class="checkout-container">
+            <!-- Checkout Form -->
+            <div class="checkout-form">
+                <h2 style="font-size: 2rem; margin-bottom: 2rem; color: #333;">✅ إتمام الاشتراك</h2>
+
+                <form id="checkoutForm" onsubmit="handleCheckout(event)">
+                    <!-- Personal Info Section -->
+                    <div class="section-title">معلومات شخصية</div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>الاسم الكامل</label>
+                            <input type="text" name="fullName" required placeholder="أحمد محمد">
+                        </div>
+                        <div class="form-group">
+                            <label>البريد الإلكتروني</label>
+                            <input type="email" name="email" required placeholder="example@email.com">
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>رقم الهاتف</label>
+                            <input type="tel" name="phone" required placeholder="01012345678">
+                        </div>
+                        <div class="form-group">
+                            <label>العنوان</label>
+                            <input type="text" name="address" required placeholder="الشارع، الحي، المدينة">
+                        </div>
+                    </div>
+
+                    <!-- Delivery Section -->
+                    <div class="section-title" style="margin-top: 2rem;">معلومات التوصيل</div>
+
+                    <div class="form-group">
+                        <label>اختر موعد بداية الاشتراك</label>
+                        <input type="date" name="startDate" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>اختر وقت التوصيل المفضل</label>
+                        <select name="deliveryTime" required>
+                            <option value="">اختر وقت التوصيل</option>
+                            <option value="morning">الصباح (7 - 10 صباحاً)</option>
+                            <option value="afternoon">بعد الظهر (12 - 3 مساءً)</option>
+                            <option value="evening">المساء (5 - 8 مساءً)</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>ملاحظات إضافية (اختياري)</label>
+                        <textarea name="notes" style="width: 100%; padding: 0.8rem; border: 1px solid #ddd; border-radius: 8px; font-family: 'Cairo', sans-serif;" placeholder="أي حساسيات غذائية أو تفضيلات خاصة..."></textarea>
+                    </div>
+
+                    <!-- Payment Section -->
+                    <div class="section-title" style="margin-top: 2rem;">طريقة الدفع</div>
+
+                    <div class="payment-methods">
+                        <label class="payment-method selected">
+                            <input type="radio" name="paymentMethod" value="card" checked onclick="selectPaymentMethod('card')">
+                            <div class="payment-method-icon">💳</div>
+                            <div class="payment-method-text">
+                                <h4>بطاقة ائتمان / خصم</h4>
+                                <p>فيزا، ماستركارد، أو بطاقة محفظة رقمية</p>
+                            </div>
+                        </label>
+
+                        <label class="payment-method">
+                            <input type="radio" name="paymentMethod" value="mobile" onclick="selectPaymentMethod('mobile')">
+                            <div class="payment-method-icon">📱</div>
+                            <div class="payment-method-text">
+                                <h4>محفظة رقمية</h4>
+                                <p>Vodafone Cash, Orange Money, Fawry</p>
+                            </div>
+                        </label>
+
+                        <label class="payment-method">
+                            <input type="radio" name="paymentMethod" value="bank" onclick="selectPaymentMethod('bank')">
+                            <div class="payment-method-icon">🏦</div>
+                            <div class="payment-method-text">
+                                <h4>تحويل بنكي</h4>
+                                <p>تحويل مباشر من حسابك البنكي</p>
+                            </div>
+                        </label>
+                    </div>
+
+                    <!-- Terms -->
+                    <div class="terms-checkbox">
+                        <input type="checkbox" id="terms" name="terms" required>
+                        <label for="terms">أوافق على الشروط والأحكام وسياسة الخصوصية</label>
+                    </div>
+
+                    <button type="submit" class="checkout-btn">تأكيد وإتمام الاشتراك</button>
+                </form>
+            </div>
+
+            <!-- Order Summary -->
+            <div class="checkout-summary">
+                <h3>📋 ملخص طلبك</h3>
+
+                <div class="plan-details">
+                    <div id="planSummary">
+                        <div class="plan-details-row">
+                            <span id="planName">جاري التحميل...</span>
+                            <span id="planPrice">-</span>
+                        </div>
+                    </div>
+
+                    <div class="plan-details-row" style="margin-top: 1rem; font-size: 0.95rem; opacity: 0.9;">
+                        <span>عدد الوجبات</span>
+                        <span id="planMeals">-</span>
+                    </div>
+
+                    <div class="plan-details-row" style="font-size: 0.95rem; opacity: 0.9; margin-bottom: 1rem;">
+                        <span>فترة الاشتراك</span>
+                        <span>شهر واحد</span>
+                    </div>
+
+                    <div class="plan-details-row total">
+                        <span>الإجمالي</span>
+                        <span id="totalPrice">-</span>
+                    </div>
+                </div>
+
+                <div style="background: rgba(255, 255, 255, 0.1); padding: 1rem; border-radius: 8px; margin-bottom: 1rem;">
+                    <h4 style="margin-top: 0; margin-bottom: 0.8rem;">✨ المميزات المضمونة:</h4>
+                    <ul style="margin: 0; padding-left: 1.5rem; list-style: none;">
+                        <li style="padding: 0.3rem 0;">✓ توصيل مجاني يومي</li>
+                        <li style="padding: 0.3rem 0;">✓ تغيير الطلب يومياً</li>
+                        <li style="padding: 0.3rem 0;">✓ دعم 24/7</li>
+                        <li style="padding: 0.3rem 0;">✓ إلغاء في أي وقت</li>
+                        <li style="padding: 0.3rem 0;">✓ ضمان الجودة</li>
+                    </ul>
+                </div>
+
+                <div class="security-badge">
+                    الدفع آمن ومشفّر بالكامل
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function loadPlanSummary() {
+            const plan = JSON.parse(localStorage.getItem('selectedPlan'));
+            
+            if (!plan) {
+                alert('لم يتم اختيار خطة. سيتم إعادة التوجيه...');
+                window.location.href = 'subscriptions.html';
+                return;
+            }
+
+            document.getElementById('planName').textContent = plan.name;
+            document.getElementById('planPrice').textContent = `${plan.price} جنيه`;
+            document.getElementById('planMeals').textContent = `${plan.meals} وجبة`;
+            document.getElementById('totalPrice').textContent = `${plan.price} جنيه`;
+
+            // Set default start date to today
+            const today = new Date().toISOString().split('T')[0];
+            document.querySelector('input[name="startDate"]').value = today;
+        }
+
+        function selectPaymentMethod(method) {
+            document.querySelectorAll('.payment-method').forEach(el => {
+                el.classList.remove('selected');
+            });
+            event.target.closest('.payment-method').classList.add('selected');
+        }
+
+        async function handleCheckout(e) {
+            e.preventDefault();
+
+            const plan = JSON.parse(localStorage.getItem('selectedPlan'));
+            const formData = new FormData(document.getElementById('checkoutForm'));
+
+            // Show loading
+            const btn = document.querySelector('.checkout-btn');
+            btn.disabled = true;
+            btn.textContent = 'جاري معالجة طلبك...';
+
+            try {
+                // Here you would normally send to payment gateway
+                // For now, just simulate success
+                await new Promise(resolve => setTimeout(resolve, 2000));
+
+                // Save subscription
+                localStorage.setItem('activeSubscription', JSON.stringify({
+                    plan: plan,
+                    customer: {
+                        fullName: formData.get('fullName'),
+                        email: formData.get('email'),
+                        phone: formData.get('phone'),
+                        address: formData.get('address')
+                    },
+                    deliveryTime: formData.get('deliveryTime'),
+                    startDate: formData.get('startDate'),
+                    paymentMethod: formData.get('paymentMethod'),
+                    status: 'active',
+                    createdAt: new Date().toISOString()
+                }));
+
+                alert('✅ تم تفعيل اشتراكك بنجاح! سيتم إعادة توجيهك قريباً...');
+                setTimeout(() => {
+                    window.location.href = 'index.html';
+                }, 2000);
+
+            } catch (error) {
+                alert('حدث خطأ أثناء معالجة طلبك');
+                btn.disabled = false;
+                btn.textContent = 'تأكيد وإتمام الاشتراك';
+            }
+        }
+
+        window.addEventListener('load', () => {
+            loadPlanSummary();
+            const lang = localStorage.getItem('elakeil_lang') || 'ar';
+            if (typeof loadLanguage === 'function') loadLanguage(lang);
+        });
+    </script>
+</body>
+</html>

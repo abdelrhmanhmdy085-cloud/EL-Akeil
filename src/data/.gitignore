@@ -1,0 +1,22 @@
+# Python / venv
+.venv/
+__pycache__/
+
+# env / secrets
+.env
+*.key
+*.pem
+src/beckend/*.txt
+
+# frontend build
+frontend/dist/
+__pycache__/
+*.py[cod]
+*.sqlite3
+media/
+.env
+.vscode/
+*.log
+db.sqlite3
+/staticfiles/
+/node_modules/

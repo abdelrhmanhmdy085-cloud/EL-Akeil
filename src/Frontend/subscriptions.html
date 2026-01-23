@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-i18n="subscriptions_title">الاشتراكات الشهرية - الأكيل</title>
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <script src="assets/js/common.js"></script>
+    <script src="assets/js/i18n.js"></script>
+    <style>
+        .subscriptions-hero {
+            background: linear-gradient(135deg, #FF5A00 0%, #ff7a2a 100%);
+            color: white;
+            padding: 4rem 2rem;
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .subscriptions-hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            font-weight: 800;
+        }
+
+        .subscriptions-hero p {
+            font-size: 1.2rem;
+            opacity: 0.95;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .subscriptions-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+            padding: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .subscription-card {
+            background: white;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .subscription-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 32px rgba(255, 90, 0, 0.2);
+        }
+
+        .subscription-card.featured {
+            border: 3px solid #FF5A00;
+            transform: scale(1.05);
+        }
+
+        .subscription-card.featured:hover {
+            transform: scale(1.05) translateY(-8px);
+        }
+
+        .featured-badge {
+            position: absolute;
+            top: -12px;
+            right: 20px;
+            background: #FF5A00;
+            color: white;
+            padding: 0.5rem 1.5rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 700;
+        }
+
+        .plan-header {
+            background: linear-gradient(135deg, #f0f0f0 0%, #f9f9f9 100%);
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .subscription-card.featured .plan-header {
+            background: linear-gradient(135deg, #FF5A00 0%, #ff7a2a 100%);
+            color: white;
+        }
+
+        .plan-name {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: #333;
+        }
+
+        .subscription-card.featured .plan-name {
+            color: white;
+        }
+
+        .plan-meals {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: #FF5A00;
+            margin-bottom: 0.5rem;
+        }
+
+        .subscription-card.featured .plan-meals {
+            color: white;
+        }
+
+        .plan-subtitle {
+            font-size: 0.9rem;
+            color: #999;
+            margin-bottom: 1rem;
+        }
+
+        .subscription-card.featured .plan-subtitle {
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .plan-price {
+            display: flex;
+            align-items: baseline;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .price-amount {
+            font-size: 2.8rem;
+            font-weight: 800;
+            color: #FF5A00;
+        }
+
+        .subscription-card.featured .price-amount {
+            color: white;
+        }
+
+        .price-currency {
+            font-size: 1.2rem;
+            color: #666;
+        }
+
+        .subscription-card.featured .price-currency {
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .price-period {
+            font-size: 0.9rem;
+            color: #999;
+            margin-top: 0.5rem;
+        }
+
+        .subscription-card.featured .price-period {
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .plan-content {
+            padding: 2rem;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .features-list {
+            list-style: none;
+            padding: 0;
+            margin: 0 0 2rem 0;
+            flex-grow: 1;
+        }
+
+        .features-list li {
+            padding: 0.8rem 0;
+            border-bottom: 1px solid #f0f0f0;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            color: #555;
+            font-size: 0.95rem;
+        }
+
+        .features-list li:last-child {
+            border-bottom: none;
+        }
+
+        .features-list li::before {
+            content: "✓";
+            display: inline-block;
+            width: 24px;
+            height: 24px;
+            background: #FF5A00;
+            color: white;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 24px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            flex-shrink: 0;
+        }
+
+        .subscription-btn {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid #FF5A00;
+            background: white;
+            color: #FF5A00;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .subscription-btn:hover {
+            background: #FF5A00;
+            color: white;
+        }
+
+        .subscription-card.featured .subscription-btn {
+            background: #FF5A00;
+            color: white;
+            border-color: #FF5A00;
+        }
+
+        .subscription-card.featured .subscription-btn:hover {
+            background: #ff7a2a;
+            border-color: #ff7a2a;
+        }
+
+        .benefits-section {
+            background: #f9f9f9;
+            padding: 4rem 2rem;
+            margin: 3rem 0;
+        }
+
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .benefit-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        }
+
+        .benefit-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .benefit-card h3 {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+            color: #333;
+        }
+
+        .benefit-card p {
+            color: #666;
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        .faq-section {
+            max-width: 1000px;
+            margin: 3rem auto;
+            padding: 2rem;
+        }
+
+        .faq-title {
+            text-align: center;
+            font-size: 2rem;
+            margin-bottom: 2rem;
+            color: #333;
+        }
+
+        .faq-item {
+            background: white;
+            margin-bottom: 1rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+            overflow: hidden;
+        }
+
+        .faq-question {
+            padding: 1.5rem;
+            background: #f9f9f9;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 600;
+            color: #333;
+            transition: background 0.3s;
+        }
+
+        .faq-question:hover {
+            background: #f0f0f0;
+        }
+
+        .faq-question.active {
+            background: #FF5A00;
+            color: white;
+        }
+
+        .faq-answer {
+            padding: 1.5rem;
+            color: #666;
+            display: none;
+            background: white;
+            line-height: 1.8;
+        }
+
+        .faq-answer.active {
+            display: block;
+        }
+
+        .faq-toggle {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        @media (max-width: 768px) {
+            .subscriptions-grid {
+                grid-template-columns: 1fr;
+                padding: 1rem;
+            }
+
+            .subscription-card.featured {
+                transform: scale(1);
+            }
+
+            .subscription-card.featured:hover {
+                transform: translateY(-8px);
+            }
+
+            .subscriptions-hero h1 {
+                font-size: 1.8rem;
+            }
+
+            .subscriptions-hero p {
+                font-size: 1rem;
+            }
+
+            .benefits-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <a href="index.html" class="nav-brand logo-area">
+            <span>El Akeil</span>
+        </a>
+        <div class="nav-controls actions">
+            <a href="index.html" class="btn btn-secondary">العودة للرئيسية</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <div class="subscriptions-hero">
+        <h1>🎁 خطط الاشتراك الشهرية</h1>
+        <p>اختر خطتك المفضلة واستمتع بوجبات لذيذة منزلية مع توصيل مجاني</p>
+    </div>
+
+    <!-- Subscription Plans -->
+    <div class="subscriptions-grid">
+        <!-- Plan 1: 10 Meals -->
+        <div class="subscription-card">
+            <div class="plan-header">
+                <div class="plan-name">🥗 الخطة الأساسية</div>
+                <div class="plan-meals">10</div>
+                <div class="plan-subtitle">وجبات شهرية</div>
+                <div class="plan-price">
+                    <span class="price-amount">299</span>
+                    <span class="price-currency">جنيه</span>
+                </div>
+                <div class="price-period">شهر واحد</div>
+            </div>
+            <div class="plan-content">
+                <ul class="features-list">
+                    <li>10 وجبات متنوعة</li>
+                    <li>توصيل مجاني</li>
+                    <li>اختيار من 50+ وجبة</li>
+                    <li>تغيير الطلب أسبوعياً</li>
+                    <li>دعم العملاء 24/7</li>
+                </ul>
+                <button class="subscription-btn" onclick="selectPlan('basic', 10, 299)">اختر هذه الخطة</button>
+            </div>
+        </div>
+
+        <!-- Plan 2: 20 Meals (Featured) -->
+        <div class="subscription-card featured">
+            <div class="featured-badge">الأكثر شهرة ⭐</div>
+            <div class="plan-header">
+                <div class="plan-name">🍱 الخطة المتوسطة</div>
+                <div class="plan-meals">20</div>
+                <div class="plan-subtitle">وجبات شهرية</div>
+                <div class="plan-price">
+                    <span class="price-amount">549</span>
+                    <span class="price-currency">جنيه</span>
+                </div>
+                <div class="price-period">شهر واحد</div>
+            </div>
+            <div class="plan-content">
+                <ul class="features-list">
+                    <li>20 وجبة متنوعة</li>
+                    <li>توصيل مجاني يومي</li>
+                    <li>اختيار من 70+ وجبة</li>
+                    <li>تغيير الطلب يومياً</li>
+                    <li>أولوية في التوصيل</li>
+                    <li>خصم 10% على الإضافيات</li>
+                </ul>
+                <button class="subscription-btn" onclick="selectPlan('premium', 20, 549)">اختر هذه الخطة</button>
+            </div>
+        </div>
+
+        <!-- Plan 3: 30 Meals -->
+        <div class="subscription-card">
+            <div class="plan-header">
+                <div class="plan-name">🍲 الخطة الفاخرة</div>
+                <div class="plan-meals">30</div>
+                <div class="plan-subtitle">وجبات شهرية</div>
+                <div class="plan-price">
+                    <span class="price-amount">799</span>
+                    <span class="price-currency">جنيه</span>
+                </div>
+                <div class="price-period">شهر واحد</div>
+            </div>
+            <div class="plan-content">
+                <ul class="features-list">
+                    <li>30 وجبة متنوعة</li>
+                    <li>توصيل مجاني يومي</li>
+                    <li>اختيار من 100+ وجبة</li>
+                    <li>تغيير الطلب يومياً</li>
+                    <li>أولوية عالية في التوصيل</li>
+                    <li>خصم 15% على الإضافيات</li>
+                    <li>استشارة غذائية مجانية</li>
+                </ul>
+                <button class="subscription-btn" onclick="selectPlan('luxury', 30, 799)">اختر هذه الخطة</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Benefits Section -->
+    <div class="benefits-section">
+        <h2 style="text-align: center; font-size: 2rem; margin-bottom: 3rem; color: #333;">لماذا تختار الأكيل؟</h2>
+        <div class="benefits-grid">
+            <div class="benefit-card">
+                <div class="benefit-icon">🍳</div>
+                <h3>طعام بيتي طازج</h3>
+                <p>وجبات صحية ولذيذة معدة يومياً من أفضل الشيفات المنزليين</p>
+            </div>
+            <div class="benefit-card">
+                <div class="benefit-icon">📦</div>
+                <h3>توصيل سريع</h3>
+                <p>نوصل وجبتك خلال 30 دقيقة مع ضمان الجودة والنظافة</p>
+            </div>
+            <div class="benefit-card">
+                <div class="benefit-icon">💚</div>
+                <h3>صحي ومغذي</h3>
+                <p>كل وجبة معدة بعناية وتحتوي على جميع العناصر الغذائية المهمة</p>
+            </div>
+            <div class="benefit-card">
+                <div class="benefit-icon">💰</div>
+                <h3>توفير مالي</h3>
+                <p>اشترك الآن واوفر حتى 25% مقارنة بالطلب العادي</p>
+            </div>
+            <div class="benefit-card">
+                <div class="benefit-icon">🔄</div>
+                <h3>مرونة كاملة</h3>
+                <p>يمكنك تغيير طلبك يومياً أو إلغاء الاشتراك في أي وقت</p>
+            </div>
+            <div class="benefit-card">
+                <div class="benefit-icon">⭐</div>
+                <h3>جودة مضمونة</h3>
+                <p>كل طبق مختار بعناية من الشيفات الموثوقين في منطقتك</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- FAQ Section -->
+    <div class="faq-section">
+        <h2 class="faq-title">❓ الأسئلة الشائعة</h2>
+        
+        <div class="faq-item">
+            <div class="faq-question" onclick="toggleFAQ(this)">
+                <span>هل يمكنني تغيير الطبق بعد الطلب؟</span>
+                <span class="faq-toggle">+</span>
+            </div>
+            <div class="faq-answer">
+                نعم! يمكنك تغيير طلبك قبل 2 ساعة من وقت التوصيل. اتصل بفريق الدعم أو استخدم التطبيق لتغيير طلبك بسهولة.
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <div class="faq-question" onclick="toggleFAQ(this)">
+                <span>ماذا يحدث إذا لم أتمكن من استقبال وجبة ما؟</span>
+                <span class="faq-toggle">+</span>
+            </div>
+            <div class="faq-answer">
+                يمكنك إلغاء الوجبة قبل 24 ساعة من التوصيل، وسيتم إعادة حسابها في الشهر القادم أو إرجاع الرصيد لديك.
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <div class="faq-question" onclick="toggleFAQ(this)">
+                <span>هل هناك عقد طويل الأجل أو يمكنني الإلغاء في أي وقت؟</span>
+                <span class="faq-toggle">+</span>
+            </div>
+            <div class="faq-answer">
+                لا توجد عقود طويلة الأجل! يمكنك الإلغاء في أي وقت بدون أي رسوم إضافية أو شروط معقدة.
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <div class="faq-question" onclick="toggleFAQ(this)">
+                <span>هل التوصيل مدرج في السعر؟</span>
+                <span class="faq-toggle">+</span>
+            </div>
+            <div class="faq-answer">
+                نعم! التوصيل مجاني تماماً مع جميع خطط الاشتراك. لا توجد رسوم إضافية.
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <div class="faq-question" onclick="toggleFAQ(this)">
+                <span>هل يمكنني اختيار الشيف المفضل لي؟</span>
+                <span class="faq-toggle">+</span>
+            </div>
+            <div class="faq-answer">
+                نعم! يمكنك البحث عن الشيفات والاختيار من وجباتهم. يمكنك أيضاً حفظ الشيفات المفضلين لديك.
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function selectPlan(planType, meals, price) {
+            const lang = localStorage.getItem('elakeil_lang') || 'ar';
+            const planNames = {
+                'basic': lang === 'ar' ? 'الخطة الأساسية (10 وجبات)' : 'Basic Plan (10 Meals)',
+                'premium': lang === 'ar' ? 'الخطة المتوسطة (20 وجبة)' : 'Premium Plan (20 Meals)',
+                'luxury': lang === 'ar' ? 'الخطة الفاخرة (30 وجبة)' : 'Luxury Plan (30 Meals)'
+            };
+
+            // Save subscription to localStorage
+            localStorage.setItem('selectedPlan', JSON.stringify({
+                type: planType,
+                meals: meals,
+                price: price,
+                name: planNames[planType],
+                startDate: new Date().toISOString()
+            }));
+
+            alert(`تم اختيار: ${planNames[planType]}\nالسعر: ${price} جنيه`);
+
+            // Redirect to checkout/payment
+            window.location.href = 'checkout.html';
+        }
+
+        function toggleFAQ(element) {
+            const question = element;
+            const answer = question.nextElementSibling;
+
+            // Close other FAQs
+            document.querySelectorAll('.faq-question').forEach(q => {
+                if (q !== question) {
+                    q.classList.remove('active');
+                    q.nextElementSibling.classList.remove('active');
+                    q.querySelector('.faq-toggle').textContent = '+';
+                }
+            });
+
+            // Toggle current FAQ
+            question.classList.toggle('active');
+            answer.classList.toggle('active');
+            question.querySelector('.faq-toggle').textContent = 
+                question.classList.contains('active') ? '−' : '+';
+        }
+
+        // Load language on page load
+        window.addEventListener('load', () => {
+            const lang = localStorage.getItem('elakeil_lang') || 'ar';
+            if (typeof loadLanguage === 'function') loadLanguage(lang);
+        });
+    </script>
+</body>
+</html>

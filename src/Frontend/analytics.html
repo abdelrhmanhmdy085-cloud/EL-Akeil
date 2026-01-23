@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-i18n="analytics_title">Chef Locations & Heatmap</title>
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+        integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet-heat/0.2.0/leaflet-heat.css" />
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: #f5f5f5;
+        }
+
+        .analytics-container {
+            display: grid;
+            grid-template-columns: 1fr 350px;
+            gap: 1rem;
+            height: 100vh;
+            padding: 1rem;
+            box-sizing: border-box;
+        }
+
+        .map-container {
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            position: relative;
+        }
+
+        #advancedMap {
+            width: 100%;
+            height: 100%;
+        }
+
+        .sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            overflow-y: auto;
+            background: white;
+            border-radius: 12px;
+            padding: 1rem;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .stats-card {
+            background: linear-gradient(135deg, #FF5A00 0%, #ff8533 100%);
+            color: white;
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .stats-card h3 {
+            margin: 0 0 10px 0;
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+
+        .stats-card .value {
+            font-size: 2rem;
+            font-weight: bold;
+        }
+
+        .legend {
+            background: #f0f0f0;
+            padding: 12px;
+            border-radius: 8px;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin: 8px 0;
+            font-size: 0.85rem;
+        }
+
+        .legend-color {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            border: 2px solid #333;
+        }
+
+        .controls {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .btn-control {
+            padding: 10px;
+            background: #FF5A00;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s;
+        }
+
+        .btn-control:hover {
+            background: #e94e00;
+            transform: translateY(-2px);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn-control.secondary {
+            background: #666;
+        }
+
+        .btn-control.secondary:hover {
+            background: #555;
+        }
+
+        .chef-list {
+            max-height: 250px;
+            overflow-y: auto;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+        }
+
+        .chef-item {
+            padding: 10px;
+            border-bottom: 1px solid #f0f0f0;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .chef-item:hover {
+            background: #fff3e0;
+        }
+
+        .chef-item.active {
+            background: #ffe0b2;
+            border-left: 4px solid #FF5A00;
+        }
+
+        .chef-name {
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 3px;
+        }
+
+        .chef-meta {
+            font-size: 0.75rem;
+            color: #999;
+        }
+
+        .toggle-heatmap {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px;
+            background: #f5f5f5;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+
+        .toggle-switch {
+            width: 40px;
+            height: 22px;
+            background: #ccc;
+            border-radius: 11px;
+            position: relative;
+            transition: all 0.3s;
+        }
+
+        .toggle-switch.active {
+            background: #FF5A00;
+        }
+
+        .toggle-switch::after {
+            content: '';
+            position: absolute;
+            width: 18px;
+            height: 18px;
+            background: white;
+            border-radius: 50%;
+            top: 2px;
+            left: 2px;
+            transition: all 0.3s;
+        }
+
+        .toggle-switch.active::after {
+            left: 20px;
+        }
+
+        @media (max-width: 768px) {
+            .analytics-container {
+                grid-template-columns: 1fr;
+            }
+
+            .sidebar {
+                max-height: 300px;
+            }
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem;
+            background: white;
+            border-bottom: 1px solid #e0e0e0;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .navbar-brand {
+            font-weight: bold;
+            font-size: 1.2rem;
+            color: #FF5A00;
+        }
+
+        .analytics-container {
+            margin-top: 60px;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <span class="navbar-brand">🗺️ Chef Locations & Heatmap</span>
+        <button onclick="logout()" class="btn btn-outline" style="margin: 0;">Logout</button>
+    </nav>
+
+    <div class="analytics-container">
+        <!-- Main Map -->
+        <div class="map-container">
+            <div id="advancedMap"></div>
+        </div>
+
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <!-- Statistics -->
+            <div id="chefStatsContainer">
+                <div style="text-align: center; padding: 20px; color: #999;">
+                    Loading analytics...
+                </div>
+            </div>
+
+            <!-- Toggle Heatmap -->
+            <div class="toggle-heatmap" onclick="toggleHeatmap()">
+                <span style="flex: 1;">Show Heatmap</span>
+                <div class="toggle-switch" id="heatmapToggle"></div>
+            </div>
+
+            <!-- Controls -->
+            <div class="controls">
+                <button class="btn-control" onclick="displayBusyAreas()">🔥 Show Busy Areas</button>
+                <button class="btn-control" onclick="fitAllMarkers()">📍 Fit All</button>
+                <button class="btn-control secondary" onclick="exportHeatmapImage()">💾 Export Map</button>
+            </div>
+
+            <!-- Legend -->
+            <div class="legend">
+                <h4 style="margin: 0 0 10px 0; font-size: 0.9rem;">Legend</h4>
+                <div class="legend-item">
+                    <div class="legend-color" style="background: #ffd700;"></div>
+                    <span>Chef (Rating 4.5+)</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color" style="background: #ff8c00;"></div>
+                    <span>Chef (Rating 4+)</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color" style="background: #ff0000;"></div>
+                    <span>Chef (Rating 3.5-4)</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color" style="background: #90EE90;"></div>
+                    <span>Active Driver</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color" style="background: #4169E1;"></div>
+                    <span>Your Location</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color" style="background: #ff0000;"></div>
+                    <span>🔥 High Demand</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color" style="background: #ffa500;"></div>
+                    <span>🔥 Medium Demand</span>
+                </div>
+            </div>
+
+            <!-- Chef List -->
+            <div>
+                <h4 style="margin: 0 0 10px 0; font-size: 0.9rem;">Nearby Chefs</h4>
+                <div id="chefList" class="chef-list">
+                    <div style="text-align: center; padding: 20px; color: #999; font-size: 0.85rem;">
+                        Loading chefs...
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+        integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-heat/0.2.0/leaflet-heat.js"></script>
+    <script src="https://cdn.socket.io/4.7.4/socket.io.min.js"></script>
+    <script src="assets/js/common.js"></script>
+    <script src="assets/js/i18n.js"></script>
+    <script src="assets/js/auth.js"></script>
+    <script src="assets/js/advanced-map.js"></script>
+
+    <script>
+        checkAuth();
+
+        let heatmapVisible = false;
+        let allChefs = [];
+
+        // Initialize map on load
+        window.addEventListener('load', () => {
+            initAdvancedChefMap('advancedMap');
+            loadAllChefs();
+        });
+
+        // Load all chefs for the list
+        async function loadAllChefs() {
+            try {
+                const response = await apiFetch('/customer/chefs');
+                if (response.ok) {
+                    allChefs = response.data;
+                    displayChefList();
+                }
+            } catch (error) {
+                console.error('Error loading chefs:', error);
+            }
+        }
+
+        // Display chef list in sidebar
+        function displayChefList() {
+            const chefList = document.getElementById('chefList');
+            
+            if (allChefs.length === 0) {
+                chefList.innerHTML = '<div style="text-align: center; padding: 20px; color: #999;">No chefs available</div>';
+                return;
+            }
+
+            chefList.innerHTML = allChefs.slice(0, 10).map(chef => `
+                <div class="chef-item" onclick="selectChefOnMap(${chef.user_id})">
+                    <div class="chef-name">👨‍🍳 ${chef.name}</div>
+                    <div class="chef-meta">
+                        ⭐ ${chef.rating} • 📏 ${chef.distance || 'N/A'} km
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Select chef on map
+        function selectChefOnMap(chefId) {
+            const chef = allChefs.find(c => c.user_id === chefId);
+            if (chef && chef.lat && chef.long) {
+                advancedMap.setView([chef.lat, chef.long], 15);
+                
+                // Update UI
+                document.querySelectorAll('.chef-item').forEach(el => el.classList.remove('active'));
+                event.target.closest('.chef-item')?.classList.add('active');
+            }
+        }
+
+        // Toggle heatmap display
+        function toggleHeatmap() {
+            heatmapVisible = !heatmapVisible;
+            const toggle = document.getElementById('heatmapToggle');
+            
+            if (heatmapVisible) {
+                toggle.classList.add('active');
+                displayHeatmap();
+            } else {
+                toggle.classList.remove('active');
+                if (window.heatmapLayer && advancedMap) {
+                    advancedMap.removeLayer(window.heatmapLayer);
+                }
+            }
+        }
+
+        // Fit all markers in view
+        function fitAllMarkers() {
+            if (!advancedMap) return;
+            
+            const group = new L.featureGroup(Object.values(trackingMarkers));
+            if (group.getLayers().length > 0) {
+                advancedMap.fitBounds(group.getBounds().pad(0.1));
+            }
+        }
+
+        // Initialize language and auth
+        initLanguage();
+    </script>
+</body>
+</html>

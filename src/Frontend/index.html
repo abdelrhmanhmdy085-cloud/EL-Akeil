@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" id="mainHtml">
+
+<head>
+  <meta charset="UTF-8">
+  <title data-i18n="portal_title">الأكيل - El Akeil</title>
+  <link rel="stylesheet" href="assets/css/styles.css">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&family=Inter:wght@400;600&display=swap"
+    rel="stylesheet">
+  <!-- Core Modules -->
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+    integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+  <script src="https://cdn.socket.io/4.7.4/socket.io.min.js"></script>
+  <script src="assets/js/common.js"></script>
+  <script src="assets/js/i18n.js"></script>
+  <script src="assets/js/auth.js"></script>
+</head>
+
+<body>
+  <!-- Splash Screen -->
+  <div id="splash-screen">
+    <div class="splash-content">
+      <div class="logo-circle-container">
+        <img src="assets/images/splash_logo.png" id="splash-logo" alt="El Akil">
+      </div>
+
+      <div id="brand-info" class="hidden">
+        <h1 class="brand-name">الأكيل</h1>
+        <p class="brand-slogan">أكل بيتي لحد باب بيتك</p>
+      </div>
+    </div>
+  </div>
+  <style>
+    /* Splash Screen Settings */
+    #splash-screen {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100vh;
+      background: #FF5A00;
+      /* Solid Premium Orange */
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 10000;
+      transition: opacity 0.8s ease-in-out;
+    }
+
+    /* Circular Container */
+    .logo-circle-container {
+      width: 250px;
+      height: 250px;
+      background: #fff;
+      /* White circle background */
+      border-radius: 50%;
+      overflow: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+      opacity: 0;
+      transform: scale(0.5);
+      animation: circlePop 1.5s forwards cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+
+    #splash-logo {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transform: scale(1.1);
+    }
+
+    /* Text */
+    #brand-info {
+      margin-top: 30px;
+      color: white;
+      text-align: center;
+      opacity: 0;
+    }
+
+    .brand-name {
+      font-size: 3.5rem;
+      margin: 0;
+      font-weight: 900;
+    }
+
+    .brand-slogan {
+      font-size: 1.5rem;
+      margin-top: 5px;
+      font-weight: 300;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    /* Animations */
+    @keyframes circlePop {
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+
+    .fade-in-up {
+      animation: fadeInUp 1s forwards;
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .fade-out {
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    /* Category Filter Buttons */
+    .category-filter-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0.8rem;
+      padding: 1rem 0;
+    }
+
+    .category-filter-btn {
+      padding: 0.8rem 1.5rem;
+      border: 2px solid #FF5A00;
+      background: white;
+      color: #FF5A00;
+      border-radius: 25px;
+      cursor: pointer;
+      font-size: 1rem;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      white-space: nowrap;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .category-filter-btn:hover {
+      background: #FF5A00;
+      color: white;
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(255, 90, 0, 0.3);
+    }
+
+    .category-filter-btn.active {
+      background: #FF5A00;
+      color: white;
+      box-shadow: 0 5px 15px rgba(255, 90, 0, 0.3);
+    }
+
+    .category-filter-btn-icon {
+      font-size: 1.2rem;
+    }
+  </style>
+  <script>
+    // Splash Screen Logic
+    window.addEventListener('load', () => {
+      const logo = document.querySelector('.logo-circle-container');
+      const text = document.getElementById('brand-info');
+      const splash = document.getElementById('splash-screen');
+
+      // Phase 1: Logo Pop (0-2s) - Handled by CSS animation
+
+      // Phase 2: Text Fade In (2s)
+      setTimeout(() => {
+        text.style.animation = 'fadeInUp 1s forwards';
+        text.classList.remove('hidden');
+        text.style.opacity = '1';
+      }, 2000);
+
+      // Phase 3: Transition Out (5s total)
+      setTimeout(() => {
+        splash.style.opacity = '0';
+        setTimeout(() => {
+          splash.style.display = 'none';
+        }, 800);
+      }, 5000);
+    });
+  </script>
+
+  <nav class="navbar">
+    <a href="index.html" class="nav-brand logo-area">
+      <!-- <img src="assets/images/logo.png" class="nav-logo-img logo" alt="El Akil" onerror="this.style.display='none'"> -->
+      <span>El Akeil</span>
+    </a>
+    <div class="nav-controls actions" id="langControls">
+      <div id="notiContainer" style="position:relative; margin-right:15px; cursor:pointer;" class="hidden">
+        <span style="font-size:1.5rem;">🔔</span>
+        <span id="notiBadge"
+          style="position:absolute; top:-5px; right:-5px; background:red; color:white; border-radius:50%; font-size:0.7rem; padding:2px 5px; display:none;">0</span>
+        <div id="notiDropdown"
+          style="position:absolute; top:30px; right:0; background:var(--bg-card); border:1px solid var(--border); width:250px; display:none; flex-direction:column; z-index:1000;">
+        </div>
+      </div>
+      <a href="auth.html" class="btn btn-order" data-i18n="nav_login">Login / Register</a>
+    </div>
+  </nav>
+
+  <header class="hero">
+    <div class="container">
+      <h1 data-i18n="hero_title" style="font-size: 3rem; margin-bottom: 1rem;">توصيل سريع للطعام البيتي</h1>
+      <p data-i18n="hero_subtitle" style="font-size: 1.5rem; max-width: 600px; margin: 0 auto; margin-bottom:2rem;">
+        اطلب الآن من أفضل الشيفات في منطقتك</p>
+
+      <div class="search-box-container">
+        <button class="search-btn">ابحث</button>
+        <input type="text" class="search-input" placeholder="ابحث عن منطقة، شارع، معلم معروف...">
+        <div class="location-icon">📍</div>
+      </div>
+
+      <!-- Category Filter Buttons -->
+      <div class="category-filter-section" style="margin-top: 2rem; text-align: center;">
+        <h3 style="font-size: 1.2rem; margin-bottom: 1rem; color: #333;" data-i18n="filter_by_type">تصفح حسب النوع</h3>
+        <div class="category-filter-buttons" id="categoryFilterButtons" style="display: flex; flex-wrap: wrap; justify-content: center; gap: 0.8rem;">
+          <div class="loading-spinner">جاري التحميل...</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Curve Separator -->
+    <div class="wave-separator">
+      <svg viewBox="0 0 1440 320" preserveAspectRatio="none">
+        <path fill="#ffffff" fill-opacity="1"
+          d="M0,96L48,112C96,128,192,160,288,160C384,160,480,128,576,122.7C672,117,768,139,864,149.3C960,160,1056,160,1152,138.7C1248,117,1344,75,1392,53.3L1440,32L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z">
+        </path>
+      </svg>
+    </div>
+  </header>
+
+  <div class="bg-white-section">
+    <main class="container main-content">
+      <!-- SECTION 2: FOOD LEVELS (Horizontal Scroll) -->
+      <section class="food-levels-section">
+        <h2 class="section-title" data-i18n="food_levels">مستويات الأكل</h2>
+        <div id="levelsContainer" class="horizontal-scroll-container">
+          <div class="loading-spinner">Loading...</div>
+        </div>
+      </section>
+
+      <!-- SECTION: OCCASIONS & HOLIDAYS (Special Highlight) -->
+      <section class="occasions-section" style="margin-top: 3rem;">
+        <h2 class="section-title"><span data-i18n="occasions_title">المناسبات والأعياد</span> <span
+            class="special-star">✨</span></h2>
+        <div id="occasionsContainer" class="occasions-grid">
+          <div class="loading-spinner">Loading...</div>
+        </div>
+      </section>
+
+      <!-- SECTION 3: FOOD CATEGORIES -->
+      <section class="food-categories-section" style="margin-top: 3rem;">
+        <h3 class="section-subtitle" data-i18n="browse_by_category"
+          style="font-size: 1.5rem; font-weight: 800; margin-bottom: 1.5rem; text-align: right;">تصفح حسب النوع</h3>
+        <div id="categoriesContainer" class="categories-grid"
+          style="display: flex; gap: 2rem; overflow-x: auto; padding: 1rem 0;">
+          <div class="loading-spinner">Loading...</div>
+        </div>
+      </section>
+
+      <!-- SECTION 5: JOIN OUR COMPANY -->
+      <section class="join-company-section">
+        <div class="join-company-content">
+          <h2 data-i18n="join_company_title">انضم لشركتنا</h2>
+          <p data-i18n="join_company_desc">كن جزءاً من عائلة الأكيل وابدأ كسب دخلاً إضافياً</p>
+          <button class="btn btn-join-company" onclick="openJoinModal()" data-i18n="btn_join">انضم الآن</button>
+        </div>
+      </section>
+
+      <!-- SECTION 6: SUBSCRIPTIONS -->
+      <section class="subscriptions-section" style="margin-top: 3rem; padding: 2rem; background: linear-gradient(135deg, #f0f0f0 0%, #f9f9f9 100%); border-radius: 12px;">
+        <h2 style="font-size: 2rem; margin-bottom: 1rem; text-align: center; color: #333;">💳 اشتراكات شهرية</h2>
+        <p style="text-align: center; color: #666; margin-bottom: 2rem; max-width: 600px; margin-left: auto; margin-right: auto;">اختر خطتك المفضلة واستمتع بوجبات لذيذة منزلية مع توصيل مجاني وتوفير حتى 25%</p>
+        <div style="display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center;">
+          <button class="btn btn-order" onclick="window.location.href='subscriptions.html'" style="padding: 1rem 2rem; font-size: 1.1rem;">عرض الخطط</button>
+          <button class="btn btn-outline" onclick="window.location.href='#'" style="padding: 1rem 2rem; font-size: 1.1rem;">تحدث معنا</button>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <!-- JOIN COMPANY MODAL -->
+  <div id="joinCompanyModal" class="modal hidden">
+    <div class="modal-content join-modal">
+      <span class="modal-close" onclick="closeJoinModal()">✕</span>
+      <h2 data-i18n="select_role">اختر دورك</h2>
+
+      <div class="role-selection-grid">
+        <!-- Chef Option -->
+        <div class="role-option-card" onclick="selectRole('chef')">
+          <div class="role-option-icon">👨‍🍳</div>
+          <h3 data-i18n="join_as_chef">انضم كشيف</h3>
+          <p data-i18n="join_chef_desc">بيع أكلك البيتي بسهولة</p>
+        </div>
+
+        <!-- Driver Option -->
+        <div class="role-option-card" onclick="selectRole('driver')">
+          <div class="role-option-icon">🛵</div>
+          <h3 data-i18n="join_as_driver">انضم كطيار</h3>
+          <p data-i18n="join_driver_desc">وصل الطلبات وزود دخلك</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Location Picker Modal -->
+  <div id="locationModal" class="location-modal hidden">
+    <div class="modal-header">
+      <span class="close-modal" onclick="closeLocationModal()">✕</span>
+      <h3>عنوان التوصيل</h3>
+    </div>
+
+    <div class="map-container">
+      <div id="pickerMap"></div>
+      <div class="center-marker-container">
+        <div class="tooltip-marker">اسحب الخريطة لتحديد الموقع</div>
+        <div class="pin-marker">📍</div>
+      </div>
+      <div class="map-search-overlay">
+        <input type="text" placeholder="ابحث عن شارع أو معلم شهير...">
+      </div>
+      <button class="current-location-btn">◎</button>
+    </div>
+
+    <div class="modal-footer">
+      <div class="address-preview">
+        <span class="pin-icon">📍</span>
+        <span id="selectedAddress">التوصيل إلى...</span>
+      </div>
+      <button class="confirm-location-btn" onclick="confirmLocation()">وصّل هنا</button>
+    </div>
+  </div>
+
+  <script>
+    // Map Modal Logic
+    let pickerMap;
+    const modal = document.getElementById('locationModal');
+    const locateBtn = document.getElementById('locateBtn');
+
+    if (locateBtn) {
+      locateBtn.addEventListener('click', openLocationModal);
+    }
+
+    function openLocationModal() {
+      modal.classList.remove('hidden');
+      if (!pickerMap) {
+        // Init Map (Cairo Center)
+        pickerMap = L.map('pickerMap').setView([30.0444, 31.2357], 15);
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+          attribution: '© OpenStreetMap'
+        }).addTo(pickerMap);
+
+        // Mock Address Update on Drag
+        pickerMap.on('moveend', () => {
+          const center = pickerMap.getCenter();
+          // Retrieve address (Using generic text for demo to avoid rate limits/complexity)
+          // In production: fetch(`https://nominatim.openstreetmap.org/reverse?lat=${center.lat}&lon=${center.lng}...`)
+          document.getElementById('selectedAddress').innerText = `التوصيل إلى شارع ${Math.floor(Math.random() * 100) + 1}، القاهرة`;
+        });
+      }
+      setTimeout(() => { pickerMap.invalidateSize(); }, 200); // Fix rendering
+    }
+
+    function closeLocationModal() {
+      modal.classList.add('hidden');
+    }
+
+    function confirmLocation() {
+      const center = pickerMap.getCenter();
+      localStorage.setItem('user_location', JSON.stringify(center));
+      closeLocationModal();
+      // Redirect or generic confirmation
+      alert("Location Saved! Redirecting to nearby chefs...");
+      window.location.href = 'auth.html?role=customer'; // Or chef list
+    }
+
+    // Override initLanguage to set selector value
+    window.addEventListener('load', () => {
+      const saved = localStorage.getItem('elakeil_lang') || 'ar';
+      const sel = document.getElementById('langSelector');
+      if (sel) sel.value = saved;
+      if (typeof loadLanguage === 'function') loadLanguage(saved);
+
+      // Load Dynamic Content
+      loadHomeContent();
+    });
+
+    async function loadHomeContent() {
+      const lang = localStorage.getItem('elakeil_lang') || 'ar';
+
+      // Load Categories Filter Buttons
+      try {
+        const catRes = await fetch(`/api/browse/categories?lang=${lang}`);
+        if (catRes.ok) {
+          const categories = await catRes.json();
+          const filterButtonsContainer = document.getElementById('categoryFilterButtons');
+          filterButtonsContainer.innerHTML = '';
+
+          // "All Categories" button
+          const allBtn = document.createElement('button');
+          allBtn.className = 'category-filter-btn active';
+          allBtn.onclick = () => filterByCategory(null);
+          allBtn.innerHTML = `<span class="category-filter-btn-icon">🍽️</span> ${lang === 'ar' ? 'الكل' : 'All'}`;
+          filterButtonsContainer.appendChild(allBtn);
+
+          // Category buttons
+          categories.forEach(cat => {
+            const btn = document.createElement('button');
+            btn.className = 'category-filter-btn';
+            btn.onclick = () => filterByCategory(cat.id, btn);
+            btn.innerHTML = `<span class="category-filter-btn-icon">${cat.icon || '🍽️'}</span> ${cat.name}`;
+            btn.dataset.categoryId = cat.id;
+            filterButtonsContainer.appendChild(btn);
+          });
+        }
+      } catch (e) {
+        console.error('Failed to load category filters:', e);
+      }
+
+      // Load Levels
+      try {
+        const lvlRes = await fetch(`/api/browse/levels?lang=${lang}`);
+        if (lvlRes.ok) {
+          const levels = await lvlRes.json();
+          const scrollContainer = document.getElementById('levelsContainer');
+          const occContainer = document.getElementById('occasionsContainer');
+
+          scrollContainer.innerHTML = '';
+          occContainer.innerHTML = '';
+
+          levels.forEach(lvl => {
+            if (lvl.is_special) {
+              // Occasions Section (Premium Card)
+              const card = document.createElement('div');
+              card.className = 'occasion-card premium-occasion';
+              card.onclick = () => window.location.href = `level.html?id=${lvl.id}`;
+              card.innerHTML = `
+                <div class="occasion-content">
+                  <div class="occasion-icon-bg">${lvl.icon || '🎉'}</div>
+                  <div class="occasion-info">
+                    <h3>${lvl.name}</h3>
+                    <p>${lvl.dish_count} ${lang === 'ar' ? 'أطباق مميزة' : 'Special Dishes'}</p>
+                  </div>
+                  <div class="occasion-arrow">→</div>
+                </div>
+              `;
+              occContainer.appendChild(card);
+            } else {
+              // Normal Level
+              const card = document.createElement('div');
+              card.className = 'level-card';
+              card.onclick = () => window.location.href = `level.html?id=${lvl.id}`;
+              card.innerHTML = `
+                        <div class="level-card-header" style="background-color: ${lvl.color_tag || '#FF5A00'}">${lvl.icon || '📍'}</div>
+                        <h3>${lvl.name}</h3>
+                        <p style="font-size:0.8rem; color:#999;">${lvl.dish_count} ${lang === 'ar' ? 'أطباق' : 'Dishes'}</p>
+                      `;
+              scrollContainer.appendChild(card);
+            }
+          });
+
+          // Add "View All" button for levels
+          const viewAllLevels = document.createElement('div');
+          viewAllLevels.className = 'level-card view-all-card';
+          viewAllLevels.onclick = () => window.location.href = 'levels.html';
+          viewAllLevels.innerHTML = `
+            <div class="level-card-header" style="background: #eee; color: #333;">→</div>
+            <h3>${lang === 'ar' ? 'المزيد' : 'More'}</h3>
+          `;
+          scrollContainer.appendChild(viewAllLevels);
+        }
+      } catch (e) {
+        console.error('Failed to load levels:', e);
+      }
+
+      // Load Categories
+      try {
+        const catRes = await fetch(`/api/browse/categories?lang=${lang}`);
+        if (catRes.ok) {
+          const categories = await catRes.json();
+          const grid = document.getElementById('categoriesContainer');
+          grid.innerHTML = '';
+
+          categories.forEach(cat => {
+            const card = document.createElement('div');
+            card.className = 'category-circle-card';
+            card.onclick = () => window.location.href = `category.html?id=${cat.id}`;
+            card.innerHTML = `
+                    <div class="category-icon-wrapper">${cat.icon || '🍽️'}</div>
+                    <span class="category-name">${cat.name}</span>
+                `;
+            grid.appendChild(card);
+          });
+
+          // Add "More" for categories
+          const moreCat = document.createElement('div');
+          moreCat.className = 'category-circle-card more-link';
+          moreCat.onclick = () => window.location.href = 'categories.html';
+          moreCat.innerHTML = `
+                  <div class="category-icon-wrapper" style="background: #f0f0f0;">...</div>
+                  <span class="category-name">${lang === 'ar' ? 'المزيد' : 'More'}</span>
+              `;
+          grid.appendChild(moreCat);
+        }
+      } catch (e) {
+        console.error('Failed to load categories:', e);
+      }
+    }
+
+    // Filter by Category Function
+    function filterByCategory(categoryId, buttonElement) {
+      // Update active button state
+      document.querySelectorAll('.category-filter-btn').forEach(btn => {
+        btn.classList.remove('active');
+      });
+      
+      if (buttonElement) {
+        buttonElement.classList.add('active');
+      } else {
+        // "All" button is first
+        document.querySelector('.category-filter-btn').classList.add('active');
+      }
+
+      // Build URL with category filter
+      if (categoryId) {
+        window.location.href = `listing.html?category=${categoryId}`;
+      } else {
+        window.location.href = `listing.html`;
+      }
+    }
+
+    // Join Company Modal Functions
+    function openJoinModal() {
+      document.getElementById('joinCompanyModal').classList.remove('hidden');
+    }
+
+    function closeJoinModal() {
+      document.getElementById('joinCompanyModal').classList.add('hidden');
+    }
+
+    function selectRole(role) {
+      if (role === 'chef') {
+        window.location.href = 'chef_register.html';
+      } else if (role === 'driver') {
+        window.location.href = 'driver_register.html';
+      }
+    }
+
+    // Close modal when clicking outside
+    document.addEventListener('DOMContentLoaded', () => {
+      const modal = document.getElementById('joinCompanyModal');
+      if (modal) {
+        modal.addEventListener('click', (e) => {
+          if (e.target === modal) closeJoinModal();
+        });
+      }
+    });
+
+  </script>
+
+  <!-- WhatsApp Button -->
+  <a href="https://wa.me/201001144459" target="_blank" class="whatsapp-btn" title="تواصل معنا على واتس آب">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.67-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.076 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421-7.403h-.004a9.87 9.87 0 00-4.846 1.235c-1.477.787-2.753 1.912-3.582 3.28C2.602 12.301 2.25 14.185 2.25 16.122c0 1.937.352 3.821 1.039 5.59.687 1.769 1.73 3.36 3.007 4.663 1.277 1.303 2.828 2.346 4.597 3.033 1.769.687 3.653 1.039 5.59 1.039 1.937 0 3.821-.352 5.59-1.039 1.769-.687 3.36-1.73 4.663-3.007 1.303-1.277 2.346-2.828 3.033-4.597.687-1.769 1.039-3.653 1.039-5.59 0-1.937-.352-3.821-1.039-5.59-.687-1.769-1.73-3.36-3.007-4.663-1.277-1.303-2.828-2.346-4.597-3.033-1.769-.687-3.653-1.039-5.59-1.039zm0 17.79c-1.53 0-3.023-.295-4.448-.869-1.425-.574-2.71-1.412-3.747-2.449-1.037-1.037-1.875-2.322-2.449-3.747-.574-1.425-.869-2.918-.869-4.448 0-1.53.295-3.023.869-4.448.574-1.425 1.412-2.71 2.449-3.747 1.037-1.037 2.322-1.875 3.747-2.449 1.425-.574 2.918-.869 4.448-.869 1.53 0 3.023.295 4.448.869 1.425.574 2.71 1.412 3.747 2.449 1.037 1.037 1.875 2.322 2.449 3.747.574 1.425.869 2.918.869 4.448 0 1.53-.295 3.023-.869 4.448-.574 1.425-1.412 2.71-2.449 3.747-1.037 1.037-2.322 1.875-3.747 2.449-1.425.574-2.918.869-4.448.869z"/>
+    </svg>
+  </a>
+
+  <style>
+    .whatsapp-btn {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      width: 60px;
+      height: 60px;
+      background: #25D366;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+      z-index: 999;
+      transition: all 0.3s ease;
+      color: white;
+    }
+
+    .whatsapp-btn:hover {
+      background: #20BA5A;
+      transform: scale(1.1);
+      box-shadow: 0 6px 16px rgba(37, 211, 102, 0.4);
+    }
+
+    .whatsapp-btn svg {
+      width: 32px;
+      height: 32px;
+      fill: currentColor;
+    }
+
+    @media (max-width: 768px) {
+      .whatsapp-btn {
+        width: 50px;
+        height: 50px;
+        bottom: 15px;
+        right: 15px;
+      }
+
+      .whatsapp-btn svg {
+        width: 28px;
+        height: 28px;
+      }
+    }
+  </style>
+</body>
+
+</html>

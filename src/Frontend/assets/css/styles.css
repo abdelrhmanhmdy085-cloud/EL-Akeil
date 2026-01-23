@@ -1,0 +1,940 @@
+:root {
+    --primary: #5E2129;
+    /* Maroon from Logo */
+    --primary-hover: #4a1a20;
+    --bg-dark: #FFF5F5;
+    /* Light Pink from Logo Background */
+    --bg-card: #FFFFFF;
+    --bg-hover: #FCE8E8;
+    /* Light Maroon Tint */
+    --text-primary: #5E2129;
+    /* Maroon Text */
+    --text-secondary: #8E5A5A;
+    --success: #00C851;
+    --danger: #ff4444;
+    --border: #E8D0D0;
+    --shadow: 0 4px 6px rgba(94, 33, 41, 0.1);
+    --font-ar: 'Cairo', sans-serif;
+    --font-en: 'Inter', sans-serif;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    margin: 0;
+    font-family: 'Cairo', 'Inter', sans-serif;
+    background-color: var(--bg-dark);
+    color: var(--text-primary);
+    overflow-x: hidden;
+    transition: background-color 0.3s, color 0.3s;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+body.rtl {
+    direction: rtl;
+    font-family: var(--font-ar);
+}
+
+/* Navbar */
+.navbar {
+    position: sticky;
+    top: 0;
+    z-index: 9999;
+    background: var(--bg-dark);
+    /* Match global pink background */
+    color: var(--text-primary);
+    border-bottom: 1px solid var(--border);
+    padding: 10px 5%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: none;
+    /* Remove shadow for seamless look, or soft shadow */
+}
+
+.nav-brand {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: var(--text-primary);
+    /* Maroon match */
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.nav-logo-img {
+    height: 55px;
+    width: auto;
+    object-fit: contain;
+    /* Requested logo size */
+}
+
+.nav-controls {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+}
+
+/* Buttons need to be adjusted if navbar is white */
+.nav-controls .btn {
+    background: var(--primary);
+    color: white;
+    border: none;
+}
+
+.nav-controls .btn-outline {
+    border: 2px solid var(--primary);
+    color: var(--primary);
+}
+
+select.lang-selector {
+    background: #f0f0f0;
+    color: #333;
+    border: 1px solid #ccc;
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+    cursor: pointer;
+}
+
+/* Layout */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+    width: 100%;
+}
+
+.hero {
+    text-align: center;
+    padding: 4rem 1rem;
+    background: linear-gradient(180deg, rgba(249, 115, 22, 0.1) 0%, rgba(18, 18, 18, 0) 100%);
+}
+
+/* Cards */
+.card {
+    background: rgba(255, 255, 255, 0.6);
+    /* Semi-transparent to show pink tint */
+    padding: 2rem;
+    border-radius: 1rem;
+    box-shadow: 0 4px 15px rgba(94, 33, 41, 0.05);
+    /* Soft maroon shadow */
+    border: 1px solid var(--border);
+    transition: transform 0.2s, border-color 0.2s;
+}
+
+.card:hover {
+    transform: translateY(-4px);
+    border-color: var(--primary);
+    background: #FFFFFF;
+    /* Solid on hover */
+}
+
+.role-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+    margin-top: 2rem;
+}
+
+.dish-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 1.5rem;
+}
+
+/* Buttons & Inputs */
+.btn {
+    background: var(--primary);
+    color: white;
+    padding: 0.75rem 1.5rem;
+    border-radius: 0.5rem;
+    border: none;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.btn:hover {
+    background: var(--primary-hover);
+}
+
+.btn-outline {
+    background: transparent;
+    border: 2px solid var(--primary);
+}
+
+.input-field {
+    width: 100%;
+    padding: 0.8rem;
+    border-radius: 0.5rem;
+    background: var(--bg-hover);
+    border: 1px solid var(--border);
+    color: white;
+}
+
+.input-label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+}
+
+/* Utils */
+.text-center {
+    text-align: center;
+}
+
+.hidden {
+    display: none !important;
+}
+
+/* Landing Page Refactor (Talabat Style) */
+
+/* Hero Section */
+.hero {
+    position: relative;
+    text-align: center;
+    padding: 8rem 2rem 14rem 2rem;
+    /* Extra padding bottom for wave */
+    background: var(--bg-dark);
+    /* Pink */
+    color: var(--text-primary);
+    overflow: hidden;
+}
+
+/* ... search box styles same as above ... */
+
+/* Color Fix for Wave: 
+   The wave is WHITE. So the element BELOW the hero must be WHITE.
+   Currently body is Pink.
+   I will wrap the main content in a white container or style body differently.
+*/
+.bg-white-section {
+    background-color: #FFFFFF;
+    min-height: 50vh;
+    padding-top: 2rem;
+}
+
+/* Language Toggle Icon */
+.lang-toggle-btn {
+    cursor: pointer;
+    font-size: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    padding: 5px 10px;
+    border-radius: 20px;
+    background: rgba(255, 255, 255, 0.1);
+    transition: all 0.3s ease;
+    border: 1px solid transparent;
+}
+
+.lang-toggle-btn:hover {
+    background: rgba(255, 255, 255, 0.2);
+    border-color: var(--primary);
+    transform: scale(1.05);
+}
+
+#lang-label {
+    font-size: 0.9rem;
+    font-weight: bold;
+    color: var(--text-color);
+}
+
+/* Landing Page Refactor (Talabat Style) */
+
+/* Hero Section */
+.hero {
+    position: relative;
+    text-align: center;
+    padding: 8rem 2rem 12rem 2rem;
+    /* Extra padding bottom for wave */
+    background: var(--bg-dark);
+    /* Pink */
+    color: var(--text-primary);
+}
+
+/* Custom Search Box container */
+.search-box-container {
+    background: #fff;
+    border-radius: 50px;
+    padding: 10px;
+    display: inline-flex;
+    align-items: center;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    max-width: 700px;
+    width: 100%;
+    margin-top: 2rem;
+    position: relative;
+}
+
+.search-input {
+    flex: 1;
+    border: none;
+    outline: none;
+    padding: 10px 20px;
+    font-size: 1.1rem;
+    text-align: right;
+    color: #333;
+}
+
+.search-btn {
+    background: var(--primary);
+    color: white;
+    border: none;
+    padding: 12px 30px;
+    border-radius: 40px;
+    /* Full pill shape */
+    font-weight: bold;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background 0.2s;
+    margin-left: 10px;
+    /* Space between btn and input */
+    white-space: nowrap;
+}
+
+.search-btn:hover {
+    background: var(--primary-hover);
+}
+
+.location-icon {
+    padding: 0 15px;
+    font-size: 1.2rem;
+    color: var(--text-secondary);
+}
+
+/* Wave Separator */
+.wave-separator {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    overflow: hidden;
+    line-height: 0;
+}
+
+.wave-separator svg {
+    position: relative;
+    display: block;
+    width: calc(133% + 1.3px);
+    height: 100px;
+}
+
+/* Card Updates (Image Style) */
+.role-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-top: -50px;
+    /* Overlap the wave slightly or just sit below */
+    z-index: 10;
+    position: relative;
+    padding-bottom: 5rem;
+}
+
+.img-card {
+    height: 250px;
+    position: relative;
+    overflow: hidden;
+    border-radius: 20px;
+    border: none;
+    cursor: pointer;
+    transition: transform 0.3s;
+    background: linear-gradient(135deg, var(--primary) 0%, #3a1116 100%);
+    /* Fallback gradient if no img */
+    display: flex;
+    align-items: flex-end;
+    /* Text at bottom */
+    padding: 0;
+}
+
+.img-card:hover {
+    transform: translateY(-10px);
+}
+
+/* Overlay content */
+.card-content {
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
+    width: 100%;
+    padding: 2rem;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.card-content h2 {
+    font-size: 1.8rem;
+    font-weight: 800;
+    margin: 0;
+    color: white !important;
+    /* Force white on dark card */
+}
+
+.card-icon {
+    font-size: 3rem;
+    opacity: 0.8;
+}
+
+/* Ensure Main Content background is white to match wave bottom */
+.main-content {
+    background: transparent;
+}
+
+/* ============================================ */
+/* SECTION STYLES - Food Levels, Categories, etc */
+/* ============================================ */
+
+.section-title {
+    font-size: 2rem;
+    font-weight: 800;
+    color: var(--text-primary);
+    margin-bottom: 1.5rem;
+    text-align: right;
+}
+
+/* SECTION 2: FOOD LEVELS */
+.food-levels-section {
+    margin-bottom: 4rem;
+}
+
+.horizontal-scroll-container {
+    display: flex;
+    gap: 1rem;
+    overflow-x: auto;
+    padding-bottom: 1rem;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+    /* Smooth scroll on iOS */
+}
+
+.horizontal-scroll-container::-webkit-scrollbar {
+    height: 8px;
+}
+
+.horizontal-scroll-container::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 10px;
+}
+
+.horizontal-scroll-container::-webkit-scrollbar-thumb {
+    background: var(--primary);
+    border-radius: 10px;
+}
+
+.level-card {
+    flex-shrink: 0;
+    width: 150px;
+    height: 150px;
+    background: linear-gradient(135deg, var(--primary) 0%, #3a1116 100%);
+    border-radius: 15px;
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    cursor: pointer;
+    transition: transform 0.3s, box-shadow 0.3s;
+    box-shadow: 0 4px 15px rgba(94, 33, 41, 0.15);
+    text-align: center;
+}
+
+.level-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 8px 25px rgba(94, 33, 41, 0.3);
+}
+
+.level-card-header {
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.level-card h3 {
+    font-size: 1rem;
+    margin: 0;
+    font-weight: 700;
+}
+
+/* SECTION 3: FOOD CATEGORIES */
+.food-categories-section {
+    margin-bottom: 4rem;
+}
+
+.categories-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 1.5rem;
+}
+
+.category-card {
+    background: var(--bg-card);
+    border: 2px solid var(--border);
+    border-radius: 15px;
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s;
+    min-height: 140px;
+}
+
+.category-card:hover {
+    border-color: var(--primary);
+    background: var(--bg-hover);
+    transform: translateY(-4px);
+    box-shadow: 0 6px 20px rgba(94, 33, 41, 0.1);
+}
+
+.category-icon {
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.category-card h3 {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin: 0;
+}
+
+/* PREMIUM OCCASIONS */
+.premium-occasion {
+    background: linear-gradient(135deg, #5E2129 0%, #8E5A5A 100%) !important;
+    height: auto !important;
+    padding: 0 !important;
+}
+
+.occasion-content {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    padding: 1.5rem;
+    gap: 1.5rem;
+}
+
+.occasion-icon-bg {
+    width: 60px;
+    height: 60px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+}
+
+.occasion-info {
+    flex-grow: 1;
+}
+
+.occasion-info h3 {
+    font-size: 1.3rem;
+    color: white;
+    margin: 0;
+}
+
+.occasion-info p {
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.8);
+    margin: 0;
+}
+
+.occasion-arrow {
+    font-size: 1.5rem;
+    color: white;
+    opacity: 0.7;
+}
+
+/* CIRCLE CATEGORIES */
+.category-circle-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.8rem;
+    cursor: pointer;
+    transition: transform 0.3s;
+}
+
+.category-circle-card:hover {
+    transform: translateY(-5px);
+}
+
+.category-icon-wrapper {
+    width: 80px;
+    height: 80px;
+    background: var(--bg-hover);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2.22rem;
+    border: 1px solid var(--border);
+    transition: all 0.3s;
+}
+
+.category-circle-card:hover .category-icon-wrapper {
+    background: var(--primary);
+    color: white;
+    border-color: var(--primary);
+    box-shadow: 0 8px 20px rgba(94, 33, 41, 0.2);
+}
+
+.category-name {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--text-primary);
+}
+
+.special-star {
+    margin: 0 10px;
+    filter: drop-shadow(0 0 5px rgba(255, 215, 0, 0.5));
+}
+
+/* SECTION 5: JOIN OUR COMPANY */
+.join-company-section {
+    margin: 4rem 0;
+    background: linear-gradient(135deg, var(--primary) 0%, #3a1116 100%);
+    border-radius: 20px;
+    padding: 3rem;
+    text-align: center;
+    color: white;
+}
+
+.join-company-content h2 {
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: white;
+    margin-bottom: 1rem;
+}
+
+.join-company-content p {
+    font-size: 1.2rem;
+    color: rgba(255, 255, 255, 0.9);
+    margin-bottom: 2rem;
+}
+
+.btn-join-company {
+    background: #FF5A00;
+    color: white;
+    padding: 1rem 3rem;
+    font-size: 1.1rem;
+    font-weight: 800;
+    border-radius: 50px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s;
+    box-shadow: 0 6px 20px rgba(255, 90, 0, 0.3);
+}
+
+.btn-join-company:hover {
+    background: #FF8533;
+    transform: translateY(-3px);
+    box-shadow: 0 10px 30px rgba(255, 90, 0, 0.4);
+}
+
+/* ============================================ */
+/* MODAL STYLES */
+/* ============================================ */
+
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9000;
+    animation: fadeIn 0.3s;
+}
+
+.modal.hidden {
+    display: none;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+.modal-content {
+    background: white;
+    border-radius: 20px;
+    padding: 2rem;
+    max-width: 600px;
+    width: 90%;
+    max-height: 90vh;
+    overflow-y: auto;
+    position: relative;
+    animation: slideUp 0.3s;
+}
+
+@keyframes slideUp {
+    from {
+        transform: translateY(50px);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.join-modal h2 {
+    font-size: 1.8rem;
+    font-weight: 800;
+    color: var(--text-primary);
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.modal-close {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: var(--text-secondary);
+    transition: color 0.2s;
+}
+
+.modal-close:hover {
+    color: var(--primary);
+}
+
+.role-selection-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.5rem;
+    margin-top: 1.5rem;
+}
+
+.role-option-card {
+    background: var(--bg-hover);
+    border: 2px solid var(--border);
+    border-radius: 15px;
+    padding: 2rem;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.role-option-card:hover {
+    border-color: var(--primary);
+    background: #FFFFFF;
+    transform: translateY(-6px);
+    box-shadow: 0 8px 25px rgba(94, 33, 41, 0.15);
+}
+
+.role-option-icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+}
+
+.role-option-card h3 {
+    font-size: 1.3rem;
+    font-weight: 800;
+    color: var(--text-primary);
+    margin-bottom: 0.5rem;
+}
+
+.role-option-card p {
+    font-size: 0.95rem;
+    color: var(--text-secondary);
+}
+
+/* FOOD DISH GRID */
+.dish-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 1.5rem;
+}
+
+.dish-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: all 0.3s;
+    display: flex;
+    flex-direction: column;
+}
+
+.dish-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 8px 20px rgba(94, 33, 41, 0.15);
+    border-color: var(--primary);
+}
+
+.dish-image {
+    width: 100%;
+    height: 150px;
+    background: linear-gradient(135deg, #f0f0f0 0%, #e0e0e0 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2.5rem;
+    overflow: hidden;
+}
+
+.dish-info {
+    padding: 1rem;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.dish-name {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 0.3rem;
+}
+
+.dish-chef {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    margin-bottom: 0.5rem;
+}
+
+.dish-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: auto;
+}
+
+.dish-price {
+    font-size: 1.1rem;
+    font-weight: 800;
+    color: var(--primary);
+}
+
+.dish-rating {
+    font-size: 0.9rem;
+    color: #FFB800;
+}
+
+/* ============================================ */
+/* RESPONSIVE DESIGN */
+/* ============================================ */
+
+@media (max-width: 768px) {
+    .section-title {
+        font-size: 1.5rem;
+    }
+
+    .level-card {
+        width: 120px;
+        height: 120px;
+    }
+
+    .level-card-header {
+        font-size: 2rem;
+    }
+
+    .categories-grid {
+        grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+    }
+
+    .occasions-section {
+        padding: 1.5rem;
+    }
+
+    .join-company-section {
+        padding: 2rem;
+    }
+
+    .join-company-content h2 {
+        font-size: 1.8rem;
+    }
+
+    .join-company-content p {
+        font-size: 1rem;
+    }
+
+    .dish-grid {
+        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    }
+
+    .modal-content {
+        width: 95%;
+        padding: 1.5rem;
+    }
+
+    .role-selection-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero {
+        padding: 6rem 1rem 10rem 1rem;
+    }
+
+    .search-box-container {
+        flex-direction: column;
+        border-radius: 15px;
+    }
+
+    .search-input {
+        width: 100%;
+    }
+
+    .search-btn {
+        width: 100%;
+        margin-left: 0;
+        margin-top: 0.5rem;
+    }
+
+    .location-icon {
+        display: none;
+    }
+
+    .level-card {
+        width: 100px;
+        height: 100px;
+    }
+
+    .level-card-header {
+        font-size: 1.5rem;
+    }
+
+    .categories-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .occasions-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .occasion-card {
+        height: 120px;
+    }
+
+    .dish-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}

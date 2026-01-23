@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title data-i18n="driver_title">Pilot Portal</title>
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&family=Inter:wght@400;600&display=swap"
+        rel="stylesheet">
+    <script src="assets/js/common.js"></script>
+    <script src="assets/js/i18n.js"></script>
+    <script src="assets/js/auth.js"></script>
+</head>
+
+<body>
+    <nav class="navbar">
+        <a href="index.html" class="nav-brand"><span>El Akeil</span></a>
+        <div class="nav-controls" id="langControls"></div>
+        <button onclick="logout()" class="btn btn-outline" style="margin-left:10px">Logout</button>
+    </nav>
+
+    <div class="container">
+        <h1 style="margin-bottom:2rem;" data-i18n="driver_desc">Jobs</h1>
+
+        <div style="display:grid; gap:2rem; grid-template-columns: 1fr 1fr;">
+            <div>
+                <h3>Available Jobs</h3>
+                <div id="poolGrid" style="margin-top:1rem; display:flex; flex-direction:column; gap:1rem;"></div>
+            </div>
+            <div>
+                <h3>My Active Deliveries</h3>
+                <div id="myGrid" style="margin-top:1rem; display:flex; flex-direction:column; gap:1rem;"></div>
+            </div>
+        </div>
+        <div id="activeJob" class="hidden">
+            <h3>Active Delivery</h3>
+            <div id="map"
+                style="height: 300px; width: 100%; margin-bottom: 1rem; border-radius: 12px; transform:translateZ(0px);">
+            </div>
+            <div id="jobDetails" class="card"></div>
+            <button onclick="updateStatus('delivered')" class="btn btn-success"
+                style="width:100%; margin-top:1rem;">Mark Delivered</button>
+        </div>
+    </div>
+
+    <script src="assets/js/main.js"></script>
+    <script>
+        checkAuth('driver');
+        let map;
+
+        async function loadPool() {
+            const res = await apiFetch('/driver/pool');
+            if (res.ok) {
+                document.getElementById('poolGrid').innerHTML = res.data.map(o => `
+                    <div class="card">
+                        <h4>Order #${o.id}</h4>
+                        <p>Pickup: ${o.chef_address || 'Chef Location'}</p>
+                        <p>Items: ${o.items_count}</p>
+                        <button onclick="acceptOrder(${o.id})" class="btn" style="width:100%">Accept</button>
+                    </div>
+                `).join('');
+            }
+            loadMyJobs();
+        }
+
+        async function loadMyJobs() {
+            const res = await apiFetch('/driver/mine');
+            if (res.ok && res.data.length > 0) {
+                const active = res.data.find(o => o.status === 'on_the_way');
+                if (active) {
+                    document.getElementById('poolGrid').parentElement.style.display = 'none'; // Hide pool
+                    document.getElementById('activeJob').classList.remove('hidden');
+                    renderActiveJob(active);
+                } else {
+                    document.getElementById('activeJob').classList.add('hidden');
+                    document.getElementById('poolGrid').parentElement.style.display = 'block';
+                }
+            }
+        }
+
+        function renderActiveJob(order) {
+            document.getElementById('jobDetails').innerHTML = `
+                <h4>Order #${order.id}</h4>
+                <p>Deliver to: ${order.customer_name || 'Customer'}</p>
+            `;
+
+            if (!map) {
+                map = L.map('map').setView([30.0444, 31.2357], 13);
+                L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                    attribution: '© OpenStreetMap'
+                }).addTo(map);
+            }
+
+            // Mock Route: Driver -> Chef -> Customer
+            // Needs lat/lng from order. For now, static markers
+            L.marker([30.05, 31.24]).addTo(map).bindPopup("Chef Pickup").openPopup();
+            L.marker([30.03, 31.22]).addTo(map).bindPopup("Customer Dropoff");
+
+            // Simulate driver movement
+            if (navigator.geolocation) {
+                navigator.geolocation.watchPosition(pos => {
+                    const { latitude, longitude } = pos.coords;
+                    // L.marker([latitude, longitude], {icon: driverIcon}).addTo(map); // Need icon
+                    apiFetch('/driver/location', 'POST', { lat: latitude, lng: longitude });
+                }, err => console.log(err));
+            }
+        }
+
+        async function acceptOrder(id) {
+            const res = await apiFetch(`/driver/accept/${id}`, 'POST');
+            if (res.ok) loadPool();
+        }
+
+        async function updateStatus(status) {
+            // ... assuming active order id is known or stored
+            // Simplified for demo: fetch active, update it
+            const resJobs = await apiFetch('/driver/mine');
+            const active = resJobs.data.find(o => o.status === 'on_the_way');
+            if (active) {
+                await apiFetch(`/driver/update/${active.id}`, 'POST', { status });
+                loadPool();
+            }
+        }
+
+        loadPool();
+    </script>
+</body>
+
+</html>

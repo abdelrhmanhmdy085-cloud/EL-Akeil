@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title data-i18n="admin_title">Admin</title>
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&family=Inter:wght@400;600&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+    <nav class="navbar">
+        <a href="index.html" class="nav-brand"><span>El Akeil</span></a>
+        <div class="nav-controls" id="langControls"></div>
+        <button onclick="logout()" class="btn btn-outline" style="margin-left:10px">Logout</button>
+    </nav>
+
+    <div class="container">
+        <h1 style="margin-bottom:2rem;" data-i18n="admin_desc">Control Panel</h1>
+
+        <div class="card">
+            <h3>Registered Users</h3>
+            <div style="overflow-x:auto">
+                <table style="width:100%; border-collapse:collapse; margin-top:1rem; text-align:left;">
+                    <thead>
+                        <tr style="color:var(--text-secondary); border-bottom:1px solid var(--border);">
+                            <th style="padding:15px">ID</th>
+                            <th style="padding:15px">Username</th>
+                            <th style="padding:15px">Role</th>
+                            <th style="padding:15px">Details</th>
+                        </tr>
+                    </thead>
+                    <tbody id="usersTable"></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script src="assets/js/main.js"></script>
+    <script>
+        checkAuth('admin');
+
+        async function loadUsers() {
+            const res = await apiFetch('/admin/users');
+            if (res.ok) {
+                const tbody = document.getElementById('usersTable');
+                tbody.innerHTML = res.data.map(u => `
+                    <tr style="border-bottom:1px solid var(--border)">
+                        <td style="padding:15px">#${u.id}</td>
+                        <td style="padding:15px">${u.username}</td>
+                        <td style="padding:15px"><span style="padding:4px 12px; border-radius:20px; background:var(--bg-hover); font-size:0.8rem">${u.role.toUpperCase()}</span></td>
+                        <td style="padding:15px; font-size:0.9rem;" class="text-secondary">
+                            ${u.role === 'customer' ? '📍 In Cairo' : ''}
+                            ${u.role === 'driver' ? '🆔 Checked' : ''}
+                            ${u.role === 'chef' ? '🍳 Kitchen' : ''}
+                        </td>
+                    </tr>
+                `).join('');
+            }
+        }
+        loadUsers();
+    </script>
+</body>
+
+</html>

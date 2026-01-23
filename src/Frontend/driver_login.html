@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-i18n="driver_login_title">دخول الطيار - الأكيل</title>
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&family=Inter:wght@400;600&display=swap"
+        rel="stylesheet">
+    <style>
+        .auth-container {
+            min-height: 100vh;
+            background: linear-gradient(135deg, var(--bg-dark) 0%, #FFEAEA 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+
+        .auth-card {
+            background: white;
+            border-radius: 20px;
+            padding: 3rem 2rem;
+            box-shadow: 0 10px 40px rgba(94, 33, 41, 0.15);
+            max-width: 450px;
+            width: 100%;
+        }
+
+        .auth-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .auth-header h1 {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .auth-header p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-label {
+            display: block;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+            font-size: 0.95rem;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 0.9rem;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            font-size: 1rem;
+            color: var(--text-primary);
+            background: var(--bg-hover);
+            transition: border-color 0.2s;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: var(--primary);
+            background: white;
+        }
+
+        .form-input::placeholder {
+            color: var(--text-secondary);
+        }
+
+        .forgot-password {
+            text-align: right;
+            margin-bottom: 1.5rem;
+        }
+
+        .forgot-password a {
+            color: var(--primary);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.2s;
+        }
+
+        .forgot-password a:hover {
+            color: var(--primary-hover);
+        }
+
+        .btn-submit {
+            width: 100%;
+            padding: 1rem;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .btn-submit:hover {
+            background: var(--primary-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(94, 33, 41, 0.2);
+        }
+
+        .auth-footer {
+            text-align: center;
+            margin-top: 1.5rem;
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+
+        .auth-footer a {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.2s;
+        }
+
+        .auth-footer a:hover {
+            color: var(--primary-hover);
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-bottom: 1rem;
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.2s;
+        }
+
+        .back-link:hover {
+            color: var(--primary);
+        }
+
+        .driver-icon {
+            font-size: 3rem;
+            text-align: center;
+            margin-bottom: 1rem;
+        }
+
+        @media (max-width: 480px) {
+            .auth-card {
+                padding: 2rem 1.5rem;
+            }
+
+            .auth-header h1 {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="auth-container">
+        <div class="auth-card">
+            <a href="index.html" class="back-link">← العودة للرئيسية</a>
+
+            <div class="auth-header">
+                <div class="driver-icon">🛵</div>
+                <h1 data-i18n="driver_login_title">دخول الطيار</h1>
+                <p data-i18n="join_driver_desc">وصل الطلبات وزود دخلك</p>
+            </div>
+
+            <form id="driverLoginForm">
+                <div class="form-group">
+                    <label class="form-label" data-i18n="email_label">البريد الإلكتروني</label>
+                    <input type="email" name="email" class="form-input" required>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" data-i18n="pass_label">كلمة المرور</label>
+                    <input type="password" name="password" class="form-input" required>
+                </div>
+
+                <div class="forgot-password">
+                    <a href="#" data-i18n="forgot_password">هل نسيت كلمة المرور؟</a>
+                </div>
+
+                <button type="submit" class="btn-submit" data-i18n="btn_login">دخول</button>
+            </form>
+
+            <div class="auth-footer">
+                <span data-i18n="dont_have_account">ليس لديك حساب؟</span>
+                <a href="driver_register.html" data-i18n="btn_register">تسجيل</a>
+            </div>
+        </div>
+    </div>
+
+    <script src="assets/js/common.js"></script>
+    <script src="assets/js/i18n.js"></script>
+    <script src="assets/js/main.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const form = document.getElementById('driverLoginForm');
+
+            form.addEventListener('submit', async (e) => {
+                e.preventDefault();
+
+                const email = form.email.value;
+                const password = form.password.value;
+
+                // API Call
+                const result = await apiFetch('/api/auth/driver-login', 'POST', {
+                    email,
+                    password,
+                    role: 'driver'
+                });
+
+                if (result.ok) {
+                    localStorage.setItem('token', result.data.token);
+                    localStorage.setItem('user', JSON.stringify(result.data.user));
+                    alert('تم الدخول بنجاح!');
+                    window.location.href = 'driver.html';
+                } else {
+                    alert('خطأ في الدخول: ' + (result.data.message || 'بيانات غير صحيحة'));
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,8 @@
+GET /api/browse/categories?lang=ar           - List all categories
+GET /api/browse/category/{id}        - Category with grouped dishes
+GET /api/browse/levels?lang=ar               - List all levels
+GET /api/browse/level/{id}           - Level with grouped dishes
+GET /api/browse/dishes/search        - Advanced search & filter
+POST /api/browse/admin/categories    - Create category
+PUT /api/browse/admin/category/{id}  - Update category
+POST/PUT /api/browse/admin/levels    - Level management
