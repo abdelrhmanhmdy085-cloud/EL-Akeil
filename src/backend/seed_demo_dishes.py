@@ -89,7 +89,7 @@ def seed_demo_dishes():
                 'description': 'Nutritious quinoa with fresh vegetables.',
                 'price': 120.0,
                 'category_en': 'Meat', # Could be any type or add a "Salad" category
-                'level_en': 'Diet & Healthy',
+                'level_en': 'Healthy',
                 'image_url': 'https://images.unsplash.com/photo-1512621776951-a57141f2eefd'
             },
             # Sweets

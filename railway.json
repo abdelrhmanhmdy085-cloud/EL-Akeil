@@ -4,7 +4,7 @@
     "builder": "dockerfile"
   },
   "deploy": {
-    "startCommand": "cd src/backend && python app.py",
+    "startCommand": "python src/backend/app.py",
     "restartPolicyMaxRetries": 5
   }
 }

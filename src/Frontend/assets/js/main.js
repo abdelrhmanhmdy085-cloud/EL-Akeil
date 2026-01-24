@@ -1,83 +1,9 @@
-const API_BASE = '/api';
 
-// Language System
-const LANG_KEY = 'elakeil_lang';
-const DEFAULT_LANG = 'ar'; // Default to Arabic as per request
-const SUPPORTED_LANGS = ['ar', 'en', 'fr', 'de', 'es', 'it', 'tr', 'ru', 'zh'];
+// Note: LANG_KEY, DEFAULT_LANG, SUPPORTED_LANGS, and translations are defined in i18n.js
+// Note: loadLanguage, applyTranslations, initLanguage, toggleLanguage are defined in i18n.js
+// Note: API_BASE and apiFetch are defined in common.js
 
-const translations = {};
-
-async function loadLanguage(lang) {
-    if (!SUPPORTED_LANGS.includes(lang)) lang = DEFAULT_LANG;
-
-    // Save preference
-    localStorage.setItem(LANG_KEY, lang);
-
-    // Set RTL
-    const direction = lang === 'ar' ? 'rtl' : 'ltr';
-    document.body.dir = direction;
-    document.body.className = direction;
-    document.documentElement.lang = lang;
-
-    // Load JSON
-    try {
-        const res = await fetch(`assets/lang/${lang}.json`);
-        const data = await res.json();
-        translations[lang] = data;
-        applyTranslations(lang);
-    } catch (e) {
-        console.error('Failed to load language:', e);
-    }
-}
-
-function applyTranslations(lang) {
-    const t = translations[lang];
-    if (!t) return;
-
-    document.querySelectorAll('[data-i18n]').forEach(el => {
-        const key = el.getAttribute('data-i18n');
-        if (t[key]) el.innerText = t[key];
-    });
-
-    document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
-        const key = el.getAttribute('data-i18n-placeholder');
-        if (t[key]) el.placeholder = t[key];
-    });
-}
-
-function initLanguage() {
-    const saved = localStorage.getItem(LANG_KEY) || DEFAULT_LANG;
-    // Inject lang selector to navbar if verified
-    const nav = document.getElementById('langControls');
-    if (nav) {
-        nav.innerHTML = `
-            <select class="lang-selector" onchange="loadLanguage(this.value)">
-                ${SUPPORTED_LANGS.map(l => `<option value="${l}" ${l === saved ? 'selected' : ''}>${l.toUpperCase()}</option>`).join('')}
-            </select>
-        `;
-    }
-    loadLanguage(saved);
-}
-
-// API & Auth
-async function apiFetch(endpoint, method = 'GET', body = null) {
-    const headers = { 'Content-Type': 'application/json' };
-    const token = localStorage.getItem('token');
-    if (token) headers['Authorization'] = `Bearer ${token}`;
-
-    const opts = { method, headers };
-    if (body) opts.body = JSON.stringify(body);
-
-    try {
-        const res = await fetch(API_BASE + endpoint, opts);
-        const data = await res.json();
-        return { ok: res.ok, status: res.status, data };
-    } catch (e) {
-        console.error(e);
-        return { ok: false, error: 'Network Error' };
-    }
-}
-
+// Auth & Utils
 function logout() {
     localStorage.removeItem('token');
     localStorage.removeItem('user');

@@ -500,7 +500,7 @@
                     submitBtn.disabled = true;
                     submitBtn.textContent = 'جاري التسجيل...';
 
-                    const response = await fetch('/api/auth/chef-register', {
+                    const response = await fetch('/api/chef-register', {
                         method: 'POST',
                         body: formData
                     });

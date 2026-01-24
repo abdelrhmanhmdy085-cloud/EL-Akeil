@@ -16,22 +16,38 @@ async function loadLanguage(lang) {
     // Load JSON
     try {
         if (!translations[lang]) {
-            const res = await fetch(`assets/lang/${lang}.json`);
-            translations[lang] = await res.json();
+            const url = `assets/lang/${lang}.json?t=${Date.now()}`;
+            console.log(`Fetching translations from: ${url}`);
+            const res = await fetch(url);
+            if (!res.ok) throw new Error(`HTTP ${res.status}`);
+            const jsonData = await res.json();
+            console.log(`Fetched JSON data for ${lang}:`, jsonData);
+            translations[lang] = jsonData;
+            console.log(`Language loaded: ${lang}, keys:`, Object.keys(translations[lang]).length);
         }
         applyTranslations(lang);
     } catch (e) {
-        console.error('Failed to load language:', e);
+        console.error('Failed to load language:', lang, e);
     }
 }
 
 function applyTranslations(lang) {
     const t = translations[lang];
-    if (!t) return;
+    if (!t) {
+        console.warn('Translations not loaded for language:', lang);
+        return;
+    }
+
+    console.log(`Applying translations for ${lang}. Elements with data-i18n:`, document.querySelectorAll('[data-i18n]').length);
 
     document.querySelectorAll('[data-i18n]').forEach(el => {
         const key = el.getAttribute('data-i18n');
-        if (t[key]) el.innerText = t[key];
+        if (t[key]) {
+            console.log(`Translating ${key}: "${el.textContent}" -> "${t[key]}"`);
+            el.textContent = t[key];
+        } else {
+            console.warn(`Missing translation key: ${key}`);
+        }
     });
 
     document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
@@ -56,7 +72,13 @@ function initLanguage() {
             </div>
         `;
     }
-    loadLanguage(saved);
+    
+    // Wait for DOM to be fully ready before loading language
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', () => loadLanguage(saved));
+    } else {
+        loadLanguage(saved);
+    }
 }
 
 function toggleLanguage() {
@@ -68,6 +90,7 @@ function toggleLanguage() {
     const label = document.getElementById('lang-label');
     if (label) label.innerText = next === 'ar' ? 'EN' : 'AR';
 
+    console.log(`Switching language from ${current} to ${next}`);
     loadLanguage(next);
 }
 

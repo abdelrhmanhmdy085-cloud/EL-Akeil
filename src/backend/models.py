@@ -111,6 +111,11 @@ class Dish(db.Model):
     food_level = db.Column(db.String(50), nullable=True)
     occasion_tag = db.Column(db.String(50), nullable=True)
     
+    # Relationships
+    chef_profile = db.relationship("ChefProfile", backref=db.backref("dishes_alt", lazy=True))
+    category_obj = db.relationship("Category", backref="dishes_obj")
+    level_obj = db.relationship("Level", backref="dishes_level")
+    
     def to_dict(self): 
         chef_user_id = None
         if self.chef_profile and self.chef_profile.user_id:
@@ -382,7 +387,7 @@ class Category(db.Model):
     display_order = db.Column(db.Integer, default=0)
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
     
-    dishes = db.relationship("Dish", backref="category_obj", lazy=True, cascade="all, delete-orphan")
+    dishes = db.relationship("Dish", foreign_keys="Dish.category_id", lazy=True)
 
     def to_dict(self):
         return {
@@ -397,7 +402,7 @@ class Category(db.Model):
         }
 
 class Level(db.Model):
-    """Food levels (Fast, Home, Special, Diet, Occasions)"""
+    """Food levels (Fast, Home, Special, Healthy, Occasions)"""
     id = db.Column(db.Integer, primary_key=True)
     name_ar = db.Column(db.String(255), nullable=False, unique=True)
     name_en = db.Column(db.String(255), nullable=False, unique=True)
@@ -409,7 +414,7 @@ class Level(db.Model):
     is_special = db.Column(db.Boolean, default=False)  # For occasions/holidays
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
     
-    dishes = db.relationship("Dish", backref="level_obj", lazy=True, cascade="all, delete-orphan")
+    dishes = db.relationship("Dish", foreign_keys="Dish.level_id", lazy=True)
 
     def to_dict(self):
         return {

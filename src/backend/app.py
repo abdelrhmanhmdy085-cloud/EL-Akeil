@@ -7,12 +7,20 @@ from dotenv import load_dotenv
 
 # Ensure we can import from src
 BASE_DIR = Path(__file__).resolve().parent
-sys.path.append(str(BASE_DIR.parent))
+PARENT_DIR = BASE_DIR.parent
+ROOT_DIR = PARENT_DIR.parent
+
+sys.path.insert(0, str(PARENT_DIR))
+sys.path.insert(0, str(ROOT_DIR))
 
 # Load Env
 load_dotenv()
 
-FRONTEND_DIR = BASE_DIR.parent / "Frontend"
+# Handle both local and Railway environments
+FRONTEND_DIR = ROOT_DIR / "Frontend"
+if not FRONTEND_DIR.exists():
+    FRONTEND_DIR = PARENT_DIR / "Frontend"
+    
 DB_PATH = BASE_DIR / "data.db"
 
 class Config:

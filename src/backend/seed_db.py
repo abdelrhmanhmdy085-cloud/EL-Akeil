@@ -66,7 +66,7 @@ def seed_data():
             {"name_en": "Fast Food", "name_ar": "أكلات سريعة", "color_tag": "red", "icon": "🚀"},
             {"name_en": "Home Cooked", "name_ar": "أكلات بيتية", "color_tag": "green", "icon": "🏠"},
             {"name_en": "Special", "name_ar": "أكلات مميزة", "color_tag": "gold", "icon": "✨"},
-            {"name_en": "Diet", "name_ar": "دايت", "color_tag": "blue", "icon": "💪"},
+            {"name_en": "Healthy", "name_ar": "صحي", "color_tag": "blue", "icon": "🥗"},
             {"name_en": "Occasions", "name_ar": "مناسبات وأعياد", "color_tag": "purple", "icon": "🎉", "is_special": True},
         ]
 

@@ -124,8 +124,11 @@ def get_category_detail(category_id):
     if not category:
         return jsonify({"error": "Category not found"}), 404
     
-    # Get all dishes in this category grouped by level
-    dishes = Dish.query.filter_by(category_id=category_id, is_available=True).all()
+    # Get all dishes in this category grouped by level (with eager loading)
+    from sqlalchemy.orm import joinedload
+    dishes = Dish.query.filter_by(category_id=category_id, is_available=True)\
+        .options(joinedload(Dish.chef_profile), joinedload(Dish.level_obj))\
+        .all()
     
     # Group by level
     grouped = {}

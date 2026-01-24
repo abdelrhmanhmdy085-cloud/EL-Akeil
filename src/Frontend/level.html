@@ -104,6 +104,55 @@
             font-size: 1.8rem;
         }
 
+        .filter-tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .filter-tab {
+            padding: 10px 20px;
+            border: 2px solid #FF5A00;
+            border-radius: 20px;
+            background: white;
+            color: #FF5A00;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            font-family: 'Cairo', sans-serif;
+        }
+
+        .filter-tab.active {
+            background: #FF5A00;
+            color: white;
+        }
+
+        .filter-tab:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(255, 90, 0, 0.2);
+        }
+
+        .status-badge {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-top: 8px;
+        }
+
+        .status-badge.ready {
+            background: #4CAF50;
+            color: white;
+        }
+
+        .status-badge.not-ready {
+            background: #FF9800;
+            color: white;
+        }
+
         .dishes-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
@@ -382,10 +431,6 @@
     <script src="assets/js/i18n.js"></script>
     <script src="assets/js/main.js"></script>
     <script>
-        const API_BASE = '/api';
-        const LANG_KEY = 'elakeil_lang';
-        const DEFAULT_LANG = 'ar';
-
         function getUrlParam(name) {
             const params = new URLSearchParams(window.location.search);
             return params.get(name);
@@ -435,6 +480,7 @@
 
                 Object.entries(groupedByCategory).forEach(([categoryName, dishes]) => {
                     const section = document.createElement('div');
+                    section.className = 'category-section';
                     
                     const title = document.createElement('div');
                     title.className = 'section-title';
@@ -443,6 +489,60 @@
                         <span>${categoryName}</span>
                     `;
                     section.appendChild(title);
+
+                    // Separate dishes by status
+                    const readyDishes = dishes.filter(d => d.is_available !== false);
+                    const notReadyDishes = dishes.filter(d => d.is_available === false);
+
+                    // Create filter tabs if there are both types
+                    if (readyDishes.length > 0 && notReadyDishes.length > 0) {
+                        const tabsContainer = document.createElement('div');
+                        tabsContainer.className = 'filter-tabs';
+                        
+                        const allTab = document.createElement('button');
+                        allTab.className = 'filter-tab active';
+                        allTab.textContent = lang === 'ar' ? `جميع الأطباق (${dishes.length})` : `All Dishes (${dishes.length})`;
+                        allTab.onclick = () => {
+                            document.querySelectorAll('.filter-tab').forEach(t => t.classList.remove('active'));
+                            allTab.classList.add('active');
+                            grid.innerHTML = '';
+                            dishes.forEach(dish => {
+                                const card = createDishCard(dish, lang);
+                                grid.appendChild(card);
+                            });
+                        };
+                        tabsContainer.appendChild(allTab);
+
+                        const readyTab = document.createElement('button');
+                        readyTab.className = 'filter-tab';
+                        readyTab.textContent = lang === 'ar' ? `🟢 جاهز (${readyDishes.length})` : `🟢 Ready (${readyDishes.length})`;
+                        readyTab.onclick = () => {
+                            document.querySelectorAll('.filter-tab').forEach(t => t.classList.remove('active'));
+                            readyTab.classList.add('active');
+                            grid.innerHTML = '';
+                            readyDishes.forEach(dish => {
+                                const card = createDishCard(dish, lang);
+                                grid.appendChild(card);
+                            });
+                        };
+                        tabsContainer.appendChild(readyTab);
+
+                        const notReadyTab = document.createElement('button');
+                        notReadyTab.className = 'filter-tab';
+                        notReadyTab.textContent = lang === 'ar' ? `🟠 غير جاهز (${notReadyDishes.length})` : `🟠 Not Ready (${notReadyDishes.length})`;
+                        notReadyTab.onclick = () => {
+                            document.querySelectorAll('.filter-tab').forEach(t => t.classList.remove('active'));
+                            notReadyTab.classList.add('active');
+                            grid.innerHTML = '';
+                            notReadyDishes.forEach(dish => {
+                                const card = createDishCard(dish, lang);
+                                grid.appendChild(card);
+                            });
+                        };
+                        tabsContainer.appendChild(notReadyTab);
+
+                        section.appendChild(tabsContainer);
+                    }
 
                     const grid = document.createElement('div');
                     grid.className = 'dishes-grid';
@@ -473,6 +573,12 @@
             const card = document.createElement('div');
             card.className = 'dish-card';
 
+            const statusText = dish.is_available === false 
+                ? (lang === 'ar' ? 'غير جاهز' : 'Not Ready')
+                : (lang === 'ar' ? 'جاهز' : 'Ready');
+            
+            const statusClass = dish.is_available === false ? 'not-ready' : 'ready';
+
             card.innerHTML = `
                 <div class="dish-card-image">${dish.image_url ? `<img src="${dish.image_url}" alt="${dish.name}">` : '🍲'}</div>
                 <div class="dish-card-content">
@@ -480,6 +586,7 @@
                         <div class="dish-card-name">${dish.name}</div>
                         ${dish.category_name ? `<div class="dish-card-category">${dish.category_name}</div>` : ''}
                     </div>
+                    <div class="status-badge ${statusClass}">${statusText}</div>
                     <div class="dish-card-chef">👨‍🍳 ${dish.chef_name || 'Unknown Chef'}</div>
                     <div class="dish-card-footer">
                         <div class="dish-card-price">${dish.price} EGP</div>

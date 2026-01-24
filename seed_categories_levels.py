@@ -111,8 +111,8 @@ def seed_categories_and_levels():
                 'is_special': False
             },
             {
-                'name_ar': 'دايت وصحي',
-                'name_en': 'Diet & Healthy',
+                'name_ar': 'صحي',
+                'name_en': 'Healthy',
                 'icon': '🥗',
                 'color_tag': '#06A77D',
                 'description_ar': 'أطباق صحية ومفيدة',

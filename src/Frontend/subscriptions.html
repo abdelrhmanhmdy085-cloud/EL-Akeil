@@ -351,6 +351,22 @@
                 grid-template-columns: 1fr;
             }
         }
+
+        .lang-toggle-btn {
+            background: #FF5A00;
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: background 0.3s ease;
+            display: inline-block;
+            margin: 0 10px;
+        }
+
+        .lang-toggle-btn:hover {
+            background: #ff7a2a;
+        }
     </style>
 </head>
 <body>
@@ -359,14 +375,15 @@
             <span>El Akeil</span>
         </a>
         <div class="nav-controls actions">
-            <a href="index.html" class="btn btn-secondary">العودة للرئيسية</a>
+            <div id="langControls"></div>
+            <a href="index.html" class="btn btn-secondary" data-i18n="back_to_home">العودة للرئيسية</a>
         </div>
     </nav>
 
     <!-- Hero Section -->
     <div class="subscriptions-hero">
-        <h1>🎁 خطط الاشتراك الشهرية</h1>
-        <p>اختر خطتك المفضلة واستمتع بوجبات لذيذة منزلية مع توصيل مجاني</p>
+        <h1 data-i18n="subscriptions_hero_title">🎁 خطط الاشتراك الشهرية</h1>
+        <p data-i18n="subscriptions_hero_desc">اختر خطتك المفضلة واستمتع بوجبات لذيذة منزلية مع توصيل مجاني</p>
     </div>
 
     <!-- Subscription Plans -->
@@ -374,98 +391,98 @@
         <!-- Plan 1: 10 Meals -->
         <div class="subscription-card">
             <div class="plan-header">
-                <div class="plan-name">🥗 الخطة الأساسية</div>
+                <div class="plan-name" data-i18n="plan_basic">🥗 الخطة الأساسية</div>
                 <div class="plan-meals">10</div>
-                <div class="plan-subtitle">وجبات شهرية</div>
+                <div class="plan-subtitle" data-i18n="plan_meals">وجبات شهرية</div>
                 <div class="plan-price">
                     <span class="price-amount">299</span>
-                    <span class="price-currency">جنيه</span>
+                    <span class="price-currency" data-i18n="egp">جنيه</span>
                 </div>
-                <div class="price-period">شهر واحد</div>
+                <div class="price-period" data-i18n="plan_month">شهر واحد</div>
             </div>
             <div class="plan-content">
                 <ul class="features-list">
-                    <li>10 وجبات متنوعة</li>
-                    <li>توصيل مجاني</li>
-                    <li>اختيار من 50+ وجبة</li>
-                    <li>تغيير الطلب أسبوعياً</li>
-                    <li>دعم العملاء 24/7</li>
+                    <li><span data-i18n="meals">10 وجبات</span> <span data-i18n="benefit_variety">متنوعة</span></li>
+                    <li data-i18n="free_delivery">توصيل مجاني</li>
+                    <li><span data-i18n="meal_options">اختيار من</span> 50+ <span data-i18n="meals">وجبة</span></li>
+                    <li data-i18n="change_weekly">تغيير الطلب أسبوعياً</li>
+                    <li data-i18n="customer_support">دعم العملاء 24/7</li>
                 </ul>
-                <button class="subscription-btn" onclick="selectPlan('basic', 10, 299)">اختر هذه الخطة</button>
+                <button class="subscription-btn" onclick="selectPlan('basic', 10, 299)" data-i18n="select_plan">اختر هذه الخطة</button>
             </div>
         </div>
 
         <!-- Plan 2: 20 Meals (Featured) -->
         <div class="subscription-card featured">
-            <div class="featured-badge">الأكثر شهرة ⭐</div>
+            <div class="featured-badge" data-i18n="most_popular">الأكثر شهرة ⭐</div>
             <div class="plan-header">
-                <div class="plan-name">🍱 الخطة المتوسطة</div>
+                <div class="plan-name" data-i18n="plan_premium">🍱 الخطة المتوسطة</div>
                 <div class="plan-meals">20</div>
-                <div class="plan-subtitle">وجبات شهرية</div>
+                <div class="plan-subtitle" data-i18n="plan_meals">وجبات شهرية</div>
                 <div class="plan-price">
                     <span class="price-amount">549</span>
-                    <span class="price-currency">جنيه</span>
+                    <span class="price-currency" data-i18n="egp">جنيه</span>
                 </div>
-                <div class="price-period">شهر واحد</div>
+                <div class="price-period" data-i18n="plan_month">شهر واحد</div>
             </div>
             <div class="plan-content">
                 <ul class="features-list">
-                    <li>20 وجبة متنوعة</li>
-                    <li>توصيل مجاني يومي</li>
-                    <li>اختيار من 70+ وجبة</li>
-                    <li>تغيير الطلب يومياً</li>
-                    <li>أولوية في التوصيل</li>
-                    <li>خصم 10% على الإضافيات</li>
+                    <li><span data-i18n="meals">20 وجبات</span> <span data-i18n="benefit_variety">متنوعة</span></li>
+                    <li data-i18n="daily_delivery">توصيل مجاني يومي</li>
+                    <li><span data-i18n="meal_options">اختيار من</span> 70+ <span data-i18n="meals">وجبة</span></li>
+                    <li data-i18n="change_daily">تغيير الطلب يومياً</li>
+                    <li data-i18n="priority_delivery">أولوية في التوصيل</li>
+                    <li data-i18n="discount_10">خصم 10% على الإضافيات</li>
                 </ul>
-                <button class="subscription-btn" onclick="selectPlan('premium', 20, 549)">اختر هذه الخطة</button>
+                <button class="subscription-btn" onclick="selectPlan('premium', 20, 549)" data-i18n="select_plan">اختر هذه الخطة</button>
             </div>
         </div>
 
         <!-- Plan 3: 30 Meals -->
         <div class="subscription-card">
             <div class="plan-header">
-                <div class="plan-name">🍲 الخطة الفاخرة</div>
+                <div class="plan-name" data-i18n="plan_luxury">🍲 الخطة الفاخرة</div>
                 <div class="plan-meals">30</div>
-                <div class="plan-subtitle">وجبات شهرية</div>
+                <div class="plan-subtitle" data-i18n="plan_meals">وجبات شهرية</div>
                 <div class="plan-price">
                     <span class="price-amount">799</span>
-                    <span class="price-currency">جنيه</span>
+                    <span class="price-currency" data-i18n="egp">جنيه</span>
                 </div>
-                <div class="price-period">شهر واحد</div>
+                <div class="price-period" data-i18n="plan_month">شهر واحد</div>
             </div>
             <div class="plan-content">
                 <ul class="features-list">
-                    <li>30 وجبة متنوعة</li>
-                    <li>توصيل مجاني يومي</li>
-                    <li>اختيار من 100+ وجبة</li>
-                    <li>تغيير الطلب يومياً</li>
-                    <li>أولوية عالية في التوصيل</li>
-                    <li>خصم 15% على الإضافيات</li>
-                    <li>استشارة غذائية مجانية</li>
+                    <li><span data-i18n="meals">30 وجبات</span> <span data-i18n="benefit_variety">متنوعة</span></li>
+                    <li data-i18n="daily_delivery">توصيل مجاني يومي</li>
+                    <li><span data-i18n="meal_options">اختيار من</span> 100+ <span data-i18n="meals">وجبة</span></li>
+                    <li data-i18n="change_daily">تغيير الطلب يومياً</li>
+                    <li data-i18n="priority_delivery">أولوية عالية في التوصيل</li>
+                    <li data-i18n="discount_15">خصم 15% على الإضافيات</li>
+                    <li data-i18n="free_nutrition">استشارة غذائية مجانية</li>
                 </ul>
-                <button class="subscription-btn" onclick="selectPlan('luxury', 30, 799)">اختر هذه الخطة</button>
+                <button class="subscription-btn" onclick="selectPlan('luxury', 30, 799)" data-i18n="select_plan">اختر هذه الخطة</button>
             </div>
         </div>
     </div>
 
     <!-- Benefits Section -->
     <div class="benefits-section">
-        <h2 style="text-align: center; font-size: 2rem; margin-bottom: 3rem; color: #333;">لماذا تختار الأكيل؟</h2>
+        <h2 style="text-align: center; font-size: 2rem; margin-bottom: 3rem; color: #333;" data-i18n="benefits_title">لماذا تختار الأكيل؟</h2>
         <div class="benefits-grid">
             <div class="benefit-card">
                 <div class="benefit-icon">🍳</div>
-                <h3>طعام بيتي طازج</h3>
-                <p>وجبات صحية ولذيذة معدة يومياً من أفضل الشيفات المنزليين</p>
+                <h3 data-i18n="benefit_fresh">طعام بيتي طازج</h3>
+                <p data-i18n="benefit_fresh_desc">وجبات صحية ولذيذة معدة يومياً من أفضل الشيفات المنزليين</p>
             </div>
             <div class="benefit-card">
                 <div class="benefit-icon">📦</div>
-                <h3>توصيل سريع</h3>
-                <p>نوصل وجبتك خلال 30 دقيقة مع ضمان الجودة والنظافة</p>
+                <h3 data-i18n="benefit_delivery">توصيل سريع</h3>
+                <p data-i18n="benefit_delivery_desc">نوصل وجبتك خلال 30 دقيقة مع ضمان الجودة والنظافة</p>
             </div>
             <div class="benefit-card">
                 <div class="benefit-icon">💚</div>
-                <h3>صحي ومغذي</h3>
-                <p>كل وجبة معدة بعناية وتحتوي على جميع العناصر الغذائية المهمة</p>
+                <h3 data-i18n="benefit_healthy">صحي ومغذي</h3>
+                <p data-i18n="benefit_healthy_desc">كل وجبة معدة بعناية وتحتوي على جميع العناصر الغذائية المهمة</p>
             </div>
             <div class="benefit-card">
                 <div class="benefit-icon">💰</div>
@@ -487,55 +504,45 @@
 
     <!-- FAQ Section -->
     <div class="faq-section">
-        <h2 class="faq-title">❓ الأسئلة الشائعة</h2>
+        <h2 class="faq-title" data-i18n="faq_title">❓ الأسئلة الشائعة</h2>
         
         <div class="faq-item">
             <div class="faq-question" onclick="toggleFAQ(this)">
-                <span>هل يمكنني تغيير الطبق بعد الطلب؟</span>
+                <span data-i18n="faq_question_1">هل يمكنني تغيير الطبق بعد الطلب؟</span>
                 <span class="faq-toggle">+</span>
             </div>
-            <div class="faq-answer">
+            <div class="faq-answer" data-i18n="faq_answer_1">
                 نعم! يمكنك تغيير طلبك قبل 2 ساعة من وقت التوصيل. اتصل بفريق الدعم أو استخدم التطبيق لتغيير طلبك بسهولة.
             </div>
         </div>
 
         <div class="faq-item">
             <div class="faq-question" onclick="toggleFAQ(this)">
-                <span>ماذا يحدث إذا لم أتمكن من استقبال وجبة ما؟</span>
+                <span data-i18n="faq_question_2">هل التوصيل مجاني؟</span>
                 <span class="faq-toggle">+</span>
             </div>
-            <div class="faq-answer">
-                يمكنك إلغاء الوجبة قبل 24 ساعة من التوصيل، وسيتم إعادة حسابها في الشهر القادم أو إرجاع الرصيد لديك.
+            <div class="faq-answer" data-i18n="faq_answer_2">
+                نعم، التوصيل مجاني تماماً مع جميع خطط الاشتراك. لا توجد رسوم إضافية.
             </div>
         </div>
 
         <div class="faq-item">
             <div class="faq-question" onclick="toggleFAQ(this)">
-                <span>هل هناك عقد طويل الأجل أو يمكنني الإلغاء في أي وقت؟</span>
+                <span data-i18n="faq_question_3">كيف ألغي الاشتراك؟</span>
                 <span class="faq-toggle">+</span>
             </div>
-            <div class="faq-answer">
+            <div class="faq-answer" data-i18n="faq_answer_3">
                 لا توجد عقود طويلة الأجل! يمكنك الإلغاء في أي وقت بدون أي رسوم إضافية أو شروط معقدة.
             </div>
         </div>
 
         <div class="faq-item">
             <div class="faq-question" onclick="toggleFAQ(this)">
-                <span>هل التوصيل مدرج في السعر؟</span>
+                <span data-i18n="faq_question_4">هل هناك خيارات غذائية؟</span>
                 <span class="faq-toggle">+</span>
             </div>
-            <div class="faq-answer">
-                نعم! التوصيل مجاني تماماً مع جميع خطط الاشتراك. لا توجد رسوم إضافية.
-            </div>
-        </div>
-
-        <div class="faq-item">
-            <div class="faq-question" onclick="toggleFAQ(this)">
-                <span>هل يمكنني اختيار الشيف المفضل لي؟</span>
-                <span class="faq-toggle">+</span>
-            </div>
-            <div class="faq-answer">
-                نعم! يمكنك البحث عن الشيفات والاختيار من وجباتهم. يمكنك أيضاً حفظ الشيفات المفضلين لديك.
+            <div class="faq-answer" data-i18n="faq_answer_4">
+                نعم، نوفر خيارات نباتية وويغانية وخالية من الجلوتين وغيرها.
             </div>
         </div>
     </div>
