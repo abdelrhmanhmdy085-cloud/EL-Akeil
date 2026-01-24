@@ -17,7 +17,12 @@ DB_PATH = BASE_DIR / "data.db"
 
 class Config:
     SECRET_KEY = os.getenv("SECRET_KEY", "dev_secret")
-    SQLALCHEMY_DATABASE_URI = f"sqlite:///{DB_PATH}"
+    # Support both SQLite and other databases for Railway
+    DATABASE_URL = os.getenv("DATABASE_URL")
+    if DATABASE_URL:
+        SQLALCHEMY_DATABASE_URI = DATABASE_URL
+    else:
+        SQLALCHEMY_DATABASE_URI = f"sqlite:///{DB_PATH}"
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     JWT_EXP_MINUTES = 1440
 
@@ -74,8 +79,14 @@ if __name__ == "__main__":
         
         app = create_app()
         socketio.init_app(app, cors_allowed_origins="*")
-        print("[OK] Server starting on http://localhost:5000")
-        socketio.run(app, debug=True, port=5000, host='0.0.0.0')
+        
+        # Get port from environment or default to 5000
+        port = int(os.getenv("PORT", 5000))
+        host = os.getenv("HOST", "0.0.0.0")
+        debug = os.getenv("FLASK_DEBUG", "0") == "1"
+        
+        print(f"[OK] Server starting on http://{host}:{port}")
+        socketio.run(app, debug=debug, port=port, host=host)
     except Exception as e:
         print(f"[ERROR] Server Error: {e}")
         import traceback

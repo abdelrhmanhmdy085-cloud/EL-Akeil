@@ -1,0 +1,5 @@
+[build]
+builder = "dockerfile"
+
+[deploy]
+startCommand = "cd src/backend && python app.py"
