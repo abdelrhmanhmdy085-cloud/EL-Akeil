@@ -1,0 +1,19 @@
+name = "El Akeil"
+description = "Food Delivery & Chef Management System"
+
+[build]
+  builder = "dockerfile"
+  dockerfile = "Dockerfile"
+
+[deploy]
+  startCommand = "python src/backend/app.py"
+  restartPolicyMaxRetries = 5
+
+[env]
+  FLASK_ENV = "production"
+  FLASK_DEBUG = "0"
+  PYTHONUNBUFFERED = "1"
+
+[[services]]
+  name = "web"
+  port = 5000
