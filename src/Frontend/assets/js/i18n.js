@@ -54,6 +54,16 @@ function applyTranslations(lang) {
         const key = el.getAttribute('data-i18n-placeholder');
         if (t[key]) el.placeholder = t[key];
     });
+
+    document.querySelectorAll('[data-i18n-title]').forEach(el => {
+        const key = el.getAttribute('data-i18n-title');
+        if (t[key]) {
+            el.title = t[key];
+            if (el.hasAttribute('aria-label')) {
+                el.setAttribute('aria-label', t[key]);
+            }
+        }
+    });
 }
 
 function initLanguage() {
@@ -66,11 +76,17 @@ function initLanguage() {
 
     const nav = document.getElementById('langControls');
     if (nav) {
-        nav.innerHTML = `
-            <div class="lang-toggle-btn" onclick="toggleLanguage()" title="Switch Language">
-                🌍 <span id="lang-label">${saved === 'ar' ? 'EN' : 'AR'}</span>
-            </div>
-        `;
+        let toggle = document.getElementById('lang-toggle-btn');
+        if (!toggle) {
+            toggle = document.createElement('button');
+            toggle.id = 'lang-toggle-btn';
+            toggle.className = 'lang-toggle-btn';
+            toggle.onclick = toggleLanguage;
+            nav.prepend(toggle);
+        }
+        toggle.innerHTML = `🌍 <span id="lang-label">${saved === 'ar' ? 'EN' : 'AR'}</span>`;
+        toggle.title = saved === 'ar' ? 'Switch to English' : 'التحويل للغة العربية';
+        toggle.setAttribute('aria-label', toggle.title);
     }
     
     // Wait for DOM to be fully ready before loading language
@@ -86,9 +102,15 @@ function toggleLanguage() {
     // Toggle logic: If Ar -> En, else -> Ar
     const next = current === 'ar' ? 'en' : 'ar';
 
-    // Update label to show the OTHER option
-    const label = document.getElementById('lang-label');
-    if (label) label.innerText = next === 'ar' ? 'EN' : 'AR';
+    // Update toggle button
+    const toggle = document.getElementById('lang-toggle-btn');
+    if (toggle) {
+        const label = document.getElementById('lang-label');
+        if (label) label.innerText = next === 'ar' ? 'EN' : 'AR';
+
+        toggle.title = next === 'ar' ? 'Switch to English' : 'التحويل للغة العربية';
+        toggle.setAttribute('aria-label', toggle.title);
+    }
 
     console.log(`Switching language from ${current} to ${next}`);
     loadLanguage(next);
