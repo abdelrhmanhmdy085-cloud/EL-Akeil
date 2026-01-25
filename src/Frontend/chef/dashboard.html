@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>لوحة تحكم الشيف - El Akeil</title>
+    <link rel="stylesheet" href="../assets/css/styles.css">
+    <link rel="stylesheet" href="chef.css">
+</head>
+<body>
+    <div class="dashboard-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <h2>🍳 Chef Dashboard</h2>
+            </div>
+            
+            <nav class="sidebar-nav">
+                <a href="#" class="nav-item active" data-section="overview">
+                    📊 نظرة عامة
+                </a>
+                <a href="#" class="nav-item" data-section="dishes">
+                    🍽️ الأطباق
+                </a>
+                <a href="#" class="nav-item" data-section="orders">
+                    📦 الطلبات
+                </a>
+                <a href="#" class="nav-item" data-section="reviews">
+                    ⭐ التقييمات
+                </a>
+                <a href="#" class="nav-item" data-section="analytics">
+                    📈 الإحصائيات
+                </a>
+                <a href="#" class="nav-item" data-section="settings">
+                    ⚙️ الإعدادات
+                </a>
+            </nav>
+            
+            <div class="sidebar-footer">
+                <button class="btn btn-logout" onclick="logout()">تسجيل الخروج</button>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Header -->
+            <header class="dashboard-header">
+                <div class="header-left">
+                    <h1 id="section-title">نظرة عامة</h1>
+                </div>
+                <div class="header-right">
+                    <div class="user-info">
+                        <span id="chef-name">الشيف</span>
+                        <div class="user-avatar">👨‍🍳</div>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Sections -->
+            <div class="content-area">
+                
+                <!-- Overview Section -->
+                <section id="overview-section" class="section active">
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <div class="stat-icon">🍽️</div>
+                            <div class="stat-content">
+                                <h3>إجمالي الأطباق</h3>
+                                <p id="total-dishes" class="stat-number">0</p>
+                            </div>
+                        </div>
+
+                        <div class="stat-card">
+                            <div class="stat-icon">📦</div>
+                            <div class="stat-content">
+                                <h3>الطلبات الأسبوعية</h3>
+                                <p id="weekly-orders" class="stat-number">0</p>
+                            </div>
+                        </div>
+
+                        <div class="stat-card">
+                            <div class="stat-icon">⭐</div>
+                            <div class="stat-content">
+                                <h3>متوسط التقييم</h3>
+                                <p id="avg-rating" class="stat-number">0</p>
+                            </div>
+                        </div>
+
+                        <div class="stat-card">
+                            <div class="stat-icon">💰</div>
+                            <div class="stat-content">
+                                <h3>الإيرادات اليومية</h3>
+                                <p id="daily-revenue" class="stat-number">0 ر.س</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Charts -->
+                    <div class="charts-grid">
+                        <div class="chart-card">
+                            <h3>الإيرادات الأسبوعية</h3>
+                            <canvas id="revenue-chart"></canvas>
+                        </div>
+                        
+                        <div class="chart-card">
+                            <h3>توزيع التقييمات</h3>
+                            <div id="rating-distribution"></div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Dishes Section -->
+                <section id="dishes-section" class="section">
+                    <div class="section-header">
+                        <h2>أطباقي</h2>
+                        <button class="btn btn-primary" onclick="openAddDishModal()">
+                            ➕ إضافة طبق جديد
+                        </button>
+                    </div>
+
+                    <div class="dishes-grid" id="dishes-container">
+                        <!-- Dishes will be loaded here -->
+                    </div>
+                </section>
+
+                <!-- Orders Section -->
+                <section id="orders-section" class="section">
+                    <div class="section-header">
+                        <h2>الطلبات الأخيرة</h2>
+                    </div>
+
+                    <div class="orders-table-container">
+                        <table class="orders-table">
+                            <thead>
+                                <tr>
+                                    <th>رقم الطلب</th>
+                                    <th>العميل</th>
+                                    <th>المبلغ</th>
+                                    <th>الحالة</th>
+                                    <th>الوقت</th>
+                                    <th>الإجراءات</th>
+                                </tr>
+                            </thead>
+                            <tbody id="orders-tbody">
+                                <!-- Orders will be loaded here -->
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+
+                <!-- Reviews Section -->
+                <section id="reviews-section" class="section">
+                    <div class="section-header">
+                        <h2>التقييمات</h2>
+                    </div>
+
+                    <div class="reviews-container" id="reviews-container">
+                        <!-- Reviews will be loaded here -->
+                    </div>
+                </section>
+
+                <!-- Analytics Section -->
+                <section id="analytics-section" class="section">
+                    <div class="analytics-grid">
+                        <div class="analytics-card">
+                            <h3>الأطباق الأكثر طلباً</h3>
+                            <div id="top-dishes-list"></div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Settings Section -->
+                <section id="settings-section" class="section">
+                    <div class="section-header">
+                        <h2>الإعدادات</h2>
+                    </div>
+
+                    <form class="settings-form" id="settings-form">
+                        <div class="form-group">
+                            <label for="chef-phone">رقم الهاتف:</label>
+                            <input type="tel" id="chef-phone" class="form-control">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="chef-bio">السيرة الذاتية:</label>
+                            <textarea id="chef-bio" class="form-control" rows="5"></textarea>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary">💾 حفظ التغييرات</button>
+                    </form>
+                </section>
+            </div>
+        </main>
+    </div>
+
+    <!-- Add Dish Modal -->
+    <div id="add-dish-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>إضافة طبق جديد</h2>
+                <button class="close-btn" onclick="closeAddDishModal()">&times;</button>
+            </div>
+
+            <form id="add-dish-form" class="modal-body">
+                <div class="form-group">
+                    <label for="dish-name">اسم الطبق:</label>
+                    <input type="text" id="dish-name" class="form-control" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="dish-description">الوصف:</label>
+                    <textarea id="dish-description" class="form-control" rows="3"></textarea>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="dish-price">السعر:</label>
+                        <input type="number" id="dish-price" class="form-control" step="0.01" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="dish-category">الفئة:</label>
+                        <select id="dish-category" class="form-control" required></select>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="dish-level">المستوى:</label>
+                        <select id="dish-level" class="form-control" required></select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="dish-image">الصورة:</label>
+                        <input type="file" id="dish-image" class="form-control" accept="image/*">
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" onclick="closeAddDishModal()">إلغاء</button>
+                    <button type="submit" class="btn btn-primary">➕ إضافة الطبق</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="../assets/js/common.js"></script>
+    <script src="chef.js"></script>
+</body>
+</html>
