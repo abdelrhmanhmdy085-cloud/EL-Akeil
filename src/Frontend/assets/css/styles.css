@@ -310,6 +310,19 @@ select.lang-selector {
     padding: 0 15px;
     font-size: 1.2rem;
     color: var(--text-secondary);
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+.location-icon:hover {
+    transform: scale(1.2);
+}
+
+.location-icon:focus-visible {
+    outline: 2px solid var(--primary);
+    border-radius: 50%;
 }
 
 /* Wave Separator */
@@ -937,4 +950,30 @@ select.lang-selector {
     .dish-grid {
         grid-template-columns: repeat(2, 1fr);
     }
+}
+
+/* Skip Splash Button */
+.skip-splash-btn {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    z-index: 10001;
+    background: rgba(255, 255, 255, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    color: white;
+    padding: 8px 16px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+}
+
+.skip-splash-btn:hover {
+    background: white;
+    color: #5E2129;
+}
+
+.skip-splash-btn:focus-visible {
+    outline: 2px solid white;
+    outline-offset: 2px;
 }
