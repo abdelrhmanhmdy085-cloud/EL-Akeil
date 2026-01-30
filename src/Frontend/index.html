@@ -26,7 +26,7 @@
 
 <body>
   <!-- Splash Screen -->
-  <div id="splash-screen" role="dialog" aria-modal="true" aria-label="Welcome Splash" style="cursor: pointer;">
+  <div id="splash-screen" role="dialog" aria-modal="true" aria-label="Welcome Splash">
     <div class="splash-content">
       <div class="logo-circle-container">
         <img src="assets/images/splash_logo.png" id="splash-logo" alt="El Akil">
@@ -37,8 +37,7 @@
         <p class="brand-slogan">أكل بيتي لحد باب بيتك</p>
       </div>
     </div>
-    <button class="skip-splash-btn hidden" id="skipSplashBtn" data-i18n="skip_splash"
-      style="position: absolute; bottom: 30px; right: 30px; background: rgba(255,255,255,0.2); color: white; border: 1px solid white; padding: 8px 20px; border-radius: 20px; cursor: pointer; z-index: 10001; font-family: inherit;">
+    <button class="skip-splash-btn hidden" id="skipSplashBtn" data-i18n="skip_splash">
       Skip
     </button>
   </div>
@@ -48,6 +47,7 @@
       position: fixed;
       top: 0;
       left: 0;
+      cursor: pointer;
       width: 100%;
       height: 100vh;
       background: #5E2129;
@@ -136,6 +136,20 @@
       pointer-events: none;
     }
 
+    .skip-splash-btn {
+      position: absolute;
+      bottom: 30px;
+      right: 30px;
+      background: rgba(255, 255, 255, 0.2);
+      color: white;
+      border: 1px solid white;
+      padding: 8px 20px;
+      border-radius: 20px;
+      cursor: pointer;
+      z-index: 10001;
+      font-family: inherit;
+    }
+
     .skip-splash-btn:hover {
       background: rgba(255, 255, 255, 0.4) !important;
       transform: scale(1.05);
@@ -193,6 +207,7 @@
 
       const dismissSplash = () => {
         splash.style.opacity = '0';
+        splash.setAttribute('aria-hidden', 'true');
         setTimeout(() => {
           splash.style.display = 'none';
         }, 800);
@@ -250,7 +265,7 @@
       <div class="search-box-container">
         <button class="search-btn" data-i18n="search_btn">ابحث</button>
         <input type="text" class="search-input" data-i18n-placeholder="search_placeholder" data-i18n-aria-label="search_placeholder" placeholder="ابحث عن منطقة، شارع، معلم معروف...">
-        <button id="locateBtn" class="location-icon" data-i18n-aria-label="location_btn_aria" style="background: none; border: none; cursor: pointer; font-size: 1.2rem;">📍</button>
+        <button id="locateBtn" class="location-icon" data-i18n-aria-label="location_btn_aria">📍</button>
       </div>
 
       <!-- Category Filter Buttons -->
