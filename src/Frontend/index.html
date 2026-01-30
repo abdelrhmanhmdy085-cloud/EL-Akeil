@@ -26,7 +26,7 @@
 
 <body>
   <!-- Splash Screen -->
-  <div id="splash-screen">
+  <div id="splash-screen" role="dialog" aria-modal="true" aria-label="Welcome Splash" style="cursor: pointer;">
     <div class="splash-content">
       <div class="logo-circle-container">
         <img src="assets/images/splash_logo.png" id="splash-logo" alt="El Akil">
@@ -37,6 +37,10 @@
         <p class="brand-slogan">أكل بيتي لحد باب بيتك</p>
       </div>
     </div>
+    <button class="skip-splash-btn hidden" id="skipSplashBtn" data-i18n="skip_splash"
+      style="position: absolute; bottom: 30px; right: 30px; background: rgba(255,255,255,0.2); color: white; border: 1px solid white; padding: 8px 20px; border-radius: 20px; cursor: pointer; z-index: 10001; font-family: inherit;">
+      Skip
+    </button>
   </div>
   <style>
     /* Splash Screen Settings */
@@ -132,6 +136,11 @@
       pointer-events: none;
     }
 
+    .skip-splash-btn:hover {
+      background: rgba(255, 255, 255, 0.4) !important;
+      transform: scale(1.05);
+    }
+
     /* Category Filter Buttons */
     .category-filter-buttons {
       display: flex;
@@ -180,22 +189,36 @@
       const logo = document.querySelector('.logo-circle-container');
       const text = document.getElementById('brand-info');
       const splash = document.getElementById('splash-screen');
+      const skipBtn = document.getElementById('skipSplashBtn');
+
+      const dismissSplash = () => {
+        splash.style.opacity = '0';
+        setTimeout(() => {
+          splash.style.display = 'none';
+        }, 800);
+      };
+
+      // Allow clicking anywhere to skip
+      splash.addEventListener('click', dismissSplash);
 
       // Phase 1: Logo Pop (0-2s) - Handled by CSS animation
 
       // Phase 2: Text Fade In (2s)
       setTimeout(() => {
+        if (splash.style.display === 'none') return;
         text.style.animation = 'fadeInUp 1s forwards';
         text.classList.remove('hidden');
         text.style.opacity = '1';
+
+        // Show skip button
+        if (skipBtn) skipBtn.classList.remove('hidden');
       }, 2000);
 
       // Phase 3: Transition Out (5s total)
       setTimeout(() => {
-        splash.style.opacity = '0';
-        setTimeout(() => {
-          splash.style.display = 'none';
-        }, 800);
+        if (splash.style.display !== 'none') {
+            dismissSplash();
+        }
       }, 5000);
     });
   </script>
@@ -225,9 +248,9 @@
         اطلب الآن من أفضل الشيفات في منطقتك</p>
 
       <div class="search-box-container">
-        <button class="search-btn">ابحث</button>
-        <input type="text" class="search-input" placeholder="ابحث عن منطقة، شارع، معلم معروف...">
-        <div class="location-icon">📍</div>
+        <button class="search-btn" data-i18n="search_btn">ابحث</button>
+        <input type="text" class="search-input" data-i18n-placeholder="search_placeholder" data-i18n-aria-label="search_placeholder" placeholder="ابحث عن منطقة، شارع، معلم معروف...">
+        <button id="locateBtn" class="location-icon" data-i18n-aria-label="location_btn_aria" style="background: none; border: none; cursor: pointer; font-size: 1.2rem;">📍</button>
       </div>
 
       <!-- Category Filter Buttons -->
@@ -301,7 +324,7 @@
   <!-- JOIN COMPANY MODAL -->
   <div id="joinCompanyModal" class="modal hidden">
     <div class="modal-content join-modal">
-      <span class="modal-close" onclick="closeJoinModal()">✕</span>
+      <span class="modal-close" onclick="closeJoinModal()" data-i18n-aria-label="close_modal_aria" role="button" tabindex="0">✕</span>
       <h2 data-i18n="select_role">اختر دورك</h2>
 
       <div class="role-selection-grid">
@@ -325,7 +348,7 @@
   <!-- Location Picker Modal -->
   <div id="locationModal" class="location-modal hidden">
     <div class="modal-header">
-      <span class="close-modal" onclick="closeLocationModal()">✕</span>
+      <span class="close-modal" onclick="closeLocationModal()" data-i18n-aria-label="close_modal_aria" role="button" tabindex="0">✕</span>
       <h3>عنوان التوصيل</h3>
     </div>
 
@@ -568,12 +591,22 @@
           if (e.target === modal) closeJoinModal();
         });
       }
+
+      // Add keyboard support for modal close buttons
+      document.querySelectorAll('.modal-close, .close-modal').forEach(btn => {
+        btn.addEventListener('keydown', (e) => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            btn.click();
+          }
+        });
+      });
     });
 
   </script>
 
   <!-- WhatsApp Button -->
-  <a href="https://wa.me/201001144459" target="_blank" class="whatsapp-btn" title="تواصل معنا على واتس آب">
+  <a href="https://wa.me/201001144459" target="_blank" class="whatsapp-btn" data-i18n-title="whatsapp_aria" data-i18n-aria-label="whatsapp_aria">
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
       <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.67-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.076 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421-7.403h-.004a9.87 9.87 0 00-4.846 1.235c-1.477.787-2.753 1.912-3.582 3.28C2.602 12.301 2.25 14.185 2.25 16.122c0 1.937.352 3.821 1.039 5.59.687 1.769 1.73 3.36 3.007 4.663 1.277 1.303 2.828 2.346 4.597 3.033 1.769.687 3.653 1.039 5.59 1.039 1.937 0 3.821-.352 5.59-1.039 1.769-.687 3.36-1.73 4.663-3.007 1.303-1.277 2.346-2.828 3.033-4.597.687-1.769 1.039-3.653 1.039-5.59 0-1.937-.352-3.821-1.039-5.59-.687-1.769-1.73-3.36-3.007-4.663-1.277-1.303-2.828-2.346-4.597-3.033-1.769-.687-3.653-1.039-5.59-1.039zm0 17.79c-1.53 0-3.023-.295-4.448-.869-1.425-.574-2.71-1.412-3.747-2.449-1.037-1.037-1.875-2.322-2.449-3.747-.574-1.425-.869-2.918-.869-4.448 0-1.53.295-3.023.869-4.448.574-1.425 1.412-2.71 2.449-3.747 1.037-1.037 2.322-1.875 3.747-2.449 1.425-.574 2.918-.869 4.448-.869 1.53 0 3.023.295 4.448.869 1.425.574 2.71 1.412 3.747 2.449 1.037 1.037 1.875 2.322 2.449 3.747.574 1.425.869 2.918.869 4.448 0 1.53-.295 3.023-.869 4.448-.574 1.425-1.412 2.71-2.449 3.747-1.037 1.037-2.322 1.875-3.747 2.449-1.425.574-2.918.869-4.448.869z"/>
     </svg>
