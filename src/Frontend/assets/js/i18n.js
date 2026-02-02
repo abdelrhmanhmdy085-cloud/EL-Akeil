@@ -69,6 +69,7 @@ function applyTranslations(lang) {
 function initLanguage() {
     let saved = localStorage.getItem(LANG_KEY);
     if (!saved) {
+        // Auto-detect
         const browserLang = navigator.language.split('-')[0];
         saved = SUPPORTED_LANGS.includes(browserLang) ? browserLang : DEFAULT_LANG;
     }
@@ -80,7 +81,7 @@ function initLanguage() {
         toggleDiv.className = 'lang-toggle-btn';
         toggleDiv.setAttribute('onclick', 'toggleLanguage()');
         toggleDiv.setAttribute('data-i18n-title', 'switch_language');
-        toggleDiv.innerHTML = `🌍 <span id="lang-label">${saved === 'ar' ? 'EN' : 'AR'}</span>`;
+        toggleDiv.innerHTML = `&#127757; <span id="lang-label">${saved === 'ar' ? 'EN' : 'AR'}</span>`;
         nav.prepend(toggleDiv);
     }
     
