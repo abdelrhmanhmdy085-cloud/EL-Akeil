@@ -196,6 +196,14 @@ select.lang-selector {
     display: none !important;
 }
 
+/* UI Polish */
+.loading-spinner { display: flex; flex-direction: column; align-items: center; padding: 2rem; gap: 1rem; color: var(--text-secondary); }
+.loading-spinner::before { content: ""; width: 30px; height: 30px; border: 3px solid var(--border); border-top-color: var(--primary); border-radius: 50%; animation: spin 1s linear infinite; }
+@keyframes spin { to { transform: rotate(360deg); } }
+
+.skip-splash-btn { position: absolute; top: 20px; right: 20px; z-index: 10001; background: rgba(255,255,255,0.2); border: 1px solid rgba(255,255,255,0.4); color: white; padding: 6px 14px; border-radius: 20px; cursor: pointer; transition: 0.3s; }
+.skip-splash-btn:hover { background: white; color: var(--primary); }
+
 /* Landing Page Refactor (Talabat Style) */
 
 /* Hero Section */
