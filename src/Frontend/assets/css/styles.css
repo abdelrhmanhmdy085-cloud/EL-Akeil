@@ -196,6 +196,27 @@ select.lang-selector {
     display: none !important;
 }
 
+/* Splash Screen Skip Button */
+.skip-splash-btn {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    padding: 8px 16px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    z-index: 10001;
+    transition: all 0.3s ease;
+}
+
+.skip-splash-btn:hover {
+    background: rgba(255, 255, 255, 0.2);
+    border-color: white;
+}
+
 /* Landing Page Refactor (Talabat Style) */
 
 /* Hero Section */

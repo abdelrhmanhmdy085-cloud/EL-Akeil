@@ -1,6 +1,11 @@
 {
     "dir": "ltr",
     "nav_login": "Login / Register",
+    "skip_splash": "Skip",
+    "locate_me": "Locate me",
+    "whatsapp_aria": "Contact us on WhatsApp",
+    "notifications": "Notifications",
+    "close": "Close",
     "portal_title": "El Akil - Portal",
     "hero_title": "Home-cooked meals to your door",
     "hero_subtitle": "Order from the best chefs nearby",
