@@ -26,7 +26,8 @@
 
 <body>
   <!-- Splash Screen -->
-  <div id="splash-screen">
+  <div id="splash-screen" role="dialog" aria-modal="true" aria-label="Splash Screen">
+    <button class="skip-splash-btn" onclick="skipSplash()" data-i18n="skip_splash">Skip</button>
     <div class="splash-content">
       <div class="logo-circle-container">
         <img src="assets/images/splash_logo.png" id="splash-logo" alt="El Akil">
@@ -53,6 +54,37 @@
       align-items: center;
       z-index: 10000;
       transition: opacity 0.8s ease-in-out;
+    }
+
+    .skip-splash-btn {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background: rgba(255, 255, 255, 0.2);
+      border: 1px solid rgba(255, 255, 255, 0.4);
+      color: white;
+      padding: 6px 16px;
+      border-radius: 20px;
+      cursor: pointer;
+      font-size: 0.9rem;
+      z-index: 10001;
+      transition: all 0.3s ease;
+      font-family: inherit;
+    }
+
+    .skip-splash-btn:hover {
+      background: rgba(255, 255, 255, 0.3);
+      transform: scale(1.05);
+    }
+
+    .skip-splash-btn:focus-visible {
+      outline: 2px solid white;
+      outline-offset: 2px;
+    }
+
+    body.rtl .skip-splash-btn {
+      right: auto;
+      left: 20px;
     }
 
     /* Circular Container */
@@ -176,6 +208,22 @@
   </style>
   <script>
     // Splash Screen Logic
+    let splashTimeout1, splashTimeout2, splashTimeout3;
+
+    function skipSplash() {
+      clearTimeout(splashTimeout1);
+      clearTimeout(splashTimeout2);
+      clearTimeout(splashTimeout3);
+      const splash = document.getElementById('splash-screen');
+      if (splash) {
+        splash.style.opacity = '0';
+        setTimeout(() => {
+          splash.style.display = 'none';
+          splash.setAttribute('aria-hidden', 'true');
+        }, 800);
+      }
+    }
+
     window.addEventListener('load', () => {
       const logo = document.querySelector('.logo-circle-container');
       const text = document.getElementById('brand-info');
@@ -184,18 +232,23 @@
       // Phase 1: Logo Pop (0-2s) - Handled by CSS animation
 
       // Phase 2: Text Fade In (2s)
-      setTimeout(() => {
-        text.style.animation = 'fadeInUp 1s forwards';
-        text.classList.remove('hidden');
-        text.style.opacity = '1';
+      splashTimeout1 = setTimeout(() => {
+        if (text) {
+          text.style.animation = 'fadeInUp 1s forwards';
+          text.classList.remove('hidden');
+          text.style.opacity = '1';
+        }
       }, 2000);
 
       // Phase 3: Transition Out (5s total)
-      setTimeout(() => {
-        splash.style.opacity = '0';
-        setTimeout(() => {
-          splash.style.display = 'none';
-        }, 800);
+      splashTimeout2 = setTimeout(() => {
+        if (splash) {
+          splash.style.opacity = '0';
+          splashTimeout3 = setTimeout(() => {
+            splash.style.display = 'none';
+            splash.setAttribute('aria-hidden', 'true');
+          }, 800);
+        }
       }, 5000);
     });
   </script>
