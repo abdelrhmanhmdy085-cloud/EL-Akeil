@@ -37,6 +37,7 @@
         <p class="brand-slogan">أكل بيتي لحد باب بيتك</p>
       </div>
     </div>
+    <button id="skip-splash-btn" class="skip-splash-btn" onclick="skipSplash()" data-i18n="skip_splash">Skip</button>
   </div>
   <style>
     /* Splash Screen Settings */
@@ -97,6 +98,28 @@
       font-size: 1.5rem;
       margin-top: 5px;
       font-weight: 300;
+    }
+
+    .skip-splash-btn {
+      position: absolute;
+      bottom: 30px;
+      right: 30px;
+      background: rgba(255, 255, 255, 0.2);
+      color: white;
+      border: 1px solid rgba(255, 255, 255, 0.5);
+      padding: 8px 24px;
+      border-radius: 20px;
+      cursor: pointer;
+      font-family: inherit;
+      font-size: 0.9rem;
+      z-index: 10001;
+      transition: all 0.3s ease;
+    }
+
+    .skip-splash-btn:hover {
+      background: rgba(255, 255, 255, 0.3);
+      border-color: white;
+      transform: scale(1.05);
     }
 
     .hidden {
@@ -176,6 +199,22 @@
   </style>
   <script>
     // Splash Screen Logic
+    let splashTimeout1, splashTimeout2, splashTimeout3;
+
+    window.skipSplash = function() {
+      if (splashTimeout1) clearTimeout(splashTimeout1);
+      if (splashTimeout2) clearTimeout(splashTimeout2);
+      if (splashTimeout3) clearTimeout(splashTimeout3);
+      const splash = document.getElementById('splash-screen');
+      if (splash) {
+        splash.style.opacity = '0';
+        setTimeout(() => {
+          splash.style.display = 'none';
+          splash.setAttribute('aria-hidden', 'true');
+        }, 800);
+      }
+    };
+
     window.addEventListener('load', () => {
       const logo = document.querySelector('.logo-circle-container');
       const text = document.getElementById('brand-info');
@@ -184,17 +223,18 @@
       // Phase 1: Logo Pop (0-2s) - Handled by CSS animation
 
       // Phase 2: Text Fade In (2s)
-      setTimeout(() => {
+      splashTimeout1 = setTimeout(() => {
         text.style.animation = 'fadeInUp 1s forwards';
         text.classList.remove('hidden');
         text.style.opacity = '1';
       }, 2000);
 
       // Phase 3: Transition Out (5s total)
-      setTimeout(() => {
+      splashTimeout2 = setTimeout(() => {
         splash.style.opacity = '0';
-        setTimeout(() => {
+        splashTimeout3 = setTimeout(() => {
           splash.style.display = 'none';
+          splash.setAttribute('aria-hidden', 'true');
         }, 800);
       }, 5000);
     });
