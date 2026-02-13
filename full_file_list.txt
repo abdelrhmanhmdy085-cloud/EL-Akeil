@@ -1,0 +1,688 @@
+.:
+total 564
+drwxr-xr-x 9 jules root   4096 Feb 13 22:04 .
+drwxr-xr-x 1 root  root   4096 Feb 13 21:34 ..
+drwxrwxr-x 2 jules jules  4096 Feb 13 21:46 .Jules
+-rw-rw-r-- 1 jules jules   233 Feb 13 21:35 .dockerignore
+-rw-rw-r-- 1 jules jules   293 Feb 13 21:35 .env
+-rw-rw-r-- 1 jules jules   186 Feb 13 21:35 .env.example
+-rw-rw-r-- 1 jules jules  2338 Feb 13 21:35 .env.production
+-rw-rw-r-- 1 jules jules   469 Feb 13 21:35 .env.railway
+drwxrwxr-x 7 jules jules  4096 Feb 13 22:04 .git
+drwxrwxr-x 3 jules jules  4096 Feb 13 21:35 .github
+drwxrwxr-x 2 jules jules  4096 Feb 13 21:35 .vscode
+-rw-rw-r-- 1 jules jules 10240 Feb 13 21:35 API_SPECIFICATIONS.md
+-rw-rw-r-- 1 jules jules 10331 Feb 13 21:35 CHEF_LOCATION_MAP_DOCUMENTATION.md
+-rw-rw-r-- 1 jules jules  5476 Feb 13 21:35 CHEF_MAP_QUICKSTART.md
+-rw-rw-r-- 1 jules jules 14262 Feb 13 21:35 COMPLETE_DOCUMENTATION_INDEX.md
+-rw-rw-r-- 1 jules jules  9509 Feb 13 21:35 DEPLOYMENT_CHECKLIST.md
+-rw-rw-r-- 1 jules jules  8261 Feb 13 21:35 DEPLOYMENT_GUIDE.md
+-rw-rw-r-- 1 jules jules  6338 Feb 13 21:35 DEPLOYMENT_SCRIPTS_README.md
+-rw-rw-r-- 1 jules jules  3196 Feb 13 21:35 DIET_TO_HEALTHY_UPDATE.md
+-rw-rw-r-- 1 jules jules  4361 Feb 13 21:35 DISH_AVAILABILITY_FEATURE.md
+-rw-rw-r-- 1 jules jules   946 Feb 13 21:35 Dockerfile
+drwxrwxr-x 2 jules jules  4096 Feb 13 21:35 EL-Akeil
+-rw-rw-r-- 1 jules jules 14200 Feb 13 21:35 FILES_MODIFIED_CREATED_SUMMARY.md
+-rw-rw-r-- 1 jules jules  8876 Feb 13 21:35 FILE_SUMMARY.md
+-rw-rw-r-- 1 jules jules 20606 Feb 13 21:35 FINAL_DELIVERY_SUMMARY.md
+-rw-rw-r-- 1 jules jules 17442 Feb 13 21:35 FINAL_PHASE_4_REPORT.md
+-rw-rw-r-- 1 jules jules 12888 Feb 13 21:35 FOOD_BROWSING_SYSTEM_GUIDE.md
+-rw-rw-r-- 1 jules jules 16103 Feb 13 21:35 IMPLEMENTATION_COMPLETION_REPORT.md
+-rw-rw-r-- 1 jules jules 10996 Feb 13 21:35 IMPLEMENTATION_GUIDE.md
+-rw-rw-r-- 1 jules jules 12774 Feb 13 21:35 INDEX.md
+-rw-rw-r-- 1 jules jules 15878 Feb 13 21:35 INDEX_AND_DOCS.md
+-rw-rw-r-- 1 jules jules 18158 Feb 13 21:35 PHASE_4_DELIVERY_SUMMARY.md
+-rw-rw-r-- 1 jules jules 29997 Feb 13 21:35 PHASE_4_IMPLEMENTATION_GUIDE.md
+-rw-rw-r-- 1 jules jules 15395 Feb 13 21:35 PHASE_4_QUICK_CHECKLIST.md
+-rw-rw-r-- 1 jules jules 13419 Feb 13 21:35 PROJECT_COMPLETION_REPORT.md
+-rw-rw-r-- 1 jules jules    31 Feb 13 21:35 Procfile
+-rw-rw-r-- 1 jules jules 10788 Feb 13 21:35 QUICK_START.md
+-rw-rw-r-- 1 jules jules  4136 Feb 13 21:35 RAILWAY_ADVANCED_SETUP.md
+-rw-rw-r-- 1 jules jules  3042 Feb 13 21:35 RAILWAY_DEPLOYMENT.md
+-rw-rw-r-- 1 jules jules  1801 Feb 13 21:35 RAILWAY_QUICK_START.md
+-rw-rw-r-- 1 jules jules  2044 Feb 13 21:35 README.md
+-rw-rw-r-- 1 jules jules  4530 Feb 13 21:35 SETUP_GUIDE.md
+-rw-rw-r-- 1 jules jules  4328 Feb 13 21:35 SUBSCRIPTIONS_I18N_COMPLETE.md
+-rw-rw-r-- 1 jules jules  2578 Feb 13 21:35 TRANSLATION_FIX.md
+-rw-rw-r-- 1 jules jules  7248 Feb 13 21:35 add_sample_dishes.py
+-rw-rw-r-- 1 jules jules  1563 Feb 13 21:35 add_vegetables_category.py
+-rw-rw-r-- 1 jules jules  2395 Feb 13 21:35 backup.sh
+-rw-rw-r-- 1 jules jules   210 Feb 13 21:35 build.sh
+-rw-rw-r-- 1 jules jules  2372 Feb 13 21:35 check_railway_deployment.py
+-rw-rw-r-- 1 jules jules 10351 Feb 13 21:35 deploy.sh
+drwxrwxr-x 4 jules jules  4096 Feb 13 21:35 dist
+-rw-rw-r-- 1 jules jules     0 Feb 13 22:04 full_file_list.txt
+-rw-rw-r-- 1 jules jules  5256 Feb 13 21:35 health-check.sh
+-rw-rw-r-- 1 jules jules   206 Feb 13 21:35 railway.json
+-rw-rw-r-- 1 jules jules    84 Feb 13 21:35 railway.toml
+-rw-rw-r-- 1 jules jules   342 Feb 13 21:35 railway.yaml
+-rw-rw-r-- 1 jules jules   121 Feb 13 21:35 requirements.txt
+-rw-rw-r-- 1 jules jules   526 Feb 13 21:35 run.bat
+-rw-rw-r-- 1 jules jules   669 Feb 13 21:35 run.ps1
+-rw-rw-r-- 1 jules jules    21 Feb 13 21:35 runtime.txt
+-rw-rw-r-- 1 jules jules  5339 Feb 13 21:35 seed_categories_levels.py
+-rw-rw-r-- 1 jules jules  7102 Feb 13 21:35 seed_chef_map.py
+-rw-rw-r-- 1 jules jules  1867 Feb 13 21:35 setup-cron.sh
+-rw-rw-r-- 1 jules jules  2681 Feb 13 21:35 setup.bat
+-rw-rw-r-- 1 jules jules  5637 Feb 13 21:35 setup.ps1
+drwxrwxr-x 9 jules jules  4096 Feb 13 21:35 src
+-rw-rw-r-- 1 jules jules   104 Feb 13 21:35 start.sh
+-rw-rw-r-- 1 jules jules  3793 Feb 13 21:35 test_chef_map.py
+-rw-rw-r-- 1 jules jules  1597 Feb 13 21:35 test_subscriptions_translation.py
+-rw-rw-r-- 1 jules jules  2742 Feb 13 21:35 update_diet_to_healthy.py
+-rw-rw-r-- 1 jules jules  2757 Feb 13 21:35 verify_flow.py
+
+./.Jules:
+total 12
+drwxrwxr-x 2 jules jules 4096 Feb 13 21:46 .
+drwxr-xr-x 9 jules root  4096 Feb 13 22:04 ..
+-rw-rw-r-- 1 jules jules  584 Feb 13 21:46 palette.md
+
+./.git:
+total 64
+drwxrwxr-x  7 jules jules  4096 Feb 13 22:04 .
+drwxr-xr-x  9 jules root   4096 Feb 13 22:04 ..
+-rw-rw-r--  1 jules jules    51 Feb 13 21:35 HEAD
+-rw-rw-r--  1 jules jules   296 Feb 13 21:35 config
+-rw-rw-r--  1 jules jules    73 Feb 13 21:34 description
+drwxrwxr-x  2 jules jules  4096 Feb 13 21:34 hooks
+-rw-rw-r--  1 jules jules 15712 Feb 13 21:47 index
+drwxrwxr-x  2 jules jules  4096 Feb 13 21:34 info
+drwxrwxr-x  3 jules jules  4096 Feb 13 21:35 logs
+drwxrwxr-x 34 jules jules  4096 Feb 13 21:46 objects
+-rw-rw-r--  1 jules jules  1580 Feb 13 21:35 packed-refs
+drwxrwxr-x  5 jules jules  4096 Feb 13 21:35 refs
+-rw-rw-r--  1 jules jules   615 Feb 13 21:35 shallow
+
+./.git/hooks:
+total 72
+drwxrwxr-x 2 jules jules 4096 Feb 13 21:34 .
+drwxrwxr-x 7 jules jules 4096 Feb 13 22:04 ..
+-rwxrwxr-x 1 jules jules  478 Feb 13 21:34 applypatch-msg.sample
+-rwxrwxr-x 1 jules jules  896 Feb 13 21:34 commit-msg.sample
+-rwxrwxr-x 1 jules jules 4726 Feb 13 21:34 fsmonitor-watchman.sample
+-rwxrwxr-x 1 jules jules  189 Feb 13 21:34 post-update.sample
+-rwxrwxr-x 1 jules jules  424 Feb 13 21:34 pre-applypatch.sample
+-rwxrwxr-x 1 jules jules 1649 Feb 13 21:34 pre-commit.sample
+-rwxrwxr-x 1 jules jules  416 Feb 13 21:34 pre-merge-commit.sample
+-rwxrwxr-x 1 jules jules 1374 Feb 13 21:34 pre-push.sample
+-rwxrwxr-x 1 jules jules 4898 Feb 13 21:34 pre-rebase.sample
+-rwxrwxr-x 1 jules jules  544 Feb 13 21:34 pre-receive.sample
+-rwxrwxr-x 1 jules jules 1492 Feb 13 21:34 prepare-commit-msg.sample
+-rwxrwxr-x 1 jules jules 2783 Feb 13 21:34 push-to-checkout.sample
+-rwxrwxr-x 1 jules jules 2308 Feb 13 21:34 sendemail-validate.sample
+-rwxrwxr-x 1 jules jules 3650 Feb 13 21:34 update.sample
+
+./.git/info:
+total 12
+drwxrwxr-x 2 jules jules 4096 Feb 13 21:34 .
+drwxrwxr-x 7 jules jules 4096 Feb 13 22:04 ..
+-rw-rw-r-- 1 jules jules  240 Feb 13 21:34 exclude
+
+./.git/logs:
+total 16
+drwxrwxr-x 3 jules jules 4096 Feb 13 21:35 .
+drwxrwxr-x 7 jules jules 4096 Feb 13 22:04 ..
+-rw-rw-r-- 1 jules jules  493 Feb 13 21:35 HEAD
+drwxrwxr-x 4 jules jules 4096 Feb 13 21:35 refs
+
+./.git/logs/refs:
+total 16
+drwxrwxr-x 4 jules jules 4096 Feb 13 21:35 .
+drwxrwxr-x 3 jules jules 4096 Feb 13 21:35 ..
+drwxrwxr-x 2 jules jules 4096 Feb 13 21:35 heads
+drwxrwxr-x 3 jules jules 4096 Feb 13 21:35 remotes
+
+./.git/logs/refs/heads:
+total 16
+drwxrwxr-x 2 jules jules 4096 Feb 13 21:35 .
+drwxrwxr-x 4 jules jules 4096 Feb 13 21:35 ..
+-rw-rw-r-- 1 jules jules  208 Feb 13 21:35 jules-7018683361809420832-70eea6bb
+-rw-rw-r-- 1 jules jules  246 Feb 13 21:35 main
+
+./.git/logs/refs/remotes:
+total 12
+drwxrwxr-x 3 jules jules 4096 Feb 13 21:35 .
+drwxrwxr-x 4 jules jules 4096 Feb 13 21:35 ..
+drwxrwxr-x 2 jules jules 4096 Feb 13 21:35 origin
+
+./.git/logs/refs/remotes/origin:
+total 12
+drwxrwxr-x 2 jules jules 4096 Feb 13 21:35 .
+drwxrwxr-x 3 jules jules 4096 Feb 13 21:35 ..
+-rw-rw-r-- 1 jules jules  246 Feb 13 21:35 HEAD
+
+./.git/objects:
+total 136
+drwxrwxr-x 34 jules jules 4096 Feb 13 21:46 .
+drwxrwxr-x  7 jules jules 4096 Feb 13 22:04 ..
+drwxrwxr-x  2 jules jules 4096 Feb 13 21:40 01
+drwxrwxr-x  2 jules jules 4096 Feb 13 21:38 03
+drwxrwxr-x  2 jules jules 4096 Feb 13 21:40 08
+drwxrwxr-x  2 jules jules 4096 Feb 13 21:47 19
+drwxrwxr-x  2 jules jules 4096 Feb 13 21:38 1e
+drwxrwxr-x  2 jules jules 4096 Feb 13 21:46 21
+drwxrwxr-x  2 jules jules 4096 Feb 13 21:39 2a
+drwxrwxr-x  2 jules jules 4096 Feb 13 21:40 2f
+drwxrwxr-x  2 jules jules 4096 Feb 13 21:37 3a
+drwxrwxr-x  2 jules jules 4096 Feb 13 21:41 42
+drwxrwxr-x  2 jules jules 4096 Feb 13 21:40 52
+drwxrwxr-x  2 jules jules 4096 Feb 13 21:40 56
+drwxrwxr-x  2 jules jules 4096 Feb 13 21:40 59
+drwxrwxr-x  2 jules jules 4096 Feb 13 21:41 76
+drwxrwxr-x  2 jules jules 4096 Feb 13 21:37 7e
+drwxrwxr-x  2 jules jules 4096 Feb 13 21:41 84
+drwxrwxr-x  2 jules jules 4096 Feb 13 21:45 c2
+drwxrwxr-x  2 jules jules 4096 Feb 13 21:40 c3
+drwxrwxr-x  2 jules jules 4096 Feb 13 21:44 c7
+drwxrwxr-x  2 jules jules 4096 Feb 13 21:40 cf
+drwxrwxr-x  2 jules jules 4096 Feb 13 21:38 d2
+drwxrwxr-x  2 jules jules 4096 Feb 13 21:40 df
+drwxrwxr-x  2 jules jules 4096 Feb 13 21:39 e1
+drwxrwxr-x  2 jules jules 4096 Feb 13 21:40 e4
+drwxrwxr-x  2 jules jules 4096 Feb 13 21:40 e8
+drwxrwxr-x  2 jules jules 4096 Feb 13 21:38 ef
+drwxrwxr-x  2 jules jules 4096 Feb 13 21:40 f5
+drwxrwxr-x  2 jules jules 4096 Feb 13 21:43 f9
+drwxrwxr-x  2 jules jules 4096 Feb 13 21:39 fa
+drwxrwxr-x  2 jules jules 4096 Feb 13 21:40 ff
+drwxrwxr-x  2 jules jules 4096 Feb 13 21:34 info
+drwxrwxr-x  2 jules jules 4096 Feb 13 21:35 pack
+
+./.git/objects/01:
+total 16
+drwxrwxr-x  2 jules jules 4096 Feb 13 21:40 .
+drwxrwxr-x 34 jules jules 4096 Feb 13 21:46 ..
+-r--r--r--  1 jules jules 6285 Feb 13 21:40 283182a08610e95674811930e33dcf25e6150a
+
+./.git/objects/03:
+total 20
+drwxrwxr-x  2 jules jules 4096 Feb 13 21:38 .
+drwxrwxr-x 34 jules jules 4096 Feb 13 21:46 ..
+-r--r--r--  1 jules jules 8859 Feb 13 21:38 2594f8f303802dacfc2e4c2977b6ce1bb6a055
+
+./.git/objects/08:
+total 20
+drwxrwxr-x  2 jules jules 4096 Feb 13 21:40 .
+drwxrwxr-x 34 jules jules 4096 Feb 13 21:46 ..
+-r--r--r--  1 jules jules 8349 Feb 13 21:40 de0496960f28078685d48c7bec9bf8a1244b51
+
+./.git/objects/19:
+total 16
+drwxrwxr-x  2 jules jules 4096 Feb 13 21:47 .
+drwxrwxr-x 34 jules jules 4096 Feb 13 21:46 ..
+-r--r--r--  1 jules jules  368 Feb 13 21:47 6e1897fd4110ef4356f1e391fd85a606b6e10f
+-r--r--r--  1 jules jules  184 Feb 13 21:40 a68723fe17aa5703c6634a6921a5cedbd21a6d
+
+./.git/objects/1e:
+total 20
+drwxrwxr-x  2 jules jules 4096 Feb 13 21:38 .
+drwxrwxr-x 34 jules jules 4096 Feb 13 21:46 ..
+-r--r--r--  1 jules jules 8922 Feb 13 21:38 d89141b436a6a6cb5d8f533724395ff82e47d6
+
+./.git/objects/21:
+total 12
+drwxrwxr-x  2 jules jules 4096 Feb 13 21:46 .
+drwxrwxr-x 34 jules jules 4096 Feb 13 21:46 ..
+-r--r--r--  1 jules jules 3838 Feb 13 21:46 9e8a7c3a65f9967db28c60c37ab5b8f15f7a2d
+
+./.git/objects/2a:
+total 12
+drwxrwxr-x  2 jules jules 4096 Feb 13 21:39 .
+drwxrwxr-x 34 jules jules 4096 Feb 13 21:46 ..
+-r--r--r--  1 jules jules 3805 Feb 13 21:39 75296c137dec28a779e7792f0720bd322bb7cd
+
+./.git/objects/2f:
+total 12
+drwxrwxr-x  2 jules jules 4096 Feb 13 21:40 .
+drwxrwxr-x 34 jules jules 4096 Feb 13 21:46 ..
+-r--r--r--  1 jules jules  528 Feb 13 21:40 c908930bf9a1399130372288bfabe1bc4fd3d9
+
+./.git/objects/3a:
+total 12
+drwxrwxr-x  2 jules jules 4096 Feb 13 21:37 .
+drwxrwxr-x 34 jules jules 4096 Feb 13 21:46 ..
+-r--r--r--  1 jules jules 3689 Feb 13 21:37 7ac93b9a3328e3a1f8f367a091c9f4f4074454
+
+./.git/objects/42:
+total 12
+drwxrwxr-x  2 jules jules 4096 Feb 13 21:41 .
+drwxrwxr-x 34 jules jules 4096 Feb 13 21:46 ..
+-r--r--r--  1 jules jules 1564 Feb 13 21:41 c5dea8d32ba9d6a3138bb7c02ebb3fa3c88cef
+
+./.git/objects/52:
+total 12
+drwxrwxr-x  2 jules jules 4096 Feb 13 21:40 .
+drwxrwxr-x 34 jules jules 4096 Feb 13 21:46 ..
+-r--r--r--  1 jules jules 1535 Feb 13 21:40 67716d31e4923c1498c81288a396d6f018922e
+
+./.git/objects/56:
+total 12
+drwxrwxr-x  2 jules jules 4096 Feb 13 21:40 .
+drwxrwxr-x 34 jules jules 4096 Feb 13 21:46 ..
+-r--r--r--  1 jules jules 3010 Feb 13 21:40 404d0a45b6939fd51a64fb5d7e545b2b16029a
+
+./.git/objects/59:
+total 16
+drwxrwxr-x  2 jules jules 4096 Feb 13 21:40 .
+drwxrwxr-x 34 jules jules 4096 Feb 13 21:46 ..
+-r--r--r--  1 jules jules 4615 Feb 13 21:45 f9dcd57c53303be578d6c5609f9ad4351f53df
+
+./.git/objects/76:
+total 16
+drwxrwxr-x  2 jules jules 4096 Feb 13 21:41 .
+drwxrwxr-x 34 jules jules 4096 Feb 13 21:46 ..
+-r--r--r--  1 jules jules 6499 Feb 13 21:41 43e2fae01ec03354a97fc3b0fa2ead35a1562d
+
+./.git/objects/7e:
+total 12
+drwxrwxr-x  2 jules jules 4096 Feb 13 21:37 .
+drwxrwxr-x 34 jules jules 4096 Feb 13 21:46 ..
+-r--r--r--  1 jules jules 3134 Feb 13 21:37 20afccd2bc9bdb626ac95eb47a0fced0492435
+
+./.git/objects/84:
+total 12
+drwxrwxr-x  2 jules jules 4096 Feb 13 21:41 .
+drwxrwxr-x 34 jules jules 4096 Feb 13 21:46 ..
+-r--r--r--  1 jules jules 2419 Feb 13 21:41 ffbb82433dd894c04c3ccc89edd201c5999ab5
+
+./.git/objects/c2:
+total 12
+drwxrwxr-x  2 jules jules 4096 Feb 13 21:45 .
+drwxrwxr-x 34 jules jules 4096 Feb 13 21:46 ..
+-r--r--r--  1 jules jules 3810 Feb 13 21:45 d01ed9b180f0cd893d534b3525dac2749ddb48
+
+./.git/objects/c3:
+total 12
+drwxrwxr-x  2 jules jules 4096 Feb 13 21:40 .
+drwxrwxr-x 34 jules jules 4096 Feb 13 21:46 ..
+-r--r--r--  1 jules jules 2457 Feb 13 21:45 61c90a5d75ba1678c66417dbca9b4e582efbc1
+
+./.git/objects/c7:
+total 20
+drwxrwxr-x  2 jules jules 4096 Feb 13 21:44 .
+drwxrwxr-x 34 jules jules 4096 Feb 13 21:46 ..
+-r--r--r--  1 jules jules 9000 Feb 13 21:44 b60659a11e48f5b04675e817bf8924e823dc01
+
+./.git/objects/cf:
+total 12
+drwxrwxr-x  2 jules jules 4096 Feb 13 21:40 .
+drwxrwxr-x 34 jules jules 4096 Feb 13 21:46 ..
+-r--r--r--  1 jules jules  119 Feb 13 21:40 894d7c50454a7edabd10cc1a5a392f4c8c5f48
+
+./.git/objects/d2:
+total 12
+drwxrwxr-x  2 jules jules 4096 Feb 13 21:38 .
+drwxrwxr-x 34 jules jules 4096 Feb 13 21:46 ..
+-r--r--r--  1 jules jules 3945 Feb 13 21:38 1ab4cd563a7f74c1aa4480b8f6c1c6943d7697
+
+./.git/objects/df:
+total 16
+drwxrwxr-x  2 jules jules 4096 Feb 13 21:40 .
+drwxrwxr-x 34 jules jules 4096 Feb 13 21:46 ..
+-r--r--r--  1 jules jules 5701 Feb 13 21:40 6a26d233252866250eb387c8cd81040b977bef
+
+./.git/objects/e1:
+total 20
+drwxrwxr-x  2 jules jules 4096 Feb 13 21:39 .
+drwxrwxr-x 34 jules jules 4096 Feb 13 21:46 ..
+-r--r--r--  1 jules jules 9001 Feb 13 21:39 e4661b90a30e2fc6e24802b21a11c09ab4604b
+
+./.git/objects/e4:
+total 12
+drwxrwxr-x  2 jules jules 4096 Feb 13 21:40 .
+drwxrwxr-x 34 jules jules 4096 Feb 13 21:46 ..
+-r--r--r--  1 jules jules  112 Feb 13 21:40 35eb296847d1b1cefca1969febab22ae01d266
+
+./.git/objects/e8:
+total 12
+drwxrwxr-x  2 jules jules 4096 Feb 13 21:40 .
+drwxrwxr-x 34 jules jules 4096 Feb 13 21:46 ..
+-r--r--r--  1 jules jules  265 Feb 13 21:45 2123ebf50348dc7da0d84d49cbd2baff7cdaff
+
+./.git/objects/ef:
+total 20
+drwxrwxr-x  2 jules jules 4096 Feb 13 21:38 .
+drwxrwxr-x 34 jules jules 4096 Feb 13 21:46 ..
+-r--r--r--  1 jules jules 8927 Feb 13 21:38 db8a79203e2c0b00900c204d8b5ead61b1caff
+
+./.git/objects/f5:
+total 20
+drwxrwxr-x  2 jules jules 4096 Feb 13 21:40 .
+drwxrwxr-x 34 jules jules 4096 Feb 13 21:46 ..
+-r--r--r--  1 jules jules 9538 Feb 13 21:40 c3a6e436e48d887eaf093541a42b73f74070e8
+
+./.git/objects/f9:
+total 12
+drwxrwxr-x  2 jules jules 4096 Feb 13 21:43 .
+drwxrwxr-x 34 jules jules 4096 Feb 13 21:46 ..
+-r--r--r--  1 jules jules  771 Feb 13 21:43 5498c17246e21f09de1fb7563500b73df17e00
+
+./.git/objects/fa:
+total 12
+drwxrwxr-x  2 jules jules 4096 Feb 13 21:39 .
+drwxrwxr-x 34 jules jules 4096 Feb 13 21:46 ..
+-r--r--r--  1 jules jules  157 Feb 13 21:39 5d24339e7bcf33d8aa64f91f1f793c984592d5
+
+./.git/objects/ff:
+total 12
+drwxrwxr-x  2 jules jules 4096 Feb 13 21:40 .
+drwxrwxr-x 34 jules jules 4096 Feb 13 21:46 ..
+-r--r--r--  1 jules jules 3701 Feb 13 21:45 e3a9c18aba1de0e6002229b87d5986ba0068fb
+
+./.git/objects/info:
+total 8
+drwxrwxr-x  2 jules jules 4096 Feb 13 21:34 .
+drwxrwxr-x 34 jules jules 4096 Feb 13 21:46 ..
+
+./.git/objects/pack:
+total 7160
+drwxrwxr-x  2 jules jules    4096 Feb 13 21:35 .
+drwxrwxr-x 34 jules jules    4096 Feb 13 21:46 ..
+-r--r--r--  1 jules jules   13028 Feb 13 21:35 pack-0ebe6522e0c9354ec571ff7e93d0b6a314fc093f.idx
+-r--r--r--  1 jules jules 7300460 Feb 13 21:46 pack-0ebe6522e0c9354ec571ff7e93d0b6a314fc093f.pack
+-r--r--r--  1 jules jules    1760 Feb 13 21:35 pack-0ebe6522e0c9354ec571ff7e93d0b6a314fc093f.rev
+
+./.git/refs:
+total 20
+drwxrwxr-x 5 jules jules 4096 Feb 13 21:35 .
+drwxrwxr-x 7 jules jules 4096 Feb 13 22:04 ..
+drwxrwxr-x 2 jules jules 4096 Feb 13 21:35 heads
+drwxrwxr-x 3 jules jules 4096 Feb 13 21:35 remotes
+drwxrwxr-x 2 jules jules 4096 Feb 13 21:35 tags
+
+./.git/refs/heads:
+total 16
+drwxrwxr-x 2 jules jules 4096 Feb 13 21:35 .
+drwxrwxr-x 5 jules jules 4096 Feb 13 21:35 ..
+-rw-rw-r-- 1 jules jules   41 Feb 13 21:35 jules-7018683361809420832-70eea6bb
+-rw-rw-r-- 1 jules jules   41 Feb 13 21:35 main
+
+./.git/refs/remotes:
+total 12
+drwxrwxr-x 3 jules jules 4096 Feb 13 21:35 .
+drwxrwxr-x 5 jules jules 4096 Feb 13 21:35 ..
+drwxrwxr-x 2 jules jules 4096 Feb 13 21:35 origin
+
+./.git/refs/remotes/origin:
+total 12
+drwxrwxr-x 2 jules jules 4096 Feb 13 21:35 .
+drwxrwxr-x 3 jules jules 4096 Feb 13 21:35 ..
+-rw-rw-r-- 1 jules jules   30 Feb 13 21:35 HEAD
+
+./.git/refs/tags:
+total 8
+drwxrwxr-x 2 jules jules 4096 Feb 13 21:35 .
+drwxrwxr-x 5 jules jules 4096 Feb 13 21:35 ..
+
+./.github:
+total 12
+drwxrwxr-x 3 jules jules 4096 Feb 13 21:35 .
+drwxr-xr-x 9 jules root  4096 Feb 13 22:04 ..
+drwxrwxr-x 2 jules jules 4096 Feb 13 21:35 workflows
+
+./.github/workflows:
+total 12
+drwxrwxr-x 2 jules jules 4096 Feb 13 21:35 .
+drwxrwxr-x 3 jules jules 4096 Feb 13 21:35 ..
+-rw-rw-r-- 1 jules jules  608 Feb 13 21:35 railway-deploy.yml
+
+./.vscode:
+total 12
+drwxrwxr-x 2 jules jules 4096 Feb 13 21:35 .
+drwxr-xr-x 9 jules root  4096 Feb 13 22:04 ..
+-rw-rw-r-- 1 jules jules  559 Feb 13 21:35 launch.json
+
+./EL-Akeil:
+total 8
+drwxrwxr-x 2 jules jules 4096 Feb 13 21:35 .
+drwxr-xr-x 9 jules root  4096 Feb 13 22:04 ..
+
+./dist:
+total 16
+drwxrwxr-x 4 jules jules 4096 Feb 13 21:35 .
+drwxr-xr-x 9 jules root  4096 Feb 13 22:04 ..
+drwxrwxr-x 2 jules jules 4096 Feb 13 21:35 css
+drwxrwxr-x 2 jules jules 4096 Feb 13 21:35 js
+
+./dist/css:
+total 24
+drwxrwxr-x 2 jules jules  4096 Feb 13 21:35 .
+drwxrwxr-x 4 jules jules  4096 Feb 13 21:35 ..
+-rw-rw-r-- 1 jules jules 13510 Feb 13 21:35 navigation-notifications-heatmap.css
+
+./dist/js:
+total 80
+drwxrwxr-x 2 jules jules  4096 Feb 13 21:35 .
+drwxrwxr-x 4 jules jules  4096 Feb 13 21:35 ..
+-rw-rw-r-- 1 jules jules 17315 Feb 13 21:35 heatmap.js
+-rw-rw-r-- 1 jules jules 18361 Feb 13 21:35 navigation.js
+-rw-rw-r-- 1 jules jules 17285 Feb 13 21:35 notifications.js
+-rw-rw-r-- 1 jules jules  9141 Feb 13 21:35 service-worker.js
+
+./src:
+total 36
+drwxrwxr-x 9 jules jules 4096 Feb 13 21:35 .
+drwxr-xr-x 9 jules root  4096 Feb 13 22:04 ..
+drwxrwxr-x 5 jules jules 4096 Feb 13 21:46 Frontend
+drwxrwxr-x 2 jules jules 4096 Feb 13 21:35 assets
+drwxrwxr-x 4 jules jules 4096 Feb 13 21:46 backend
+drwxrwxr-x 2 jules jules 4096 Feb 13 21:35 beckend
+drwxrwxr-x 2 jules jules 4096 Feb 13 21:35 components
+drwxrwxr-x 3 jules jules 4096 Feb 13 21:35 core
+drwxrwxr-x 2 jules jules 4096 Feb 13 21:35 data
+
+./src/Frontend:
+total 268
+drwxrwxr-x 5 jules jules  4096 Feb 13 21:46 .
+drwxrwxr-x 9 jules jules  4096 Feb 13 21:35 ..
+-rw-rw-r-- 1 jules jules  2681 Feb 13 21:35 admin.html
+-rw-rw-r-- 1 jules jules 12334 Feb 13 21:35 analytics.html
+drwxrwxr-x 6 jules jules  4096 Feb 13 21:35 assets
+-rw-rw-r-- 1 jules jules 12326 Feb 13 21:46 auth.html
+-rw-rw-r-- 1 jules jules  7638 Feb 13 21:35 categories.html
+-rw-rw-r-- 1 jules jules 14787 Feb 13 21:35 category.html
+-rw-rw-r-- 1 jules jules 17674 Feb 13 21:35 checkout.html
+drwxrwxr-x 2 jules jules  4096 Feb 13 21:35 chef
+-rw-rw-r-- 1 jules jules     0 Feb 13 21:35 chef_login.html
+-rw-rw-r-- 1 jules jules 19279 Feb 13 21:35 chef_register.html
+-rw-rw-r-- 1 jules jules 15568 Feb 13 21:35 customer.html
+-rw-rw-r-- 1 jules jules  5237 Feb 13 21:35 driver.html
+-rw-rw-r-- 1 jules jules  5593 Feb 13 21:35 driver_auth.html
+-rw-rw-r-- 1 jules jules  6913 Feb 13 21:35 driver_login.html
+-rw-rw-r-- 1 jules jules 12501 Feb 13 21:35 driver_register.html
+-rw-rw-r-- 1 jules jules 25705 Feb 13 21:44 index.html
+drwxrwxr-x 2 jules jules  4096 Feb 13 21:35 js
+-rw-rw-r-- 1 jules jules 19954 Feb 13 21:35 level.html
+-rw-rw-r-- 1 jules jules 12062 Feb 13 21:35 levels.html
+-rw-rw-r-- 1 jules jules  8171 Feb 13 21:35 listing.html
+-rw-rw-r-- 1 jules jules 21356 Feb 13 21:35 subscriptions.html
+
+./src/Frontend/assets:
+total 6040
+drwxrwxr-x 6 jules jules    4096 Feb 13 21:35 .
+drwxrwxr-x 5 jules jules    4096 Feb 13 21:46 ..
+-rw-rw-r-- 1 jules jules 2846654 Feb 13 21:35 ChatGPT Image Jan 7, 2026, 01_04_56 PM.png
+-rw-rw-r-- 1 jules jules 3188970 Feb 13 21:35 ChatGPT Image Jan 7, 2026, 01_26_10 PM.png
+-rw-rw-r-- 1 jules jules   27904 Feb 13 21:35 El Akil 2.png
+-rw-rw-r-- 1 jules jules   16895 Feb 13 21:35 El Akil.jpg
+-rw-rw-r-- 1 jules jules   36768 Feb 13 21:35 El Akil.png
+-rw-rw-r-- 1 jules jules   36768 Feb 13 21:35 El_Akil.png
+drwxrwxr-x 2 jules jules    4096 Feb 13 21:35 css
+drwxrwxr-x 3 jules jules    4096 Feb 13 21:35 images
+drwxrwxr-x 2 jules jules    4096 Feb 13 21:35 js
+drwxrwxr-x 2 jules jules    4096 Feb 13 21:37 lang
+
+./src/Frontend/assets/css:
+total 44
+drwxrwxr-x 2 jules jules  4096 Feb 13 21:35 .
+drwxrwxr-x 6 jules jules  4096 Feb 13 21:35 ..
+-rw-rw-r-- 1 jules jules 13510 Feb 13 21:35 navigation-notifications-heatmap.css
+-rw-rw-r-- 1 jules jules 18086 Feb 13 21:35 styles.css
+
+./src/Frontend/assets/images:
+total 916
+drwxrwxr-x 3 jules jules   4096 Feb 13 21:35 .
+drwxrwxr-x 6 jules jules   4096 Feb 13 21:35 ..
+drwxrwxr-x 2 jules jules   4096 Feb 13 21:35 img
+-rw-rw-r-- 1 jules jules  29585 Feb 13 21:35 logo.png
+-rw-rw-r-- 1 jules jules  14321 Feb 13 21:35 logo_woman.jpg
+-rw-rw-r-- 1 jules jules 548356 Feb 13 21:35 logo_woman.png
+-rw-rw-r-- 1 jules jules  29585 Feb 13 21:35 splash_final.png
+-rw-rw-r-- 1 jules jules 226212 Feb 13 21:35 splash_logo.jpg
+-rw-rw-r-- 1 jules jules  29585 Feb 13 21:35 splash_logo.png
+-rw-rw-r-- 1 jules jules  29585 Feb 13 21:35 splash_logo_maroon.png
+
+./src/Frontend/assets/images/img:
+total 592
+drwxrwxr-x 2 jules jules   4096 Feb 13 21:35 .
+drwxrwxr-x 3 jules jules   4096 Feb 13 21:35 ..
+-rw-rw-r-- 1 jules jules  29585 Feb 13 21:35 logo.png
+-rw-rw-r-- 1 jules jules  14321 Feb 13 21:35 logo_woman.jpg
+-rw-rw-r-- 1 jules jules 548356 Feb 13 21:35 logo_woman.png
+
+./src/Frontend/assets/js:
+total 52
+drwxrwxr-x 2 jules jules 4096 Feb 13 21:35 .
+drwxrwxr-x 6 jules jules 4096 Feb 13 21:35 ..
+-rw-rw-r-- 1 jules jules 9451 Feb 13 21:35 advanced-map.js
+-rw-rw-r-- 1 jules jules  566 Feb 13 21:35 auth.js
+-rw-rw-r-- 1 jules jules 6391 Feb 13 21:35 chefs-map.js
+-rw-rw-r-- 1 jules jules 3416 Feb 13 21:35 common.js
+-rw-rw-r-- 1 jules jules 3375 Feb 13 21:35 i18n.js
+-rw-rw-r-- 1 jules jules 8988 Feb 13 21:35 main.js
+
+./src/Frontend/assets/lang:
+total 32
+drwxrwxr-x 2 jules jules 4096 Feb 13 21:37 .
+drwxrwxr-x 6 jules jules 4096 Feb 13 21:35 ..
+-rw-rw-r-- 1 jules jules 9909 Feb 13 21:37 ar.json
+-rw-rw-r-- 1 jules jules 8201 Feb 13 21:37 en.json
+
+./src/Frontend/chef:
+total 48
+drwxrwxr-x 2 jules jules  4096 Feb 13 21:35 .
+drwxrwxr-x 5 jules jules  4096 Feb 13 21:46 ..
+-rw-rw-r-- 1 jules jules 10955 Feb 13 21:35 chef.css
+-rw-rw-r-- 1 jules jules 14985 Feb 13 21:35 chef.js
+-rw-rw-r-- 1 jules jules 10462 Feb 13 21:35 dashboard.html
+
+./src/Frontend/js:
+total 80
+drwxrwxr-x 2 jules jules  4096 Feb 13 21:35 .
+drwxrwxr-x 5 jules jules  4096 Feb 13 21:46 ..
+-rw-rw-r-- 1 jules jules 17315 Feb 13 21:35 heatmap.js
+-rw-rw-r-- 1 jules jules 18361 Feb 13 21:35 navigation.js
+-rw-rw-r-- 1 jules jules 17285 Feb 13 21:35 notifications.js
+-rw-rw-r-- 1 jules jules  9141 Feb 13 21:35 service-worker.js
+
+./src/assets:
+total 24
+drwxrwxr-x 2 jules jules  4096 Feb 13 21:35 .
+drwxrwxr-x 9 jules jules  4096 Feb 13 21:35 ..
+-rw-rw-r-- 1 jules jules 13944 Feb 13 21:35 logo_woman.jpg
+
+./src/backend:
+total 104
+drwxrwxr-x 4 jules jules  4096 Feb 13 21:46 .
+drwxrwxr-x 9 jules jules  4096 Feb 13 21:35 ..
+-rw-rw-r-- 1 jules jules     0 Feb 13 21:35 .gitignore
+-rw-rw-r-- 1 jules jules   492 Feb 13 21:35 Untitled-1.txt
+-rw-rw-r-- 1 jules jules     0 Feb 13 21:35 __init__.py
+-rw-rw-r-- 1 jules jules  3168 Feb 13 21:35 app.py
+drwxrwxr-x 2 jules jules  4096 Feb 13 21:35 el-akeil
+-rw-rw-r-- 1 jules jules   375 Feb 13 21:35 manage.py
+-rw-rw-r-- 1 jules jules 19147 Feb 13 21:35 models.py
+-rw-rw-r-- 1 jules jules 14410 Feb 13 21:35 models_enhanced.py
+drwxrwxr-x 3 jules jules  4096 Feb 13 21:46 routes
+-rw-rw-r-- 1 jules jules  3793 Feb 13 21:35 seed_db.py
+-rw-rw-r-- 1 jules jules  4895 Feb 13 21:35 seed_demo_dishes.py
+-rw-rw-r-- 1 jules jules    59 Feb 13 21:35 socket_instance.py
+-rw-rw-r-- 1 jules jules  2555 Feb 13 21:35 sockets.py
+-rw-rw-r-- 1 jules jules 18543 Feb 13 21:35 sockets_enhanced.py
+
+./src/backend/el-akeil:
+total 20
+drwxrwxr-x 2 jules jules 4096 Feb 13 21:35 .
+drwxrwxr-x 4 jules jules 4096 Feb 13 21:46 ..
+-rw-rw-r-- 1 jules jules    0 Feb 13 21:35 init_.py
+-rw-rw-r-- 1 jules jules 1733 Feb 13 21:35 settings.py
+-rw-rw-r-- 1 jules jules  394 Feb 13 21:35 urls.py
+-rw-rw-r-- 1 jules jules  166 Feb 13 21:35 wsgi.py
+
+./src/backend/routes:
+total 76
+drwxrwxr-x 3 jules jules  4096 Feb 13 21:46 .
+drwxrwxr-x 4 jules jules  4096 Feb 13 21:46 ..
+-rw-rw-r-- 1 jules jules     0 Feb 13 21:35 __init__.py
+-rw-rw-r-- 1 jules jules   215 Feb 13 21:35 admin.py
+-rw-rw-r-- 1 jules jules  7961 Feb 13 21:35 auth.py
+-rw-rw-r-- 1 jules jules 11378 Feb 13 21:35 browse.py
+drwxrwxr-x 2 jules jules  4096 Feb 13 21:46 chef
+-rw-rw-r-- 1 jules jules  2160 Feb 13 21:35 chef.py
+-rw-rw-r-- 1 jules jules 11456 Feb 13 21:35 customer.py
+-rw-rw-r-- 1 jules jules  3269 Feb 13 21:35 driver.py
+-rw-rw-r-- 1 jules jules 18488 Feb 13 21:35 navigation_routes.py
+
+./src/backend/routes/chef:
+total 32
+drwxrwxr-x 2 jules jules 4096 Feb 13 21:46 .
+drwxrwxr-x 3 jules jules 4096 Feb 13 21:46 ..
+-rw-rw-r-- 1 jules jules  205 Feb 13 21:35 __init__.py
+-rw-rw-r-- 1 jules jules 4692 Feb 13 21:35 dashboard.py
+-rw-rw-r-- 1 jules jules 7139 Feb 13 21:35 dishes.py
+-rw-rw-r-- 1 jules jules 2499 Feb 13 21:35 reviews.py
+
+./src/beckend:
+total 8
+drwxrwxr-x 2 jules jules 4096 Feb 13 21:35 .
+drwxrwxr-x 9 jules jules 4096 Feb 13 21:35 ..
+-rw-rw-r-- 1 jules jules    0 Feb 13 21:35 .gitignore
+
+./src/components:
+total 12
+drwxrwxr-x 2 jules jules 4096 Feb 13 21:35 .
+drwxrwxr-x 9 jules jules 4096 Feb 13 21:35 ..
+-rw-rw-r-- 1 jules jules 1922 Feb 13 21:35 ChatBox.tsx
+
+./src/core:
+total 40
+drwxrwxr-x 3 jules jules 4096 Feb 13 21:35 .
+drwxrwxr-x 9 jules jules 4096 Feb 13 21:35 ..
+-rw-rw-r-- 1 jules jules  786 Feb 13 21:35 admin.py
+-rw-rw-r-- 1 jules jules  176 Feb 13 21:35 apps.py
+-rw-rw-r-- 1 jules jules    0 Feb 13 21:35 init_.py
+-rw-rw-r-- 1 jules jules 2295 Feb 13 21:35 models.py
+-rw-rw-r-- 1 jules jules 1350 Feb 13 21:35 seriailzers.py
+drwxrwxr-x 3 jules jules 4096 Feb 13 21:35 templates
+-rw-rw-r-- 1 jules jules  903 Feb 13 21:35 urls.py
+-rw-rw-r-- 1 jules jules 5655 Feb 13 21:35 views.py
+
+./src/core/templates:
+total 12
+drwxrwxr-x 3 jules jules 4096 Feb 13 21:35 .
+drwxrwxr-x 3 jules jules 4096 Feb 13 21:35 ..
+drwxrwxr-x 3 jules jules 4096 Feb 13 21:35 core
+
+./src/core/templates/core:
+total 12
+drwxrwxr-x 3 jules jules 4096 Feb 13 21:35 .
+drwxrwxr-x 3 jules jules 4096 Feb 13 21:35 ..
+drwxrwxr-x 2 jules jules 4096 Feb 13 21:35 w
+
+./src/core/templates/core/w:
+total 28
+drwxrwxr-x 2 jules jules 4096 Feb 13 21:35 .
+drwxrwxr-x 3 jules jules 4096 Feb 13 21:35 ..
+-rw-rw-r-- 1 jules jules 1486 Feb 13 21:35 base.html
+-rw-rw-r-- 1 jules jules 1918 Feb 13 21:35 cart.html
+-rw-rw-r-- 1 jules jules  920 Feb 13 21:35 checkout.html
+-rw-rw-r-- 1 jules jules 2023 Feb 13 21:35 home.html
+-rw-rw-r-- 1 jules jules 1007 Feb 13 21:35 product_dteail.html
+
+./src/data:
+total 16
+drwxrwxr-x 2 jules jules 4096 Feb 13 21:35 .
+drwxrwxr-x 9 jules jules 4096 Feb 13 21:35 ..
+-rw-rw-r-- 1 jules jules  220 Feb 13 21:35 .gitignore
+-rw-rw-r-- 1 jules jules  587 Feb 13 21:35 neo4j.gitignore
