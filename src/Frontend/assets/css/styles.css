@@ -889,6 +889,26 @@ select.lang-selector {
     }
 }
 
+/* Accessibility: Focus Visible Styles */
+:focus-visible {
+    outline: 3px solid var(--primary);
+    outline-offset: 2px;
+}
+
+/* Ensure Role Selection Buttons look like cards */
+button.role-option-card {
+    font-family: inherit;
+    width: 100%;
+    color: inherit;
+    -webkit-appearance: none;
+    appearance: none;
+}
+
+button.role-option-card:focus-visible {
+    transform: translateY(-6px);
+    box-shadow: 0 8px 25px rgba(94, 33, 41, 0.15);
+}
+
 @media (max-width: 480px) {
     .hero {
         padding: 6rem 1rem 10rem 1rem;
