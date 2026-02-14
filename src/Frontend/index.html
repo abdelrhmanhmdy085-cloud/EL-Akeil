@@ -205,7 +205,7 @@
       <!-- <img src="assets/images/logo.png" class="nav-logo-img logo" alt="El Akil" onerror="this.style.display='none'"> -->
       <span>El Akeil</span>
     </a>
-    <div class="nav-controls actions" id="langControls">
+    <div class="nav-controls actions">
       <div id="notiContainer" style="position:relative; margin-right:15px; cursor:pointer;" class="hidden" role="button" tabindex="0" aria-label="Notifications">
         <span style="font-size:1.5rem;">🔔</span>
         <span id="notiBadge"
@@ -214,6 +214,7 @@
           style="position:absolute; top:30px; right:0; background:var(--bg-card); border:1px solid var(--border); width:250px; display:none; flex-direction:column; z-index:1000;">
         </div>
       </div>
+      <div id="langControls"></div>
       <a href="auth.html" class="btn btn-order" data-i18n="nav_login">Login / Register</a>
     </div>
   </nav>
@@ -306,14 +307,14 @@
 
       <div class="role-selection-grid">
         <!-- Chef Option -->
-        <button type="button" class="role-option-card" onclick="selectRole('chef')" data-i18n-aria="join_as_chef" aria-label="Join as Chef">
+        <button type="button" class="role-option-card" onclick="selectRole('chef')" aria-label="Join as Chef">
           <div class="role-option-icon">👨‍🍳</div>
           <h3 data-i18n="join_as_chef">انضم كشيف</h3>
           <p data-i18n="join_chef_desc">بيع أكلك البيتي بسهولة</p>
         </button>
 
         <!-- Driver Option -->
-        <button type="button" class="role-option-card" onclick="selectRole('driver')" data-i18n-aria="join_as_driver" aria-label="Join as Driver">
+        <button type="button" class="role-option-card" onclick="selectRole('driver')" aria-label="Join as Driver">
           <div class="role-option-icon">🛵</div>
           <h3 data-i18n="join_as_driver">انضم كطيار</h3>
           <p data-i18n="join_driver_desc">وصل الطلبات وزود دخلك</p>
@@ -527,7 +528,7 @@
       document.querySelectorAll('.category-filter-btn').forEach(btn => {
         btn.classList.remove('active');
       });
-      
+
       if (buttonElement) {
         buttonElement.classList.add('active');
       } else {

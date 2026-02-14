@@ -212,7 +212,7 @@ select.lang-selector {
 
 /* ... search box styles same as above ... */
 
-/* Color Fix for Wave: 
+/* Color Fix for Wave:
    The wave is WHITE. So the element BELOW the hero must be WHITE.
    Currently body is Pink.
    I will wrap the main content in a white container or style body differently.
