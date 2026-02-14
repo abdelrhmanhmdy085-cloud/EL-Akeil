@@ -212,7 +212,7 @@ select.lang-selector {
 
 /* ... search box styles same as above ... */
 
-/* Color Fix for Wave: 
+/* Color Fix for Wave:
    The wave is WHITE. So the element BELOW the hero must be WHITE.
    Currently body is Pink.
    I will wrap the main content in a white container or style body differently.
@@ -887,6 +887,26 @@ select.lang-selector {
     .role-selection-grid {
         grid-template-columns: 1fr;
     }
+}
+
+/* Accessibility: Focus Visible Styles */
+:focus-visible {
+    outline: 3px solid var(--primary);
+    outline-offset: 2px;
+}
+
+/* Ensure Role Selection Buttons look like cards */
+button.role-option-card {
+    font-family: inherit;
+    width: 100%;
+    color: inherit;
+    -webkit-appearance: none;
+    appearance: none;
+}
+
+button.role-option-card:focus-visible {
+    transform: translateY(-6px);
+    box-shadow: 0 8px 25px rgba(94, 33, 41, 0.15);
 }
 
 @media (max-width: 480px) {
