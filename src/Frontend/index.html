@@ -206,7 +206,7 @@
       <span>El Akeil</span>
     </a>
     <div class="nav-controls actions" id="langControls">
-      <div id="notiContainer" style="position:relative; margin-right:15px; cursor:pointer;" class="hidden">
+      <div id="notiContainer" style="position:relative; margin-right:15px; cursor:pointer;" class="hidden" role="button" tabindex="0" data-i18n-aria-label="notifications">
         <span style="font-size:1.5rem;">🔔</span>
         <span id="notiBadge"
           style="position:absolute; top:-5px; right:-5px; background:red; color:white; border-radius:50%; font-size:0.7rem; padding:2px 5px; display:none;">0</span>
@@ -301,23 +301,23 @@
   <!-- JOIN COMPANY MODAL -->
   <div id="joinCompanyModal" class="modal hidden">
     <div class="modal-content join-modal">
-      <span class="modal-close" onclick="closeJoinModal()">✕</span>
+      <button type="button" class="modal-close" onclick="closeJoinModal()" data-i18n-aria-label="close">✕</button>
       <h2 data-i18n="select_role">اختر دورك</h2>
 
       <div class="role-selection-grid">
         <!-- Chef Option -->
-        <div class="role-option-card" onclick="selectRole('chef')">
+        <button type="button" class="role-option-card" onclick="selectRole('chef')">
           <div class="role-option-icon">👨‍🍳</div>
           <h3 data-i18n="join_as_chef">انضم كشيف</h3>
           <p data-i18n="join_chef_desc">بيع أكلك البيتي بسهولة</p>
-        </div>
+        </button>
 
         <!-- Driver Option -->
-        <div class="role-option-card" onclick="selectRole('driver')">
+        <button type="button" class="role-option-card" onclick="selectRole('driver')">
           <div class="role-option-icon">🛵</div>
           <h3 data-i18n="join_as_driver">انضم كطيار</h3>
           <p data-i18n="join_driver_desc">وصل الطلبات وزود دخلك</p>
-        </div>
+        </button>
       </div>
     </div>
   </div>
