@@ -41,6 +41,11 @@ body.rtl {
     font-family: var(--font-ar);
 }
 
+:focus-visible {
+    outline: 3px solid var(--primary);
+    outline-offset: 2px;
+}
+
 /* Navbar */
 .navbar {
     position: sticky;
@@ -717,6 +722,13 @@ select.lang-selector {
     cursor: pointer;
     color: var(--text-secondary);
     transition: color 0.2s;
+    background: none;
+    border: none;
+    padding: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1;
 }
 
 .modal-close:hover {
@@ -738,6 +750,8 @@ select.lang-selector {
     text-align: center;
     cursor: pointer;
     transition: all 0.3s;
+    width: 100%;
+    font-family: inherit;
 }
 
 .role-option-card:hover {

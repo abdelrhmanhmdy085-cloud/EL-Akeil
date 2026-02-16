@@ -90,13 +90,19 @@ window.addEventListener('load', () => {
     const cont = document.getElementById('notiContainer');
     const drop = document.getElementById('notiDropdown');
     if (cont && drop) {
-        cont.onclick = (e) => {
+        cont.addEventListener('click', (e) => {
             // reset badge
             document.getElementById('notiBadge').innerText = '0';
             document.getElementById('notiBadge').style.display = 'none';
             drop.style.display = drop.style.display === 'none' ? 'flex' : 'none';
             e.stopPropagation();
-        }
+        });
+        cont.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                cont.click();
+            }
+        });
         document.addEventListener('click', () => {
             drop.style.display = 'none';
         });
