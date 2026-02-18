@@ -178,7 +178,11 @@
     "loading_plan": "Loading...",
     "no_plan_selected": "No plan selected. Redirecting...",
     "processing": "Processing your order...",
-    "success_message": "âœ… Your subscription has been activated successfully! Redirecting...",
+    "success_message": "✅ Your subscription has been activated successfully! Redirecting...",
     "error_message": "An error occurred while processing your order",
-    "choose_delivery_time": "Choose Delivery Time"
+    "choose_delivery_time": "Choose Delivery Time",
+    "aria_label_notifications": "Notifications",
+    "aria_label_close": "Close Modal",
+    "aria_label_join_chef": "Join as Chef",
+    "aria_label_join_driver": "Join as Delivery Driver"
 }
