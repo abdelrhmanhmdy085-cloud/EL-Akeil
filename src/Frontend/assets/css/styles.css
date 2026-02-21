@@ -24,6 +24,11 @@
     padding: 0;
 }
 
+*:focus-visible {
+    outline: 3px solid var(--primary);
+    outline-offset: 2px;
+}
+
 body {
     margin: 0;
     font-family: 'Cairo', 'Inter', sans-serif;
@@ -717,6 +722,9 @@ select.lang-selector {
     cursor: pointer;
     color: var(--text-secondary);
     transition: color 0.2s;
+    background: none;
+    border: none;
+    padding: 0;
 }
 
 .modal-close:hover {
@@ -738,6 +746,10 @@ select.lang-selector {
     text-align: center;
     cursor: pointer;
     transition: all 0.3s;
+    font-family: inherit;
+    font-size: inherit;
+    color: inherit;
+    width: 100%;
 }
 
 .role-option-card:hover {
