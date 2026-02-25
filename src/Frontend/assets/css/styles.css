@@ -761,18 +761,21 @@ select.lang-selector {
 }
 
 .role-option-icon {
+    display: block;
     font-size: 3rem;
     margin-bottom: 1rem;
 }
 
-.role-option-card h3 {
+.role-option-title {
+    display: block;
     font-size: 1.3rem;
     font-weight: 800;
     color: var(--text-primary);
     margin-bottom: 0.5rem;
 }
 
-.role-option-card p {
+.role-option-desc {
+    display: block;
     font-size: 0.95rem;
     color: var(--text-secondary);
 }
