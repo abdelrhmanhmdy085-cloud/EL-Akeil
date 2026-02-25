@@ -24,6 +24,11 @@
     padding: 0;
 }
 
+*:focus-visible {
+    outline: 3px solid var(--primary);
+    outline-offset: 2px;
+}
+
 body {
     margin: 0;
     font-family: 'Cairo', 'Inter', sans-serif;
@@ -236,6 +241,8 @@ select.lang-selector {
     transition: all 0.3s ease;
     border: 1px solid var(--primary);
     color: var(--text-primary);
+    font-family: inherit;
+    line-height: 1;
 }
 
 .lang-toggle-btn:hover {
@@ -717,6 +724,10 @@ select.lang-selector {
     cursor: pointer;
     color: var(--text-secondary);
     transition: color 0.2s;
+    background: none;
+    border: none;
+    padding: 0.5rem;
+    line-height: 1;
 }
 
 .modal-close:hover {
@@ -738,6 +749,8 @@ select.lang-selector {
     text-align: center;
     cursor: pointer;
     transition: all 0.3s;
+    font-family: inherit;
+    width: 100%;
 }
 
 .role-option-card:hover {
@@ -748,18 +761,21 @@ select.lang-selector {
 }
 
 .role-option-icon {
+    display: block;
     font-size: 3rem;
     margin-bottom: 1rem;
 }
 
-.role-option-card h3 {
+.role-option-title {
+    display: block;
     font-size: 1.3rem;
     font-weight: 800;
     color: var(--text-primary);
     margin-bottom: 0.5rem;
 }
 
-.role-option-card p {
+.role-option-desc {
+    display: block;
     font-size: 0.95rem;
     color: var(--text-secondary);
 }
