@@ -71,7 +71,7 @@ function initLanguage() {
 
     const nav = document.getElementById('langControls');
     if (nav) {
-        // Use prepend to avoid overwriting other elements like notifications
+        // Use prepend to avoid overwriting other elements like notifications or login
         const toggleBtn = document.createElement('button');
         toggleBtn.className = 'lang-toggle-btn';
         toggleBtn.setAttribute('onclick', 'toggleLanguage()');
