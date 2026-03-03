@@ -1,0 +1,3 @@
+## 2025-05-15 - [Semantic Navigation and Injection Safety]
+**Learning:** Found a common pattern of using `div` elements with `onclick` handlers for interactive navigation components (language toggle, notifications). This breaks keyboard accessibility. Additionally, found that `initLanguage` was using `innerHTML` to inject the toggle, which unintentionally wiped out existing siblings (like the Login button) in the `#langControls` container.
+**Action:** Always use semantic `<button>` elements for interactive components. When injecting elements dynamically, use `prepend()` or `append()` instead of `innerHTML` to preserve existing DOM elements. Add `data-i18n-aria-label` support to ensure icon-only buttons remain accessible across all supported languages.
