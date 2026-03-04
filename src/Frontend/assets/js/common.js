@@ -51,7 +51,7 @@ function initSocket() {
 function showNotification(msg) {
     // Update Badge
     const badge = document.getElementById('notiBadge');
-    const container = document.getElementById('notiContainer');
+    const container = document.getElementById('notiWrapper') || document.getElementById('notiContainer');
     if (badge && container) {
         container.classList.remove('hidden');
         badge.style.display = 'block';
