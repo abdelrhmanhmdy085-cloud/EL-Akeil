@@ -1,0 +1,3 @@
+## 2025-05-14 - [Preserving Peer Elements in i18n initialization]
+**Learning:** When a script dynamically injects UI elements into a container that might already contain other interactive components (like a notification badge), using `innerHTML` to set the container's content can inadvertently remove those peers. This is especially critical in localized apps where initialization order might vary.
+**Action:** Use `prepend` or `append` with `document.createElement` instead of `innerHTML` when adding localized controls to shared containers (e.g., `#langControls`) to ensure that elements like notification wrappers are preserved.
