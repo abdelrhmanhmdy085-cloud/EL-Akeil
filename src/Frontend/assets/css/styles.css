@@ -236,6 +236,13 @@ select.lang-selector {
     transition: all 0.3s ease;
     border: 1px solid var(--primary);
     color: var(--text-primary);
+    font-family: inherit;
+}
+
+button.lang-toggle-btn {
+    background: rgba(94, 33, 41, 0.1);
+    padding: 8px 12px;
+    border: 1px solid var(--primary);
 }
 
 .lang-toggle-btn:hover {

@@ -1,6 +1,8 @@
 {
     "dir": "ltr",
     "nav_login": "Login / Register",
+    "aria_label_lang_toggle": "Change Language",
+    "aria_label_notifications": "Notifications",
     "portal_title": "El Akil - Portal",
     "hero_title": "Home-cooked meals to your door",
     "hero_subtitle": "Order from the best chefs nearby",
