@@ -1,6 +1,9 @@
 {
     "dir": "rtl",
     "nav_login": "دخول / تسجيل",
+    "aria_label_lang_toggle": "تغيير اللغة إلى الإنجليزية",
+    "title_lang_toggle": "تغيير اللغة إلى الإنجليزية",
+    "aria_label_whatsapp": "تواصل معنا عبر واتساب",
     "portal_title": "الأكيل - El Akil",
     "hero_title": "أكل بيتي مضمون لحد باب بيتك",
     "hero_subtitle": "اطلب الآن من أفضل الشيفات في منطقتك",
