@@ -135,6 +135,8 @@
     "back_to_home": "العودة للرئيسية",
     "egp": "جنيه",
     "checkout_title": "الدفع - الأكيل",
+    "lang_toggle_title": "تبديل اللغة",
+    "aria_label_lang_toggle": "تبديل اللغة",
     "back_to_plans": "العودة للخطط",
     "back_to_plan_selection": "← العودة لاختيار الخطة",
     "complete_subscription": "✅ إتمام الاشتراك",
