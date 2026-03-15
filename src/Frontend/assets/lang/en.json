@@ -140,6 +140,8 @@
     "back_to_home": "Back to Home",
     "egp": "EGP",
     "checkout_title": "Checkout - El Akeil",
+    "lang_toggle_title": "Switch Language",
+    "aria_label_lang_toggle": "Switch Language",
     "back_to_plans": "Back to Plans",
     "back_to_plan_selection": "â† Back to Plan Selection",
     "complete_subscription": "âœ… Complete Your Subscription",

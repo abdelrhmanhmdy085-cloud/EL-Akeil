@@ -236,12 +236,19 @@ select.lang-selector {
     transition: all 0.3s ease;
     border: 1px solid var(--primary);
     color: var(--text-primary);
+    font-family: inherit;
+    line-height: inherit;
 }
 
 .lang-toggle-btn:hover {
     background: var(--primary);
     color: white;
     transform: scale(1.05);
+}
+
+.lang-toggle-btn:focus-visible {
+    outline: 2px solid var(--primary);
+    outline-offset: 2px;
 }
 
 #lang-label {
