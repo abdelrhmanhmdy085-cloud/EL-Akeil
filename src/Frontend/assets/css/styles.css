@@ -236,6 +236,7 @@ select.lang-selector {
     transition: all 0.3s ease;
     border: 1px solid var(--primary);
     color: var(--text-primary);
+    font-family: inherit;
 }
 
 .lang-toggle-btn:hover {
