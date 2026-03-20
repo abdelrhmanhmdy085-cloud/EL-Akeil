@@ -206,10 +206,12 @@
       <span>El Akeil</span>
     </a>
     <div class="nav-controls actions" id="langControls">
-      <div id="notiContainer" style="position:relative; margin-right:15px; cursor:pointer;" class="hidden">
-        <span style="font-size:1.5rem;">🔔</span>
-        <span id="notiBadge"
-          style="position:absolute; top:-5px; right:-5px; background:red; color:white; border-radius:50%; font-size:0.7rem; padding:2px 5px; display:none;">0</span>
+      <div id="notiWrapper" style="position:relative; margin-right:15px;" class="hidden">
+        <button id="notiContainer" style="background:transparent; border:none; cursor:pointer; padding:0;" data-i18n-aria-label="aria_label_notifications" aria-label="Notifications">
+          <span style="font-size:1.5rem;" aria-hidden="true">🔔</span>
+          <span id="notiBadge"
+            style="position:absolute; top:-5px; right:-5px; background:red; color:white; border-radius:50%; font-size:0.7rem; padding:2px 5px; display:none;">0</span>
+        </button>
         <div id="notiDropdown"
           style="position:absolute; top:30px; right:0; background:var(--bg-card); border:1px solid var(--border); width:250px; display:none; flex-direction:column; z-index:1000;">
         </div>
@@ -225,9 +227,11 @@
         اطلب الآن من أفضل الشيفات في منطقتك</p>
 
       <div class="search-box-container">
-        <button class="search-btn">ابحث</button>
-        <input type="text" class="search-input" placeholder="ابحث عن منطقة، شارع، معلم معروف...">
-        <div class="location-icon">📍</div>
+        <button class="search-btn" data-i18n="search_btn">ابحث</button>
+        <input type="text" class="search-input" placeholder="ابحث عن منطقة، شارع، معلم معروف..." data-i18n-placeholder="search_placeholder">
+        <button id="locateBtn" class="location-icon" data-i18n-aria-label="aria_label_locate_me" aria-label="Locate me">
+          <span aria-hidden="true">📍</span>
+        </button>
       </div>
 
       <!-- Category Filter Buttons -->

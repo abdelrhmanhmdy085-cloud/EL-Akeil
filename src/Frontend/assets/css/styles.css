@@ -150,6 +150,23 @@ select.lang-selector {
     gap: 1.5rem;
 }
 
+/* Focus Visible Styles for Keyboard Navigation */
+:focus-visible {
+    outline: 3px solid var(--primary);
+    outline-offset: 2px;
+}
+
+/* Specific resets for converted elements */
+button.location-icon,
+button.lang-toggle-btn,
+button#notiContainer {
+    font-family: inherit;
+    background: transparent;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+}
+
 /* Buttons & Inputs */
 .btn {
     background: var(--primary);
@@ -232,10 +249,11 @@ select.lang-selector {
     gap: 5px;
     padding: 8px 12px;
     border-radius: 20px;
-    background: rgba(94, 33, 41, 0.1);
+    background: rgba(94, 33, 41, 0.1) !important; /* Override button reset */
     transition: all 0.3s ease;
-    border: 1px solid var(--primary);
+    border: 1px solid var(--primary) !important; /* Override button reset */
     color: var(--text-primary);
+    font-family: inherit;
 }
 
 .lang-toggle-btn:hover {
