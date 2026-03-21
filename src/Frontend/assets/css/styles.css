@@ -236,12 +236,18 @@ select.lang-selector {
     transition: all 0.3s ease;
     border: 1px solid var(--primary);
     color: var(--text-primary);
+    font-family: inherit;
 }
 
 .lang-toggle-btn:hover {
     background: var(--primary);
     color: white;
     transform: scale(1.05);
+}
+
+.lang-toggle-btn:focus-visible {
+    outline: 3px solid var(--primary);
+    outline-offset: 2px;
 }
 
 #lang-label {
@@ -306,10 +312,33 @@ select.lang-selector {
     background: var(--primary-hover);
 }
 
+.search-btn:focus-visible {
+    outline: 3px solid var(--primary);
+    outline-offset: 2px;
+}
+
 .location-icon {
     padding: 0 15px;
     font-size: 1.2rem;
     color: var(--text-secondary);
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.2s;
+}
+
+.location-icon:hover {
+    transform: scale(1.2);
+    color: var(--primary);
+}
+
+.location-icon:focus-visible {
+    outline: 3px solid var(--primary);
+    outline-offset: 2px;
 }
 
 /* Wave Separator */
@@ -643,6 +672,11 @@ select.lang-selector {
     background: #FF8533;
     transform: translateY(-3px);
     box-shadow: 0 10px 30px rgba(255, 90, 0, 0.4);
+}
+
+.category-filter-btn:focus-visible {
+    outline: 3px solid #FF5A00;
+    outline-offset: 2px;
 }
 
 /* ============================================ */
