@@ -41,6 +41,11 @@ body.rtl {
     font-family: var(--font-ar);
 }
 
+:focus-visible {
+    outline: 3px solid var(--primary);
+    outline-offset: 2px;
+}
+
 /* Navbar */
 .navbar {
     position: sticky;
@@ -310,6 +315,19 @@ select.lang-selector {
     padding: 0 15px;
     font-size: 1.2rem;
     color: var(--text-secondary);
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    font-family: inherit;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.2s;
+}
+
+.location-icon:hover {
+    transform: scale(1.1);
+    color: var(--primary);
 }
 
 /* Wave Separator */
