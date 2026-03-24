@@ -225,9 +225,9 @@
         اطلب الآن من أفضل الشيفات في منطقتك</p>
 
       <div class="search-box-container">
-        <button class="search-btn">ابحث</button>
-        <input type="text" class="search-input" placeholder="ابحث عن منطقة، شارع، معلم معروف...">
-        <div class="location-icon">📍</div>
+        <button type="button" class="search-btn" data-i18n="search_btn">ابحث</button>
+        <input type="text" class="search-input" data-i18n-placeholder="search_placeholder" placeholder="ابحث عن منطقة، شارع، معلم معروف...">
+        <button type="button" id="locateBtn" class="location-icon" data-i18n-aria-label="aria_label_locate_btn" data-i18n-title="aria_label_locate_btn">📍</button>
       </div>
 
       <!-- Category Filter Buttons -->
@@ -354,11 +354,7 @@
     // Map Modal Logic
     let pickerMap;
     const modal = document.getElementById('locationModal');
-    const locateBtn = document.getElementById('locateBtn');
-
-    if (locateBtn) {
-      locateBtn.addEventListener('click', openLocationModal);
-    }
+    // We get locateBtn later in the script or use event delegation
 
     function openLocationModal() {
       modal.classList.remove('hidden');
@@ -567,6 +563,12 @@
         modal.addEventListener('click', (e) => {
           if (e.target === modal) closeJoinModal();
         });
+      }
+
+      // Re-bind locateBtn after DOM is ready
+      const locateBtn = document.getElementById('locateBtn');
+      if (locateBtn) {
+        locateBtn.addEventListener('click', openLocationModal);
       }
     });
 
