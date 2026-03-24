@@ -236,6 +236,7 @@ select.lang-selector {
     transition: all 0.3s ease;
     border: 1px solid var(--primary);
     color: var(--text-primary);
+    font-family: inherit;
 }
 
 .lang-toggle-btn:hover {
@@ -310,6 +311,27 @@ select.lang-selector {
     padding: 0 15px;
     font-size: 1.2rem;
     color: var(--text-secondary);
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.2s;
+}
+
+.location-icon:hover {
+    transform: scale(1.15);
+    color: var(--primary);
+}
+
+.location-icon:focus-visible,
+.lang-toggle-btn:focus-visible,
+.search-btn:focus-visible,
+.category-filter-btn:focus-visible {
+    outline: 3px solid var(--primary);
+    outline-offset: 2px;
 }
 
 /* Wave Separator */
