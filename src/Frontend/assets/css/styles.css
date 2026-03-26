@@ -210,58 +210,6 @@ select.lang-selector {
     overflow: hidden;
 }
 
-/* ... search box styles same as above ... */
-
-/* Color Fix for Wave: 
-   The wave is WHITE. So the element BELOW the hero must be WHITE.
-   Currently body is Pink.
-   I will wrap the main content in a white container or style body differently.
-*/
-.bg-white-section {
-    background-color: #FFFFFF;
-    min-height: 50vh;
-    padding-top: 2rem;
-}
-
-/* Language Toggle Icon */
-.lang-toggle-btn {
-    cursor: pointer;
-    font-size: 1.5rem;
-    display: flex;
-    align-items: center;
-    gap: 5px;
-    padding: 8px 12px;
-    border-radius: 20px;
-    background: rgba(94, 33, 41, 0.1);
-    transition: all 0.3s ease;
-    border: 1px solid var(--primary);
-    color: var(--text-primary);
-}
-
-.lang-toggle-btn:hover {
-    background: var(--primary);
-    color: white;
-    transform: scale(1.05);
-}
-
-#lang-label {
-    font-size: 0.9rem;
-    font-weight: bold;
-}
-
-/* Landing Page Refactor (Talabat Style) */
-
-/* Hero Section */
-.hero {
-    position: relative;
-    text-align: center;
-    padding: 8rem 2rem 12rem 2rem;
-    /* Extra padding bottom for wave */
-    background: var(--bg-dark);
-    /* Pink */
-    color: var(--text-primary);
-}
-
 /* Custom Search Box container */
 .search-box-container {
     background: #fff;
@@ -310,6 +258,45 @@ select.lang-selector {
     padding: 0 15px;
     font-size: 1.2rem;
     color: var(--text-secondary);
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    transition: transform 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.location-icon:hover {
+    transform: scale(1.2);
+    color: var(--primary);
+}
+
+/* Language Toggle Icon */
+.lang-toggle-btn {
+    cursor: pointer;
+    font-size: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    padding: 8px 12px;
+    border-radius: 20px;
+    background: rgba(94, 33, 41, 0.1);
+    transition: all 0.3s ease;
+    border: 1px solid var(--primary);
+    color: var(--text-primary);
+    font-family: inherit;
+}
+
+.lang-toggle-btn:hover {
+    background: var(--primary);
+    color: white;
+    transform: scale(1.05);
+}
+
+#lang-label {
+    font-size: 0.9rem;
+    font-weight: bold;
 }
 
 /* Wave Separator */
@@ -386,6 +373,12 @@ select.lang-selector {
 }
 
 /* Ensure Main Content background is white to match wave bottom */
+.bg-white-section {
+    background-color: #FFFFFF;
+    min-height: 50vh;
+    padding-top: 2rem;
+}
+
 .main-content {
     background: transparent;
 }
