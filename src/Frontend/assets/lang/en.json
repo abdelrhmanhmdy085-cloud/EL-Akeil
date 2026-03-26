@@ -180,5 +180,11 @@
     "processing": "Processing your order...",
     "success_message": "âœ… Your subscription has been activated successfully! Redirecting...",
     "error_message": "An error occurred while processing your order",
-    "choose_delivery_time": "Choose Delivery Time"
+    "choose_delivery_time": "Choose Delivery Time",
+    "title_lang_toggle": "Switch Language",
+    "aria_label_lang_toggle": "Switch between Arabic and English",
+    "title_locate_me": "Locate Me",
+    "aria_label_locate_me": "Use your current location to find nearby chefs",
+    "title_whatsapp": "Contact us on WhatsApp",
+    "aria_label_whatsapp": "Open WhatsApp chat with El Akeil support"
 }
