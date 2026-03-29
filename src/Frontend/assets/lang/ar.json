@@ -1,6 +1,10 @@
 {
     "dir": "rtl",
     "nav_login": "دخول / تسجيل",
+    "aria_label_lang_toggle": "تغيير اللغة",
+    "title_lang_toggle": "تغيير اللغة",
+    "aria_label_locate": "حدد موقعي على الخريطة",
+    "title_locate": "اختر عنوان التوصيل",
     "portal_title": "الأكيل - El Akil",
     "hero_title": "أكل بيتي مضمون لحد باب بيتك",
     "hero_subtitle": "اطلب الآن من أفضل الشيفات في منطقتك",
