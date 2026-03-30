@@ -6,6 +6,8 @@
     "hero_subtitle": "Order from the best chefs nearby",
     "search_placeholder": "Search for food or chef...",
     "search_btn": "Search",
+    "aria_label_location": "Use current location",
+    "title_location": "Use current location",
     "categories": "Categories",
     "footer_text": "All rights reserved to El Akeil 2026",
     "eat_title": "I want to Eat",
