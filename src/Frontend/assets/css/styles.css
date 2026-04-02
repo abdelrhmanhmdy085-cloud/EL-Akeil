@@ -24,6 +24,11 @@
     padding: 0;
 }
 
+:focus-visible {
+    outline: 3px solid var(--primary);
+    outline-offset: 2px;
+}
+
 body {
     margin: 0;
     font-family: 'Cairo', 'Inter', sans-serif;
@@ -236,6 +241,7 @@ select.lang-selector {
     transition: all 0.3s ease;
     border: 1px solid var(--primary);
     color: var(--text-primary);
+    font-family: inherit;
 }
 
 .lang-toggle-btn:hover {
@@ -310,6 +316,10 @@ select.lang-selector {
     padding: 0 15px;
     font-size: 1.2rem;
     color: var(--text-secondary);
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    font-family: inherit;
 }
 
 /* Wave Separator */
