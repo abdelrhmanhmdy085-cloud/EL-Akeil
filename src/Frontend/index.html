@@ -201,12 +201,12 @@
   </script>
 
   <nav class="navbar">
-    <a href="index.html" class="nav-brand logo-area">
+    <a href="index.html" class="nav-brand logo-area" data-i18n-aria-label="aria_label_home_link">
       <!-- <img src="assets/images/logo.png" class="nav-logo-img logo" alt="El Akil" onerror="this.style.display='none'"> -->
       <span>El Akeil</span>
     </a>
     <div class="nav-controls actions" id="langControls">
-      <div id="notiContainer" style="position:relative; margin-right:15px; cursor:pointer;" class="hidden">
+      <div id="notiContainer" style="position:relative; margin-right:15px; cursor:pointer;" class="hidden" role="button" tabindex="0" data-i18n-aria-label="aria_label_notifications">
         <span style="font-size:1.5rem;">🔔</span>
         <span id="notiBadge"
           style="position:absolute; top:-5px; right:-5px; background:red; color:white; border-radius:50%; font-size:0.7rem; padding:2px 5px; display:none;">0</span>
@@ -227,7 +227,7 @@
       <div class="search-box-container">
         <button class="search-btn">ابحث</button>
         <input type="text" class="search-input" placeholder="ابحث عن منطقة، شارع، معلم معروف...">
-        <div class="location-icon">📍</div>
+        <button type="button" class="location-icon" id="locateBtn" data-i18n-aria-label="aria_label_location_btn" data-i18n-title="location_btn_tooltip">📍</button>
       </div>
 
       <!-- Category Filter Buttons -->
