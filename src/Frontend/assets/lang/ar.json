@@ -175,5 +175,11 @@
     "processing": "جاري معالجة طلبك...",
     "success_message": "✅ تم تفعيل اشتراكك بنجاح! سيتم إعادة توجيهك قريبا...",
     "error_message": "حدث خطأ أثناء معالجة طلبك",
-    "choose_delivery_time": "اختر وقت التوصيل"
+    "choose_delivery_time": "اختر وقت التوصيل",
+    "aria_label_lang_toggle": "تغيير اللغة",
+    "lang_switch_tooltip": "التبديل بين العربية والإنجليزية",
+    "aria_label_location_btn": "تحديد موقع التوصيل",
+    "location_btn_tooltip": "اضغط لتحديد موقعك على الخريطة",
+    "aria_label_home_link": "الرئيسية - الأكيل",
+    "aria_label_notifications": "التنبيهات"
 }
