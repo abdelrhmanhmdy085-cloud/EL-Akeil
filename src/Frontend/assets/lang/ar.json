@@ -175,5 +175,13 @@
     "processing": "جاري معالجة طلبك...",
     "success_message": "✅ تم تفعيل اشتراكك بنجاح! سيتم إعادة توجيهك قريبا...",
     "error_message": "حدث خطأ أثناء معالجة طلبك",
-    "choose_delivery_time": "اختر وقت التوصيل"
+    "choose_delivery_time": "اختر وقت التوصيل",
+    "tooltip_lang_toggle": "تغيير اللغة",
+    "aria_label_lang_toggle": "تغيير اللغة",
+    "aria_label_notifications": "التنبيهات",
+    "tooltip_notifications": "عرض التنبيهات",
+    "aria_label_locate": "حدد موقعي",
+    "tooltip_locate": "تحديد موقع التوصيل",
+    "tooltip_whatsapp": "تواصل معنا عبر واتساب",
+    "aria_label_whatsapp": "واتساب"
 }

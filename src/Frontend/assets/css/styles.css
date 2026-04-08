@@ -24,6 +24,11 @@
     padding: 0;
 }
 
+*:focus-visible {
+    outline: 3px solid var(--primary);
+    outline-offset: 2px;
+}
+
 body {
     margin: 0;
     font-family: 'Cairo', 'Inter', sans-serif;
@@ -236,6 +241,8 @@ select.lang-selector {
     transition: all 0.3s ease;
     border: 1px solid var(--primary);
     color: var(--text-primary);
+    font-family: inherit;
+    line-height: normal;
 }
 
 .lang-toggle-btn:hover {
@@ -247,6 +254,23 @@ select.lang-selector {
 #lang-label {
     font-size: 0.9rem;
     font-weight: bold;
+}
+
+#notiContainer {
+    background: none;
+    border: none;
+    padding: 0;
+    margin: 0;
+    font-family: inherit;
+    color: inherit;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.2s;
+}
+
+#notiContainer:hover {
+    transform: scale(1.1);
 }
 
 /* Landing Page Refactor (Talabat Style) */
@@ -310,6 +334,18 @@ select.lang-selector {
     padding: 0 15px;
     font-size: 1.2rem;
     color: var(--text-secondary);
+    background: none;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.2s;
+}
+
+.location-icon:hover {
+    transform: scale(1.2);
+    color: var(--primary);
 }
 
 /* Wave Separator */
