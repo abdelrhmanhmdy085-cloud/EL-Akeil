@@ -24,6 +24,20 @@
     padding: 0;
 }
 
+:focus-visible {
+    outline: 3px solid var(--primary);
+    outline-offset: 2px;
+}
+
+button {
+    font-family: inherit;
+    border: none;
+    background: none;
+    padding: 0;
+    cursor: pointer;
+    line-height: normal;
+}
+
 body {
     margin: 0;
     font-family: 'Cairo', 'Inter', sans-serif;
