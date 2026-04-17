@@ -41,6 +41,12 @@ body.rtl {
     font-family: var(--font-ar);
 }
 
+/* Accessibility */
+:focus-visible {
+    outline: 3px solid var(--primary);
+    outline-offset: 2px;
+}
+
 /* Navbar */
 .navbar {
     position: sticky;
@@ -236,6 +242,8 @@ select.lang-selector {
     transition: all 0.3s ease;
     border: 1px solid var(--primary);
     color: var(--text-primary);
+    font-family: inherit;
+    line-height: normal;
 }
 
 .lang-toggle-btn:hover {
@@ -310,6 +318,18 @@ select.lang-selector {
     padding: 0 15px;
     font-size: 1.2rem;
     color: var(--text-secondary);
+    background: none;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.2s;
+}
+
+.location-icon:hover {
+    transform: scale(1.2);
+    color: var(--primary);
 }
 
 /* Wave Separator */
