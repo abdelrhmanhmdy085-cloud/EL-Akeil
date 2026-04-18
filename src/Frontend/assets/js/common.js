@@ -52,8 +52,11 @@ function showNotification(msg) {
     // Update Badge
     const badge = document.getElementById('notiBadge');
     const container = document.getElementById('notiContainer');
+    const wrapper = document.getElementById('notiWrapper');
     if (badge && container) {
-        container.classList.remove('hidden');
+        if (wrapper) wrapper.classList.remove('hidden');
+        else container.classList.remove('hidden');
+
         badge.style.display = 'block';
         let count = parseInt(badge.innerText) || 0;
         badge.innerText = count + 1;
