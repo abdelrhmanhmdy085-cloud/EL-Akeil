@@ -180,5 +180,8 @@
     "processing": "Processing your order...",
     "success_message": "âœ… Your subscription has been activated successfully! Redirecting...",
     "error_message": "An error occurred while processing your order",
-    "choose_delivery_time": "Choose Delivery Time"
+    "choose_delivery_time": "Choose Delivery Time",
+    "aria_label_lang_toggle": "Change language",
+    "lang_toggle_title": "Switch between Arabic and English",
+    "locate_me": "Locate me"
 }
