@@ -51,7 +51,7 @@ function initSocket() {
 function showNotification(msg) {
     // Update Badge
     const badge = document.getElementById('notiBadge');
-    const container = document.getElementById('notiContainer');
+    const container = document.getElementById('notiWrapper') || document.getElementById('notiContainer');
     if (badge && container) {
         container.classList.remove('hidden');
         badge.style.display = 'block';
@@ -91,6 +91,7 @@ window.addEventListener('load', () => {
     const drop = document.getElementById('notiDropdown');
     if (cont && drop) {
         cont.onclick = (e) => {
+            e.preventDefault();
             // reset badge
             document.getElementById('notiBadge').innerText = '0';
             document.getElementById('notiBadge').style.display = 'none';
