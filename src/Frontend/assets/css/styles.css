@@ -310,6 +310,40 @@ select.lang-selector {
     padding: 0 15px;
     font-size: 1.2rem;
     color: var(--text-secondary);
+    background: none;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.2s ease;
+}
+
+.location-icon:hover {
+    transform: scale(1.2);
+}
+
+.lang-toggle-btn {
+    background: none;
+    border: none;
+    padding: 8px 12px;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    color: var(--text-primary);
+    border-radius: 20px;
+    transition: background 0.2s;
+}
+
+.lang-toggle-btn:hover {
+    background: rgba(0, 0, 0, 0.05);
+}
+
+[dir="rtl"] .lang-toggle-btn {
+    flex-direction: row-reverse;
 }
 
 /* Wave Separator */
@@ -910,7 +944,8 @@ select.lang-selector {
     }
 
     .location-icon {
-        display: none;
+        display: flex;
+        padding: 10px;
     }
 
     .level-card {
