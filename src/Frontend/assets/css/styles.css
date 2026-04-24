@@ -24,6 +24,11 @@
     padding: 0;
 }
 
+:focus-visible {
+    outline: 3px solid var(--primary);
+    outline-offset: 2px;
+}
+
 body {
     margin: 0;
     font-family: 'Cairo', 'Inter', sans-serif;
@@ -225,6 +230,11 @@ select.lang-selector {
 
 /* Language Toggle Icon */
 .lang-toggle-btn {
+    appearance: none;
+    background: none;
+    border: none;
+    padding: 0;
+    font-family: inherit;
     cursor: pointer;
     font-size: 1.5rem;
     display: flex;
@@ -236,6 +246,7 @@ select.lang-selector {
     transition: all 0.3s ease;
     border: 1px solid var(--primary);
     color: var(--text-primary);
+    line-height: normal;
 }
 
 .lang-toggle-btn:hover {
@@ -307,9 +318,16 @@ select.lang-selector {
 }
 
 .location-icon {
+    appearance: none;
+    background: none;
+    border: none;
     padding: 0 15px;
     font-size: 1.2rem;
     color: var(--text-secondary);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 /* Wave Separator */
