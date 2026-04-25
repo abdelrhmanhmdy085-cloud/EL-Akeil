@@ -310,6 +310,28 @@ select.lang-selector {
     padding: 0 15px;
     font-size: 1.2rem;
     color: var(--text-secondary);
+    background: none;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.2s;
+}
+
+.location-icon:hover {
+    transform: scale(1.2);
+}
+
+/* Accessibility: Focus visible */
+:focus-visible {
+    outline: 3px solid var(--primary);
+    outline-offset: 2px;
+}
+
+.lang-toggle-btn {
+    appearance: none;
+    font-family: inherit;
 }
 
 /* Wave Separator */
@@ -910,7 +932,7 @@ select.lang-selector {
     }
 
     .location-icon {
-        display: none;
+        padding: 10px;
     }
 
     .level-card {
