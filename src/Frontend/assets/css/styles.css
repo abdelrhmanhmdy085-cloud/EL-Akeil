@@ -24,6 +24,15 @@
     padding: 0;
 }
 
+:focus-visible {
+    outline: 3px solid var(--primary);
+    outline-offset: 2px;
+}
+
+button {
+    font-family: inherit;
+}
+
 body {
     margin: 0;
     font-family: 'Cairo', 'Inter', sans-serif;
@@ -236,6 +245,8 @@ select.lang-selector {
     transition: all 0.3s ease;
     border: 1px solid var(--primary);
     color: var(--text-primary);
+    appearance: none;
+    line-height: normal;
 }
 
 .lang-toggle-btn:hover {
@@ -910,7 +921,8 @@ select.lang-selector {
     }
 
     .location-icon {
-        display: none;
+        /* Keep it visible on mobile for better accessibility */
+        display: flex;
     }
 
     .level-card {
