@@ -837,6 +837,55 @@ select.lang-selector {
     color: #FFB800;
 }
 
+/* Password Toggle Styles */
+.password-wrapper {
+    position: relative;
+    width: 100%;
+    margin-bottom: 1rem;
+}
+
+.password-wrapper .form-input {
+    margin-bottom: 0;
+    padding-inline-end: 45px;
+}
+
+.toggle-password {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    padding: 0 10px;
+    cursor: pointer;
+    font-size: 1.2rem;
+    color: var(--text-secondary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    transition: color 0.2s;
+    z-index: 2;
+}
+
+/* Position toggle based on direction */
+[dir="ltr"] .toggle-password {
+    right: 5px;
+}
+
+[dir="rtl"] .toggle-password {
+    left: 5px;
+}
+
+.toggle-password:hover {
+    color: var(--primary);
+}
+
+/* Global Focus Indicator */
+:focus-visible {
+    outline: 3px solid var(--primary);
+    outline-offset: 2px;
+}
+
 /* ============================================ */
 /* RESPONSIVE DESIGN */
 /* ============================================ */
