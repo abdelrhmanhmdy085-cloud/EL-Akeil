@@ -92,14 +92,22 @@
 
         <form id="authForm">
             <!-- Universal Fields -->
-            <div style="text-align:left; margin-bottom:0.5rem" data-i18n="username">Username</div>
+            <label for="username" style="display:block; text-align:left; margin-bottom:0.5rem" data-i18n="username">Username</label>
             <input type="text" id="username" class="form-input" required>
 
-            <div style="text-align:left; margin-bottom:0.5rem" data-i18n="pass_label">Password</div>
-            <input type="password" id="password" class="form-input" required>
+            <label for="password" style="display:block; text-align:left; margin-bottom:0.5rem" data-i18n="pass_label">Password</label>
+            <div class="password-wrapper">
+                <input type="password" id="password" class="form-input" required>
+                <button type="button" class="toggle-password" onclick="togglePasswordVisibility('password')" data-i18n-title="show_password" data-i18n-aria-label="show_password">👁️</button>
+            </div>
 
-            <div style="text-align:left; margin-bottom:0.5rem" data-i18n="valid_pass_confirm">Confirm Password</div>
-            <input type="password" id="confirm_password" class="form-input" required>
+            <div id="confirmPassContainer">
+                <label for="confirm_password" style="display:block; text-align:left; margin-bottom:0.5rem" data-i18n="valid_pass_confirm">Confirm Password</label>
+                <div class="password-wrapper">
+                    <input type="password" id="confirm_password" class="form-input" required>
+                    <button type="button" class="toggle-password" onclick="togglePasswordVisibility('confirm_password')" data-i18n-title="show_password" data-i18n-aria-label="show_password">👁️</button>
+                </div>
+            </div>
 
             <!-- Registration Fields -->
             <div id="regFields" class="hidden">
@@ -143,8 +151,31 @@
         </form>
     </div>
 
+    <script src="assets/js/common.js"></script>
+    <script src="assets/js/i18n.js"></script>
     <script src="assets/js/main.js"></script>
     <script>
+        function togglePasswordVisibility(inputId) {
+            const input = document.getElementById(inputId);
+            const btn = input.nextElementSibling;
+            const lang = localStorage.getItem('elakeil_lang') || 'ar';
+            const t = translations[lang] || {};
+
+            if (input.type === 'password') {
+                input.type = 'text';
+                btn.textContent = '🙈';
+                const hideLabel = t['hide_password'] || 'Hide password';
+                btn.setAttribute('aria-label', hideLabel);
+                btn.title = hideLabel;
+            } else {
+                input.type = 'password';
+                btn.textContent = '👁️';
+                const showLabel = t['show_password'] || 'Show password';
+                btn.setAttribute('aria-label', showLabel);
+                btn.title = showLabel;
+            }
+        }
+
         const urlParams = new URLSearchParams(window.location.search);
         const roleParam = urlParams.get('role');
         let role = roleParam || 'customer';
@@ -161,13 +192,7 @@
         function toggleMode() {
             isLogin = !isLogin;
             document.getElementById('regFields').classList.toggle('hidden', isLogin);
-            document.getElementById('confirm_password').parentElement.style.display = isLogin ? 'none' : 'block'; // Toggle confirm pass
-            // Hide label too if feasible, but structure is flat. Let's fix structure or toggle inputs.
-            // Actually, simply toggling the input and its label (previous sibling) is cleaner if wrapped.
-            // For now, let's just assume we toggle the specific elements.
-            const confirmInput = document.getElementById('confirm_password');
-            confirmInput.style.display = isLogin ? 'none' : 'block';
-            confirmInput.previousElementSibling.style.display = isLogin ? 'none' : 'block';
+            document.getElementById('confirmPassContainer').style.display = isLogin ? 'none' : 'block';
 
             // Update Text
             const submitBtn = document.getElementById('submitBtn');
