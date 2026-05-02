@@ -75,6 +75,43 @@
         button[type="submit"]:hover {
             background-color: #4a1a20 !important;
         }
+
+        .password-wrapper {
+            position: relative;
+            margin-bottom: 1rem;
+        }
+
+        .password-wrapper .form-input {
+            margin-bottom: 0;
+            padding-right: 40px;
+        }
+
+        [dir="rtl"] .password-wrapper .form-input {
+            padding-right: 12px;
+            padding-left: 40px;
+        }
+
+        .toggle-password {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 1.2rem;
+            color: #5E2129;
+            z-index: 10;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        [dir="rtl"] .toggle-password {
+            right: auto;
+            left: 10px;
+        }
     </style>
 </head>
 
@@ -96,10 +133,16 @@
             <input type="text" id="username" class="form-input" required>
 
             <div style="text-align:left; margin-bottom:0.5rem" data-i18n="pass_label">Password</div>
-            <input type="password" id="password" class="form-input" required>
+            <div class="password-wrapper">
+                <input type="password" id="password" class="form-input" required>
+                <button type="button" class="toggle-password" onclick="togglePasswordVisibility('password')" data-i18n-aria-label="show_password">👁️</button>
+            </div>
 
             <div style="text-align:left; margin-bottom:0.5rem" data-i18n="valid_pass_confirm">Confirm Password</div>
-            <input type="password" id="confirm_password" class="form-input" required>
+            <div class="password-wrapper">
+                <input type="password" id="confirm_password" class="form-input" required>
+                <button type="button" class="toggle-password" onclick="togglePasswordVisibility('confirm_password')" data-i18n-aria-label="show_password">👁️</button>
+            </div>
 
             <!-- Registration Fields -->
             <div id="regFields" class="hidden">
@@ -158,16 +201,30 @@
             });
         }
 
+        function togglePasswordVisibility(inputId) {
+            const input = document.getElementById(inputId);
+            const btn = input.nextElementSibling;
+            const lang = localStorage.getItem('elakeil_lang') || 'ar';
+            const t = (typeof translations !== 'undefined' && translations[lang]) ? translations[lang] : {};
+
+            if (input.type === 'password') {
+                input.type = 'text';
+                btn.textContent = '🙈';
+                btn.setAttribute('aria-label', t['hide_password'] || 'Hide password');
+            } else {
+                input.type = 'password';
+                btn.textContent = '👁️';
+                btn.setAttribute('aria-label', t['show_password'] || 'Show password');
+            }
+        }
+
         function toggleMode() {
             isLogin = !isLogin;
             document.getElementById('regFields').classList.toggle('hidden', isLogin);
-            document.getElementById('confirm_password').parentElement.style.display = isLogin ? 'none' : 'block'; // Toggle confirm pass
-            // Hide label too if feasible, but structure is flat. Let's fix structure or toggle inputs.
-            // Actually, simply toggling the input and its label (previous sibling) is cleaner if wrapped.
-            // For now, let's just assume we toggle the specific elements.
-            const confirmInput = document.getElementById('confirm_password');
-            confirmInput.style.display = isLogin ? 'none' : 'block';
-            confirmInput.previousElementSibling.style.display = isLogin ? 'none' : 'block';
+
+            const confirmWrapper = document.getElementById('confirm_password').parentElement;
+            confirmWrapper.style.display = isLogin ? 'none' : 'block';
+            confirmWrapper.previousElementSibling.style.display = isLogin ? 'none' : 'block';
 
             // Update Text
             const submitBtn = document.getElementById('submitBtn');

@@ -1,4 +1,6 @@
 {
+    "show_password": "إظهار كلمة المرور",
+    "hide_password": "إخفاء كلمة المرور",
     "dir": "rtl",
     "nav_login": "دخول / تسجيل",
     "portal_title": "الأكيل - El Akil",
