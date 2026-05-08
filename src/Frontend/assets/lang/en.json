@@ -70,6 +70,9 @@
     "driver_login_title": "Delivery Driver Login",
     "kitchen_name": "Kitchen Name",
     "kitchen_address": "Kitchen Address",
+    "locate_me": "Locate Me",
+    "lang_toggle_title": "Switch Language",
+    "aria_label_lang_toggle": "Change website language",
     "driver_vehicle": "Vehicle Type",
     "driver_license": "Driving License Number",
     "already_have_account": "Already have an account?",
@@ -180,5 +183,6 @@
     "processing": "Processing your order...",
     "success_message": "âœ… Your subscription has been activated successfully! Redirecting...",
     "error_message": "An error occurred while processing your order",
-    "choose_delivery_time": "Choose Delivery Time"
+    "choose_delivery_time": "Choose Delivery Time",
+    "whatsapp_contact": "Contact us on WhatsApp"
 }
