@@ -196,6 +196,18 @@ select.lang-selector {
     display: none !important;
 }
 
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+}
+
 /* Landing Page Refactor (Talabat Style) */
 
 /* Hero Section */
@@ -236,6 +248,9 @@ select.lang-selector {
     transition: all 0.3s ease;
     border: 1px solid var(--primary);
     color: var(--text-primary);
+    font-family: inherit;
+    appearance: none;
+    line-height: normal;
 }
 
 .lang-toggle-btn:hover {
@@ -310,6 +325,12 @@ select.lang-selector {
     padding: 0 15px;
     font-size: 1.2rem;
     color: var(--text-secondary);
+    background: none;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 /* Wave Separator */
