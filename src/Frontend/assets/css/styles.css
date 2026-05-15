@@ -965,13 +965,3 @@ body.rtl .toggle-password {
     right: auto;
     left: 15px;
 }
-
-/* UX Padding for Password Fields with Toggle */
-.password-wrapper .form-input {
-    padding-right: 45px !important;
-}
-
-body.rtl .password-wrapper .form-input {
-    padding-right: 12px !important;
-    padding-left: 45px !important;
-}
