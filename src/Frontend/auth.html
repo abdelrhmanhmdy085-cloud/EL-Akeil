@@ -96,10 +96,16 @@
             <input type="text" id="username" class="form-input" required>
 
             <div style="text-align:left; margin-bottom:0.5rem" data-i18n="pass_label">Password</div>
-            <input type="password" id="password" class="form-input" required>
+            <div class="password-wrapper">
+                <input type="password" id="password" class="form-input" required autocomplete="current-password">
+                <button type="button" class="toggle-password" onclick="togglePasswordVisibility('password')" data-i18n-aria-label="show_password" title="Show Password">👁️</button>
+            </div>
 
             <div style="text-align:left; margin-bottom:0.5rem" data-i18n="valid_pass_confirm">Confirm Password</div>
-            <input type="password" id="confirm_password" class="form-input" required>
+            <div class="password-wrapper">
+                <input type="password" id="confirm_password" class="form-input" required autocomplete="new-password">
+                <button type="button" class="toggle-password" onclick="togglePasswordVisibility('confirm_password')" data-i18n-aria-label="show_password" title="Show Password">👁️</button>
+            </div>
 
             <!-- Registration Fields -->
             <div id="regFields" class="hidden">
@@ -143,6 +149,8 @@
         </form>
     </div>
 
+    <script src="assets/js/common.js"></script>
+    <script src="assets/js/i18n.js"></script>
     <script src="assets/js/main.js"></script>
     <script>
         const urlParams = new URLSearchParams(window.location.search);
@@ -158,16 +166,37 @@
             });
         }
 
+        function togglePasswordVisibility(inputId) {
+            const input = document.getElementById(inputId);
+            const btn = input.nextElementSibling;
+            const lang = localStorage.getItem('elakeil_lang') || 'ar';
+            const t = translations[lang] || {};
+
+            if (input.type === 'password') {
+                input.type = 'text';
+                btn.innerText = '🙈';
+                btn.setAttribute('data-i18n-aria-label', 'hide_password');
+                btn.title = t.hide_password || 'Hide Password';
+                if (t.hide_password) btn.setAttribute('aria-label', t.hide_password);
+            } else {
+                input.type = 'password';
+                btn.innerText = '👁️';
+                btn.setAttribute('data-i18n-aria-label', 'show_password');
+                btn.title = t.show_password || 'Show Password';
+                if (t.show_password) btn.setAttribute('aria-label', t.show_password);
+            }
+        }
+
         function toggleMode() {
             isLogin = !isLogin;
             document.getElementById('regFields').classList.toggle('hidden', isLogin);
-            document.getElementById('confirm_password').parentElement.style.display = isLogin ? 'none' : 'block'; // Toggle confirm pass
             // Hide label too if feasible, but structure is flat. Let's fix structure or toggle inputs.
             // Actually, simply toggling the input and its label (previous sibling) is cleaner if wrapped.
             // For now, let's just assume we toggle the specific elements.
             const confirmInput = document.getElementById('confirm_password');
-            confirmInput.style.display = isLogin ? 'none' : 'block';
-            confirmInput.previousElementSibling.style.display = isLogin ? 'none' : 'block';
+            const wrapper = confirmInput.closest('.password-wrapper');
+            wrapper.style.display = isLogin ? 'none' : 'block';
+            wrapper.previousElementSibling.style.display = isLogin ? 'none' : 'block';
 
             // Update Text
             const submitBtn = document.getElementById('submitBtn');
