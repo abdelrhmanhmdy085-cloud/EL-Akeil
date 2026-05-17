@@ -225,16 +225,18 @@ select.lang-selector {
 
 /* Language Toggle Icon */
 .lang-toggle-btn {
+    appearance: none;
+    background: rgba(94, 33, 41, 0.1);
+    border: 1px solid var(--primary);
+    padding: 8px 12px;
+    font-family: inherit;
     cursor: pointer;
     font-size: 1.5rem;
     display: flex;
     align-items: center;
     gap: 5px;
-    padding: 8px 12px;
     border-radius: 20px;
-    background: rgba(94, 33, 41, 0.1);
     transition: all 0.3s ease;
-    border: 1px solid var(--primary);
     color: var(--text-primary);
 }
 
@@ -307,7 +309,12 @@ select.lang-selector {
 }
 
 .location-icon {
+    appearance: none;
+    background: none;
+    border: none;
     padding: 0 15px;
+    font-family: inherit;
+    cursor: pointer;
     font-size: 1.2rem;
     color: var(--text-secondary);
 }
