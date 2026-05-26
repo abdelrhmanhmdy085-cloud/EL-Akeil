@@ -91,42 +91,56 @@
         <h2 data-i18n="login_title" style="margin-bottom: 2rem; color: var(--primary);">تسجيل الدخول - الأكيل</h2>
 
         <form id="authForm">
+            <script>
+                // Correct initial visibility based on isLogin
+                document.addEventListener('DOMContentLoaded', () => {
+                   const confirmWrapper = document.querySelector('.password-wrapper');
+                   if (confirmWrapper) confirmWrapper.style.display = isLogin ? 'none' : 'block';
+                });
+            </script>
             <!-- Universal Fields -->
-            <div style="text-align:left; margin-bottom:0.5rem" data-i18n="username">Username</div>
+            <label for="username" style="display:block; text-align:left; margin-bottom:0.5rem" data-i18n="username">Username</label>
             <input type="text" id="username" class="form-input" required>
 
-            <div style="text-align:left; margin-bottom:0.5rem" data-i18n="pass_label">Password</div>
+            <label for="password" style="display:block; text-align:left; margin-bottom:0.5rem" data-i18n="pass_label">Password</label>
             <input type="password" id="password" class="form-input" required>
 
-            <div style="text-align:left; margin-bottom:0.5rem" data-i18n="valid_pass_confirm">Confirm Password</div>
-            <input type="password" id="confirm_password" class="form-input" required>
+            <div class="password-wrapper">
+                <label for="confirm_password" style="display:block; text-align:left; margin-bottom:0.5rem" data-i18n="valid_pass_confirm">Confirm Password</label>
+                <input type="password" id="confirm_password" class="form-input" required>
+            </div>
 
             <!-- Registration Fields -->
             <div id="regFields" class="hidden">
-                <div style="text-align:left; margin-bottom:0.5rem" data-i18n="full_name">Full Name</div>
+                <label for="fullname" style="display:block; text-align:left; margin-bottom:0.5rem" data-i18n="full_name">Full Name</label>
                 <input type="text" id="fullname" class="form-input">
 
                 <!-- Role Specific -->
                 <div id="chefFields" class="hidden">
+                    <label for="address" class="sr-only" data-i18n="kitchen_addr">Kitchen Address</label>
                     <input type="text" id="address" data-i18n-placeholder="kitchen_addr" placeholder="Kitchen Address"
                         class="form-input">
+                    <label for="chef_national_id" class="sr-only" data-i18n="national_id">National ID</label>
                     <input type="text" id="chef_national_id" data-i18n-placeholder="national_id"
                         placeholder="National ID" class="form-input">
                 </div>
 
                 <div id="customerFields" class="hidden">
-                    <input type="tel" id="phone" placeholder="Phone Number" class="form-input">
+                    <label for="phone" class="sr-only" data-i18n="phone">Phone Number</label>
+                    <input type="tel" id="phone" placeholder="Phone Number" data-i18n-placeholder="phone" class="form-input">
                     <div style="display:grid; grid-template-columns: 1fr 1fr; gap:10px">
+                        <label for="lat" class="sr-only">Lat</label>
                         <input type="number" id="lat" placeholder="Lat" class="form-input">
+                        <label for="long" class="sr-only">Long</label>
                         <input type="number" id="long" placeholder="Long" class="form-input">
                     </div>
                 </div>
 
                 <div id="driverFields" class="hidden">
-                    <div style="text-align:left; margin-bottom:0.5rem">National ID</div>
+                    <label for="national_id" style="display:block; text-align:left; margin-bottom:0.5rem" data-i18n="national_id">National ID</label>
                     <input type="text" id="national_id" class="form-input">
                     <div style="margin-bottom: 1rem;">
-                        <label class="input-label" data-i18n="face_id_msg">Please enable camera</label>
+                        <label class="input-label" for="webcam" data-i18n="face_id_msg">Please enable camera</label>
                         <video id="webcam" autoplay playsinline
                             style="width:100%; border-radius:0.5rem; background:black; margin-bottom:10px;"></video>
                         <button type="button" id="snapBtn" class="btn" style="width:100%;">📸 Verify Face</button>
@@ -161,13 +175,9 @@
         function toggleMode() {
             isLogin = !isLogin;
             document.getElementById('regFields').classList.toggle('hidden', isLogin);
-            document.getElementById('confirm_password').parentElement.style.display = isLogin ? 'none' : 'block'; // Toggle confirm pass
-            // Hide label too if feasible, but structure is flat. Let's fix structure or toggle inputs.
-            // Actually, simply toggling the input and its label (previous sibling) is cleaner if wrapped.
-            // For now, let's just assume we toggle the specific elements.
-            const confirmInput = document.getElementById('confirm_password');
-            confirmInput.style.display = isLogin ? 'none' : 'block';
-            confirmInput.previousElementSibling.style.display = isLogin ? 'none' : 'block';
+
+            const confirmWrapper = document.querySelector('.password-wrapper');
+            if (confirmWrapper) confirmWrapper.style.display = isLogin ? 'none' : 'block';
 
             // Update Text
             const submitBtn = document.getElementById('submitBtn');
