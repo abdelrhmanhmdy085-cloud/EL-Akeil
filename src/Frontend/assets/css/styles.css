@@ -841,6 +841,54 @@ select.lang-selector {
 /* RESPONSIVE DESIGN */
 /* ============================================ */
 
+
+/* Accessibility Utilities */
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+}
+
+:focus-visible {
+    outline: 3px solid var(--primary);
+    outline-offset: 2px;
+}
+
+/* Reset for converted buttons */
+button.lang-toggle-btn,
+button.location-icon {
+    appearance: none;
+    font-family: inherit;
+    cursor: pointer;
+    color: inherit;
+    line-height: normal;
+    background: transparent;
+    border: none;
+}
+
+button.lang-toggle-btn {
+    background: rgba(94, 33, 41, 0.1);
+    border: 1px solid var(--primary);
+    padding: 8px 12px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    border-radius: 20px;
+}
+
+button.location-icon {
+    padding: 0 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 @media (max-width: 768px) {
     .section-title {
         font-size: 1.5rem;
@@ -909,7 +957,8 @@ select.lang-selector {
         margin-top: 0.5rem;
     }
 
-    .location-icon {
+    .location-icon,
+    button.location-icon {
         display: none;
     }
 
