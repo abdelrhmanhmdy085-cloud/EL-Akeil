@@ -970,10 +970,3 @@ select.lang-selector {
     outline: 3px solid var(--primary);
     outline-offset: 2px;
 }
-
-/* Ensure interactive elements have pointers */
-button,
-[role="button"],
-.lang-toggle-btn {
-    cursor: pointer;
-}

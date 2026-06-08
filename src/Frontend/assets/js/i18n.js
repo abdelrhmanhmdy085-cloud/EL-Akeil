@@ -43,11 +43,8 @@ function applyTranslations(lang) {
     document.querySelectorAll('[data-i18n]').forEach(el => {
         const key = el.getAttribute('data-i18n');
         if (t[key]) {
-            if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
-                el.placeholder = t[key];
-            } else {
-                el.textContent = t[key];
-            }
+            console.log(`Translating ${key}: "${el.textContent}" -> "${t[key]}"`);
+            el.textContent = t[key];
         } else {
             console.warn(`Missing translation key: ${key}`);
         }
@@ -90,9 +87,7 @@ function initLanguage() {
     
     // Wait for DOM to be fully ready before loading language
     if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', () => {
-            loadLanguage(saved);
-        });
+        document.addEventListener('DOMContentLoaded', () => loadLanguage(saved));
     } else {
         loadLanguage(saved);
     }
