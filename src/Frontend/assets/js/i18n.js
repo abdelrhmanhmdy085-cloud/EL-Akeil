@@ -53,6 +53,16 @@ function applyTranslations(lang) {
     document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
         const key = el.getAttribute('data-i18n-placeholder');
         if (t[key]) el.placeholder = t[key];
+
+    document.querySelectorAll("[data-i18n-title]").forEach(el => {
+        const key = el.getAttribute("data-i18n-title");
+        if (t[key]) el.title = t[key];
+    });
+
+    document.querySelectorAll("[data-i18n-aria-label]").forEach(el => {
+        const key = el.getAttribute("data-i18n-aria-label");
+        if (t[key]) el.setAttribute("aria-label", t[key]);
+    });
     });
 }
 
