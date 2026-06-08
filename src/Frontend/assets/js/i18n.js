@@ -43,8 +43,11 @@ function applyTranslations(lang) {
     document.querySelectorAll('[data-i18n]').forEach(el => {
         const key = el.getAttribute('data-i18n');
         if (t[key]) {
-            console.log(`Translating ${key}: "${el.textContent}" -> "${t[key]}"`);
-            el.textContent = t[key];
+            if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
+                el.placeholder = t[key];
+            } else {
+                el.textContent = t[key];
+            }
         } else {
             console.warn(`Missing translation key: ${key}`);
         }
@@ -53,6 +56,17 @@ function applyTranslations(lang) {
     document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
         const key = el.getAttribute('data-i18n-placeholder');
         if (t[key]) el.placeholder = t[key];
+    });
+
+    // Support for title and aria-label localization
+    document.querySelectorAll('[data-i18n-title]').forEach(el => {
+        const key = el.getAttribute('data-i18n-title');
+        if (t[key]) el.title = t[key];
+    });
+
+    document.querySelectorAll('[data-i18n-aria-label]').forEach(el => {
+        const key = el.getAttribute('data-i18n-aria-label');
+        if (t[key]) el.setAttribute('aria-label', t[key]);
     });
 }
 
@@ -65,17 +79,20 @@ function initLanguage() {
     }
 
     const nav = document.getElementById('langControls');
-    if (nav) {
-        nav.innerHTML = `
-            <div class="lang-toggle-btn" onclick="toggleLanguage()" title="Switch Language">
+    if (nav && !document.querySelector('.lang-toggle-btn')) {
+        nav.insertAdjacentHTML('afterbegin', `
+            <button type="button" class="lang-toggle-btn" onclick="toggleLanguage()"
+                    data-i18n-title="lang_toggle_label" data-i18n-aria-label="lang_toggle_label">
                 🌍 <span id="lang-label">${saved === 'ar' ? 'EN' : 'AR'}</span>
-            </div>
-        `;
+            </button>
+        `);
     }
     
     // Wait for DOM to be fully ready before loading language
     if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', () => loadLanguage(saved));
+        document.addEventListener('DOMContentLoaded', () => {
+            loadLanguage(saved);
+        });
     } else {
         loadLanguage(saved);
     }
