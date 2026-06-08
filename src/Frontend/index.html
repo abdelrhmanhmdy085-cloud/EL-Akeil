@@ -206,14 +206,14 @@
       <span>El Akeil</span>
     </a>
     <div class="nav-controls actions" id="langControls">
-      <button type="button" id="notiContainer" style="position:relative; margin-right:15px;" class="icon-btn-reset hidden" data-i18n-aria-label="notifications">
+      <div id="notiContainer" style="position:relative; margin-right:15px; cursor:pointer;" class="hidden">
         <span style="font-size:1.5rem;">🔔</span>
         <span id="notiBadge"
           style="position:absolute; top:-5px; right:-5px; background:red; color:white; border-radius:50%; font-size:0.7rem; padding:2px 5px; display:none;">0</span>
         <div id="notiDropdown"
           style="position:absolute; top:30px; right:0; background:var(--bg-card); border:1px solid var(--border); width:250px; display:none; flex-direction:column; z-index:1000;">
         </div>
-      </button>
+      </div>
       <a href="auth.html" class="btn btn-order" data-i18n="nav_login">Login / Register</a>
     </div>
   </nav>
@@ -224,11 +224,10 @@
       <p data-i18n="hero_subtitle" style="font-size: 1.5rem; max-width: 600px; margin: 0 auto; margin-bottom:2rem;">
         اطلب الآن من أفضل الشيفات في منطقتك</p>
 
-      <div class="search-box-container">
-        <label for="searchInput" class="sr-only" data-i18n="search_label">ابحث عن أكلة أو شيف</label>
-        <button class="search-btn" data-i18n="search_btn">ابحث</button>
-        <input type="text" id="searchInput" class="search-input" data-i18n-placeholder="search_placeholder" placeholder="ابحث عن منطقة، شارع، معلم معروف...">
-        <button type="button" id="locateBtn" class="icon-btn-reset location-icon" data-i18n-title="locate_me" data-i18n-aria-label="locate_me">📍</button>
+      <div class="search-box-container"><label for="searchInput" class="sr-only" data-i18n="search_label">Search</label>
+        <button class="search-btn">ابحث</button>
+        <input type="text" id="searchInput" class="search-input" placeholder="ابحث عن منطقة، شارع، معلم معروف...">
+        <button type="button" class="icon-btn-reset location-icon" data-i18n-aria-label="locate_me" data-i18n-title="locate_me">📍</button>
       </div>
 
       <!-- Category Filter Buttons -->
@@ -574,7 +573,7 @@
   </script>
 
   <!-- WhatsApp Button -->
-  <a href="https://wa.me/201001144459" target="_blank" class="whatsapp-btn" data-i18n-title="whatsapp_contact" data-i18n-aria-label="whatsapp_contact" title="تواصل معنا على واتس آب">
+  <a href="https://wa.me/201001144459" target="_blank" class="whatsapp-btn" title="تواصل معنا على واتس آب">
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
       <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.67-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.076 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421-7.403h-.004a9.87 9.87 0 00-4.846 1.235c-1.477.787-2.753 1.912-3.582 3.28C2.602 12.301 2.25 14.185 2.25 16.122c0 1.937.352 3.821 1.039 5.59.687 1.769 1.73 3.36 3.007 4.663 1.277 1.303 2.828 2.346 4.597 3.033 1.769.687 3.653 1.039 5.59 1.039 1.937 0 3.821-.352 5.59-1.039 1.769-.687 3.36-1.73 4.663-3.007 1.303-1.277 2.346-2.828 3.033-4.597.687-1.769 1.039-3.653 1.039-5.59 0-1.937-.352-3.821-1.039-5.59-.687-1.769-1.73-3.36-3.007-4.663-1.277-1.303-2.828-2.346-4.597-3.033-1.769-.687-3.653-1.039-5.59-1.039zm0 17.79c-1.53 0-3.023-.295-4.448-.869-1.425-.574-2.71-1.412-3.747-2.449-1.037-1.037-1.875-2.322-2.449-3.747-.574-1.425-.869-2.918-.869-4.448 0-1.53.295-3.023.869-4.448.574-1.425 1.412-2.71 2.449-3.747 1.037-1.037 2.322-1.875 3.747-2.449 1.425-.574 2.918-.869 4.448-.869 1.53 0 3.023.295 4.448.869 1.425.574 2.71 1.412 3.747 2.449 1.037 1.037 1.875 2.322 2.449 3.747.574 1.425.869 2.918.869 4.448 0 1.53-.295 3.023-.869 4.448-.574 1.425-1.412 2.71-2.449 3.747-1.037 1.037-2.322 1.875-3.747 2.449-1.425.574-2.918.869-4.448.869z"/>
     </svg>
