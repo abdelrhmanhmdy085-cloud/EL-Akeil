@@ -225,9 +225,10 @@
         اطلب الآن من أفضل الشيفات في منطقتك</p>
 
       <div class="search-box-container">
-        <button class="search-btn">ابحث</button>
-        <input type="text" class="search-input" placeholder="ابحث عن منطقة، شارع، معلم معروف...">
-        <div class="location-icon">📍</div>
+        <button class="search-btn" data-i18n="search_btn">ابحث</button>
+        <label for="searchInput" class="sr-only" data-i18n="search_placeholder">ابحث عن منطقة، شارع، معلم معروف...</label>
+        <input type="text" id="searchInput" class="search-input" placeholder="ابحث عن منطقة، شارع، معلم معروف..." data-i18n-placeholder="search_placeholder">
+        <button type="button" id="locateBtn" class="location-icon icon-btn-reset" data-i18n-title="locate_me" data-i18n-aria-label="locate_me">📍</button>
       </div>
 
       <!-- Category Filter Buttons -->
