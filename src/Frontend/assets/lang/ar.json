@@ -176,4 +176,6 @@
     "success_message": "✅ تم تفعيل اشتراكك بنجاح! سيتم إعادة توجيهك قريبا...",
     "error_message": "حدث خطأ أثناء معالجة طلبك",
     "choose_delivery_time": "اختر وقت التوصيل"
+    ,"locate_me": "حدد موقعي"
+    ,"search_label": "بحث"
 }
