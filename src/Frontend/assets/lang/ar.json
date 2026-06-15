@@ -25,7 +25,7 @@
     "national_id": "الرقم القومي",
     "pass_mismatch": "كلمة المرور غير متطابقة!",
     "btn_login": "دخول",
-    "btn_register": "تسجيل جديد",
+    "btn_register": "تسجيل",
     "no_account": "ليس لديك حساب؟ سجل الآن",
     "face_id_msg": "يرجى تفعيل الكاميرا للتحقق من الوجه",
     "add_to_cart": "أضف للسلة",
@@ -175,5 +175,9 @@
     "processing": "جاري معالجة طلبك...",
     "success_message": "✅ تم تفعيل اشتراكك بنجاح! سيتم إعادة توجيهك قريبا...",
     "error_message": "حدث خطأ أثناء معالجة طلبك",
-    "choose_delivery_time": "اختر وقت التوصيل"
+    "choose_delivery_time": "اختر وقت التوصيل",
+    "show_password": "إظهار كلمة المرور",
+    "hide_password": "إخفاء كلمة المرور",
+    "username_label": "اسم المستخدم",
+    "customer_register_title": "تسجيل كعميل"
 }
