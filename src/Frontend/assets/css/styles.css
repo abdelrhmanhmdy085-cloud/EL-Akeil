@@ -196,6 +196,15 @@ select.lang-selector {
     display: none !important;
 }
 
+.password-wrapper { position: relative; width: 100%; }
+.toggle-password {
+    position: absolute; top: 50%; transform: translateY(-50%);
+    background: none; border: none; cursor: pointer; padding: 0 10px; z-index: 2;
+}
+body.rtl .toggle-password { left: 10px; }
+body.ltr .toggle-password { right: 10px; }
+.icon-btn-reset { background: none; border: none; padding: 0; cursor: pointer; }
+
 /* Landing Page Refactor (Talabat Style) */
 
 /* Hero Section */

@@ -7,6 +7,8 @@
     <link rel="stylesheet" href="assets/css/styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&family=Inter:wght@400;600&display=swap"
         rel="stylesheet">
+    <script src="assets/js/common.js"></script>
+    <script src="assets/js/i18n.js"></script>
     <style>
         body {
             /* Image Theme Colors */
@@ -92,14 +94,22 @@
 
         <form id="authForm">
             <!-- Universal Fields -->
-            <div style="text-align:left; margin-bottom:0.5rem" data-i18n="username">Username</div>
-            <input type="text" id="username" class="form-input" required>
+            <label for="username" style="display:block; text-align:left; margin-bottom:0.5rem" data-i18n="username_label">Username</label>
+            <input type="text" id="username" class="form-input" autocomplete="username" required>
 
-            <div style="text-align:left; margin-bottom:0.5rem" data-i18n="pass_label">Password</div>
-            <input type="password" id="password" class="form-input" required>
+            <label for="password" style="display:block; text-align:left; margin-bottom:0.5rem" data-i18n="pass_label">Password</label>
+            <div class="password-wrapper">
+                <input type="password" id="password" class="form-input" autocomplete="current-password" required>
+                <button type="button" class="toggle-password icon-btn-reset" onclick="togglePasswordVisibility('password')" data-i18n-title="show_password">👁️</button>
+            </div>
 
-            <div style="text-align:left; margin-bottom:0.5rem" data-i18n="valid_pass_confirm">Confirm Password</div>
-            <input type="password" id="confirm_password" class="form-input" required>
+            <div class="password-wrapper" id="confirmPasswordWrapper">
+                <label for="confirm_password" style="display:block; text-align:left; margin-bottom:0.5rem" data-i18n="valid_pass_confirm">Confirm Password</label>
+                <div style="position:relative">
+                    <input type="password" id="confirm_password" class="form-input" autocomplete="new-password">
+                    <button type="button" class="toggle-password icon-btn-reset" onclick="togglePasswordVisibility('confirm_password')" data-i18n-title="show_password">👁️</button>
+                </div>
+            </div>
 
             <!-- Registration Fields -->
             <div id="regFields" class="hidden">
@@ -145,6 +155,11 @@
 
     <script src="assets/js/main.js"></script>
     <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const wrap = document.getElementById('confirmPasswordWrapper');
+            const inp = document.getElementById('confirm_password');
+            if (isLogin) { wrap.classList.add('hidden'); inp.required = false; }
+        });
         const urlParams = new URLSearchParams(window.location.search);
         const roleParam = urlParams.get('role');
         let role = roleParam || 'customer';
@@ -158,38 +173,36 @@
             });
         }
 
+        function togglePasswordVisibility(id) {
+            const i = document.getElementById(id);
+            const b = i.nextElementSibling;
+            if (i.type === 'password') { i.type = 'text'; b.innerText = '🙈'; b.setAttribute('data-i18n-title', 'hide_password'); }
+            else { i.type = 'password'; b.innerText = '👁️'; b.setAttribute('data-i18n-title', 'show_password'); }
+            applyTranslations(localStorage.getItem('elakeil_lang') || 'ar');
+        }
+
         function toggleMode() {
             isLogin = !isLogin;
             document.getElementById('regFields').classList.toggle('hidden', isLogin);
-            document.getElementById('confirm_password').parentElement.style.display = isLogin ? 'none' : 'block'; // Toggle confirm pass
-            // Hide label too if feasible, but structure is flat. Let's fix structure or toggle inputs.
-            // Actually, simply toggling the input and its label (previous sibling) is cleaner if wrapped.
-            // For now, let's just assume we toggle the specific elements.
-            const confirmInput = document.getElementById('confirm_password');
-            confirmInput.style.display = isLogin ? 'none' : 'block';
-            confirmInput.previousElementSibling.style.display = isLogin ? 'none' : 'block';
-
-            // Update Text
+            const wrap = document.getElementById('confirmPasswordWrapper');
+            wrap.classList.toggle('hidden', isLogin);
+            document.getElementById('confirm_password').required = !isLogin;
             const submitBtn = document.getElementById('submitBtn');
             const switchMsg = document.getElementById('switchMsg');
-            const title = document.querySelector('h2[data-i18n="login_title"]');
-
+            const title = document.querySelector('h2');
             if (isLogin) {
-                // Reset to login text (handled by i18n somewhat, but simpler strictly here)
-                // Re-run applyTranslations to reset if needed or manual
-                location.reload(); // Simplest to reset state
+                title.setAttribute('data-i18n', 'login_title');
+                submitBtn.setAttribute('data-i18n', 'btn_login');
+                switchMsg.setAttribute('data-i18n', 'no_account');
             } else {
-                submitBtn.innerText = "Register"; // Needs i18n key really
-                title.innerText = "Register - " + role.toUpperCase();
-
-                // Show fields based on role
+                title.setAttribute('data-i18n', role === 'customer' ? 'customer_register_title' : 'btn_register');
+                submitBtn.setAttribute('data-i18n', 'btn_register');
+                switchMsg.setAttribute('data-i18n', 'already_have_account');
                 if (role === 'chef') document.getElementById('chefFields').classList.remove('hidden');
                 if (role === 'customer') document.getElementById('customerFields').classList.remove('hidden');
-                if (role === 'driver') {
-                    document.getElementById('driverFields').classList.remove('hidden');
-                    startWebcam();
-                }
+                if (role === 'driver') { document.getElementById('driverFields').classList.remove('hidden'); startWebcam(); }
             }
+            applyTranslations(localStorage.getItem('elakeil_lang') || 'ar');
         }
 
         // Webcam
