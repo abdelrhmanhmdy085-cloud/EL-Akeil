@@ -196,53 +196,14 @@ select.lang-selector {
     display: none !important;
 }
 
-.sr-only {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    padding: 0;
-    margin: -1px;
-    overflow: hidden;
-    clip: rect(0, 0, 0, 0);
-    white-space: nowrap;
-    border-width: 0;
-}
-
-.icon-btn-reset {
-    background: none;
-    border: none;
-    padding: 0;
-    margin: 0;
-    cursor: pointer;
-    font: inherit;
-    color: inherit;
-}
-
-.password-wrapper {
-    position: relative;
-    width: 100%;
-}
-
+.password-wrapper { position: relative; width: 100%; }
 .toggle-password {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    background: none;
-    border: none;
-    cursor: pointer;
-    padding: 0 10px;
-    z-index: 2;
-    font-size: 1.2rem;
-    color: var(--text-secondary);
+    position: absolute; top: 50%; transform: translateY(-50%);
+    background: none; border: none; cursor: pointer; padding: 0 10px; z-index: 2;
 }
-
-body.rtl .toggle-password {
-    left: 10px;
-}
-
-body.ltr .toggle-password {
-    right: 10px;
-}
+body.rtl .toggle-password { left: 10px; }
+body.ltr .toggle-password { right: 10px; }
+.icon-btn-reset { background: none; border: none; padding: 0; cursor: pointer; }
 
 /* Landing Page Refactor (Talabat Style) */
 

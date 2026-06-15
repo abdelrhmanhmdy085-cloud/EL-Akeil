@@ -100,14 +100,14 @@
             <label for="password" style="display:block; text-align:left; margin-bottom:0.5rem" data-i18n="pass_label">Password</label>
             <div class="password-wrapper">
                 <input type="password" id="password" class="form-input" autocomplete="current-password" required>
-                <button type="button" class="toggle-password icon-btn-reset" onclick="togglePasswordVisibility('password')" data-i18n-title="show_password" data-i18n-aria-label="show_password" aria-label="Show password">👁️</button>
+                <button type="button" class="toggle-password icon-btn-reset" onclick="togglePasswordVisibility('password')" data-i18n-title="show_password">👁️</button>
             </div>
 
             <div class="password-wrapper" id="confirmPasswordWrapper">
                 <label for="confirm_password" style="display:block; text-align:left; margin-bottom:0.5rem" data-i18n="valid_pass_confirm">Confirm Password</label>
                 <div style="position:relative">
                     <input type="password" id="confirm_password" class="form-input" autocomplete="new-password">
-                    <button type="button" class="toggle-password icon-btn-reset" onclick="togglePasswordVisibility('confirm_password')" data-i18n-title="show_password" data-i18n-aria-label="show_password" aria-label="Show password">👁️</button>
+                    <button type="button" class="toggle-password icon-btn-reset" onclick="togglePasswordVisibility('confirm_password')" data-i18n-title="show_password">👁️</button>
                 </div>
             </div>
 
@@ -155,19 +155,11 @@
 
     <script src="assets/js/main.js"></script>
     <script>
-        // Initial state logic
         document.addEventListener('DOMContentLoaded', () => {
-            const confirmWrapper = document.getElementById('confirmPasswordWrapper');
-            const confirmInput = document.getElementById('confirm_password');
-            if (isLogin) {
-                confirmWrapper.classList.add('hidden');
-                confirmInput.required = false;
-            } else {
-                confirmWrapper.classList.remove('hidden');
-                confirmInput.required = true;
-            }
+            const wrap = document.getElementById('confirmPasswordWrapper');
+            const inp = document.getElementById('confirm_password');
+            if (isLogin) { wrap.classList.add('hidden'); inp.required = false; }
         });
-
         const urlParams = new URLSearchParams(window.location.search);
         const roleParam = urlParams.get('role');
         let role = roleParam || 'customer';
@@ -181,39 +173,23 @@
             });
         }
 
-        function togglePasswordVisibility(inputId) {
-            const input = document.getElementById(inputId);
-            const btn = input.nextElementSibling;
-
-            if (input.type === 'password') {
-                input.type = 'text';
-                btn.innerText = '🙈';
-                btn.setAttribute('data-i18n-title', 'hide_password');
-                btn.setAttribute('data-i18n-aria-label', 'hide_password');
-            } else {
-                input.type = 'password';
-                btn.innerText = '👁️';
-                btn.setAttribute('data-i18n-title', 'show_password');
-                btn.setAttribute('data-i18n-aria-label', 'show_password');
-            }
+        function togglePasswordVisibility(id) {
+            const i = document.getElementById(id);
+            const b = i.nextElementSibling;
+            if (i.type === 'password') { i.type = 'text'; b.innerText = '🙈'; b.setAttribute('data-i18n-title', 'hide_password'); }
+            else { i.type = 'password'; b.innerText = '👁️'; b.setAttribute('data-i18n-title', 'show_password'); }
             applyTranslations(localStorage.getItem('elakeil_lang') || 'ar');
         }
 
         function toggleMode() {
             isLogin = !isLogin;
             document.getElementById('regFields').classList.toggle('hidden', isLogin);
-
-            const confirmWrapper = document.getElementById('confirmPasswordWrapper');
-            confirmWrapper.classList.toggle('hidden', isLogin);
-
-            const confirmInput = document.getElementById('confirm_password');
-            confirmInput.required = !isLogin;
-
-            // Update Text
+            const wrap = document.getElementById('confirmPasswordWrapper');
+            wrap.classList.toggle('hidden', isLogin);
+            document.getElementById('confirm_password').required = !isLogin;
             const submitBtn = document.getElementById('submitBtn');
             const switchMsg = document.getElementById('switchMsg');
             const title = document.querySelector('h2');
-
             if (isLogin) {
                 title.setAttribute('data-i18n', 'login_title');
                 submitBtn.setAttribute('data-i18n', 'btn_login');
@@ -222,14 +198,9 @@
                 title.setAttribute('data-i18n', role === 'customer' ? 'customer_register_title' : 'btn_register');
                 submitBtn.setAttribute('data-i18n', 'btn_register');
                 switchMsg.setAttribute('data-i18n', 'already_have_account');
-
-                // Show fields based on role
                 if (role === 'chef') document.getElementById('chefFields').classList.remove('hidden');
                 if (role === 'customer') document.getElementById('customerFields').classList.remove('hidden');
-                if (role === 'driver') {
-                    document.getElementById('driverFields').classList.remove('hidden');
-                    startWebcam();
-                }
+                if (role === 'driver') { document.getElementById('driverFields').classList.remove('hidden'); startWebcam(); }
             }
             applyTranslations(localStorage.getItem('elakeil_lang') || 'ar');
         }
