@@ -225,9 +225,10 @@
         اطلب الآن من أفضل الشيفات في منطقتك</p>
 
       <div class="search-box-container">
-        <button class="search-btn">ابحث</button>
-        <input type="text" class="search-input" placeholder="ابحث عن منطقة، شارع، معلم معروف...">
-        <div class="location-icon">📍</div>
+        <button type="button" class="search-btn" data-i18n="search_btn">ابحث</button>
+        <label for="searchInput" class="sr-only" data-i18n="search_placeholder">ابحث عن منطقة، شارع، معلم معروف...</label>
+        <input type="text" id="searchInput" class="search-input" placeholder="ابحث عن منطقة، شارع، معلم معروف..." data-i18n-placeholder="search_placeholder">
+        <button type="button" id="locateBtn" class="icon-btn-reset location-icon" data-i18n-aria-label="locate_me" title="Locate Me">📍</button>
       </div>
 
       <!-- Category Filter Buttons -->
@@ -306,18 +307,18 @@
 
       <div class="role-selection-grid">
         <!-- Chef Option -->
-        <div class="role-option-card" onclick="selectRole('chef')">
-          <div class="role-option-icon">👨‍🍳</div>
-          <h3 data-i18n="join_as_chef">انضم كشيف</h3>
-          <p data-i18n="join_chef_desc">بيع أكلك البيتي بسهولة</p>
-        </div>
+        <button type="button" class="role-option-card" onclick="selectRole('chef')">
+          <span class="role-option-icon">👨‍🍳</span>
+          <span class="role-option-title" data-i18n="join_as_chef">انضم كشيف</span>
+          <span class="role-option-desc" data-i18n="join_chef_desc">بيع أكلك البيتي بسهولة</span>
+        </button>
 
         <!-- Driver Option -->
-        <div class="role-option-card" onclick="selectRole('driver')">
-          <div class="role-option-icon">🛵</div>
-          <h3 data-i18n="join_as_driver">انضم كطيار</h3>
-          <p data-i18n="join_driver_desc">وصل الطلبات وزود دخلك</p>
-        </div>
+        <button type="button" class="role-option-card" onclick="selectRole('driver')">
+          <span class="role-option-icon">🛵</span>
+          <span class="role-option-title" data-i18n="join_as_driver">انضم كطيار</span>
+          <span class="role-option-desc" data-i18n="join_driver_desc">وصل الطلبات وزود دخلك</span>
+        </button>
       </div>
     </div>
   </div>
