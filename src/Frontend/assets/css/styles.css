@@ -17,35 +17,9 @@
     --font-ar: 'Cairo', sans-serif;
     --font-en: 'Inter', sans-serif;
 }
-
-.sr-only {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    padding: 0;
-    margin: -1px;
-    overflow: hidden;
-    clip: rect(0, 0, 0, 0);
-    white-space: nowrap;
-    border-width: 0;
-}
-
-.icon-btn-reset {
-    background: none;
-    border: none;
-    padding: 0;
-    cursor: pointer;
-    font: inherit;
-    color: inherit;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-:focus-visible {
-    outline: 3px solid var(--primary);
-    outline-offset: 2px;
-}
+.sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border-width: 0; }
+.icon-btn-reset { background: none; border: none; padding: 0; cursor: pointer; font: inherit; color: inherit; display: flex; align-items: center; justify-content: center; }
+:focus-visible { outline: 3px solid var(--primary); outline-offset: 2px; }
 
 * {
     box-sizing: border-box;
