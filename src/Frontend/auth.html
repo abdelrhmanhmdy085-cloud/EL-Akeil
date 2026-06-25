@@ -92,75 +92,35 @@
 
         <form id="authForm">
             <!-- Universal Fields -->
-            <div style="text-align:left; margin-bottom:0.5rem">
-                <label for="username" data-i18n="username_label">Username</label>
-            </div>
+            <div style="text-align:left; margin-bottom:0.5rem"><label for="username" data-i18n="username_label">Username</label></div>
             <input type="text" id="username" class="form-input" autocomplete="username" required>
-
-            <div style="text-align:left; margin-bottom:0.5rem">
-                <label for="password" data-i18n="pass_label">Password</label>
-            </div>
-            <div class="password-wrapper">
-                <input type="password" id="password" class="form-input" autocomplete="current-password" required style="padding-right: 40px;">
-                <button type="button" class="icon-btn-reset password-toggle" onclick="togglePasswordVisibility('password', this)" data-i18n-title="show_password" aria-label="Show password">
-                    👁️
-                </button>
-            </div>
-
-            <div class="confirm-password-section" style="margin-top: 1rem;">
-                <div style="text-align:left; margin-bottom:0.5rem">
-                    <label for="confirm_password" data-i18n="valid_pass_confirm">Confirm Password</label>
-                </div>
-                <div class="password-wrapper">
-                    <input type="password" id="confirm_password" class="form-input" autocomplete="new-password" style="padding-right: 40px;" required>
-                    <button type="button" class="icon-btn-reset password-toggle" onclick="togglePasswordVisibility('confirm_password', this)" data-i18n-title="show_password" aria-label="Show password">
-                        👁️
-                    </button>
-                </div>
-            </div>
+            <div style="text-align:left; margin-bottom:0.5rem"><label for="password" data-i18n="pass_label">Password</label></div>
+            <div class="password-wrapper"><input type="password" id="password" class="form-input" autocomplete="current-password" required style="padding-right: 40px;"><button type="button" class="icon-btn-reset password-toggle" onclick="togglePasswordVisibility('password', this)" data-i18n-title="show_password" aria-label="Show password">👁️</button></div>
+            <div class="confirm-password-section" style="margin-top: 1rem;"><div style="text-align:left; margin-bottom:0.5rem"><label for="confirm_password" data-i18n="valid_pass_confirm">Confirm Password</label></div><div class="password-wrapper"><input type="password" id="confirm_password" class="form-input" autocomplete="new-password" style="padding-right: 40px;" required><button type="button" class="icon-btn-reset password-toggle" onclick="togglePasswordVisibility('confirm_password', this)" data-i18n-title="show_password" aria-label="Show password">👁️</button></div></div>
 
             <!-- Registration Fields -->
             <div id="regFields" class="hidden">
-                <div style="text-align:left; margin-bottom:0.5rem">
-                    <label for="fullname" data-i18n="full_name">Full Name</label>
-                </div>
-                <input type="text" id="fullname" class="form-input" autocomplete="name">
+                <div style="text-align:left; margin-bottom:0.5rem" data-i18n="full_name">Full Name</div>
+                <input type="text" id="fullname" class="form-input">
 
                 <!-- Role Specific -->
                 <div id="chefFields" class="hidden">
-                    <div style="text-align:left; margin-bottom:0.5rem">
-                        <label for="address" data-i18n="kitchen_addr">Kitchen Address</label>
-                    </div>
                     <input type="text" id="address" data-i18n-placeholder="kitchen_addr" placeholder="Kitchen Address"
                         class="form-input">
-                    <div style="text-align:left; margin-bottom:0.5rem">
-                        <label for="chef_national_id" data-i18n="national_id">National ID</label>
-                    </div>
                     <input type="text" id="chef_national_id" data-i18n-placeholder="national_id"
                         placeholder="National ID" class="form-input">
                 </div>
 
                 <div id="customerFields" class="hidden">
-                    <div style="text-align:left; margin-bottom:0.5rem">
-                        <label for="phone" data-i18n="phone_label">Phone Number</label>
-                    </div>
-                    <input type="tel" id="phone" placeholder="Phone Number" class="form-input" autocomplete="tel">
+                    <input type="tel" id="phone" placeholder="Phone Number" class="form-input">
                     <div style="display:grid; grid-template-columns: 1fr 1fr; gap:10px">
-                        <div>
-                            <label for="lat" class="sr-only">Latitude</label>
-                            <input type="number" id="lat" placeholder="Lat" class="form-input">
-                        </div>
-                        <div>
-                            <label for="long" class="sr-only">Longitude</label>
-                            <input type="number" id="long" placeholder="Long" class="form-input">
-                        </div>
+                        <input type="number" id="lat" placeholder="Lat" class="form-input">
+                        <input type="number" id="long" placeholder="Long" class="form-input">
                     </div>
                 </div>
 
                 <div id="driverFields" class="hidden">
-                    <div style="text-align:left; margin-bottom:0.5rem">
-                        <label for="national_id" data-i18n="national_id">National ID</label>
-                    </div>
+                    <div style="text-align:left; margin-bottom:0.5rem">National ID</div>
                     <input type="text" id="national_id" class="form-input">
                     <div style="margin-bottom: 1rem;">
                         <label class="input-label" data-i18n="face_id_msg">Please enable camera</label>
@@ -187,82 +147,32 @@
         let role = roleParam || 'customer';
         let isLogin = !roleParam; // If role is specified in URL, default to Register mode
 
-        // If specific role requested, switch to register view immediately
-        if (roleParam) {
-            isLogin = false;
-        }
-
+        if (roleParam) isLogin = false;
         document.addEventListener('DOMContentLoaded', () => {
-            if (!isLogin) {
-                // Manually trigger register view setup without full toggleMode logic if needed
-                // Or just call toggleMode with isLogin initially false
-                isLogin = true; // Set to true so toggleMode switches it to false
-                toggleMode();
-            } else {
-                // Ensure confirm pass is hidden in login mode
-                document.querySelector('.confirm-password-section').classList.add('hidden');
-            }
+            if (!isLogin) { isLogin = true; toggleMode(); }
+            else { document.querySelector('.confirm-password-section').classList.add('hidden'); }
         });
-
         function togglePasswordVisibility(inputId, btn) {
-            const input = document.getElementById(inputId);
-            const lang = localStorage.getItem('elakeil_lang') || 'ar';
-            const t = (typeof translations !== 'undefined' && translations[lang]) ? translations[lang] : {};
-
-            if (input.type === 'password') {
-                input.type = 'text';
-                btn.innerHTML = '🙈';
-                btn.setAttribute('data-i18n-title', 'hide_password');
-                btn.setAttribute('aria-label', t.hide_password || 'Hide password');
-            } else {
-                input.type = 'password';
-                btn.innerHTML = '👁️';
-                btn.setAttribute('data-i18n-title', 'show_password');
-                btn.setAttribute('aria-label', t.show_password || 'Show password');
-            }
-            // Re-apply translations to update title if needed
-            if (typeof applyTranslations === 'function') {
-                applyTranslations(lang);
-            }
+            const input = document.getElementById(inputId), lang = localStorage.getItem('elakeil_lang') || 'ar', t = (typeof translations !== 'undefined' && translations[lang]) ? translations[lang] : {};
+            if (input.type === 'password') { input.type = 'text'; btn.innerHTML = '🙈'; btn.setAttribute('data-i18n-title', 'hide_password'); btn.setAttribute('aria-label', t.hide_password || 'Hide password'); }
+            else { input.type = 'password'; btn.innerHTML = '👁️'; btn.setAttribute('data-i18n-title', 'show_password'); btn.setAttribute('aria-label', t.show_password || 'Show password'); }
+            if (typeof applyTranslations === 'function') applyTranslations(lang);
         }
-
         function toggleMode() {
-            isLogin = !isLogin;
-            const lang = localStorage.getItem('elakeil_lang') || 'ar';
-
+            isLogin = !isLogin; const lang = localStorage.getItem('elakeil_lang') || 'ar';
             document.getElementById('regFields').classList.toggle('hidden', isLogin);
             document.querySelector('.confirm-password-section').classList.toggle('hidden', isLogin);
-
-            // Update Text using data-i18n
-            const submitBtn = document.getElementById('submitBtn');
-            const switchMsg = document.getElementById('switchMsg');
-            const title = document.querySelector('h2');
-
-            if (isLogin) {
-                title.setAttribute('data-i18n', 'login_title');
-                submitBtn.setAttribute('data-i18n', 'btn_login');
-                switchMsg.setAttribute('data-i18n', 'no_account');
-            } else {
-                title.setAttribute('data-i18n', role === 'chef' ? 'chef_register_title' :
-                                              role === 'driver' ? 'driver_register_title' :
-                                              'customer_register_title');
-                submitBtn.setAttribute('data-i18n', 'btn_register');
-                switchMsg.setAttribute('data-i18n', 'already_have_account');
-
-                // Show fields based on role
+            const submitBtn = document.getElementById('submitBtn'), switchMsg = document.getElementById('switchMsg'), title = document.querySelector('h2');
+            if (isLogin) { title.setAttribute('data-i18n', 'login_title'); submitBtn.setAttribute('data-i18n', 'btn_login'); switchMsg.setAttribute('data-i18n', 'no_account'); }
+            else {
+                title.setAttribute('data-i18n', role === 'chef' ? 'chef_register_title' : role === 'driver' ? 'driver_register_title' : 'customer_register_title');
+                submitBtn.setAttribute('data-i18n', 'btn_register'); switchMsg.setAttribute('data-i18n', 'already_have_account');
                 document.getElementById('chefFields').classList.toggle('hidden', role !== 'chef');
                 document.getElementById('customerFields').classList.toggle('hidden', role !== 'customer');
-                if (role === 'driver') {
-                    document.getElementById('driverFields').classList.remove('hidden');
-                    startWebcam();
-                } else {
-                    document.getElementById('driverFields').classList.add('hidden');
-                }
+                if (role === 'driver') { document.getElementById('driverFields').classList.remove('hidden'); startWebcam(); }
+                else { document.getElementById('driverFields').classList.add('hidden'); }
             }
-
-            if (typeof applyTranslations === 'function') {
-                applyTranslations(lang);
-            }
+            if (typeof applyTranslations === 'function') applyTranslations(lang);
         }
 
         // Webcam

@@ -195,49 +195,11 @@ select.lang-selector {
 .hidden {
     display: none !important;
 }
-
-.sr-only {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    padding: 0;
-    margin: -1px;
-    overflow: hidden;
-    clip: rect(0, 0, 0, 0);
-    white-space: nowrap;
-    border-width: 0;
-}
-
-.icon-btn-reset {
-    background: none;
-    border: none;
-    padding: 0;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: inherit;
-    font: inherit;
-}
-
-.password-wrapper {
-    position: relative;
-    width: 100%;
-}
-
-.password-toggle {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    right: 12px;
-    font-size: 1.2rem;
-    color: var(--text-secondary);
-}
-
-body.rtl .password-toggle {
-    right: auto;
-    left: 12px;
-}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border-width:0;}
+.icon-btn-reset{background:none;border:none;padding:0;cursor:pointer;display:flex;align-items:center;justify-content:center;color:inherit;font:inherit;}
+.password-wrapper{position:relative;width:100%;}
+.password-toggle{position:absolute;top:50%;transform:translateY(-50%);right:12px;font-size:1.2rem;color:var(--text-secondary);}
+body.rtl .password-toggle{right:auto;left:12px;}
 
 /* Landing Page Refactor (Talabat Style) */
 
