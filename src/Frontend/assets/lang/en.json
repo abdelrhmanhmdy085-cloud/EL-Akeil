@@ -25,8 +25,8 @@
     "national_id": "National ID",
     "pass_mismatch": "Passwords do not match!",
     "btn_login": "Login",
-    "btn_register": "Register",
-    "no_account": "Don't have an account? Register",
+    "btn_register": "Register Now",
+    "no_account": "Don't have an account? Register Now",
     "face_id_msg": "Please enable camera for Face ID",
     "add_to_cart": "Add to Cart",
     "checkout": "Checkout",
@@ -72,7 +72,7 @@
     "kitchen_address": "Kitchen Address",
     "driver_vehicle": "Vehicle Type",
     "driver_license": "Driving License Number",
-    "already_have_account": "Already have an account?",
+    "already_have_account": "Already have an account? Login",
     "dont_have_account": "Don't have an account?",
     "forgot_password": "Forgot Password?",
     "categories_title": "Browse by Category",
@@ -180,5 +180,10 @@
     "processing": "Processing your order...",
     "success_message": "âœ… Your subscription has been activated successfully! Redirecting...",
     "error_message": "An error occurred while processing your order",
-    "choose_delivery_time": "Choose Delivery Time"
+    "choose_delivery_time": "Choose Delivery Time",
+    "show_password": "Show Password",
+    "hide_password": "Hide Password",
+    "username_label": "Username",
+    "customer_register_title": "Customer Registration",
+    "phone_label": "Phone Number"
 }
