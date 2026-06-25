@@ -175,5 +175,10 @@
     "processing": "جاري معالجة طلبك...",
     "success_message": "✅ تم تفعيل اشتراكك بنجاح! سيتم إعادة توجيهك قريبا...",
     "error_message": "حدث خطأ أثناء معالجة طلبك",
-    "choose_delivery_time": "اختر وقت التوصيل"
+    "choose_delivery_time": "اختر وقت التوصيل",
+    "show_password": "إظهار كلمة المرور",
+    "hide_password": "إخفاء كلمة المرور",
+    "username_label": "اسم المستخدم",
+    "customer_register_title": "تسجيل عميل جديد",
+    "phone_label": "رقم الهاتف"
 }
