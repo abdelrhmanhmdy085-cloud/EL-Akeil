@@ -80,8 +80,9 @@ function initLanguage() {
             const nav = document.getElementById('langControls');
             if (nav) {
                 nav.innerHTML = `
-                    <button type="button" class="lang-toggle-btn icon-btn-reset" onclick="toggleLanguage()"
-                        data-i18n-title="lang_toggle_label" data-i18n-aria-label="lang_toggle_label">
+                    <button type="button" class="lang-toggle-btn" onclick="toggleLanguage()"
+                        data-i18n-title="lang_toggle_label" data-i18n-aria-label="lang_toggle_label"
+                        style="appearance:none; background:none; border:none; cursor:pointer; font:inherit; color:inherit; display:flex; align-items:center; gap:5px; padding:8px 12px; border-radius:20px; background:rgba(94, 33, 41, 0.1); transition:all 0.3s ease; border:1px solid var(--primary); color:var(--text-primary);">
                         🌍 <span id="lang-label">${saved === 'ar' ? 'EN' : 'AR'}</span>
                     </button>
                 `;
@@ -92,8 +93,9 @@ function initLanguage() {
         const nav = document.getElementById('langControls');
         if (nav) {
             nav.innerHTML = `
-                <button type="button" class="lang-toggle-btn icon-btn-reset" onclick="toggleLanguage()"
-                    data-i18n-title="lang_toggle_label" data-i18n-aria-label="lang_toggle_label">
+                <button type="button" class="lang-toggle-btn" onclick="toggleLanguage()"
+                    data-i18n-title="lang_toggle_label" data-i18n-aria-label="lang_toggle_label"
+                    style="appearance:none; background:none; border:none; cursor:pointer; font:inherit; color:inherit; display:flex; align-items:center; gap:5px; padding:8px 12px; border-radius:20px; background:rgba(94, 33, 41, 0.1); transition:all 0.3s ease; border:1px solid var(--primary); color:var(--text-primary);">
                     🌍 <span id="lang-label">${saved === 'ar' ? 'EN' : 'AR'}</span>
                 </button>
             `;
