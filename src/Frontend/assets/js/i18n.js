@@ -54,16 +54,6 @@ function applyTranslations(lang) {
         const key = el.getAttribute('data-i18n-placeholder');
         if (t[key]) el.placeholder = t[key];
     });
-
-    document.querySelectorAll('[data-i18n-title]').forEach(el => {
-        const key = el.getAttribute('data-i18n-title');
-        if (t[key]) el.title = t[key];
-    });
-
-    document.querySelectorAll('[data-i18n-aria-label]').forEach(el => {
-        const key = el.getAttribute('data-i18n-aria-label');
-        if (t[key]) el.setAttribute('aria-label', t[key]);
-    });
 }
 
 function initLanguage() {
@@ -75,17 +65,19 @@ function initLanguage() {
     }
 
     const nav = document.getElementById('langControls');
-    if (nav && !document.getElementById('lang-toggle-btn')) {
-        const toggleBtn = document.createElement('button');
+    let toggleBtn = document.getElementById('lang-toggle-btn');
+    if (nav && !toggleBtn) {
+        toggleBtn = document.createElement('button');
         toggleBtn.id = 'lang-toggle-btn';
         toggleBtn.type = 'button';
-        toggleBtn.className = 'lang-toggle-btn icon-btn-reset';
+        toggleBtn.className = 'lang-toggle-btn';
         toggleBtn.onclick = toggleLanguage;
-        toggleBtn.setAttribute('data-i18n-title', 'lang_toggle_label');
-        toggleBtn.setAttribute('data-i18n-aria-label', 'lang_toggle_label');
-
+        toggleBtn.title = 'Switch Language';
         toggleBtn.innerHTML = `🌍 <span id="lang-label">${saved === 'ar' ? 'EN' : 'AR'}</span>`;
         nav.prepend(toggleBtn);
+    } else if (toggleBtn) {
+        const label = document.getElementById('lang-label');
+        if (label) label.innerText = saved === 'ar' ? 'EN' : 'AR';
     }
     
     // Wait for DOM to be fully ready before loading language
