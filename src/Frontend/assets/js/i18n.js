@@ -65,12 +65,19 @@ function initLanguage() {
     }
 
     const nav = document.getElementById('langControls');
-    if (nav) {
-        nav.innerHTML = `
-            <div class="lang-toggle-btn" onclick="toggleLanguage()" title="Switch Language">
-                🌍 <span id="lang-label">${saved === 'ar' ? 'EN' : 'AR'}</span>
-            </div>
-        `;
+    let toggleBtn = document.getElementById('lang-toggle-btn');
+    if (nav && !toggleBtn) {
+        toggleBtn = document.createElement('button');
+        toggleBtn.id = 'lang-toggle-btn';
+        toggleBtn.type = 'button';
+        toggleBtn.className = 'lang-toggle-btn';
+        toggleBtn.onclick = toggleLanguage;
+        toggleBtn.title = 'Switch Language';
+        toggleBtn.innerHTML = `🌍 <span id="lang-label">${saved === 'ar' ? 'EN' : 'AR'}</span>`;
+        nav.prepend(toggleBtn);
+    } else if (toggleBtn) {
+        const label = document.getElementById('lang-label');
+        if (label) label.innerText = saved === 'ar' ? 'EN' : 'AR';
     }
     
     // Wait for DOM to be fully ready before loading language

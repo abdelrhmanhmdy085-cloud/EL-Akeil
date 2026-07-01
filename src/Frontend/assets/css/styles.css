@@ -18,6 +18,11 @@
     --font-en: 'Inter', sans-serif;
 }
 
+:focus-visible {
+    outline: 3px solid var(--primary);
+    outline-offset: 2px;
+}
+
 * {
     box-sizing: border-box;
     margin: 0;
@@ -236,6 +241,8 @@ select.lang-selector {
     transition: all 0.3s ease;
     border: 1px solid var(--primary);
     color: var(--text-primary);
+    appearance: none;
+    font-family: inherit;
 }
 
 .lang-toggle-btn:hover {
