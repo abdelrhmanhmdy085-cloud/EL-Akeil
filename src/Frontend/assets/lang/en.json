@@ -4,10 +4,8 @@
     "portal_title": "El Akil - Portal",
     "hero_title": "Home-cooked meals to your door",
     "hero_subtitle": "Order from the best chefs nearby",
-    "search_label": "Search for area, street, landmark...",
-    "search_placeholder": "Search for area, street, landmark...",
+    "search_placeholder": "Search for food or chef...",
     "search_btn": "Search",
-    "locate_me": "Locate me",
     "categories": "Categories",
     "footer_text": "All rights reserved to El Akeil 2026",
     "eat_title": "I want to Eat",
@@ -182,5 +180,7 @@
     "processing": "Processing your order...",
     "success_message": "âœ… Your subscription has been activated successfully! Redirecting...",
     "error_message": "An error occurred while processing your order",
-    "choose_delivery_time": "Choose Delivery Time"
+    "choose_delivery_time": "Choose Delivery Time",
+    "search_label": "Search for food or chef...",
+    "locate_me": "Locate me"
 }
