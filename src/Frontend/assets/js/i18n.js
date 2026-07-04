@@ -54,6 +54,16 @@ function applyTranslations(lang) {
         const key = el.getAttribute('data-i18n-placeholder');
         if (t[key]) el.placeholder = t[key];
     });
+
+    document.querySelectorAll('[data-i18n-title]').forEach(el => {
+        const key = el.getAttribute('data-i18n-title');
+        if (t[key]) el.title = t[key];
+    });
+
+    document.querySelectorAll('[data-i18n-aria-label]').forEach(el => {
+        const key = el.getAttribute('data-i18n-aria-label');
+        if (t[key]) el.setAttribute('aria-label', t[key]);
+    });
 }
 
 function initLanguage() {
@@ -65,12 +75,20 @@ function initLanguage() {
     }
 
     const nav = document.getElementById('langControls');
-    if (nav) {
-        nav.innerHTML = `
-            <div class="lang-toggle-btn" onclick="toggleLanguage()" title="Switch Language">
-                🌍 <span id="lang-label">${saved === 'ar' ? 'EN' : 'AR'}</span>
-            </div>
+    if (nav && !document.getElementById('lang-toggle-btn')) {
+        const toggleBtn = document.createElement('button');
+        toggleBtn.type = 'button';
+        toggleBtn.id = 'lang-toggle-btn';
+        toggleBtn.className = 'lang-toggle-btn';
+        toggleBtn.setAttribute('data-i18n-title', 'lang_toggle_label');
+        toggleBtn.setAttribute('data-i18n-aria-label', 'lang_toggle_label');
+
+        toggleBtn.innerHTML = `
+            🌍 <span id="lang-label">${saved === 'ar' ? 'EN' : 'AR'}</span>
         `;
+
+        toggleBtn.addEventListener('click', toggleLanguage);
+        nav.prepend(toggleBtn);
     }
     
     // Wait for DOM to be fully ready before loading language
@@ -86,12 +104,12 @@ function toggleLanguage() {
     // Toggle logic: If Ar -> En, else -> Ar
     const next = current === 'ar' ? 'en' : 'ar';
 
-    // Update label to show the OTHER option
-    const label = document.getElementById('lang-label');
-    if (label) label.innerText = next === 'ar' ? 'EN' : 'AR';
-
     console.log(`Switching language from ${current} to ${next}`);
-    loadLanguage(next);
+    loadLanguage(next).then(() => {
+        // Update label to show the OTHER option
+        const label = document.getElementById('lang-label');
+        if (label) label.innerText = next === 'ar' ? 'EN' : 'AR';
+    });
 }
 
 document.addEventListener('DOMContentLoaded', initLanguage);
