@@ -24,6 +24,24 @@
     padding: 0;
 }
 
+/* Accessibility Utilities */
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+}
+
+:focus-visible {
+    outline: 3px solid var(--primary);
+    outline-offset: 2px;
+}
+
 body {
     margin: 0;
     font-family: 'Cairo', 'Inter', sans-serif;
@@ -236,6 +254,8 @@ select.lang-selector {
     transition: all 0.3s ease;
     border: 1px solid var(--primary);
     color: var(--text-primary);
+    font-family: inherit;
+    appearance: none;
 }
 
 .lang-toggle-btn:hover {
