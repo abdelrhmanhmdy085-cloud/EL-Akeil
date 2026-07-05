@@ -180,5 +180,9 @@
     "processing": "Processing your order...",
     "success_message": "âœ… Your subscription has been activated successfully! Redirecting...",
     "error_message": "An error occurred while processing your order",
-    "choose_delivery_time": "Choose Delivery Time"
+    "choose_delivery_time": "Choose Delivery Time",
+    "locate_me": "Locate Me",
+    "notifications": "Notifications",
+    "whatsapp_contact": "Contact us on WhatsApp",
+    "lang_toggle_label": "Switch Language"
 }
