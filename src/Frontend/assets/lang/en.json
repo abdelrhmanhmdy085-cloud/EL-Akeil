@@ -106,7 +106,7 @@
     "plan_luxury": "Luxury Plan",
     "plan_meals": "Monthly Meals",
     "plan_month": "One Month",
-    "most_popular": "Most Popular â­",
+    "most_popular": "Most Popular ⭐",
     "select_plan": "Choose This Plan",
     "meals": "Meals",
     "free_delivery": "Free Delivery",
@@ -141,7 +141,7 @@
     "egp": "EGP",
     "checkout_title": "Checkout - El Akeil",
     "back_to_plans": "Back to Plans",
-    "back_to_plan_selection": "â† Back to Plan Selection",
+    "back_to_plan_selection": "← Back to Plan Selection",
     "complete_subscription": "âœ… Complete Your Subscription",
     "personal_info": "Personal Information",
     "email": "Email",
@@ -168,7 +168,7 @@
     "subscription_period": "Subscription Period",
     "one_month": "One Month",
     "total": "Total",
-    "guaranteed_features": "âœ¨ Guaranteed Benefits:",
+    "guaranteed_features": "✨ Guaranteed Benefits:",
     "free_daily_delivery": "âœ“ Free Daily Delivery",
     "daily_changes": "âœ“ Change Order Daily",
     "support_24_7": "âœ“ 24/7 Support",
@@ -180,5 +180,9 @@
     "processing": "Processing your order...",
     "success_message": "âœ… Your subscription has been activated successfully! Redirecting...",
     "error_message": "An error occurred while processing your order",
-    "choose_delivery_time": "Choose Delivery Time"
+    "choose_delivery_time": "Choose Delivery Time",
+    "locate_me": "Locate me",
+    "search_label": "Search for area, street, landmark...",
+    "notifications": "Notifications",
+    "lang_toggle_label": "Switch Language"
 }
