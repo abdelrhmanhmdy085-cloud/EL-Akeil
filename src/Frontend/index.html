@@ -206,14 +206,14 @@
       <span>El Akeil</span>
     </a>
     <div class="nav-controls actions" id="langControls">
-      <div id="notiContainer" style="position:relative; margin-right:15px; cursor:pointer;" class="hidden">
+      <button type="button" id="notiContainer" class="icon-btn-reset hidden" data-i18n-title="notifications" data-i18n-aria-label="notifications" style="position:relative; margin-right:15px; cursor:pointer;">
         <span style="font-size:1.5rem;">🔔</span>
         <span id="notiBadge"
           style="position:absolute; top:-5px; right:-5px; background:red; color:white; border-radius:50%; font-size:0.7rem; padding:2px 5px; display:none;">0</span>
         <div id="notiDropdown"
           style="position:absolute; top:30px; right:0; background:var(--bg-card); border:1px solid var(--border); width:250px; display:none; flex-direction:column; z-index:1000;">
         </div>
-      </div>
+      </button>
       <a href="auth.html" class="btn btn-order" data-i18n="nav_login">Login / Register</a>
     </div>
   </nav>
@@ -225,16 +225,16 @@
         اطلب الآن من أفضل الشيفات في منطقتك</p>
 
       <div class="search-box-container">
-        <button class="search-btn">ابحث</button>
-        <input type="text" class="search-input" placeholder="ابحث عن منطقة، شارع، معلم معروف...">
-        <div class="location-icon">📍</div>
+        <button class="search-btn" data-i18n="search_btn">ابحث</button>
+        <input type="text" id="searchInput" class="search-input" data-i18n-placeholder="search_placeholder" data-i18n-aria-label="search_label" placeholder="ابحث عن منطقة، شارع، معلم معروف...">
+        <button type="button" id="locateBtn" class="location-btn icon-btn-reset" data-i18n-title="locate_me" data-i18n-aria-label="locate_me">📍</button>
       </div>
 
       <!-- Category Filter Buttons -->
       <div class="category-filter-section" style="margin-top: 2rem; text-align: center;">
         <h3 style="font-size: 1.2rem; margin-bottom: 1rem; color: #333;" data-i18n="filter_by_type">تصفح حسب النوع</h3>
         <div class="category-filter-buttons" id="categoryFilterButtons" style="display: flex; flex-wrap: wrap; justify-content: center; gap: 0.8rem;">
-          <div class="loading-spinner">جاري التحميل...</div>
+          <div class="loading-spinner" data-i18n="loading">جاري التحميل...</div>
         </div>
       </div>
     </div>
