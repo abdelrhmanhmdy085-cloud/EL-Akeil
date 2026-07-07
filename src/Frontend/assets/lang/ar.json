@@ -4,8 +4,8 @@
     "portal_title": "الأكيل - El Akil",
     "hero_title": "أكل بيتي مضمون لحد باب بيتك",
     "hero_subtitle": "اطلب الآن من أفضل الشيفات في منطقتك",
-    "search_placeholder": "ابحث عن أكلة أو شيف...",
-    "search_btn": "بحث",
+    "search_placeholder": "ابحث عن منطقة، شارع، معلم معروف...",
+    "search_btn": "ابحث",
     "categories": "الأقسام",
     "footer_text": "جميع الحقوق محفوظة للأكيل 2026",
     "eat_title": "عايز أكل",
@@ -175,5 +175,7 @@
     "processing": "جاري معالجة طلبك...",
     "success_message": "✅ تم تفعيل اشتراكك بنجاح! سيتم إعادة توجيهك قريبا...",
     "error_message": "حدث خطأ أثناء معالجة طلبك",
-    "choose_delivery_time": "اختر وقت التوصيل"
+    "choose_delivery_time": "اختر وقت التوصيل",
+    "search_label": "ابحث عن الطعام",
+    "locate_me": "تحديد موقعي"
 }
