@@ -25,6 +25,7 @@
 </head>
 
 <body>
+  <a href="#main-content" class="skip-link" data-i18n="skip_to_content">انتقل إلى المحتوى</a>
   <!-- Splash Screen -->
   <div id="splash-screen">
     <div class="splash-content">
@@ -225,9 +226,10 @@
         اطلب الآن من أفضل الشيفات في منطقتك</p>
 
       <div class="search-box-container">
-        <button class="search-btn">ابحث</button>
-        <input type="text" class="search-input" placeholder="ابحث عن منطقة، شارع، معلم معروف...">
-        <div class="location-icon">📍</div>
+        <button class="search-btn" data-i18n="search_btn">ابحث</button>
+        <label for="searchInput" class="sr-only" data-i18n="search_label">Search</label>
+        <input type="text" id="searchInput" class="search-input" data-i18n-placeholder="search_placeholder" placeholder="ابحث...">
+        <button type="button" class="location-icon icon-btn-reset" id="locateBtn" data-i18n-title="locate_me" data-i18n-aria-label="locate_me">📍</button>
       </div>
 
       <!-- Category Filter Buttons -->
@@ -250,7 +252,7 @@
   </header>
 
   <div class="bg-white-section">
-    <main class="container main-content">
+    <main class="container main-content" id="main-content">
       <!-- SECTION 2: FOOD LEVELS (Horizontal Scroll) -->
       <section class="food-levels-section">
         <h2 class="section-title" data-i18n="food_levels">مستويات الأكل</h2>
