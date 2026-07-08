@@ -54,38 +54,29 @@ function applyTranslations(lang) {
         const key = el.getAttribute('data-i18n-placeholder');
         if (t[key]) el.placeholder = t[key];
     });
-
-    document.querySelectorAll('[data-i18n-aria-label]').forEach(el => {
-        const key = el.getAttribute('data-i18n-aria-label');
-        if (t[key]) el.setAttribute('aria-label', t[key]);
-    });
-
-    document.querySelectorAll('[data-i18n-title]').forEach(el => {
-        const key = el.getAttribute('data-i18n-title');
-        if (t[key]) el.setAttribute('title', t[key]);
+    ['aria-label', 'title'].forEach(attr => {
+        document.querySelectorAll(`[data-i18n-${attr}]`).forEach(el => {
+            const key = el.getAttribute(`data-i18n-${attr}`);
+            if (t[key]) el.setAttribute(attr, t[key]);
+        });
     });
 }
 
 function initLanguage() {
-    let saved = localStorage.getItem(LANG_KEY);
-    if (!saved) {
-        const browserLang = navigator.language.split('-')[0];
-        saved = SUPPORTED_LANGS.includes(browserLang) ? browserLang : DEFAULT_LANG;
-    }
-
+    let saved = localStorage.getItem(LANG_KEY) || DEFAULT_LANG;
     const nav = document.getElementById('langControls');
     if (nav && !document.getElementById('lang-toggle-btn')) {
-        const toggleBtn = document.createElement('button');
-        toggleBtn.id = 'lang-toggle-btn';
-        toggleBtn.type = 'button';
-        toggleBtn.className = 'lang-toggle-btn icon-btn-reset';
-        toggleBtn.setAttribute('data-i18n-title', 'lang_toggle_label');
-        toggleBtn.setAttribute('data-i18n-aria-label', 'lang_toggle_label');
-        toggleBtn.onclick = toggleLanguage;
-        toggleBtn.innerHTML = `🌍 <span id="lang-label">${saved === 'ar' ? 'EN' : 'AR'}</span>`;
-        nav.prepend(toggleBtn);
+        const btn = document.createElement('button');
+        btn.id = 'lang-toggle-btn';
+        btn.type = 'button';
+        btn.className = 'lang-toggle-btn icon-btn-reset';
+        btn.onclick = toggleLanguage;
+        btn.innerHTML = `🌍 <span id="lang-label">${saved === 'ar' ? 'EN' : 'AR'}</span>`;
+        btn.setAttribute('data-i18n-title', 'lang_toggle_label');
+        nav.prepend(btn);
     }
     
+    // Wait for DOM to be fully ready before loading language
     if (document.readyState === 'loading') {
         document.addEventListener('DOMContentLoaded', () => loadLanguage(saved));
     } else {
