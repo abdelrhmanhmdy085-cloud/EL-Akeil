@@ -76,15 +76,15 @@ function initLanguage() {
 
     const nav = document.getElementById('langControls');
     if (nav && !document.getElementById('lang-toggle-btn')) {
-        const toggleBtn = document.createElement('button');
-        toggleBtn.id = 'lang-toggle-btn';
-        toggleBtn.type = 'button';
-        toggleBtn.className = 'icon-btn-reset lang-toggle-btn';
-        toggleBtn.onclick = toggleLanguage;
-        toggleBtn.setAttribute('data-i18n-title', 'lang_toggle_label');
-        toggleBtn.setAttribute('data-i18n-aria-label', 'lang_toggle_label');
-        toggleBtn.innerHTML = `🌍 <span id="lang-label">${saved === 'ar' ? 'EN' : 'AR'}</span>`;
-        nav.prepend(toggleBtn);
+        const btn = document.createElement('button');
+        btn.id = 'lang-toggle-btn';
+        btn.type = 'button';
+        btn.className = 'icon-btn-reset lang-toggle-btn';
+        btn.onclick = toggleLanguage;
+        btn.setAttribute('data-i18n-title', 'lang_toggle_label');
+        btn.setAttribute('data-i18n-aria-label', 'lang_toggle_label');
+        btn.innerHTML = `🌍 <span id="lang-label">${saved === 'ar' ? 'EN' : 'AR'}</span>`;
+        nav.prepend(btn);
     }
     
     // Wait for DOM to be fully ready before loading language
