@@ -13,12 +13,6 @@ async function loadLanguage(lang) {
     document.documentElement.lang = lang;
     document.body.className = direction;
 
-    // Update lang-label if it exists to show the opposite option
-    const label = document.getElementById('lang-label');
-    if (label) {
-        label.innerText = lang === 'ar' ? 'EN' : 'AR';
-    }
-
     // Load JSON
     try {
         if (!translations[lang]) {
@@ -82,30 +76,11 @@ function initLanguage() {
 
     const nav = document.getElementById('langControls');
     if (nav) {
-        if (!document.getElementById('lang-toggle-btn')) {
-            const toggleBtn = document.createElement('button');
-            toggleBtn.type = 'button';
-            toggleBtn.id = 'lang-toggle-btn';
-            toggleBtn.className = 'lang-toggle-btn';
-            toggleBtn.onclick = toggleLanguage;
-            toggleBtn.setAttribute('data-i18n-title', 'switch_language');
-            toggleBtn.setAttribute('data-i18n-aria-label', 'switch_language');
-
-            // Icon button visual reset
-            toggleBtn.style.background = 'none';
-            toggleBtn.style.border = 'none';
-            toggleBtn.style.cursor = 'pointer';
-            toggleBtn.style.fontFamily = 'inherit';
-            toggleBtn.style.fontSize = 'inherit';
-            toggleBtn.style.color = 'inherit';
-            toggleBtn.style.display = 'inline-flex';
-            toggleBtn.style.alignItems = 'center';
-            toggleBtn.style.padding = '4px 8px';
-
-            toggleBtn.innerHTML = `🌍 <span id="lang-label" style="margin-inline-start: 4px;">${saved === 'ar' ? 'EN' : 'AR'}</span>`;
-
-            nav.prepend(toggleBtn);
-        }
+        nav.innerHTML = `
+            <div class="lang-toggle-btn" onclick="toggleLanguage()" title="Switch Language">
+                🌍 <span id="lang-label">${saved === 'ar' ? 'EN' : 'AR'}</span>
+            </div>
+        `;
     }
     
     // Wait for DOM to be fully ready before loading language
@@ -121,7 +96,7 @@ function toggleLanguage() {
     // Toggle logic: If Ar -> En, else -> Ar
     const next = current === 'ar' ? 'en' : 'ar';
 
-    // Update label to show the OTHER option immediately
+    // Update label to show the OTHER option
     const label = document.getElementById('lang-label');
     if (label) label.innerText = next === 'ar' ? 'EN' : 'AR';
 
