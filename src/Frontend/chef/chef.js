@@ -50,7 +50,8 @@ function switchSection(sectionName) {
 
     // Show active section
     document.getElementById(`${sectionName}-section`).classList.add('active');
-    event.target.classList.add('active');
+    const activeNav = document.querySelector(`.nav-item[data-section="${sectionName}"]`);
+    if (activeNav) activeNav.classList.add('active');
 
     // Update title
     const titles = {
@@ -456,8 +457,21 @@ function closeAddDishModal() {
 
 // Notification Helper
 function showNotification(message, type = 'info') {
-    // This can be enhanced with a proper toast library
-    alert(message);
+    let container = document.getElementById('toast-container');
+    if (!container) {
+        container = document.createElement('div');
+        container.id = 'toast-container';
+        document.body.appendChild(container);
+    }
+    const toast = document.createElement('div');
+    toast.className = `toast toast-${type}`;
+    toast.textContent = message;
+    container.appendChild(toast);
+    setTimeout(() => toast.classList.add('show'), 10);
+    setTimeout(() => {
+        toast.classList.remove('show');
+        setTimeout(() => toast.remove(), 300);
+    }, 3500);
 }
 
 // Logout
