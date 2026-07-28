@@ -194,17 +194,10 @@ function createDishCard(dish) {
         <div class="dish-info">
             <div class="dish-name">${dish.name}</div>
             <div class="dish-description">${dish.description || 'بدون وصف'}</div>
-            <div class="dish-price" style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px;">
-                <span>${dish.price.toFixed(2)} ر.س</span>
-                <span class="status-badge ${dish.available ? 'status-completed' : 'status-pending'}">
-                    ${dish.available ? 'متوفر' : 'غير متوفر'}
-                </span>
-            </div>
+            <div class="dish-price">${dish.price.toFixed(2)} ر.س</div>
             <div class="dish-actions">
                 <button class="dish-edit" onclick="editDish(${dish.id})">✏️ تعديل</button>
-                <button class="dish-toggle" onclick="toggleAvailability(${dish.id})" title="${dish.available ? 'تعطيل توفر الطبق' : 'تفعيل توفر الطبق'}" aria-label="${dish.available ? 'تعطيل توفر الطبق' : 'تفعيل توفر الطبق'}">
-                    ${dish.available ? '⏸️ تعطيل' : '▶️ تفعيل'}
-                </button>
+                <button class="dish-toggle" onclick="toggleAvailability(${dish.id})">${dish.available ? '🔴' : '🟢'}</button>
                 <button class="dish-delete" onclick="deleteDish(${dish.id})">🗑️ حذف</button>
             </div>
         </div>
