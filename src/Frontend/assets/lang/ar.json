@@ -175,16 +175,5 @@
     "processing": "جاري معالجة طلبك...",
     "success_message": "✅ تم تفعيل اشتراكك بنجاح! سيتم إعادة توجيهك قريبا...",
     "error_message": "حدث خطأ أثناء معالجة طلبك",
-    "choose_delivery_time": "اختر وقت التوصيل",
-    "skip_to_content": "تخطي إلى المحتوى",
-    "switch_language": "تبديل اللغة",
-    "locate_me": "حدد موقعي",
-    "lang_toggle_label": "تبديل اللغة",
-    "search_label": "بحث",
-    "username_label": "اسم المستخدم",
-    "show_password": "عرض كلمة المرور",
-    "hide_password": "إخفاء كلمة المرور",
-    "whatsapp_contact": "تواصل معنا على واتس آب",
-    "notifications": "الإشعارات",
-    "customer_register_title": "تسجيل حساب عميل"
+    "choose_delivery_time": "اختر وقت التوصيل"
 }
