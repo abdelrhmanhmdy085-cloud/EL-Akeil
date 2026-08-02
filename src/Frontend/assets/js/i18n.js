@@ -26,6 +26,8 @@ async function loadLanguage(lang) {
             console.log(`Language loaded: ${lang}, keys:`, Object.keys(translations[lang]).length);
         }
         applyTranslations(lang);
+        const label = document.getElementById('lang-label');
+        if (label) label.innerText = lang === 'ar' ? 'EN' : 'AR';
     } catch (e) {
         console.error('Failed to load language:', lang, e);
     }
@@ -54,6 +56,16 @@ function applyTranslations(lang) {
         const key = el.getAttribute('data-i18n-placeholder');
         if (t[key]) el.placeholder = t[key];
     });
+
+    document.querySelectorAll('[data-i18n-title]').forEach(el => {
+        const key = el.getAttribute('data-i18n-title');
+        if (t[key]) el.title = t[key];
+    });
+
+    document.querySelectorAll('[data-i18n-aria-label]').forEach(el => {
+        const key = el.getAttribute('data-i18n-aria-label');
+        if (t[key]) el.setAttribute('aria-label', t[key]);
+    });
 }
 
 function initLanguage() {
@@ -66,11 +78,24 @@ function initLanguage() {
 
     const nav = document.getElementById('langControls');
     if (nav) {
-        nav.innerHTML = `
-            <div class="lang-toggle-btn" onclick="toggleLanguage()" title="Switch Language">
-                🌍 <span id="lang-label">${saved === 'ar' ? 'EN' : 'AR'}</span>
-            </div>
-        `;
+        // Remove obsolete select elements
+        const oldSelects = nav.querySelectorAll('select.lang-selector');
+        oldSelects.forEach(select => select.remove());
+
+        if (!document.getElementById('lang-toggle-btn')) {
+            const toggleBtn = document.createElement('button');
+            toggleBtn.type = 'button';
+            toggleBtn.id = 'lang-toggle-btn';
+            toggleBtn.className = 'lang-toggle-btn';
+            toggleBtn.onclick = toggleLanguage;
+            toggleBtn.setAttribute('data-i18n-title', 'switch_language');
+            toggleBtn.setAttribute('data-i18n-aria-label', 'switch_language');
+            toggleBtn.title = saved === 'ar' ? 'Switch Language' : 'تبديل اللغة';
+            toggleBtn.setAttribute('aria-label', saved === 'ar' ? 'Switch Language' : 'تبديل اللغة');
+            toggleBtn.style.fontFamily = 'inherit';
+            toggleBtn.innerHTML = `🌍 <span id="lang-label">${saved === 'ar' ? 'EN' : 'AR'}</span>`;
+            nav.prepend(toggleBtn);
+        }
     }
     
     // Wait for DOM to be fully ready before loading language

@@ -175,5 +175,12 @@
     "processing": "جاري معالجة طلبك...",
     "success_message": "✅ تم تفعيل اشتراكك بنجاح! سيتم إعادة توجيهك قريبا...",
     "error_message": "حدث خطأ أثناء معالجة طلبك",
-    "choose_delivery_time": "اختر وقت التوصيل"
+    "choose_delivery_time": "اختر وقت التوصيل",
+    "switch_language": "تبديل اللغة",
+    "skip_to_content": "الذهاب إلى المحتوى الأساسي",
+    "error_required": "هذا الحقل مطلوب",
+    "error_email": "بريد إلكتروني غير صالح",
+    "error_password": "كلمة المرور قصيرة جداً (8 أحرف على الأقل)",
+    "error_national_id": "الرقم القومي يجب أن يكون 14 رقماً",
+    "forgot_password": "هل نسيت كلمة المرور؟"
 }
