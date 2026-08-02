@@ -26,8 +26,6 @@ async function loadLanguage(lang) {
             console.log(`Language loaded: ${lang}, keys:`, Object.keys(translations[lang]).length);
         }
         applyTranslations(lang);
-        const label = document.getElementById('lang-label');
-        if (label) label.innerText = lang === 'ar' ? 'EN' : 'AR';
     } catch (e) {
         console.error('Failed to load language:', lang, e);
     }
@@ -78,7 +76,6 @@ function initLanguage() {
 
     const nav = document.getElementById('langControls');
     if (nav) {
-        // Remove obsolete select elements
         const oldSelects = nav.querySelectorAll('select.lang-selector');
         oldSelects.forEach(select => select.remove());
 
@@ -90,10 +87,8 @@ function initLanguage() {
             toggleBtn.onclick = toggleLanguage;
             toggleBtn.setAttribute('data-i18n-title', 'switch_language');
             toggleBtn.setAttribute('data-i18n-aria-label', 'switch_language');
-            toggleBtn.title = saved === 'ar' ? 'Switch Language' : 'تبديل اللغة';
-            toggleBtn.setAttribute('aria-label', saved === 'ar' ? 'Switch Language' : 'تبديل اللغة');
             toggleBtn.style.fontFamily = 'inherit';
-            toggleBtn.innerHTML = `🌍 <span id="lang-label">${saved === 'ar' ? 'EN' : 'AR'}</span>`;
+            toggleBtn.innerHTML = `🌍 <span id="lang-label" data-i18n="lang_toggle_label"></span>`;
             nav.prepend(toggleBtn);
         }
     }
@@ -108,13 +103,7 @@ function initLanguage() {
 
 function toggleLanguage() {
     const current = localStorage.getItem(LANG_KEY) || DEFAULT_LANG;
-    // Toggle logic: If Ar -> En, else -> Ar
     const next = current === 'ar' ? 'en' : 'ar';
-
-    // Update label to show the OTHER option
-    const label = document.getElementById('lang-label');
-    if (label) label.innerText = next === 'ar' ? 'EN' : 'AR';
-
     console.log(`Switching language from ${current} to ${next}`);
     loadLanguage(next);
 }
