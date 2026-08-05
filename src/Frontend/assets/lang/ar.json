@@ -175,8 +175,5 @@
     "processing": "جاري معالجة طلبك...",
     "success_message": "✅ تم تفعيل اشتراكك بنجاح! سيتم إعادة توجيهك قريبا...",
     "error_message": "حدث خطأ أثناء معالجة طلبك",
-    "choose_delivery_time": "اختر وقت التوصيل",
-    "locate_me": "تحديد موقعي",
-    "locate_search_placeholder": "ابحث عن منطقة، شارع، معلم معروف...",
-    "whatsapp_contact": "تواصل معنا على واتس آب"
+    "choose_delivery_time": "اختر وقت التوصيل"
 }

@@ -307,27 +307,9 @@ select.lang-selector {
 }
 
 .location-icon {
-    background: none;
-    border: none;
-    cursor: pointer;
     padding: 0 15px;
     font-size: 1.2rem;
     color: var(--text-secondary);
-    transition: transform 0.2s, opacity 0.2s;
-    outline: none;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.location-icon:hover {
-    transform: scale(1.15);
-    opacity: 0.85;
-}
-
-.location-icon:focus-visible {
-    outline: 2px solid var(--primary);
-    border-radius: 50%;
 }
 
 /* Wave Separator */
