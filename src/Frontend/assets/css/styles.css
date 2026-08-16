@@ -307,9 +307,12 @@ select.lang-selector {
 }
 
 .location-icon {
+    background: none;
+    border: none;
     padding: 0 15px;
     font-size: 1.2rem;
     color: var(--text-secondary);
+    cursor: pointer;
 }
 
 /* Wave Separator */
