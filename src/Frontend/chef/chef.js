@@ -40,6 +40,25 @@ function setupEventListeners() {
 
     // Settings form
     document.getElementById('settings-form').addEventListener('submit', handleSaveSettings);
+
+    // Keyboard & overlay listeners for modal accessibility
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+            const modal = document.getElementById('add-dish-modal');
+            if (modal && modal.classList.contains('active')) {
+                closeAddDishModal();
+            }
+        }
+    });
+
+    const modal = document.getElementById('add-dish-modal');
+    if (modal) {
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                closeAddDishModal();
+            }
+        });
+    }
 }
 
 // Switch Sections
