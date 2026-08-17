@@ -194,11 +194,11 @@
     </div>
 
     <!-- Add Dish Modal -->
-    <div id="add-dish-modal" class="modal">
+    <div id="add-dish-modal" class="modal" role="dialog" aria-modal="true" aria-labelledby="add-dish-modal-title">
         <div class="modal-content">
             <div class="modal-header">
-                <h2>إضافة طبق جديد</h2>
-                <button class="close-btn" onclick="closeAddDishModal()">&times;</button>
+                <h2 id="add-dish-modal-title">إضافة طبق جديد</h2>
+                <button class="close-btn" onclick="closeAddDishModal()" aria-label="إغلاق">&times;</button>
             </div>
 
             <form id="add-dish-form" class="modal-body">
