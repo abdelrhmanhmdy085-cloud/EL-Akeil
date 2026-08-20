@@ -301,7 +301,7 @@
   <!-- JOIN COMPANY MODAL -->
   <div id="joinCompanyModal" class="modal hidden">
     <div class="modal-content join-modal">
-      <span class="modal-close" onclick="closeJoinModal()">✕</span>
+      <button type="button" class="modal-close" onclick="closeJoinModal()" aria-label="إغلاق" title="إغلاق" data-i18n-aria-label="close_modal" data-i18n-title="close_modal">✕</button>
       <h2 data-i18n="select_role">اختر دورك</h2>
 
       <div class="role-selection-grid">
@@ -325,7 +325,7 @@
   <!-- Location Picker Modal -->
   <div id="locationModal" class="location-modal hidden">
     <div class="modal-header">
-      <span class="close-modal" onclick="closeLocationModal()">✕</span>
+      <button type="button" class="close-modal" onclick="closeLocationModal()" aria-label="إغلاق" title="إغلاق" data-i18n-aria-label="close_modal" data-i18n-title="close_modal">✕</button>
       <h3>عنوان التوصيل</h3>
     </div>
 
@@ -338,7 +338,7 @@
       <div class="map-search-overlay">
         <input type="text" placeholder="ابحث عن شارع أو معلم شهير...">
       </div>
-      <button class="current-location-btn">◎</button>
+      <button type="button" class="current-location-btn" aria-label="موقعي الحالي" title="موقعي الحالي" data-i18n-aria-label="current_location" data-i18n-title="current_location">◎</button>
     </div>
 
     <div class="modal-footer">
@@ -560,7 +560,7 @@
       }
     }
 
-    // Close modal when clicking outside
+    // Close modal when clicking outside or pressing Escape
     document.addEventListener('DOMContentLoaded', () => {
       const modal = document.getElementById('joinCompanyModal');
       if (modal) {
@@ -568,6 +568,12 @@
           if (e.target === modal) closeJoinModal();
         });
       }
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+          closeJoinModal();
+          closeLocationModal();
+        }
+      });
     });
 
   </script>
