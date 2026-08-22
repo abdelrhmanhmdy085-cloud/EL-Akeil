@@ -310,6 +310,23 @@ select.lang-selector {
     padding: 0 15px;
     font-size: 1.2rem;
     color: var(--text-secondary);
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-family: inherit;
+    line-height: inherit;
+    transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.location-icon:hover {
+    transform: scale(1.15);
+    opacity: 0.85;
+}
+
+.location-icon:focus-visible {
+    outline: 2px solid var(--primary-color, #FF5A00);
+    outline-offset: 2px;
+    border-radius: 4px;
 }
 
 /* Wave Separator */
