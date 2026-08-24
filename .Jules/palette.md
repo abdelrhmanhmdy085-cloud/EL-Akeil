@@ -1,3 +1,0 @@
-## 2026-08-24 - Dynamic ARIA Label & Title Internationalization
-**Learning:** Icon-only navigation buttons (e.g. back buttons) require explicit `aria-label` and `title` attributes that dynamically update when users switch application languages (e.g., English <-> Arabic). Supporting `data-i18n-aria-label` and `data-i18n-title` in `i18n.js` (`applyTranslations`) enables clean, declarative localization of accessible names and hover tooltips.
-**Action:** When adding accessibility attributes to icon-only buttons or interactive components in this app, include `data-i18n-aria-label` and `data-i18n-title` data attributes so screen reader labels update upon language change.
