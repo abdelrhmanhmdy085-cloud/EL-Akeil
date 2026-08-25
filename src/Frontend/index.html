@@ -299,10 +299,10 @@
   </div>
 
   <!-- JOIN COMPANY MODAL -->
-  <div id="joinCompanyModal" class="modal hidden">
+  <div id="joinCompanyModal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="joinModalTitle">
     <div class="modal-content join-modal">
-      <span class="modal-close" onclick="closeJoinModal()">✕</span>
-      <h2 data-i18n="select_role">اختر دورك</h2>
+      <button type="button" class="modal-close" onclick="closeJoinModal()" aria-label="إغلاق" data-i18n-aria-label="close_modal">✕</button>
+      <h2 id="joinModalTitle" data-i18n="select_role">اختر دورك</h2>
 
       <div class="role-selection-grid">
         <!-- Chef Option -->
@@ -323,10 +323,10 @@
   </div>
 
   <!-- Location Picker Modal -->
-  <div id="locationModal" class="location-modal hidden">
+  <div id="locationModal" class="location-modal hidden" role="dialog" aria-modal="true" aria-labelledby="locationModalTitle">
     <div class="modal-header">
-      <span class="close-modal" onclick="closeLocationModal()">✕</span>
-      <h3>عنوان التوصيل</h3>
+      <button type="button" class="close-modal" onclick="closeLocationModal()" aria-label="إغلاق" data-i18n-aria-label="close_modal">✕</button>
+      <h3 id="locationModalTitle">عنوان التوصيل</h3>
     </div>
 
     <div class="map-container">
@@ -560,14 +560,32 @@
       }
     }
 
-    // Close modal when clicking outside
+    // Close modal when clicking outside or pressing Escape key
     document.addEventListener('DOMContentLoaded', () => {
-      const modal = document.getElementById('joinCompanyModal');
-      if (modal) {
-        modal.addEventListener('click', (e) => {
-          if (e.target === modal) closeJoinModal();
+      const joinModal = document.getElementById('joinCompanyModal');
+      if (joinModal) {
+        joinModal.addEventListener('click', (e) => {
+          if (e.target === joinModal) closeJoinModal();
         });
       }
+
+      const locationModal = document.getElementById('locationModal');
+      if (locationModal) {
+        locationModal.addEventListener('click', (e) => {
+          if (e.target === locationModal) closeLocationModal();
+        });
+      }
+
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+          if (joinModal && !joinModal.classList.contains('hidden')) {
+            closeJoinModal();
+          }
+          if (locationModal && !locationModal.classList.contains('hidden')) {
+            closeLocationModal();
+          }
+        }
+      });
     });
 
   </script>
