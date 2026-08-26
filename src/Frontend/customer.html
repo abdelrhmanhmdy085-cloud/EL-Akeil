@@ -22,6 +22,16 @@
             padding: 0.5rem 1rem;
             cursor: pointer;
             color: var(--text-secondary);
+            background: none;
+            border: none;
+            font-family: inherit;
+            font-size: 1rem;
+        }
+
+        .tab:focus-visible {
+            outline: 2px solid var(--primary);
+            outline-offset: 2px;
+            border-radius: 4px;
         }
 
         .tab.active {
@@ -56,13 +66,13 @@
     </nav>
 
     <div class="container" style="padding-bottom: 80px;">
-        <div class="tabs">
-            <div class="tab active" onclick="switchTab('menu')" data-i18n="eat_title">Menu</div>
-            <div class="tab" onclick="switchTab('orders')" data-i18n="my_orders">My Orders</div>
+        <div class="tabs" role="tablist">
+            <button type="button" class="tab active" id="tab-menu" role="tab" aria-selected="true" aria-controls="menuTab" onclick="switchTab('menu', this)" data-i18n="eat_title">Menu</button>
+            <button type="button" class="tab" id="tab-orders" role="tab" aria-selected="false" aria-controls="ordersTab" onclick="switchTab('orders', this)" data-i18n="my_orders">My Orders</button>
         </div>
 
         <!-- Menu Tab -->
-        <div id="menuTab">
+        <div id="menuTab" role="tabpanel" aria-labelledby="tab-menu">
             <!-- Map Container -->
             <div style="position: relative; margin-bottom: 1.5rem;">
                 <div id="map" style="height: 350px; width: 100%; border-radius: 12px; z-index: 1; box-shadow: 0 2px 8px rgba(0,0,0,0.2);">
@@ -125,7 +135,7 @@
         </div>
 
         <!-- Orders Tab -->
-        <div id="ordersTab" class="hidden">
+        <div id="ordersTab" role="tabpanel" aria-labelledby="tab-orders" class="hidden">
             <h1 style="margin-bottom:2rem;" data-i18n="my_orders">My Orders</h1>
             <div id="ordersList" style="display:flex; flex-direction:column; gap:1rem;"></div>
         </div>
@@ -149,9 +159,16 @@
         let allDishes = [];
         let filteredChefId = null;
 
-        function switchTab(tab) {
-            document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
-            event.target.classList.add('active');
+        function switchTab(tab, btnElement) {
+            const targetBtn = btnElement || document.getElementById(`tab-${tab}`);
+            document.querySelectorAll('.tab').forEach(t => {
+                t.classList.remove('active');
+                t.setAttribute('aria-selected', 'false');
+            });
+            if (targetBtn) {
+                targetBtn.classList.add('active');
+                targetBtn.setAttribute('aria-selected', 'true');
+            }
             document.getElementById('menuTab').classList.toggle('hidden', tab !== 'menu');
             document.getElementById('ordersTab').classList.toggle('hidden', tab !== 'orders');
             if (tab === 'orders') loadOrders();
