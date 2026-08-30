@@ -288,6 +288,11 @@
         }
 
         .faq-question {
+            width: 100%;
+            border: none;
+            font-family: inherit;
+            font-size: inherit;
+            text-align: inherit;
             padding: 1.5rem;
             background: #f9f9f9;
             cursor: pointer;
@@ -301,6 +306,11 @@
 
         .faq-question:hover {
             background: #f0f0f0;
+        }
+
+        .faq-question:focus-visible {
+            outline: 2px solid #FF5A00;
+            outline-offset: -2px;
         }
 
         .faq-question.active {
@@ -507,41 +517,41 @@
         <h2 class="faq-title" data-i18n="faq_title">❓ الأسئلة الشائعة</h2>
         
         <div class="faq-item">
-            <div class="faq-question" onclick="toggleFAQ(this)">
+            <button type="button" class="faq-question" id="faq-btn-1" aria-expanded="false" aria-controls="faq-answer-1" onclick="toggleFAQ(this)">
                 <span data-i18n="faq_question_1">هل يمكنني تغيير الطبق بعد الطلب؟</span>
-                <span class="faq-toggle">+</span>
-            </div>
-            <div class="faq-answer" data-i18n="faq_answer_1">
+                <span class="faq-toggle" aria-hidden="true">+</span>
+            </button>
+            <div id="faq-answer-1" class="faq-answer" role="region" aria-labelledby="faq-btn-1" data-i18n="faq_answer_1">
                 نعم! يمكنك تغيير طلبك قبل 2 ساعة من وقت التوصيل. اتصل بفريق الدعم أو استخدم التطبيق لتغيير طلبك بسهولة.
             </div>
         </div>
 
         <div class="faq-item">
-            <div class="faq-question" onclick="toggleFAQ(this)">
+            <button type="button" class="faq-question" id="faq-btn-2" aria-expanded="false" aria-controls="faq-answer-2" onclick="toggleFAQ(this)">
                 <span data-i18n="faq_question_2">هل التوصيل مجاني؟</span>
-                <span class="faq-toggle">+</span>
-            </div>
-            <div class="faq-answer" data-i18n="faq_answer_2">
+                <span class="faq-toggle" aria-hidden="true">+</span>
+            </button>
+            <div id="faq-answer-2" class="faq-answer" role="region" aria-labelledby="faq-btn-2" data-i18n="faq_answer_2">
                 نعم، التوصيل مجاني تماماً مع جميع خطط الاشتراك. لا توجد رسوم إضافية.
             </div>
         </div>
 
         <div class="faq-item">
-            <div class="faq-question" onclick="toggleFAQ(this)">
+            <button type="button" class="faq-question" id="faq-btn-3" aria-expanded="false" aria-controls="faq-answer-3" onclick="toggleFAQ(this)">
                 <span data-i18n="faq_question_3">كيف ألغي الاشتراك؟</span>
-                <span class="faq-toggle">+</span>
-            </div>
-            <div class="faq-answer" data-i18n="faq_answer_3">
+                <span class="faq-toggle" aria-hidden="true">+</span>
+            </button>
+            <div id="faq-answer-3" class="faq-answer" role="region" aria-labelledby="faq-btn-3" data-i18n="faq_answer_3">
                 لا توجد عقود طويلة الأجل! يمكنك الإلغاء في أي وقت بدون أي رسوم إضافية أو شروط معقدة.
             </div>
         </div>
 
         <div class="faq-item">
-            <div class="faq-question" onclick="toggleFAQ(this)">
+            <button type="button" class="faq-question" id="faq-btn-4" aria-expanded="false" aria-controls="faq-answer-4" onclick="toggleFAQ(this)">
                 <span data-i18n="faq_question_4">هل هناك خيارات غذائية؟</span>
-                <span class="faq-toggle">+</span>
-            </div>
-            <div class="faq-answer" data-i18n="faq_answer_4">
+                <span class="faq-toggle" aria-hidden="true">+</span>
+            </button>
+            <div id="faq-answer-4" class="faq-answer" role="region" aria-labelledby="faq-btn-4" data-i18n="faq_answer_4">
                 نعم، نوفر خيارات نباتية وويغانية وخالية من الجلوتين وغيرها.
             </div>
         </div>
@@ -574,21 +584,32 @@
         function toggleFAQ(element) {
             const question = element;
             const answer = question.nextElementSibling;
+            const isCurrentlyActive = question.classList.contains('active');
 
             // Close other FAQs
             document.querySelectorAll('.faq-question').forEach(q => {
                 if (q !== question) {
                     q.classList.remove('active');
-                    q.nextElementSibling.classList.remove('active');
-                    q.querySelector('.faq-toggle').textContent = '+';
+                    q.setAttribute('aria-expanded', 'false');
+                    if (q.nextElementSibling) {
+                        q.nextElementSibling.classList.remove('active');
+                    }
+                    const toggleSpan = q.querySelector('.faq-toggle');
+                    if (toggleSpan) toggleSpan.textContent = '+';
                 }
             });
 
             // Toggle current FAQ
-            question.classList.toggle('active');
-            answer.classList.toggle('active');
-            question.querySelector('.faq-toggle').textContent = 
-                question.classList.contains('active') ? '−' : '+';
+            const nextActive = !isCurrentlyActive;
+            question.classList.toggle('active', nextActive);
+            question.setAttribute('aria-expanded', nextActive ? 'true' : 'false');
+            if (answer) {
+                answer.classList.toggle('active', nextActive);
+            }
+            const toggleSpan = question.querySelector('.faq-toggle');
+            if (toggleSpan) {
+                toggleSpan.textContent = nextActive ? '−' : '+';
+            }
         }
 
         // Load language on page load
