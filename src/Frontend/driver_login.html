@@ -106,10 +106,35 @@
             transition: all 0.3s;
         }
 
-        .btn-submit:hover {
+        .btn-submit:hover:not(:disabled) {
             background: var(--primary-hover);
             transform: translateY(-2px);
             box-shadow: 0 6px 20px rgba(94, 33, 41, 0.2);
+        }
+
+        .btn-submit:disabled {
+            opacity: 0.7;
+            cursor: not-allowed;
+        }
+
+        .password-wrapper {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+
+        .password-toggle {
+            position: absolute;
+            inset-inline-end: 12px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            padding: 0.2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .auth-footer {
@@ -174,20 +199,23 @@
 
             <form id="driverLoginForm">
                 <div class="form-group">
-                    <label class="form-label" data-i18n="email_label">البريد الإلكتروني</label>
-                    <input type="email" name="email" class="form-input" required>
+                    <label for="driver-email" class="form-label" data-i18n="email_label">البريد الإلكتروني</label>
+                    <input type="email" id="driver-email" name="email" class="form-input" autocomplete="email" required>
                 </div>
 
                 <div class="form-group">
-                    <label class="form-label" data-i18n="pass_label">كلمة المرور</label>
-                    <input type="password" name="password" class="form-input" required>
+                    <label for="driver-password" class="form-label" data-i18n="pass_label">كلمة المرور</label>
+                    <div class="password-wrapper">
+                        <input type="password" id="driver-password" name="password" class="form-input" autocomplete="current-password" required style="padding-inline-end: 2.5rem;">
+                        <button type="button" id="togglePasswordBtn" class="password-toggle" data-i18n-aria-label="show_password" data-i18n-title="show_password" aria-label="إظهار كلمة المرور" title="إظهار كلمة المرور">👁️</button>
+                    </div>
                 </div>
 
                 <div class="forgot-password">
                     <a href="#" data-i18n="forgot_password">هل نسيت كلمة المرور؟</a>
                 </div>
 
-                <button type="submit" class="btn-submit" data-i18n="btn_login">دخول</button>
+                <button type="submit" id="submitBtn" class="btn-submit" data-i18n="btn_login">دخول</button>
             </form>
 
             <div class="auth-footer">
@@ -203,6 +231,23 @@
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const form = document.getElementById('driverLoginForm');
+            const submitBtn = document.getElementById('submitBtn');
+            const toggleBtn = document.getElementById('togglePasswordBtn');
+            const passwordInput = document.getElementById('driver-password');
+
+            if (toggleBtn && passwordInput) {
+                toggleBtn.addEventListener('click', () => {
+                    const isPassword = passwordInput.type === 'password';
+                    passwordInput.type = isPassword ? 'text' : 'password';
+                    toggleBtn.textContent = isPassword ? '🙈' : '👁️';
+                    const key = isPassword ? 'hide_password' : 'show_password';
+                    const defaultText = isPassword ? 'إخفاء كلمة المرور' : 'إظهار كلمة المرور';
+                    toggleBtn.setAttribute('data-i18n-aria-label', key);
+                    toggleBtn.setAttribute('data-i18n-title', key);
+                    toggleBtn.setAttribute('aria-label', defaultText);
+                    toggleBtn.setAttribute('title', defaultText);
+                });
+            }
 
             form.addEventListener('submit', async (e) => {
                 e.preventDefault();
@@ -210,20 +255,31 @@
                 const email = form.email.value;
                 const password = form.password.value;
 
-                // API Call
-                const result = await apiFetch('/api/auth/driver-login', 'POST', {
-                    email,
-                    password,
-                    role: 'driver'
-                });
+                submitBtn.disabled = true;
+                const originalText = submitBtn.textContent;
+                submitBtn.textContent = 'جاري الدخول...';
 
-                if (result.ok) {
-                    localStorage.setItem('token', result.data.token);
-                    localStorage.setItem('user', JSON.stringify(result.data.user));
-                    alert('تم الدخول بنجاح!');
-                    window.location.href = 'driver.html';
-                } else {
-                    alert('خطأ في الدخول: ' + (result.data.message || 'بيانات غير صحيحة'));
+                try {
+                    // API Call
+                    const result = await apiFetch('/api/auth/driver-login', 'POST', {
+                        email,
+                        password,
+                        role: 'driver'
+                    });
+
+                    if (result.ok) {
+                        localStorage.setItem('token', result.data.token);
+                        localStorage.setItem('user', JSON.stringify(result.data.user));
+                        alert('تم الدخول بنجاح!');
+                        window.location.href = 'driver.html';
+                    } else {
+                        alert('خطأ في الدخول: ' + (result.data.message || 'بيانات غير صحيحة'));
+                    }
+                } catch (err) {
+                    alert('حدث خطأ أثناء الدخول. حاول مرة أخرى.');
+                } finally {
+                    submitBtn.disabled = false;
+                    submitBtn.textContent = originalText;
                 }
             });
         });
