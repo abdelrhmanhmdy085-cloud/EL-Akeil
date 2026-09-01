@@ -1,3 +1,0 @@
-## 2026-09-01 - Password Visibility Toggle with Logical CSS Positioning
-**Learning:** For forms in bi-directional (LTR/RTL) web applications like El Akeil, password visibility toggles placed inside input containers should use logical CSS property `inset-inline-end: 12px` instead of `right: 12px` or `left: 12px`. This automatically positions the button correctly regardless of page direction without requiring conditional RTL stylesheet overrides.
-**Action:** When adding absolute-positioned input accessory controls (like toggles or clear icons), always use logical CSS properties (`inset-inline-end`) and update `aria-label`/`title` dynamically upon state toggling.
