@@ -249,9 +249,11 @@
                     passwordInput.type = isPassword ? 'text' : 'password';
                     togglePasswordBtn.textContent = isPassword ? '🙈' : '👁️';
                     const key = isPassword ? 'hide_password' : 'show_password';
-                    const defaultText = isPassword ? 'إخفاء كلمة المرور' : 'إظهار كلمة المرور';
                     const lang = localStorage.getItem('elakeil_lang') || 'ar';
-                    const text = (window.translations && translations[lang] && translations[lang][key]) || defaultText;
+                    const defaultText = isPassword
+                        ? (lang === 'ar' ? 'إخفاء كلمة المرور' : 'Hide password')
+                        : (lang === 'ar' ? 'إظهار كلمة المرور' : 'Show password');
+                    const text = (window.translations && window.translations[lang] && window.translations[lang][key]) || defaultText;
                     togglePasswordBtn.setAttribute('aria-label', text);
                     togglePasswordBtn.setAttribute('title', text);
                 });
