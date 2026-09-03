@@ -185,34 +185,34 @@
             <form id="driverRegisterForm">
                 <div class="form-row">
                     <div class="form-group">
-                        <label class="form-label" data-i18n="full_name">الاسم الكامل</label>
-                        <input type="text" name="fullName" class="form-input" required>
+                        <label for="driver-fullname" class="form-label" data-i18n="full_name">الاسم الكامل</label>
+                        <input id="driver-fullname" type="text" name="fullName" class="form-input" required>
                         <span class="error-message" data-i18n="error_required">هذا الحقل مطلوب</span>
                     </div>
                     <div class="form-group">
-                        <label class="form-label" data-i18n="email_label">البريد الإلكتروني</label>
-                        <input type="email" name="email" class="form-input" required>
+                        <label for="driver-email" class="form-label" data-i18n="email_label">البريد الإلكتروني</label>
+                        <input id="driver-email" type="email" name="email" class="form-input" required>
                         <span class="error-message" data-i18n="error_email">بريد إلكتروني غير صحيح</span>
                     </div>
                 </div>
 
                 <div class="form-row">
                     <div class="form-group">
-                        <label class="form-label" data-i18n="pass_label">كلمة المرور</label>
-                        <input type="password" name="password" class="form-input" required>
+                        <label for="driver-password" class="form-label" data-i18n="pass_label">كلمة المرور</label>
+                        <input id="driver-password" type="password" name="password" class="form-input" required>
                         <span class="error-message" data-i18n="error_password">كلمة المرور قصيرة جداً (8 أحرف على الأقل)</span>
                     </div>
                     <div class="form-group">
-                        <label class="form-label" data-i18n="valid_pass_confirm">تأكيد كلمة المرور</label>
-                        <input type="password" name="confirmPassword" class="form-input" required>
+                        <label for="driver-confirm-password" class="form-label" data-i18n="valid_pass_confirm">تأكيد كلمة المرور</label>
+                        <input id="driver-confirm-password" type="password" name="confirmPassword" class="form-input" required>
                         <span class="error-message" data-i18n="pass_mismatch">كلمة المرور غير متطابقة!</span>
                     </div>
                 </div>
 
                 <div class="form-row">
                     <div class="form-group">
-                        <label class="form-label" data-i18n="driver_vehicle">نوع السيارة</label>
-                        <select name="vehicleType" class="form-input" required>
+                        <label for="driver-vehicle" class="form-label" data-i18n="driver_vehicle">نوع السيارة</label>
+                        <select id="driver-vehicle" name="vehicleType" class="form-input" required>
                             <option value="">اختر نوع السيارة</option>
                             <option value="motorcycle">دراجة نارية</option>
                             <option value="scooter">سكوتر</option>
@@ -221,21 +221,21 @@
                         <span class="error-message" data-i18n="error_required">هذا الحقل مطلوب</span>
                     </div>
                     <div class="form-group">
-                        <label class="form-label" data-i18n="driver_license">رقم رخصة القيادة</label>
-                        <input type="text" name="licenseNumber" class="form-input" required>
+                        <label for="driver-license" class="form-label" data-i18n="driver_license">رقم رخصة القيادة</label>
+                        <input id="driver-license" type="text" name="licenseNumber" class="form-input" required>
                         <span class="error-message" data-i18n="error_required">هذا الحقل مطلوب</span>
                     </div>
                 </div>
 
                 <div class="form-group">
-                    <label class="form-label" data-i18n="national_id">الرقم القومي</label>
-                    <input type="text" name="nationalId" class="form-input" pattern="[0-9]{14}" required>
+                    <label for="driver-national-id" class="form-label" data-i18n="national_id">الرقم القومي</label>
+                    <input id="driver-national-id" type="text" name="nationalId" class="form-input" pattern="[0-9]{14}" required>
                     <span class="error-message" data-i18n="error_national_id">الرقم القومي يجب أن يكون 14 رقم</span>
                 </div>
 
                 <div class="form-group">
-                    <label class="form-label">رقم الهاتف</label>
-                    <input type="tel" name="phoneNumber" class="form-input" pattern="[0-9]{10,11}" required>
+                    <label for="driver-phone" class="form-label" data-i18n="phone">رقم الهاتف</label>
+                    <input id="driver-phone" type="tel" name="phoneNumber" class="form-input" pattern="[0-9]{10,11}" required>
                     <span class="error-message" data-i18n="error_required">رقم هاتف صحيح مطلوب</span>
                 </div>
 
