@@ -101,19 +101,20 @@
             </div>
 
             <!-- Categories -->
-            <div class="categories-scroll"
+            <div class="categories-scroll" role="group" aria-label="Category filters"
                 style="display:flex; gap:10px; overflow-x:auto; padding-bottom:10px; margin-bottom:1rem;">
-                <button class="btn btn-outline active-filter" onclick="filterCat('all', this)">All</button>
-                <button class="btn btn-outline" onclick="filterCat('Meat', this)">🥩 Meat</button>
-                <button class="btn btn-outline" onclick="filterCat('Chicken', this)">🍗 Chicken</button>
-                <button class="btn btn-outline" onclick="filterCat('Seafood', this)">🐟 Seafood</button>
-                <button class="btn btn-outline" onclick="filterCat('Dessert', this)">🍰 Dessert</button>
-                <button class="btn btn-outline" onclick="filterCat('Healthy', this)">🥗 Healthy</button>
+                <button type="button" class="btn active-filter" aria-pressed="true" onclick="filterCat('all', this)">All</button>
+                <button type="button" class="btn btn-outline" aria-pressed="false" onclick="filterCat('Meat', this)">🥩 Meat</button>
+                <button type="button" class="btn btn-outline" aria-pressed="false" onclick="filterCat('Chicken', this)">🍗 Chicken</button>
+                <button type="button" class="btn btn-outline" aria-pressed="false" onclick="filterCat('Seafood', this)">🐟 Seafood</button>
+                <button type="button" class="btn btn-outline" aria-pressed="false" onclick="filterCat('Dessert', this)">🍰 Dessert</button>
+                <button type="button" class="btn btn-outline" aria-pressed="false" onclick="filterCat('Healthy', this)">🥗 Healthy</button>
             </div>
 
             <!-- Filters -->
             <div style="display:flex; gap:10px; margin-bottom:1rem;">
                 <select id="sortFilter" class="input-field" style="width:auto; padding:5px 10px;"
+                    aria-label="Sort dishes"
                     onchange="applyFilters()">
                     <option value="default">Sort By</option>
                     <option value="price_low">Price: Low to High</option>
@@ -169,10 +170,14 @@
 
         function filterCat(cat, btn) {
             currentCat = cat;
-            document.querySelectorAll('.categories-scroll .btn').forEach(b => b.classList.remove('active-filter', 'btn'));
-            document.querySelectorAll('.categories-scroll .btn').forEach(b => b.classList.add('btn-outline')); // reset
+            document.querySelectorAll('.categories-scroll button').forEach(b => {
+                b.classList.remove('active-filter');
+                b.classList.add('btn', 'btn-outline');
+                b.setAttribute('aria-pressed', 'false');
+            });
             btn.classList.remove('btn-outline');
-            btn.classList.add('btn'); // Active style
+            btn.classList.add('btn', 'active-filter');
+            btn.setAttribute('aria-pressed', 'true');
             applyFilters();
         }
 
