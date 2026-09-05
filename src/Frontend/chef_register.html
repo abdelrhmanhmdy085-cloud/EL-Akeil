@@ -288,45 +288,45 @@
             <form id="chefRegisterForm">
                 <div class="form-row">
                     <div class="form-group">
-                        <label class="form-label" data-i18n="full_name">الاسم الكامل</label>
-                        <input type="text" name="fullName" class="form-input" required>
+                        <label for="chef-fullname" class="form-label" data-i18n="full_name">الاسم الكامل</label>
+                        <input id="chef-fullname" type="text" name="fullName" class="form-input" required>
                         <span class="error-message" data-i18n="error_required">هذا الحقل مطلوب</span>
                     </div>
                     <div class="form-group">
-                        <label class="form-label" data-i18n="email_label">البريد الإلكتروني</label>
-                        <input type="email" name="email" class="form-input" required>
+                        <label for="chef-email" class="form-label" data-i18n="email_label">البريد الإلكتروني</label>
+                        <input id="chef-email" type="email" name="email" class="form-input" required>
                         <span class="error-message" data-i18n="error_email">بريد إلكتروني غير صحيح</span>
                     </div>
                 </div>
 
                 <div class="form-row">
                     <div class="form-group">
-                        <label class="form-label" data-i18n="pass_label">كلمة المرور</label>
-                        <input type="password" name="password" class="form-input" required>
+                        <label for="chef-password" class="form-label" data-i18n="pass_label">كلمة المرور</label>
+                        <input id="chef-password" type="password" name="password" class="form-input" required>
                         <span class="error-message" data-i18n="error_password">كلمة المرور قصيرة جداً (8 أحرف على الأقل)</span>
                     </div>
                     <div class="form-group">
-                        <label class="form-label" data-i18n="valid_pass_confirm">تأكيد كلمة المرور</label>
-                        <input type="password" name="confirmPassword" class="form-input" required>
+                        <label for="chef-confirm-password" class="form-label" data-i18n="valid_pass_confirm">تأكيد كلمة المرور</label>
+                        <input id="chef-confirm-password" type="password" name="confirmPassword" class="form-input" required>
                         <span class="error-message" data-i18n="pass_mismatch">كلمة المرور غير متطابقة!</span>
                     </div>
                 </div>
 
                 <div class="form-group">
-                    <label class="form-label" data-i18n="kitchen_name">اسم المطبخ</label>
-                    <input type="text" name="kitchenName" class="form-input" required>
+                    <label for="chef-kitchen-name" class="form-label" data-i18n="kitchen_name">اسم المطبخ</label>
+                    <input id="chef-kitchen-name" type="text" name="kitchenName" class="form-input" required>
                     <span class="error-message" data-i18n="error_required">هذا الحقل مطلوب</span>
                 </div>
 
                 <div class="form-group">
-                    <label class="form-label" data-i18n="kitchen_address">عنوان المطبخ</label>
-                    <input type="text" name="kitchenAddress" class="form-input" placeholder="الحي، الشارع، المدينة" required>
+                    <label for="chef-kitchen-address" class="form-label" data-i18n="kitchen_address">عنوان المطبخ</label>
+                    <input id="chef-kitchen-address" type="text" name="kitchenAddress" class="form-input" placeholder="الحي، الشارع، المدينة" required>
                     <span class="error-message" data-i18n="error_required">هذا الحقل مطلوب</span>
                 </div>
 
                 <div class="form-group">
-                    <label class="form-label" data-i18n="national_id">الرقم القومي</label>
-                    <input type="text" name="nationalId" class="form-input" pattern="[0-9]{14}" placeholder="14 رقم" required>
+                    <label for="chef-national-id" class="form-label" data-i18n="national_id">الرقم القومي</label>
+                    <input id="chef-national-id" type="text" name="nationalId" class="form-input" pattern="[0-9]{14}" placeholder="14 رقم" required>
                     <span class="error-message" data-i18n="error_national_id">الرقم القومي يجب أن يكون 14 رقم</span>
                 </div>
 
@@ -367,29 +367,29 @@
                 </div>
                 
                 <div class="form-group">
-                    <label class="form-label">اسم الطبق</label>
-                    <input type="text" class="form-input dish-name" placeholder="مثلاً: معكرونة بشرقة" required>
+                    <label for="dish_name_${dishCount}" class="form-label">اسم الطبق</label>
+                    <input id="dish_name_${dishCount}" type="text" class="form-input dish-name" placeholder="مثلاً: معكرونة بشرقة" required>
                 </div>
 
                 <div class="form-row">
                     <div class="form-group">
-                        <label class="form-label">السعر (جنيه)</label>
-                        <input type="number" class="form-input dish-price" placeholder="50" min="1" step="0.5" required>
+                        <label for="dish_price_${dishCount}" class="form-label">السعر (جنيه)</label>
+                        <input id="dish_price_${dishCount}" type="number" class="form-input dish-price" placeholder="50" min="1" step="0.5" required>
                     </div>
                     <div class="form-group">
-                        <label class="form-label">حجم الحصة</label>
-                        <input type="text" class="form-input dish-serving" placeholder="مثلاً: 250g" required>
+                        <label for="dish_serving_${dishCount}" class="form-label">حجم الحصة</label>
+                        <input id="dish_serving_${dishCount}" type="text" class="form-input dish-serving" placeholder="مثلاً: 250g" required>
                     </div>
                 </div>
 
                 <div class="form-group">
-                    <label class="form-label">الوصف</label>
-                    <textarea class="form-input dish-description" placeholder="وصف الطبق والمكونات..." style="min-height: 70px;" required></textarea>
+                    <label for="dish_desc_${dishCount}" class="form-label">الوصف</label>
+                    <textarea id="dish_desc_${dishCount}" class="form-input dish-description" placeholder="وصف الطبق والمكونات..." style="min-height: 70px;" required></textarea>
                 </div>
 
                 <div class="form-group">
-                    <label class="form-label">صور الطبق (اختياري)</label>
-                    <input type="file" class="dish-images" accept="image/*" multiple onchange="previewDishImages(this, '${dishId}')">
+                    <label for="dish_images_${dishCount}" class="form-label">صور الطبق (اختياري)</label>
+                    <input id="dish_images_${dishCount}" type="file" class="dish-images" accept="image/*" multiple onchange="previewDishImages(this, '${dishId}')">
                     <div style="font-size: 0.85rem; color: #666; margin-top: 0.5rem;">يمكنك اختيار عدة صور</div>
                     <div class="file-preview" id="preview_${dishId}"></div>
                 </div>
@@ -413,7 +413,7 @@
                     item.className = 'file-preview-item';
                     item.innerHTML = `
                         <img src="${e.target.result}">
-                        <button type="button" class="remove-btn" onclick="this.parentElement.remove()">×</button>
+                        <button type="button" class="remove-btn" aria-label="إزالة الصورة" title="إزالة الصورة" onclick="this.parentElement.remove()">×</button>
                     `;
                     preview.appendChild(item);
                 };
