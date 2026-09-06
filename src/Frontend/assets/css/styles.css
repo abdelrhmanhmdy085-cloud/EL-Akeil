@@ -717,10 +717,21 @@ select.lang-selector {
     cursor: pointer;
     color: var(--text-secondary);
     transition: color 0.2s;
+    background: transparent;
+    border: none;
+    padding: 0;
+    line-height: 1;
+    font-family: inherit;
 }
 
 .modal-close:hover {
     color: var(--primary);
+}
+
+.modal-close:focus-visible {
+    outline: 2px solid var(--primary);
+    outline-offset: 2px;
+    border-radius: 4px;
 }
 
 .role-selection-grid {
@@ -738,6 +749,8 @@ select.lang-selector {
     text-align: center;
     cursor: pointer;
     transition: all 0.3s;
+    font-family: inherit;
+    width: 100%;
 }
 
 .role-option-card:hover {
@@ -745,6 +758,11 @@ select.lang-selector {
     background: #FFFFFF;
     transform: translateY(-6px);
     box-shadow: 0 8px 25px rgba(94, 33, 41, 0.15);
+}
+
+.role-option-card:focus-visible {
+    outline: 2px solid var(--primary);
+    outline-offset: 2px;
 }
 
 .role-option-icon {
