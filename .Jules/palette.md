@@ -1,0 +1,3 @@
+## 2026-09-06 - Modal Dialog Keyboard Accessibility and Dynamic ARIA Translation
+**Learning:** In vanilla HTML/JS modal implementations, converting clickable `<div>` cards and `<span>` close elements into semantic `<button type="button">` elements combined with `:focus-visible` outlines and an `Escape` keydown handler instantly enables full keyboard navigation without visual regression. Additionally, expanding `i18n.js` to process `data-i18n-aria-label` guarantees accessible screen reader labels across all supported languages.
+**Action:** Always wrap modal role cards and close handles in semantic `<button>` tags, attach an `Escape` dismissal listener to modal dialogs, and ensure `data-i18n-aria-label` is applied to icon/close buttons for localization.
