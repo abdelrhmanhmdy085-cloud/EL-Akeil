@@ -56,11 +56,21 @@
             display: flex;
             flex-direction: column;
             min-height: 250px;
+            border: none;
+            padding: 0;
+            width: 100%;
+            text-align: inherit;
+            font-family: inherit;
         }
 
         .category-card:hover {
             transform: translateY(-8px);
             box-shadow: 0 12px 24px rgba(255, 140, 66, 0.3);
+        }
+
+        .category-card:focus-visible {
+            outline: 3px solid #FF5A00;
+            outline-offset: 4px;
         }
 
         .category-card-icon {
@@ -214,17 +224,20 @@
                 grid.className = 'categories-grid';
 
                 categories.forEach(cat => {
-                    const card = document.createElement('div');
+                    const card = document.createElement('button');
+                    card.type = 'button';
                     card.className = 'category-card';
+                    const countText = `${cat.dish_count} ${lang === 'ar' ? 'أطباق' : 'Dishes'}`;
+                    card.setAttribute('aria-label', `${cat.name} - ${countText}`);
                     card.onclick = () => window.location.href = `category.html?id=${cat.id}`;
                     card.innerHTML = `
-                        <div class="category-card-icon">${cat.icon || '🍽️'}</div>
+                        <div class="category-card-icon" aria-hidden="true">${cat.icon || '🍽️'}</div>
                         <div class="category-card-content">
                             <div class="category-card-name">${cat.name}</div>
                             <div class="category-card-description">${cat.description || ''}</div>
                             <div class="category-card-footer">
-                                <span class="category-card-count">${cat.dish_count} ${lang === 'ar' ? 'أطباق' : 'Dishes'}</span>
-                                <span class="category-card-arrow">→</span>
+                                <span class="category-card-count">${countText}</span>
+                                <span class="category-card-arrow" aria-hidden="true">→</span>
                             </div>
                         </div>
                     `;
