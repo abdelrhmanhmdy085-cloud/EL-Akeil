@@ -160,6 +160,17 @@
             background: #f5f5f5;
             border-radius: 6px;
             cursor: pointer;
+            border: none;
+            width: 100%;
+            text-align: inherit;
+            font-family: inherit;
+            font-size: inherit;
+            color: inherit;
+        }
+
+        .toggle-heatmap:focus-visible {
+            outline: 2px solid #FF5A00;
+            outline-offset: 2px;
         }
 
         .toggle-switch {
@@ -248,10 +259,10 @@
             </div>
 
             <!-- Toggle Heatmap -->
-            <div class="toggle-heatmap" onclick="toggleHeatmap()">
-                <span style="flex: 1;">Show Heatmap</span>
-                <div class="toggle-switch" id="heatmapToggle"></div>
-            </div>
+            <button type="button" class="toggle-heatmap" id="heatmapToggleContainer" role="switch" aria-checked="false" onclick="toggleHeatmap()">
+                <span style="flex: 1; text-align: start;">Show Heatmap</span>
+                <div class="toggle-switch" id="heatmapToggle" aria-hidden="true"></div>
+            </button>
 
             <!-- Controls -->
             <div class="controls">
@@ -375,12 +386,15 @@
         function toggleHeatmap() {
             heatmapVisible = !heatmapVisible;
             const toggle = document.getElementById('heatmapToggle');
+            const toggleBtn = document.getElementById('heatmapToggleContainer');
             
             if (heatmapVisible) {
                 toggle.classList.add('active');
+                if (toggleBtn) toggleBtn.setAttribute('aria-checked', 'true');
                 displayHeatmap();
             } else {
                 toggle.classList.remove('active');
+                if (toggleBtn) toggleBtn.setAttribute('aria-checked', 'false');
                 if (window.heatmapLayer && advancedMap) {
                     advancedMap.removeLayer(window.heatmapLayer);
                 }
