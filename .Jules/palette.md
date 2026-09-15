@@ -1,0 +1,3 @@
+## 2026-09-15 - Semantic Button Cards for Dynamic Grids
+**Learning:** In static HTML/JS food browsing pages where category or level cards are generated dynamically, using `<div>` elements with `onclick` breaks keyboard navigation and screen reader accessibility. Converting them to `<button type="button">` with CSS resets (`border: none; padding: 0; width: 100%; text-align: inherit; font-family: inherit; font-size: inherit;`) and `:focus-visible` outline indicators ensures native focusability and accessibility while keeping card styling intact.
+**Action:** Whenever converting non-semantic card containers to buttons, always apply CSS resets on the button class and mark decorative inner elements (icons, arrows) with `aria-hidden="true"`.
