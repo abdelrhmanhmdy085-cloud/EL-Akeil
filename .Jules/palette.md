@@ -1,0 +1,3 @@
+## 2026-09-16 - Form Label Associations on Checkout and Subscription Forms
+**Learning:** Form fields inside grouped cards and flex containers on subscription/checkout forms benefit significantly from explicit `for` and `id` bindings on `<label>` elements, enabling click-to-focus interactivity and proper screen reader field identification across custom card radio buttons.
+**Action:** When working with custom radio buttons or grouped form fields in static HTML forms, ensure each `<label>` uses `for="<input-id>"` alongside matching `id` attributes on `<input>`, `<select>`, and `<textarea>` elements.
