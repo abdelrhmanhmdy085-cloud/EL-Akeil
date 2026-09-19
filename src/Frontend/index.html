@@ -225,9 +225,9 @@
         اطلب الآن من أفضل الشيفات في منطقتك</p>
 
       <div class="search-box-container">
-        <button class="search-btn">ابحث</button>
+        <button type="button" class="search-btn" data-i18n="search_btn">ابحث</button>
         <input type="text" class="search-input" placeholder="ابحث عن منطقة، شارع، معلم معروف...">
-        <div class="location-icon">📍</div>
+        <button type="button" class="location-icon" id="locateBtn" data-i18n-aria-label="locate_me" data-i18n-title="locate_me" aria-label="Locate me" title="Locate me">📍</button>
       </div>
 
       <!-- Category Filter Buttons -->
@@ -323,30 +323,25 @@
   </div>
 
   <!-- Location Picker Modal -->
-  <div id="locationModal" class="location-modal hidden">
-    <div class="modal-header">
-      <span class="close-modal" onclick="closeLocationModal()">✕</span>
-      <h3>عنوان التوصيل</h3>
-    </div>
+  <div id="locationModal" class="modal location-modal hidden" role="dialog" aria-modal="true" aria-labelledby="locationModalTitle">
+    <div class="modal-content">
+      <div class="modal-header" style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1rem;">
+        <h3 id="locationModalTitle" style="margin:0;">عنوان التوصيل</h3>
+        <button type="button" class="close-modal" onclick="closeLocationModal()" style="background:none; border:none; font-size:1.5rem; cursor:pointer;" data-i18n-aria-label="close_modal" aria-label="إغلاق">✕</button>
+      </div>
 
-    <div class="map-container">
-      <div id="pickerMap"></div>
-      <div class="center-marker-container">
-        <div class="tooltip-marker">اسحب الخريطة لتحديد الموقع</div>
-        <div class="pin-marker">📍</div>
+      <div class="map-container">
+        <div id="pickerMap"></div>
+        <button type="button" class="current-location-btn" id="currentLocBtn" data-i18n-aria-label="locate_me" data-i18n-title="locate_me" aria-label="Locate me" title="Locate me">◎</button>
       </div>
-      <div class="map-search-overlay">
-        <input type="text" placeholder="ابحث عن شارع أو معلم شهير...">
-      </div>
-      <button class="current-location-btn">◎</button>
-    </div>
 
-    <div class="modal-footer">
-      <div class="address-preview">
-        <span class="pin-icon">📍</span>
-        <span id="selectedAddress">التوصيل إلى...</span>
+      <div class="modal-footer" style="display:flex; justify-content:space-between; align-items:center; margin-top:1rem;">
+        <div class="address-preview">
+          <span class="pin-icon">📍</span>
+          <span id="selectedAddress">التوصيل إلى...</span>
+        </div>
+        <button type="button" class="btn btn-order confirm-location-btn" onclick="confirmLocation()">وصّل هنا</button>
       </div>
-      <button class="confirm-location-btn" onclick="confirmLocation()">وصّل هنا</button>
     </div>
   </div>
 
@@ -355,9 +350,27 @@
     let pickerMap;
     const modal = document.getElementById('locationModal');
     const locateBtn = document.getElementById('locateBtn');
+    const currentLocBtn = document.getElementById('currentLocBtn');
 
     if (locateBtn) {
       locateBtn.addEventListener('click', openLocationModal);
+    }
+
+    if (currentLocBtn) {
+      currentLocBtn.addEventListener('click', () => {
+        if (navigator.geolocation) {
+          navigator.geolocation.getCurrentPosition(
+            (pos) => {
+              if (pickerMap) {
+                pickerMap.setView([pos.coords.latitude, pos.coords.longitude], 15);
+              }
+            },
+            (err) => {
+              console.error('Geolocation error:', err);
+            }
+          );
+        }
+      });
     }
 
     function openLocationModal() {
