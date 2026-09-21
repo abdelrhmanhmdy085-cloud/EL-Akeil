@@ -368,7 +368,7 @@ class HeatmapManager {
         modal.className = 'modal zone-info-modal';
         modal.innerHTML = `
             <div class="modal-content">
-                <button class="modal-close" onclick="this.parentElement.parentElement.remove()">×</button>
+                <button type="button" class="modal-close" aria-label="Close zone info" title="Close" onclick="this.parentElement.parentElement.remove()">&times;</button>
                 ${infoContent}
                 <div class="zone-actions">
                     <button class="btn btn-primary" onclick="heatmapManager.focusZone(${zone.center.lat}, ${zone.center.long})">

@@ -253,7 +253,7 @@ class NavigationManager {
             <div class="route-info-container">
                 <div class="route-header">
                     <h3>🗺️ Navigation</h3>
-                    <button class="btn-minimize" onclick="this.parentElement.parentElement.classList.toggle('minimized')">−</button>
+                    <button type="button" class="btn-minimize" aria-label="Minimize navigation panel" title="Minimize" onclick="this.parentElement.parentElement.classList.toggle('minimized')">−</button>
                 </div>
 
                 <div class="route-content">

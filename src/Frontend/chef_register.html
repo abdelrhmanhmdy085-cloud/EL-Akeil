@@ -413,7 +413,7 @@
                     item.className = 'file-preview-item';
                     item.innerHTML = `
                         <img src="${e.target.result}">
-                        <button type="button" class="remove-btn" onclick="this.parentElement.remove()">×</button>
+                        <button type="button" class="remove-btn" aria-label="إزالة الصورة" title="Remove image" onclick="this.parentElement.remove()">&times;</button>
                     `;
                     preview.appendChild(item);
                 };
