@@ -353,7 +353,7 @@ class NotificationManager {
                 <div class="toast-title">${title}</div>
                 <div class="toast-message">${message}</div>
             </div>
-            <button class="toast-close" onclick="this.parentElement.remove()">×</button>
+            <button type="button" class="toast-close" aria-label="Close notification" title="Close" onclick="this.parentElement.remove()">&times;</button>
         `;
         
         const container = document.getElementById('toast-container') || this.createToastContainer();
@@ -437,7 +437,7 @@ class NotificationManager {
                     <div class="notif-message">${notif.message || ''}</div>
                     <div class="notif-time">${new Date(notif.timestamp).toLocaleTimeString()}</div>
                 </div>
-                <button class="btn-close-notif" onclick="notificationManager.removeNotification(${index})">×</button>
+                <button type="button" class="btn-close-notif" aria-label="Dismiss notification" title="Dismiss" onclick="notificationManager.removeNotification(${index})">&times;</button>
             </div>
         `).join('');
     }

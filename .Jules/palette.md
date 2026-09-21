@@ -1,0 +1,3 @@
+## 2026-03-31 - Accessible Control Semantics for Close and Minimize Buttons
+**Learning:** Dynamic UI components created in JS (toasts, notifications, map modals, route cards) and static modals frequently used symbol-only characters (`×`, `✕`, `−`) or non-semantic `<span>` elements, causing screen readers to announce "multiplication sign" or "minus" and missing keyboard focusability.
+**Action:** Always replace non-semantic close elements with `<button type="button">` and include explicit `aria-label`, `title`, and optional `data-i18n-aria-label` attributes to ensure keyboard focus, screen reader accessibility, and hover tooltips.
