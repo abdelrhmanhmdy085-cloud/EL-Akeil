@@ -1,0 +1,3 @@
+## 2026-09-26 - Accessible Tab pattern in Vanilla HTML/JS
+**Learning:** In non-framework HTML/JS templates, navigation tabs implemented as `<div>` elements with `onclick` lack keyboard focus, `role="tab"` attributes, and rely on the deprecated `window.event` object which breaks in strict mode or non-click event triggers.
+**Action:** Always convert tab triggers to semantic `<button type="button" class="tab" role="tab">` elements inside a `role="tablist"` container, link them to `role="tabpanel"` using `aria-controls` and `aria-labelledby`, update `aria-selected` dynamically in JS, and apply `:focus-visible` outline styles.
