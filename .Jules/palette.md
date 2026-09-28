@@ -1,0 +1,3 @@
+## 2026-09-28 - Accessible Navigation Tabs & Filters in Customer Portal
+**Learning:** Converting `<div>` tab elements to `<button type="button" class="tab" role="tab">` elements in a `role="tablist"` container requires setting explicit CSS resets (`background: none; border: none; font-family: inherit; font-size: 1rem;`) and focus indicators (`:focus-visible`), as well as pairing with `aria-selected`, `aria-controls`, and `role="tabpanel"`. When updating category filter buttons dynamically, preserve base `.btn` utility classes during state resetting (`b.classList.add('btn', 'btn-outline')`) so button layout and padding remain intact.
+**Action:** Always maintain base styling classes when toggling active/pressed states on button groups.
