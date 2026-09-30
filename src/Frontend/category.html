@@ -111,11 +111,21 @@
             cursor: pointer;
             display: flex;
             flex-direction: column;
+            border: none;
+            padding: 0;
+            text-align: inherit;
+            font-family: inherit;
+            width: 100%;
         }
 
         .dish-card:hover {
             transform: translateY(-4px);
             box-shadow: 0 8px 16px rgba(255, 90, 0, 0.15);
+        }
+
+        .dish-card:focus-visible {
+            outline: 3px solid #FF5A00;
+            outline-offset: 3px;
         }
 
         .dish-card-image {
@@ -453,20 +463,28 @@
         }
 
         function createDishCard(dish, lang) {
-            const card = document.createElement('div');
+            const card = document.createElement('button');
+            card.type = 'button';
             card.className = 'dish-card';
+            card.onclick = () => window.location.href = `listing.html?category=${dish.category_id || ''}`;
+
+            const chef = dish.chef_name || 'Unknown Chef';
+            const priceStr = `${dish.price} EGP`;
+            const ratingStr = dish.rating ? `${dish.rating}` : '0';
+            const levelStr = dish.level_name ? `, ${dish.level_name}` : '';
+            card.setAttribute('aria-label', `${dish.name}${levelStr}, ${chef}, ${priceStr}, ${ratingStr}`);
 
             card.innerHTML = `
-                <div class="dish-card-image">${dish.image_url ? `<img src="${dish.image_url}" alt="${dish.name}">` : '🍲'}</div>
+                <div class="dish-card-image">${dish.image_url ? `<img src="${dish.image_url}" alt="${dish.name}">` : '<span aria-hidden="true">🍲</span>'}</div>
                 <div class="dish-card-content">
                     <div class="dish-card-header">
                         <div class="dish-card-name">${dish.name}</div>
                         ${dish.level_name ? `<div class="dish-card-level">${dish.level_name}</div>` : ''}
                     </div>
-                    <div class="dish-card-chef">👨‍🍳 ${dish.chef_name || 'Unknown Chef'}</div>
+                    <div class="dish-card-chef"><span aria-hidden="true">👨‍🍳 </span>${chef}</div>
                     <div class="dish-card-footer">
-                        <div class="dish-card-price">${dish.price} EGP</div>
-                        <div class="dish-card-rating">⭐ ${dish.rating || 0}</div>
+                        <div class="dish-card-price">${priceStr}</div>
+                        <div class="dish-card-rating"><span aria-hidden="true">⭐ </span>${ratingStr}</div>
                     </div>
                 </div>
             `;
