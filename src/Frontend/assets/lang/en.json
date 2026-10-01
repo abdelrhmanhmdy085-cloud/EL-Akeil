@@ -19,6 +19,8 @@
     "login_title": "Login - El Akeil",
     "email_label": "Email Address",
     "pass_label": "Password",
+    "show_password": "Show password",
+    "hide_password": "Hide password",
     "valid_pass_confirm": "Confirm Password",
     "full_name": "Full Name",
     "kitchen_addr": "Kitchen Address",
