@@ -75,6 +75,27 @@
         button[type="submit"]:hover {
             background-color: #4a1a20 !important;
         }
+
+        .password-toggle-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            inset-inline-end: 12px;
+            background: none;
+            border: none;
+            padding: 4px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #5E2129;
+            border-radius: 4px;
+        }
+
+        .password-toggle-btn:focus-visible {
+            outline: 2px solid #5E2129;
+            outline-offset: 2px;
+        }
     </style>
 </head>
 
@@ -92,18 +113,52 @@
 
         <form id="authForm">
             <!-- Universal Fields -->
-            <div style="text-align:left; margin-bottom:0.5rem" data-i18n="username">Username</div>
+            <div style="text-align:left; margin-bottom:0.5rem">
+                <label for="username" data-i18n="username">Username</label>
+            </div>
             <input type="text" id="username" class="form-input" required>
 
-            <div style="text-align:left; margin-bottom:0.5rem" data-i18n="pass_label">Password</div>
-            <input type="password" id="password" class="form-input" required>
+            <div style="text-align:left; margin-bottom:0.5rem">
+                <label for="password" data-i18n="pass_label">Password</label>
+            </div>
+            <div class="password-wrapper" style="position: relative; width: 100%; margin-bottom: 1rem;">
+                <input type="password" id="password" class="form-input" style="margin-bottom: 0; padding-inline-end: 42px;" required>
+                <button type="button" class="password-toggle-btn" onclick="togglePasswordVisibility('password', this)" aria-label="إظهار كلمة المرور" data-i18n-aria-label="show_password" title="إظهار كلمة المرور" data-i18n-title="show_password" aria-pressed="false">
+                    <svg class="eye-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                        <circle cx="12" cy="12" r="3"></circle>
+                    </svg>
+                    <svg class="eye-off-icon hidden" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"></path>
+                        <line x1="1" y1="1" x2="23" y2="23"></line>
+                    </svg>
+                </button>
+            </div>
 
-            <div style="text-align:left; margin-bottom:0.5rem" data-i18n="valid_pass_confirm">Confirm Password</div>
-            <input type="password" id="confirm_password" class="form-input" required>
+            <div id="confirmPasswordGroup">
+                <div style="text-align:left; margin-bottom:0.5rem">
+                    <label for="confirm_password" data-i18n="valid_pass_confirm">Confirm Password</label>
+                </div>
+                <div class="password-wrapper" style="position: relative; width: 100%; margin-bottom: 1rem;">
+                    <input type="password" id="confirm_password" class="form-input" style="margin-bottom: 0; padding-inline-end: 42px;">
+                    <button type="button" class="password-toggle-btn" onclick="togglePasswordVisibility('confirm_password', this)" aria-label="إظهار كلمة المرور" data-i18n-aria-label="show_password" title="إظهار كلمة المرور" data-i18n-title="show_password" aria-pressed="false">
+                        <svg class="eye-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                            <circle cx="12" cy="12" r="3"></circle>
+                        </svg>
+                        <svg class="eye-off-icon hidden" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"></path>
+                            <line x1="1" y1="1" x2="23" y2="23"></line>
+                        </svg>
+                    </button>
+                </div>
+            </div>
 
             <!-- Registration Fields -->
             <div id="regFields" class="hidden">
-                <div style="text-align:left; margin-bottom:0.5rem" data-i18n="full_name">Full Name</div>
+                <div style="text-align:left; margin-bottom:0.5rem">
+                    <label for="fullname" data-i18n="full_name">Full Name</label>
+                </div>
                 <input type="text" id="fullname" class="form-input">
 
                 <!-- Role Specific -->
@@ -150,24 +205,54 @@
         let role = roleParam || 'customer';
         let isLogin = !roleParam; // If role is specified in URL, default to Register mode
 
-        // If specific role requested, switch to register view immediately
-        if (roleParam) {
-            document.addEventListener('DOMContentLoaded', () => {
-                if (isLogin) toggleMode(); // Ensure we are in register mode if role is param
-                // Actually logic below handles state, we just need to set isLogin false initially
-            });
+        document.addEventListener('DOMContentLoaded', () => {
+            const confirmGroup = document.getElementById('confirmPasswordGroup');
+            const confirmInput = document.getElementById('confirm_password');
+            if (isLogin) {
+                if (confirmGroup) confirmGroup.style.display = 'none';
+                if (confirmInput) confirmInput.required = false;
+            } else {
+                toggleMode();
+            }
+        });
+
+        function togglePasswordVisibility(inputId, btn) {
+            const input = document.getElementById(inputId);
+            if (!input) return;
+            const isPassword = input.type === 'password';
+            input.type = isPassword ? 'text' : 'password';
+
+            btn.setAttribute('aria-pressed', isPassword ? 'true' : 'false');
+
+            const lang = localStorage.getItem('elakeil_lang') || 'ar';
+            const showI18nKey = isPassword ? 'hide_password' : 'show_password';
+            const labelText = (typeof translations !== 'undefined' && translations[lang]?.[showI18nKey])
+                ? translations[lang][showI18nKey]
+                : (isPassword ? (lang === 'en' ? 'Hide password' : 'إخفاء كلمة المرور') : (lang === 'en' ? 'Show password' : 'إظهار كلمة المرور'));
+
+            btn.setAttribute('aria-label', labelText);
+            btn.setAttribute('title', labelText);
+            btn.setAttribute('data-i18n-aria-label', showI18nKey);
+            btn.setAttribute('data-i18n-title', showI18nKey);
+
+            const eyeIcon = btn.querySelector('.eye-icon');
+            const eyeOffIcon = btn.querySelector('.eye-off-icon');
+            if (eyeIcon && eyeOffIcon) {
+                eyeIcon.classList.toggle('hidden', isPassword);
+                eyeOffIcon.classList.toggle('hidden', !isPassword);
+            }
         }
 
         function toggleMode() {
             isLogin = !isLogin;
             document.getElementById('regFields').classList.toggle('hidden', isLogin);
-            document.getElementById('confirm_password').parentElement.style.display = isLogin ? 'none' : 'block'; // Toggle confirm pass
-            // Hide label too if feasible, but structure is flat. Let's fix structure or toggle inputs.
-            // Actually, simply toggling the input and its label (previous sibling) is cleaner if wrapped.
-            // For now, let's just assume we toggle the specific elements.
+
+            const confirmGroup = document.getElementById('confirmPasswordGroup');
             const confirmInput = document.getElementById('confirm_password');
-            confirmInput.style.display = isLogin ? 'none' : 'block';
-            confirmInput.previousElementSibling.style.display = isLogin ? 'none' : 'block';
+            if (confirmGroup && confirmInput) {
+                confirmGroup.style.display = isLogin ? 'none' : 'block';
+                confirmInput.required = !isLogin;
+            }
 
             // Update Text
             const submitBtn = document.getElementById('submitBtn');
@@ -175,14 +260,11 @@
             const title = document.querySelector('h2[data-i18n="login_title"]');
 
             if (isLogin) {
-                // Reset to login text (handled by i18n somewhat, but simpler strictly here)
-                // Re-run applyTranslations to reset if needed or manual
-                location.reload(); // Simplest to reset state
+                location.reload();
             } else {
-                submitBtn.innerText = "Register"; // Needs i18n key really
+                submitBtn.innerText = "Register";
                 title.innerText = "Register - " + role.toUpperCase();
 
-                // Show fields based on role
                 if (role === 'chef') document.getElementById('chefFields').classList.remove('hidden');
                 if (role === 'customer') document.getElementById('customerFields').classList.remove('hidden');
                 if (role === 'driver') {

@@ -1,0 +1,3 @@
+## 2026-10-01 - Password Visibility Toggle Wrapper Pattern
+**Learning:** In pages with mode toggling (such as auth portal switching between login and register), input wrappers like `.password-wrapper` require hiding both the input container and adjusting input `required` attributes dynamically so HTML5 form validation remains functional. Using CSS logical property `inset-inline-end: 12px` ensures the toggle button aligns seamlessly across both LTR and RTL directions.
+**Action:** Always associate labels via matching `for` and `id` attributes, set `required` dynamically when toggling input visibility, and position action icons with `inset-inline-end`.

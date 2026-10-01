@@ -19,6 +19,8 @@
     "login_title": "تسجيل الدخول - الأكيل",
     "email_label": "البريد الإلكتروني",
     "pass_label": "كلمة المرور",
+    "show_password": "إظهار كلمة المرور",
+    "hide_password": "إخفاء كلمة المرور",
     "valid_pass_confirm": "تأكيد كلمة المرور",
     "full_name": "الاسم الكامل",
     "kitchen_addr": "عنوان المطبخ",
