@@ -1,0 +1,12 @@
+[build]
+  publish = "src/Frontend"
+
+[[redirects]]
+  from = "/api/*"
+  to = "https://el-akeil.up.railway.app/api/:splat"
+  status = 200
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
