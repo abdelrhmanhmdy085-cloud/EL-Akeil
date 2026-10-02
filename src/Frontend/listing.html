@@ -18,10 +18,11 @@
             <span>El Akeil</span>
         </a>
         <div class="nav-controls actions">
-            <a href="index.html" class="btn btn-secondary" style="margin-right: 1rem;">العودة للرئيسية</a>
-            <a href="categories.html" class="btn btn-outline">الفئات</a>
-            <a href="levels.html" class="btn btn-outline">المستويات</a>
+            <a href="index.html" class="btn btn-secondary" style="margin-inline-end: 0.5rem;" data-i18n="back_to_home">العودة للرئيسية</a>
+            <a href="categories.html" class="btn btn-secondary" style="margin-inline-end: 0.5rem;" data-i18n="categories">الفئات</a>
+            <a href="levels.html" class="btn btn-secondary" data-i18n="food_levels">المستويات</a>
         </div>
+        <div id="langControls"></div>
     </nav>
 
     <div class="container" style="margin-top: 4rem;">
@@ -31,7 +32,7 @@
         <p id="filterInfo" style="text-align: right; color: var(--text-secondary); margin-bottom: 2rem;"></p>
 
         <div id="dishesGrid" class="dish-grid">
-            <div class="loading-spinner">Loading...</div>
+            <div class="loading-spinner" role="status" data-i18n="loading">Loading...</div>
         </div>
     </div>
 
@@ -107,6 +108,10 @@
                     // Rating or status
                     const ratingText = dish.rating ? `★ ${dish.rating}` : (lang === 'ar' ? 'جديد' : 'New');
 
+                    const viewDetailsText = lang === 'ar' ? 'عرض التفاصيل' : 'View Details';
+                    const addToCartText = lang === 'ar' ? 'أضف للطلب' : 'Add to Order';
+                    const priceText = lang === 'ar' ? `${dish.price} جنيه` : `${dish.price} EGP`;
+
                     card.innerHTML = `
                         <div class="dish-image">
                             ${imageHtml}
@@ -118,14 +123,14 @@
                             <p class="dish-chef" style="font-size: 0.9rem; color: var(--text-secondary);">${chefName}</p>
                             
                             <div class="dish-meta" style="display: flex; justify-content: space-between; align-items: center; margin: 0.5rem 0;">
-                                <span class="dish-price" style="font-weight: 700; color: var(--primary);">${dish.price} جنيه</span>
+                                <span class="dish-price" style="font-weight: 700; color: var(--primary);">${priceText}</span>
                                 <span class="dish-rating" style="font-size: 0.9rem;">${ratingText}</span>
                             </div>
 
                             <p class="dish-description" style="font-size: 0.85rem; color: var(--text-secondary); margin: 0.5rem 0; line-height: 1.4; max-height: 60px; overflow: hidden;">${dish.description || ''}</p>
                             
-                            <button class="btn btn-order" style="width:100%; margin-top:1rem; padding:0.7rem;" onclick="viewDish(${dish.id})">عرض التفاصيل</button>
-                            <button class="btn" style="width:100%; margin-top:0.5rem; padding:0.7rem; background: #FF5A00; color: white; border: none;" onclick="addToCart(${dish.id})">أضف للطلب</button>
+                            <button type="button" class="btn btn-order" style="width:100%; margin-top:1rem; padding:0.7rem;" aria-label="${viewDetailsText} - ${dish.name}" onclick="viewDish(${dish.id})">${viewDetailsText}</button>
+                            <button type="button" class="btn" style="width:100%; margin-top:0.5rem; padding:0.7rem; background: #FF5A00; color: white; border: none;" aria-label="${addToCartText} - ${dish.name}" onclick="addToCart(${dish.id})">${addToCartText}</button>
                         </div>
                     `;
                     grid.appendChild(card);
@@ -152,11 +157,12 @@
         }
 
         window.addEventListener('load', () => {
+            if (typeof initLanguage === 'function') initLanguage();
             loadListing();
-            
-            // تحديث العنوان مع اللغة
-            const lang = localStorage.getItem('elakeil_lang') || 'ar';
-            if (typeof loadLanguage === 'function') loadLanguage(lang);
+        });
+
+        window.addEventListener('languageChanged', () => {
+            loadListing();
         });
     </script>
 </body>
