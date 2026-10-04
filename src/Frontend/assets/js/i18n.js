@@ -54,6 +54,16 @@ function applyTranslations(lang) {
         const key = el.getAttribute('data-i18n-placeholder');
         if (t[key]) el.placeholder = t[key];
     });
+
+    document.querySelectorAll('[data-i18n-title]').forEach(el => {
+        const key = el.getAttribute('data-i18n-title');
+        if (t[key]) el.title = t[key];
+    });
+
+    document.querySelectorAll('[data-i18n-aria-label]').forEach(el => {
+        const key = el.getAttribute('data-i18n-aria-label');
+        if (t[key]) el.setAttribute('aria-label', t[key]);
+    });
 }
 
 function initLanguage() {
@@ -66,10 +76,13 @@ function initLanguage() {
 
     const nav = document.getElementById('langControls');
     if (nav) {
+        const oldSelect = nav.querySelector('select.lang-selector');
+        if (oldSelect) oldSelect.remove();
+
         nav.innerHTML = `
-            <div class="lang-toggle-btn" onclick="toggleLanguage()" title="Switch Language">
-                🌍 <span id="lang-label">${saved === 'ar' ? 'EN' : 'AR'}</span>
-            </div>
+            <button type="button" class="lang-toggle-btn" onclick="toggleLanguage()" data-i18n-title="switch_language" data-i18n-aria-label="switch_language" title="Switch Language" aria-label="Switch Language">
+                <span aria-hidden="true">🌍</span> <span id="lang-label">${saved === 'ar' ? 'EN' : 'AR'}</span>
+            </button>
         `;
     }
     
