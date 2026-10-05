@@ -288,11 +288,6 @@
         }
 
         .faq-question {
-            width: 100%;
-            border: none;
-            font-family: inherit;
-            font-size: 1rem;
-            text-align: inherit;
             padding: 1.5rem;
             background: #f9f9f9;
             cursor: pointer;
@@ -302,11 +297,6 @@
             font-weight: 600;
             color: #333;
             transition: background 0.3s;
-        }
-
-        .faq-question:focus-visible {
-            outline: 2px solid #FF5A00;
-            outline-offset: -2px;
         }
 
         .faq-question:hover {
@@ -418,7 +408,7 @@
                     <li data-i18n="change_weekly">تغيير الطلب أسبوعياً</li>
                     <li data-i18n="customer_support">دعم العملاء 24/7</li>
                 </ul>
-                    <button type="button" class="subscription-btn" onclick="selectPlan('basic', 10, 299)" data-i18n="select_plan">اختر هذه الخطة</button>
+                <button class="subscription-btn" onclick="selectPlan('basic', 10, 299)" data-i18n="select_plan">اختر هذه الخطة</button>
             </div>
         </div>
 
@@ -444,7 +434,7 @@
                     <li data-i18n="priority_delivery">أولوية في التوصيل</li>
                     <li data-i18n="discount_10">خصم 10% على الإضافيات</li>
                 </ul>
-                    <button type="button" class="subscription-btn" onclick="selectPlan('premium', 20, 549)" data-i18n="select_plan">اختر هذه الخطة</button>
+                <button class="subscription-btn" onclick="selectPlan('premium', 20, 549)" data-i18n="select_plan">اختر هذه الخطة</button>
             </div>
         </div>
 
@@ -470,7 +460,7 @@
                     <li data-i18n="discount_15">خصم 15% على الإضافيات</li>
                     <li data-i18n="free_nutrition">استشارة غذائية مجانية</li>
                 </ul>
-                    <button type="button" class="subscription-btn" onclick="selectPlan('luxury', 30, 799)" data-i18n="select_plan">اختر هذه الخطة</button>
+                <button class="subscription-btn" onclick="selectPlan('luxury', 30, 799)" data-i18n="select_plan">اختر هذه الخطة</button>
             </div>
         </div>
     </div>
@@ -496,18 +486,18 @@
             </div>
             <div class="benefit-card">
                 <div class="benefit-icon">💰</div>
-                <h3 data-i18n="benefit_saving">توفير مالي</h3>
-                <p data-i18n="benefit_saving_desc">اشترك الآن واوفر حتى 25% مقارنة بالطلب العادي</p>
+                <h3>توفير مالي</h3>
+                <p>اشترك الآن واوفر حتى 25% مقارنة بالطلب العادي</p>
             </div>
             <div class="benefit-card">
                 <div class="benefit-icon">🔄</div>
-                <h3 data-i18n="benefit_flexibility">مرونة كاملة</h3>
-                <p data-i18n="benefit_flexibility_desc">يمكنك تغيير طلبك يومياً أو إلغاء الاشتراك في أي وقت</p>
+                <h3>مرونة كاملة</h3>
+                <p>يمكنك تغيير طلبك يومياً أو إلغاء الاشتراك في أي وقت</p>
             </div>
             <div class="benefit-card">
                 <div class="benefit-icon">⭐</div>
-                <h3 data-i18n="benefit_quality">جودة مضمونة</h3>
-                <p data-i18n="benefit_quality_desc">كل طبق مختار بعناية من الشيفات الموثوقين في منطقتك</p>
+                <h3>جودة مضمونة</h3>
+                <p>كل طبق مختار بعناية من الشيفات الموثوقين في منطقتك</p>
             </div>
         </div>
     </div>
@@ -517,41 +507,41 @@
         <h2 class="faq-title" data-i18n="faq_title">❓ الأسئلة الشائعة</h2>
         
         <div class="faq-item">
-            <button type="button" class="faq-question" id="faq-question-1" onclick="toggleFAQ(this)" aria-expanded="false" aria-controls="faq-answer-1">
+            <div class="faq-question" onclick="toggleFAQ(this)">
                 <span data-i18n="faq_question_1">هل يمكنني تغيير الطبق بعد الطلب؟</span>
-                <span class="faq-toggle" aria-hidden="true">+</span>
-            </button>
-            <div class="faq-answer" id="faq-answer-1" role="region" aria-labelledby="faq-question-1" data-i18n="faq_answer_1">
+                <span class="faq-toggle">+</span>
+            </div>
+            <div class="faq-answer" data-i18n="faq_answer_1">
                 نعم! يمكنك تغيير طلبك قبل 2 ساعة من وقت التوصيل. اتصل بفريق الدعم أو استخدم التطبيق لتغيير طلبك بسهولة.
             </div>
         </div>
 
         <div class="faq-item">
-            <button type="button" class="faq-question" id="faq-question-2" onclick="toggleFAQ(this)" aria-expanded="false" aria-controls="faq-answer-2">
+            <div class="faq-question" onclick="toggleFAQ(this)">
                 <span data-i18n="faq_question_2">هل التوصيل مجاني؟</span>
-                <span class="faq-toggle" aria-hidden="true">+</span>
-            </button>
-            <div class="faq-answer" id="faq-answer-2" role="region" aria-labelledby="faq-question-2" data-i18n="faq_answer_2">
+                <span class="faq-toggle">+</span>
+            </div>
+            <div class="faq-answer" data-i18n="faq_answer_2">
                 نعم، التوصيل مجاني تماماً مع جميع خطط الاشتراك. لا توجد رسوم إضافية.
             </div>
         </div>
 
         <div class="faq-item">
-            <button type="button" class="faq-question" id="faq-question-3" onclick="toggleFAQ(this)" aria-expanded="false" aria-controls="faq-answer-3">
+            <div class="faq-question" onclick="toggleFAQ(this)">
                 <span data-i18n="faq_question_3">كيف ألغي الاشتراك؟</span>
-                <span class="faq-toggle" aria-hidden="true">+</span>
-            </button>
-            <div class="faq-answer" id="faq-answer-3" role="region" aria-labelledby="faq-question-3" data-i18n="faq_answer_3">
+                <span class="faq-toggle">+</span>
+            </div>
+            <div class="faq-answer" data-i18n="faq_answer_3">
                 لا توجد عقود طويلة الأجل! يمكنك الإلغاء في أي وقت بدون أي رسوم إضافية أو شروط معقدة.
             </div>
         </div>
 
         <div class="faq-item">
-            <button type="button" class="faq-question" id="faq-question-4" onclick="toggleFAQ(this)" aria-expanded="false" aria-controls="faq-answer-4">
+            <div class="faq-question" onclick="toggleFAQ(this)">
                 <span data-i18n="faq_question_4">هل هناك خيارات غذائية؟</span>
-                <span class="faq-toggle" aria-hidden="true">+</span>
-            </button>
-            <div class="faq-answer" id="faq-answer-4" role="region" aria-labelledby="faq-question-4" data-i18n="faq_answer_4">
+                <span class="faq-toggle">+</span>
+            </div>
+            <div class="faq-answer" data-i18n="faq_answer_4">
                 نعم، نوفر خيارات نباتية وويغانية وخالية من الجلوتين وغيرها.
             </div>
         </div>
@@ -589,19 +579,16 @@
             document.querySelectorAll('.faq-question').forEach(q => {
                 if (q !== question) {
                     q.classList.remove('active');
-                    q.setAttribute('aria-expanded', 'false');
-                    if (q.nextElementSibling) q.nextElementSibling.classList.remove('active');
-                    const toggleSpan = q.querySelector('.faq-toggle');
-                    if (toggleSpan) toggleSpan.textContent = '+';
+                    q.nextElementSibling.classList.remove('active');
+                    q.querySelector('.faq-toggle').textContent = '+';
                 }
             });
 
             // Toggle current FAQ
-            const isActive = question.classList.toggle('active');
-            question.setAttribute('aria-expanded', isActive ? 'true' : 'false');
-            if (answer) answer.classList.toggle('active', isActive);
-            const toggleSpan = question.querySelector('.faq-toggle');
-            if (toggleSpan) toggleSpan.textContent = isActive ? '−' : '+';
+            question.classList.toggle('active');
+            answer.classList.toggle('active');
+            question.querySelector('.faq-toggle').textContent =
+                question.classList.contains('active') ? '−' : '+';
         }
 
         // Load language on page load
