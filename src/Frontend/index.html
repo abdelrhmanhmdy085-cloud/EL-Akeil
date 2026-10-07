@@ -496,23 +496,28 @@
           grid.innerHTML = '';
 
           categories.forEach(cat => {
-            const card = document.createElement('div');
+            const card = document.createElement('button');
+            card.type = 'button';
             card.className = 'category-circle-card';
+            card.setAttribute('aria-label', cat.name);
             card.onclick = () => window.location.href = `category.html?id=${cat.id}`;
             card.innerHTML = `
-                    <div class="category-icon-wrapper">${cat.icon || '🍽️'}</div>
+                    <div class="category-icon-wrapper" aria-hidden="true">${cat.icon || '🍽️'}</div>
                     <span class="category-name">${cat.name}</span>
                 `;
             grid.appendChild(card);
           });
 
           // Add "More" for categories
-          const moreCat = document.createElement('div');
+          const moreCat = document.createElement('button');
+          moreCat.type = 'button';
           moreCat.className = 'category-circle-card more-link';
+          const moreLabel = lang === 'ar' ? 'المزيد' : 'More';
+          moreCat.setAttribute('aria-label', moreLabel);
           moreCat.onclick = () => window.location.href = 'categories.html';
           moreCat.innerHTML = `
-                  <div class="category-icon-wrapper" style="background: #f0f0f0;">...</div>
-                  <span class="category-name">${lang === 'ar' ? 'المزيد' : 'More'}</span>
+                  <div class="category-icon-wrapper" style="background: #f0f0f0;" aria-hidden="true">...</div>
+                  <span class="category-name">${moreLabel}</span>
               `;
           grid.appendChild(moreCat);
         }

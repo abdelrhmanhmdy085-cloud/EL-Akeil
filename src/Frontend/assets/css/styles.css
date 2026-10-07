@@ -566,10 +566,22 @@ select.lang-selector {
     gap: 0.8rem;
     cursor: pointer;
     transition: transform 0.3s;
+    background: transparent;
+    border: none;
+    padding: 0;
+    width: auto;
+    font-family: inherit;
+    text-align: center;
 }
 
 .category-circle-card:hover {
     transform: translateY(-5px);
+}
+
+.category-circle-card:focus-visible {
+    outline: 3px solid var(--primary);
+    outline-offset: 4px;
+    border-radius: 12px;
 }
 
 .category-icon-wrapper {
