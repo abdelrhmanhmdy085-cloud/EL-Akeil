@@ -74,6 +74,8 @@
     "driver_license": "رقم رخصة القيادة",
     "already_have_account": "هل لديك حساب؟ دخول",
     "dont_have_account": "ليس لديك حساب؟ تسجيل",
+    "show_password": "إظهار كلمة المرور",
+    "hide_password": "إخفاء كلمة المرور",
     "categories_title": "تصفح حسب الفئة",
     "categories_subtitle": "اختر الفئة المفضلة لديك",
     "levels_title": "تصفح حسب المستوى",

@@ -75,6 +75,8 @@
     "already_have_account": "Already have an account?",
     "dont_have_account": "Don't have an account?",
     "forgot_password": "Forgot Password?",
+    "show_password": "Show password",
+    "hide_password": "Hide password",
     "categories_title": "Browse by Category",
     "categories_subtitle": "Choose your favorite food category",
     "levels_title": "Browse by Level",
