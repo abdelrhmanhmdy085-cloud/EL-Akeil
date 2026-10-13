@@ -1,0 +1,3 @@
+## 2025-02-14 - Explicit Label Linking and Event Handling on RTL Checkout Forms
+**Learning:** Checkout forms with custom radio wrapper labels require `:focus-within` styling in addition to `:focus-visible` on inputs so keyboard users get clear visual feedback when navigating payment methods. Inline event handlers must explicitly receive the `event` object (`selectPaymentMethod('card', event)`) to avoid implicit global scope resolution failures across browser contexts.
+**Action:** Always link form labels to control IDs explicitly using `for` and `id`, apply `:focus-within` on custom option containers, pass explicit `event` parameters to inline JS callbacks, and convey submission state via `aria-busy="true"`.
