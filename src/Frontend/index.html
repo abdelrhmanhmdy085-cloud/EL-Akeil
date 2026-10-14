@@ -225,9 +225,9 @@
         اطلب الآن من أفضل الشيفات في منطقتك</p>
 
       <div class="search-box-container">
-        <button class="search-btn">ابحث</button>
-        <input type="text" class="search-input" placeholder="ابحث عن منطقة، شارع، معلم معروف...">
-        <div class="location-icon">📍</div>
+        <button type="button" class="search-btn" onclick="executeHeroSearch()" data-i18n="search_btn" data-i18n-aria-label="search_btn" aria-label="بحث">ابحث</button>
+        <input type="text" class="search-input" id="heroSearchInput" placeholder="ابحث عن منطقة، شارع، معلم معروف..." data-i18n-placeholder="search_placeholder" aria-label="ابحث عن منطقة، شارع، معلم معروف..." data-i18n-aria-label="search_placeholder" onkeypress="if(event.key === 'Enter') executeHeroSearch()">
+        <button type="button" class="location-icon" id="locateBtn" onclick="openLocationModal()" title="حدد موقعك" data-i18n-title="locate_me" aria-label="حدد موقعك" data-i18n-aria-label="locate_me">📍</button>
       </div>
 
       <!-- Category Filter Buttons -->
@@ -518,6 +518,16 @@
         }
       } catch (e) {
         console.error('Failed to load categories:', e);
+      }
+    }
+
+    function executeHeroSearch() {
+      const queryInput = document.getElementById('heroSearchInput');
+      const query = queryInput ? queryInput.value.trim() : '';
+      if (query) {
+        window.location.href = `listing.html?q=${encodeURIComponent(query)}`;
+      } else {
+        window.location.href = `listing.html`;
       }
     }
 
