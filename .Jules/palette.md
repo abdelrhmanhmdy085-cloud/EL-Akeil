@@ -1,3 +1,0 @@
-## 2025-10-16 - Accessible FAQ Accordions & Focus Visibility
-**Learning:** In static HTML templates without component libraries, converting clickable `<div>` header triggers to semantic `<button type="button">` elements with CSS resets (`width: 100%`, `border: none`, `font-family: inherit`, `text-align: inherit`) preserves full visual layout while instantly providing native keyboard accessibility (Tab, Space, Enter) and screen reader support (`aria-expanded`, `aria-controls`).
-**Action:** When building or enhancing accordions or collapsible cards, always use semantic `<button type="button">` elements with `:focus-visible` styling and ensure JavaScript dynamically toggles `aria-expanded="true|false"`.
