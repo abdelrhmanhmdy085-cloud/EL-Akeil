@@ -253,7 +253,7 @@ class NavigationManager {
             <div class="route-info-container">
                 <div class="route-header">
                     <h3>🗺️ Navigation</h3>
-                    <button class="btn-minimize" onclick="this.parentElement.parentElement.classList.toggle('minimized')">−</button>
+                    <button type="button" class="btn-minimize" aria-label="Minimize navigation panel" title="Minimize navigation panel" aria-expanded="true" onclick="navigationManager.toggleMinimizePanel(this)">−</button>
                 </div>
 
                 <div class="route-content">
@@ -306,6 +306,21 @@ class NavigationManager {
         }
 
         return panel;
+    }
+
+    /**
+     * Toggle minimize state for route information panel
+     * @param {HTMLElement} btn - The minimize toggle button
+     */
+    toggleMinimizePanel(btn) {
+        if (!btn) return;
+        const container = btn.closest('.route-info-container') || btn.parentElement.parentElement;
+        const isMinimized = container.classList.toggle('minimized');
+        const label = isMinimized ? 'Expand navigation panel' : 'Minimize navigation panel';
+        btn.setAttribute('aria-expanded', (!isMinimized).toString());
+        btn.setAttribute('aria-label', label);
+        btn.setAttribute('title', label);
+        btn.textContent = isMinimized ? '+' : '−';
     }
 
     /**
