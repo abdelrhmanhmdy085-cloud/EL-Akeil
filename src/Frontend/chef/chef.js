@@ -40,6 +40,25 @@ function setupEventListeners() {
 
     // Settings form
     document.getElementById('settings-form').addEventListener('submit', handleSaveSettings);
+
+    // Modal keyboard & backdrop click listeners
+    const modal = document.getElementById('add-dish-modal');
+    if (modal) {
+        modal.addEventListener('click', function(e) {
+            if (e.target === modal) {
+                closeAddDishModal();
+            }
+        });
+    }
+
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') {
+            const activeModal = document.getElementById('add-dish-modal');
+            if (activeModal && activeModal.classList.contains('active')) {
+                closeAddDishModal();
+            }
+        }
+    });
 }
 
 // Switch Sections
@@ -50,7 +69,8 @@ function switchSection(sectionName) {
 
     // Show active section
     document.getElementById(`${sectionName}-section`).classList.add('active');
-    event.target.classList.add('active');
+    const navItem = document.querySelector(`.nav-item[data-section="${sectionName}"]`);
+    if (navItem) navItem.classList.add('active');
 
     // Update title
     const titles = {
@@ -196,9 +216,9 @@ function createDishCard(dish) {
             <div class="dish-description">${dish.description || 'بدون وصف'}</div>
             <div class="dish-price">${dish.price.toFixed(2)} ر.س</div>
             <div class="dish-actions">
-                <button class="dish-edit" onclick="editDish(${dish.id})">✏️ تعديل</button>
-                <button class="dish-toggle" onclick="toggleAvailability(${dish.id})">${dish.available ? '🔴' : '🟢'}</button>
-                <button class="dish-delete" onclick="deleteDish(${dish.id})">🗑️ حذف</button>
+                <button type="button" class="dish-edit" onclick="editDish(${dish.id})" aria-label="تعديل الطبق" title="تعديل الطبق">✏️ تعديل</button>
+                <button type="button" class="dish-toggle" onclick="toggleAvailability(${dish.id})" aria-label="${dish.available ? 'تعطيل الطبق' : 'تفعيل الطبق'}" title="${dish.available ? 'تعطيل الطبق' : 'تفعيل الطبق'}">${dish.available ? '⏸️ تعطيل' : '▶️ تفعيل'}</button>
+                <button type="button" class="dish-delete" onclick="deleteDish(${dish.id})" aria-label="حذف الطبق" title="حذف الطبق">🗑️ حذف</button>
             </div>
         </div>
     `;

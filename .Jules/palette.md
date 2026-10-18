@@ -1,0 +1,3 @@
+## 2025-05-20 - Chef Dashboard Navigation & Toggle Action UX
+**Learning:** In the chef dashboard, toggling dish availability with ambiguous status emojis (🔴/🟢) created visual cognitive dissonance regarding state versus action. Furthermore, inline event handlers calling `switchSection` relied on the deprecated global `window.event` object, causing element selector failures when target elements were nested.
+**Action:** Always use explicit action-oriented labels ("⏸️ تعطيل" / "▶️ تفعيل") on action buttons with `aria-label` and `title` attributes, and query active navigation elements directly (`document.querySelector('.nav-item[data-section="..."]')`) rather than relying on global `event.target`.

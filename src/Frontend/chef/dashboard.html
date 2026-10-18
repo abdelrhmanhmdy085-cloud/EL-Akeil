@@ -37,7 +37,7 @@
             </nav>
             
             <div class="sidebar-footer">
-                <button class="btn btn-logout" onclick="logout()">تسجيل الخروج</button>
+                <button type="button" class="btn btn-logout" data-i18n="logout" onclick="logout()">تسجيل الخروج</button>
             </div>
         </aside>
 
@@ -113,7 +113,7 @@
                 <section id="dishes-section" class="section">
                     <div class="section-header">
                         <h2>أطباقي</h2>
-                        <button class="btn btn-primary" onclick="openAddDishModal()">
+                        <button type="button" class="btn btn-primary" onclick="openAddDishModal()">
                             ➕ إضافة طبق جديد
                         </button>
                     </div>
@@ -194,11 +194,11 @@
     </div>
 
     <!-- Add Dish Modal -->
-    <div id="add-dish-modal" class="modal">
+    <div id="add-dish-modal" class="modal" role="dialog" aria-modal="true" aria-labelledby="add-dish-modal-title">
         <div class="modal-content">
             <div class="modal-header">
-                <h2>إضافة طبق جديد</h2>
-                <button class="close-btn" onclick="closeAddDishModal()">&times;</button>
+                <h2 id="add-dish-modal-title">إضافة طبق جديد</h2>
+                <button type="button" class="close-btn" aria-label="إغلاق" title="إغلاق" onclick="closeAddDishModal()">&times;</button>
             </div>
 
             <form id="add-dish-form" class="modal-body">
