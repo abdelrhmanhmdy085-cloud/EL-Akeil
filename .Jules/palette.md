@@ -1,0 +1,3 @@
+## 2026-03-30 - Modal Close Triggers & Keyboard Accessibility
+**Learning:** Modal close controls rendered as `<span>` tags prevent keyboard focus/navigation and lack screen reader announcements. Replacing them with `<button type="button">`, adding CSS resets (`background: transparent`, `border: none`, `padding: 0`), `:focus-visible` outline indicators, and a global `Escape` keypress listener improves accessibility without visual regressions.
+**Action:** Always check modal templates across HTML files for non-semantic close triggers and ensure semantic `<button>` elements with `:focus-visible` styling and `Escape` key dismiss listeners are used.
