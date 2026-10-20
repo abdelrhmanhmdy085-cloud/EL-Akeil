@@ -1,0 +1,3 @@
+## 2026-10-20 - Map Analytics Toggle and List Accessibility
+**Learning:** In map and dashboard sidebars (`analytics.html`), custom toggle switches and interactive list items were implemented as `<div>` elements with `onclick` handlers. This prevented keyboard navigation and screen reader state detection (`role="switch"`, `aria-checked`), while reliance on global `event.target` in selection functions broke reliability in non-inline execution contexts.
+**Action:** Wrap custom switch controls in semantic `<button type="button" role="switch" aria-checked="...">` with CSS resets and `:focus-visible` outlines, and pass `this` explicitly in dynamic `onclick` handlers (`selectChefOnMap(id, this)`) to update state reliably.
