@@ -225,9 +225,9 @@
         اطلب الآن من أفضل الشيفات في منطقتك</p>
 
       <div class="search-box-container">
-        <button class="search-btn">ابحث</button>
-        <input type="text" class="search-input" placeholder="ابحث عن منطقة، شارع، معلم معروف...">
-        <div class="location-icon">📍</div>
+        <button type="button" class="search-btn" id="heroSearchBtn" onclick="executeHeroSearch()" data-i18n="search_btn" data-i18n-aria-label="search_btn" aria-label="بحث">بحث</button>
+        <input type="text" id="heroSearchInput" class="search-input" placeholder="ابحث عن منطقة، شارع، معلم معروف..." aria-label="ابحث عن منطقة، شارع، معلم معروف..." data-i18n-placeholder="search_location_placeholder" data-i18n-aria-label="search_location_placeholder" onkeyup="if(event.key==='Enter') executeHeroSearch()">
+        <button type="button" class="location-icon" id="locateBtn" data-i18n-aria-label="locate_me" data-i18n-title="locate_me" aria-label="تحديد موقعي" title="تحديد موقعي">📍</button>
       </div>
 
       <!-- Category Filter Buttons -->
@@ -351,6 +351,17 @@
   </div>
 
   <script>
+    // Hero Search Functionality
+    function executeHeroSearch() {
+      const input = document.getElementById('heroSearchInput');
+      const query = input ? input.value.trim() : '';
+      if (query) {
+        window.location.href = `listing.html?q=${encodeURIComponent(query)}`;
+      } else {
+        window.location.href = 'listing.html';
+      }
+    }
+
     // Map Modal Logic
     let pickerMap;
     const modal = document.getElementById('locationModal');

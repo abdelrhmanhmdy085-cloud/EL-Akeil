@@ -306,10 +306,33 @@ select.lang-selector {
     background: var(--primary-hover);
 }
 
+.search-btn:focus-visible, .search-input:focus-visible {
+    outline: 2px solid var(--primary);
+    outline-offset: 2px;
+}
+
 .location-icon {
     padding: 0 15px;
     font-size: 1.2rem;
     color: var(--text-secondary);
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.2s ease, color 0.2s ease;
+}
+
+.location-icon:hover {
+    color: var(--primary);
+    transform: scale(1.15);
+}
+
+.location-icon:focus-visible {
+    outline: 2px solid var(--primary);
+    outline-offset: 2px;
+    border-radius: 50%;
 }
 
 /* Wave Separator */
