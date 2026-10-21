@@ -40,6 +40,7 @@
             const params = new URLSearchParams(window.location.search);
             const categoryId = params.get('category');
             const levelId = params.get('level');
+            const searchQuery = params.get('q') || params.get('search');
             
             const grid = document.getElementById('dishesGrid');
             const titleEl = document.getElementById('pageTitle');
@@ -60,10 +61,14 @@
                     filterType = 'level';
                     filterId = levelId;
                 } else {
-                    // All dishes
+                    // All dishes or search query
                     endpoint = `/api/browse/dishes?lang=${lang}`;
-                    titleEl.innerText = lang === 'ar' ? 'جميع الأطباق' : 'All Dishes';
-                    filterInfo.innerText = lang === 'ar' ? 'يتم عرض جميع الأطباق المتاحة' : 'Showing all available dishes';
+                    if (searchQuery) {
+                        filterType = 'search';
+                    } else {
+                        titleEl.innerText = lang === 'ar' ? 'جميع الأطباق' : 'All Dishes';
+                        filterInfo.innerText = lang === 'ar' ? 'يتم عرض جميع الأطباق المتاحة' : 'Showing all available dishes';
+                    }
                 }
 
                 const response = await fetch(endpoint);
@@ -73,10 +78,20 @@
                 }
 
                 const data = await response.json();
-                const dishes = Array.isArray(data) ? data : (data.dishes || []);
+                let dishes = Array.isArray(data) ? data : (data.dishes || []);
 
-                // Set Title if needed
-                if (filterType === 'category' && data.category_name) {
+                // Filter & Set Title
+                if (filterType === 'search' && searchQuery) {
+                    const qLower = searchQuery.toLowerCase();
+                    dishes = dishes.filter(d =>
+                        (d.name && d.name.toLowerCase().includes(qLower)) ||
+                        (d.description && d.description.toLowerCase().includes(qLower)) ||
+                        (d.chef_name && d.chef_name.toLowerCase().includes(qLower))
+                    );
+                    titleEl.innerText = lang === 'ar' ? `نتائج البحث عن: "${searchQuery}"` : `Search results for: "${searchQuery}"`;
+                    document.title = `${searchQuery} - El Akeil`;
+                    filterInfo.innerText = lang === 'ar' ? `${dishes.length} أطباق تطابق بحثك` : `${dishes.length} dishes match your search`;
+                } else if (filterType === 'category' && data.category_name) {
                     titleEl.innerText = data.category_name;
                     document.title = `${data.category_name} - El Akeil`;
                     filterInfo.innerText = lang === 'ar' ? `${dishes.length} أطباق في هذه الفئة` : `${dishes.length} dishes in this category`;
