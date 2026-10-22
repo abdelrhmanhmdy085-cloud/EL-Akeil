@@ -19,9 +19,19 @@
         }
 
         .tab {
+            background: none;
+            border: none;
+            font-family: inherit;
+            font-size: 1rem;
             padding: 0.5rem 1rem;
             cursor: pointer;
             color: var(--text-secondary);
+        }
+
+        .tab:focus-visible {
+            outline: 2px solid var(--primary);
+            outline-offset: 2px;
+            border-radius: 4px;
         }
 
         .tab.active {
@@ -52,17 +62,17 @@
         <a href="index.html" class="nav-brand"><span>El Akeil</span></a>
         <div class="nav-controls" id="langControls"></div>
         <a href="analytics.html" class="btn btn-outline" style="margin: 0 10px;">📊 Analytics</a>
-        <button onclick="logout()" class="btn btn-outline" style="margin-left:10px">Logout</button>
+        <button type="button" onclick="logout()" class="btn btn-outline" style="margin-left:10px" data-i18n="logout">Logout</button>
     </nav>
 
     <div class="container" style="padding-bottom: 80px;">
-        <div class="tabs">
-            <div class="tab active" onclick="switchTab('menu')" data-i18n="eat_title">Menu</div>
-            <div class="tab" onclick="switchTab('orders')" data-i18n="my_orders">My Orders</div>
+        <div class="tabs" role="tablist">
+            <button type="button" class="tab active" role="tab" id="tab-menu" aria-selected="true" aria-controls="menuTab" onclick="switchTab('menu')" data-i18n="eat_title">Menu</button>
+            <button type="button" class="tab" role="tab" id="tab-orders" aria-selected="false" aria-controls="ordersTab" onclick="switchTab('orders')" data-i18n="my_orders">My Orders</button>
         </div>
 
         <!-- Menu Tab -->
-        <div id="menuTab">
+        <div id="menuTab" role="tabpanel" aria-labelledby="tab-menu">
             <!-- Map Container -->
             <div style="position: relative; margin-bottom: 1.5rem;">
                 <div id="map" style="height: 350px; width: 100%; border-radius: 12px; z-index: 1; box-shadow: 0 2px 8px rgba(0,0,0,0.2);">
@@ -125,7 +135,7 @@
         </div>
 
         <!-- Orders Tab -->
-        <div id="ordersTab" class="hidden">
+        <div id="ordersTab" class="hidden" role="tabpanel" aria-labelledby="tab-orders">
             <h1 style="margin-bottom:2rem;" data-i18n="my_orders">My Orders</h1>
             <div id="ordersList" style="display:flex; flex-direction:column; gap:1rem;"></div>
         </div>
@@ -150,8 +160,15 @@
         let filteredChefId = null;
 
         function switchTab(tab) {
-            document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
-            event.target.classList.add('active');
+            document.querySelectorAll('.tab').forEach(t => {
+                t.classList.remove('active');
+                t.setAttribute('aria-selected', 'false');
+            });
+            const activeTab = tab === 'menu' ? document.getElementById('tab-menu') : document.getElementById('tab-orders');
+            if (activeTab) {
+                activeTab.classList.add('active');
+                activeTab.setAttribute('aria-selected', 'true');
+            }
             document.getElementById('menuTab').classList.toggle('hidden', tab !== 'menu');
             document.getElementById('ordersTab').classList.toggle('hidden', tab !== 'orders');
             if (tab === 'orders') loadOrders();
