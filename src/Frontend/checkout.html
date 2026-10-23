@@ -57,10 +57,16 @@
         }
 
         .form-group input:focus,
-        .form-group select:focus {
+        .form-group select:focus,
+        .form-group textarea:focus {
             outline: none;
             border-color: #FF5A00;
             box-shadow: 0 0 0 3px rgba(255, 90, 0, 0.1);
+        }
+
+        .payment-method:focus-within {
+            border-color: #FF5A00;
+            outline: 2px solid #FF5A00;
         }
 
         .form-row {
@@ -200,6 +206,11 @@
             background: #ff7a2a;
         }
 
+        .checkout-btn:focus-visible {
+            outline: 3px solid #FF5A00;
+            outline-offset: 2px;
+        }
+
         .checkout-btn:disabled {
             background: #ccc;
             cursor: not-allowed;
@@ -273,23 +284,23 @@
 
                     <div class="form-row">
                         <div class="form-group">
-                            <label>الاسم الكامل</label>
-                            <input type="text" name="fullName" required placeholder="أحمد محمد">
+                            <label for="checkout-fullName">الاسم الكامل</label>
+                            <input id="checkout-fullName" type="text" name="fullName" required placeholder="أحمد محمد">
                         </div>
                         <div class="form-group">
-                            <label>البريد الإلكتروني</label>
-                            <input type="email" name="email" required placeholder="example@email.com">
+                            <label for="checkout-email">البريد الإلكتروني</label>
+                            <input id="checkout-email" type="email" name="email" required placeholder="example@email.com">
                         </div>
                     </div>
 
                     <div class="form-row">
                         <div class="form-group">
-                            <label>رقم الهاتف</label>
-                            <input type="tel" name="phone" required placeholder="01012345678">
+                            <label for="checkout-phone">رقم الهاتف</label>
+                            <input id="checkout-phone" type="tel" name="phone" required placeholder="01012345678">
                         </div>
                         <div class="form-group">
-                            <label>العنوان</label>
-                            <input type="text" name="address" required placeholder="الشارع، الحي، المدينة">
+                            <label for="checkout-address">العنوان</label>
+                            <input id="checkout-address" type="text" name="address" required placeholder="الشارع، الحي، المدينة">
                         </div>
                     </div>
 
@@ -297,13 +308,13 @@
                     <div class="section-title" style="margin-top: 2rem;">معلومات التوصيل</div>
 
                     <div class="form-group">
-                        <label>اختر موعد بداية الاشتراك</label>
-                        <input type="date" name="startDate" required>
+                        <label for="checkout-startDate">اختر موعد بداية الاشتراك</label>
+                        <input id="checkout-startDate" type="date" name="startDate" required>
                     </div>
 
                     <div class="form-group">
-                        <label>اختر وقت التوصيل المفضل</label>
-                        <select name="deliveryTime" required>
+                        <label for="checkout-deliveryTime">اختر وقت التوصيل المفضل</label>
+                        <select id="checkout-deliveryTime" name="deliveryTime" required>
                             <option value="">اختر وقت التوصيل</option>
                             <option value="morning">الصباح (7 - 10 صباحاً)</option>
                             <option value="afternoon">بعد الظهر (12 - 3 مساءً)</option>
@@ -312,8 +323,8 @@
                     </div>
 
                     <div class="form-group">
-                        <label>ملاحظات إضافية (اختياري)</label>
-                        <textarea name="notes" style="width: 100%; padding: 0.8rem; border: 1px solid #ddd; border-radius: 8px; font-family: 'Cairo', sans-serif;" placeholder="أي حساسيات غذائية أو تفضيلات خاصة..."></textarea>
+                        <label for="checkout-notes">ملاحظات إضافية (اختياري)</label>
+                        <textarea id="checkout-notes" name="notes" style="width: 100%; padding: 0.8rem; border: 1px solid #ddd; border-radius: 8px; font-family: 'Cairo', sans-serif;" placeholder="أي حساسيات غذائية أو تفضيلات خاصة..."></textarea>
                     </div>
 
                     <!-- Payment Section -->
@@ -321,7 +332,7 @@
 
                     <div class="payment-methods">
                         <label class="payment-method selected">
-                            <input type="radio" name="paymentMethod" value="card" checked onclick="selectPaymentMethod('card')">
+                            <input type="radio" name="paymentMethod" value="card" checked onclick="selectPaymentMethod(event, 'card')">
                             <div class="payment-method-icon">💳</div>
                             <div class="payment-method-text">
                                 <h4>بطاقة ائتمان / خصم</h4>
@@ -330,7 +341,7 @@
                         </label>
 
                         <label class="payment-method">
-                            <input type="radio" name="paymentMethod" value="mobile" onclick="selectPaymentMethod('mobile')">
+                            <input type="radio" name="paymentMethod" value="mobile" onclick="selectPaymentMethod(event, 'mobile')">
                             <div class="payment-method-icon">📱</div>
                             <div class="payment-method-text">
                                 <h4>محفظة رقمية</h4>
@@ -339,7 +350,7 @@
                         </label>
 
                         <label class="payment-method">
-                            <input type="radio" name="paymentMethod" value="bank" onclick="selectPaymentMethod('bank')">
+                            <input type="radio" name="paymentMethod" value="bank" onclick="selectPaymentMethod(event, 'bank')">
                             <div class="payment-method-icon">🏦</div>
                             <div class="payment-method-text">
                                 <h4>تحويل بنكي</h4>
@@ -424,11 +435,15 @@
             document.querySelector('input[name="startDate"]').value = today;
         }
 
-        function selectPaymentMethod(method) {
+        function selectPaymentMethod(e, method) {
             document.querySelectorAll('.payment-method').forEach(el => {
                 el.classList.remove('selected');
             });
-            event.target.closest('.payment-method').classList.add('selected');
+            const target = e ? e.target : event.target;
+            if (target) {
+                const card = target.closest('.payment-method');
+                if (card) card.classList.add('selected');
+            }
         }
 
         async function handleCheckout(e) {
@@ -440,6 +455,7 @@
             // Show loading
             const btn = document.querySelector('.checkout-btn');
             btn.disabled = true;
+            btn.setAttribute('aria-busy', 'true');
             btn.textContent = 'جاري معالجة طلبك...';
 
             try {
@@ -471,6 +487,7 @@
             } catch (error) {
                 alert('حدث خطأ أثناء معالجة طلبك');
                 btn.disabled = false;
+                btn.removeAttribute('aria-busy');
                 btn.textContent = 'تأكيد وإتمام الاشتراك';
             }
         }
