@@ -40,6 +40,7 @@
             const params = new URLSearchParams(window.location.search);
             const categoryId = params.get('category');
             const levelId = params.get('level');
+            const searchQuery = params.get('q') || params.get('search');
             
             const grid = document.getElementById('dishesGrid');
             const titleEl = document.getElementById('pageTitle');
@@ -51,7 +52,12 @@
                 let filterType = '';
                 let filterId = '';
 
-                if (categoryId) {
+                if (searchQuery) {
+                    endpoint = `/api/browse/dishes?lang=${lang}`;
+                    filterType = 'search';
+                    titleEl.innerText = lang === 'ar' ? `نتائج البحث عن "${searchQuery}"` : `Search Results for "${searchQuery}"`;
+                    document.title = `${searchQuery} - El Akeil`;
+                } else if (categoryId) {
                     endpoint = `/api/browse/category/${categoryId}/dishes?lang=${lang}`;
                     filterType = 'category';
                     filterId = categoryId;
@@ -73,10 +79,21 @@
                 }
 
                 const data = await response.json();
-                const dishes = Array.isArray(data) ? data : (data.dishes || []);
+                let dishes = Array.isArray(data) ? data : (data.dishes || []);
+
+                if (filterType === 'search' && searchQuery) {
+                    const qLower = searchQuery.toLowerCase();
+                    dishes = dishes.filter(d =>
+                        (d.name && d.name.toLowerCase().includes(qLower)) ||
+                        (d.description && d.description.toLowerCase().includes(qLower)) ||
+                        (d.chef_name && d.chef_name.toLowerCase().includes(qLower))
+                    );
+                }
 
                 // Set Title if needed
-                if (filterType === 'category' && data.category_name) {
+                if (filterType === 'search') {
+                    filterInfo.innerText = lang === 'ar' ? `تم العثور على ${dishes.length} أطباق` : `Found ${dishes.length} dishes`;
+                } else if (filterType === 'category' && data.category_name) {
                     titleEl.innerText = data.category_name;
                     document.title = `${data.category_name} - El Akeil`;
                     filterInfo.innerText = lang === 'ar' ? `${dishes.length} أطباق في هذه الفئة` : `${dishes.length} dishes in this category`;
