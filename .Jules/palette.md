@@ -1,0 +1,3 @@
+## 2026-03-30 - Hero Search Integration & Client-Side Filtering Fallback
+**Learning:** In static frontend deployments or static file servers where endpoint availability for specialized search routes (`/api/browse/dishes/search`) might fail or return 404, fallback filtering on standard endpoints (`/api/browse/dishes`) prevents user-facing errors (`Error loading dishes`) and guarantees seamless UX.
+**Action:** When connecting hero search bars to listing pages, ensure query parameters (`q` / `search`) are gracefully handled on the client side with fallback filtering if search endpoints are not available.

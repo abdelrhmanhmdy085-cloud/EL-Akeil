@@ -225,9 +225,9 @@
         اطلب الآن من أفضل الشيفات في منطقتك</p>
 
       <div class="search-box-container">
-        <button class="search-btn">ابحث</button>
-        <input type="text" class="search-input" placeholder="ابحث عن منطقة، شارع، معلم معروف...">
-        <div class="location-icon">📍</div>
+        <button type="button" id="heroSearchBtn" class="search-btn" onclick="executeHeroSearch()" data-i18n="search_btn" data-i18n-aria-label="search_btn" aria-label="ابحث">ابحث</button>
+        <input type="text" id="heroSearchInput" class="search-input" placeholder="ابحث عن منطقة، شارع، معلم معروف..." data-i18n-placeholder="search_location_placeholder" data-i18n-aria-label="search_location_placeholder" aria-label="ابحث عن منطقة، شارع، معلم معروف...">
+        <button type="button" class="location-icon" id="locateBtn" onclick="openLocationModal()" title="تحديد الموقع" data-i18n-title="locate_me" data-i18n-aria-label="locate_me" aria-label="تحديد الموقع">📍</button>
       </div>
 
       <!-- Category Filter Buttons -->
@@ -521,6 +521,17 @@
       }
     }
 
+    // Hero Search Function
+    function executeHeroSearch() {
+      const input = document.getElementById('heroSearchInput');
+      const query = input ? input.value.trim() : '';
+      if (query) {
+        window.location.href = `listing.html?q=${encodeURIComponent(query)}`;
+      } else {
+        window.location.href = 'listing.html';
+      }
+    }
+
     // Filter by Category Function
     function filterByCategory(categoryId, buttonElement) {
       // Update active button state
@@ -560,12 +571,22 @@
       }
     }
 
-    // Close modal when clicking outside
+    // Close modal when clicking outside & hero search enter key listener
     document.addEventListener('DOMContentLoaded', () => {
       const modal = document.getElementById('joinCompanyModal');
       if (modal) {
         modal.addEventListener('click', (e) => {
           if (e.target === modal) closeJoinModal();
+        });
+      }
+
+      const heroInput = document.getElementById('heroSearchInput');
+      if (heroInput) {
+        heroInput.addEventListener('keypress', (e) => {
+          if (e.key === 'Enter') {
+            e.preventDefault();
+            executeHeroSearch();
+          }
         });
       }
     });
