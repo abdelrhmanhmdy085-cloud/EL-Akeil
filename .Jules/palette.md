@@ -1,0 +1,3 @@
+## 2026-03-31 - FAQ Accordion Accessibility & Focus States
+**Learning:** Collapsible FAQ accordions using `<div>` wrappers fail accessibility criteria because they lack keyboard focusability, screen reader interaction context, and expand/collapse ARIA state announcements. Converting them to `<button type="button">` with `aria-expanded` and `aria-controls` coupled with `:focus-visible` styling provides keyboard navigation and state feedback without altering visual design.
+**Action:** When working with accordion or collapsible UI components, use semantic `<button type="button">` elements with explicit `aria-expanded` and `aria-controls` attributes, and include `:focus-visible` outline styles.
